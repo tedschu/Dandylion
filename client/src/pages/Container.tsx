@@ -27,8 +27,6 @@ function Container({
   questionPrompts,
   setQuestionPrompts,
 }: ContainerProps) {
-  console.log(currentStep);
-
   return (
     <>
       <div className="pageContainer flexCol">

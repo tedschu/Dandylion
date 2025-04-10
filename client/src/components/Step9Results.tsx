@@ -10,11 +10,7 @@ function Step9Results({
 }: StepProps) {
   console.log(userResponses);
 
-  return (
-    <>
-      <p>Here's the results</p>
-    </>
-  );
+  return <>{userResponses.step1}</>;
 }
 
 export default Step9Results;

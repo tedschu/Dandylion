@@ -1,0 +1,50 @@
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+/* Universal flex property classes */
+.flexCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Component styling */
+.pageContainer {
+  background-color: lightcoral;
+  min-height: 100vh;
+  gap: 10px;
+}
+
+.stepContainer {
+  background-color: lightcyan;
+  text-align: center;
+  max-width: 850px;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  background-color: lightskyblue;
+}
+
+/* FORM AND INPUT STYLING */
+
+.userForm {
+  width: 80%;
+}
+
+.userInputBox {
+  width: 100%;
+}

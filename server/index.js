@@ -36,3 +36,23 @@ app.use((req, res, next) => {
 // ALl incoming requests (GET, PUT, etc.) to this route will be handled by this router
 // app.use("api/anthropicAPI", anthropicRoutes);
 // app.use("api/googlePlacesAPI", googlePlacesRoutes);
+
+app.use(express.static(path.join(__dirname, "/../client/dist")));
+
+if (process.env.NODE_ENV === "production") {
+  // After your API routes, add this for client-side routing
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
+  });
+}
+
+// Handles errors in serving (middleware)
+app.use((err, req, res, next) => {
+  console.error("server error", err);
+  res.status(500).json({ error: "Internal server error" });
+});
+
+// Start up the server and log confirmation
+app.listen(port, () => {
+  console.log(`Travel app is running on port ${port}`);
+});

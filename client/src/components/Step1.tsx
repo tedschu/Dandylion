@@ -18,14 +18,14 @@ function Step1({
   return (
     <>
       <div className="stepContainer flexCol">
-        <h3>{questionPrompts.step1}</h3>
+        <h3>{questionPrompts.question1}</h3>
         <form className="userForm flexCol" action="">
           <input
             className="userInputBox"
             type="text"
             placeholder="Be conversational: ex. 'I'm going with my daughter and her two friends.'"
-            value={userResponses.step1}
-            name="step1"
+            value={userResponses.response1}
+            name="response1"
             onChange={setFormValues}
           />
           <button onClick={() => setCurrentStep(2)}>Next step</button>

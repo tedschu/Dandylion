@@ -34,9 +34,48 @@ async function callAnthropicAPI(messages, system = "") {
 
 // routes
 
-router.get("/recommendation", (req, res) => {
+// POSTs the questions + user responses to Anthropic messages API, returning the travel recommendations
+router.post("/recommendation", async (req, res) => {
   try {
     // get passed info from body, put it into message and system prompt arrays, call on caller function, return results
+    const {
+      question1,
+      response1,
+      question2,
+      response2,
+      question3,
+      response3,
+      question4,
+      response4,
+      question5,
+      response5,
+      question6,
+      response6,
+      question7,
+      response7,
+      question8,
+      response8,
+    } = req.body;
+
+    // "stringify" the data to pass to Anthropic, e.g. convert the data object to a string
+    const responseString = JSON.stringify({
+      question1: question1,
+      response1: response1,
+      question2: question2,
+      response2: response2,
+      question3: question3,
+      response3: response3,
+      question4: question4,
+      response4: response4,
+      question5: question5,
+      response5: response5,
+      question6: question6,
+      response6: response6,
+      question7: question7,
+      response7: response7,
+      question8: question8,
+      response8: response8,
+    });
   } catch (error) {}
 });
 

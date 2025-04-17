@@ -18,13 +18,13 @@ function Step6({
   return (
     <>
       <div className="stepContainer flexCol">
-        <h3>{questionPrompts.step6}</h3>
+        <h3>{questionPrompts.question6}</h3>
         <form className="userForm flexCol" action="">
           <input
             type="text"
             placeholder="I'm thinking between $3000 - $5000 in total, but I'm flexible. Ideally it would be less though."
-            value={userResponses.step6}
-            name="step6"
+            value={userResponses.response6}
+            name="response6"
             onChange={setFormValues}
           />
           <button onClick={() => setCurrentStep(5)}>Go back</button>

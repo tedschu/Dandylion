@@ -10,23 +10,23 @@ export type StepProps = {
 };
 
 export type UserResponses = {
-  step1: string;
-  step2: string;
-  step3: string;
-  step4: string;
-  step5: string;
-  step6: string;
-  step7: string;
-  step8: string;
+  response1: string;
+  response2: string;
+  response3: string;
+  response4: string;
+  response5: string;
+  response6: string;
+  response7: string;
+  response8: string;
 };
 
 export type QuestionPrompts = {
-  step1: string;
-  step2: string;
-  step3: string;
-  step4: string;
-  step5: string;
-  step6: string;
-  step7: string;
-  step8: string;
+  question1: string;
+  question2: string;
+  question3: string;
+  question4: string;
+  question5: string;
+  question6: string;
+  question7: string;
+  question8: string;
 };

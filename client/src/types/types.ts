@@ -7,6 +7,8 @@ export type StepProps = {
   setUserResponses: React.Dispatch<React.SetStateAction<UserResponses>>;
   questionPrompts: QuestionPrompts;
   setQuestionPrompts: React.Dispatch<React.SetStateAction<QuestionPrompts>>;
+  apiResponse?: apiResponse;
+  setApiResponse?: React.Dispatch<React.SetStateAction<apiResponse>>;
 };
 
 export type UserResponses = {

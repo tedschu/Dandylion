@@ -7,6 +7,8 @@ function Step9({
   setUserResponses,
   questionPrompts,
   setQuestionPrompts,
+  apiResponse,
+  setApiResponse,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
     const tempObj = { ...userResponses };
@@ -18,7 +20,6 @@ function Step9({
   function handleSubmission() {
     getTripResults();
     setCurrentStep(10);
-    console.log(userResponses);
   }
 
   const getTripResults = async () => {
@@ -58,7 +59,9 @@ function Step9({
 
       const data = await response.json();
 
-      console.log(data);
+      if (setApiResponse) {
+        setApiResponse(data);
+      }
     } catch (error) {}
   };
 

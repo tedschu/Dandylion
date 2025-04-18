@@ -124,6 +124,8 @@ function Container({
             setUserResponses={setUserResponses}
             questionPrompts={questionPrompts}
             setQuestionPrompts={setQuestionPrompts}
+            apiResponse={apiResponse}
+            setApiResponse={setApiResponse}
           />
         )}
         {currentStep === 10 && (
@@ -134,6 +136,8 @@ function Container({
             setUserResponses={setUserResponses}
             questionPrompts={questionPrompts}
             setQuestionPrompts={setQuestionPrompts}
+            apiResponse={apiResponse}
+            setApiResponse={setApiResponse}
           />
         )}
       </div>

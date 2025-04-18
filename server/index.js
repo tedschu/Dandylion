@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 // Register / create the API routes
 // Attaches (or, mounts) a router (application that handles routes) to a base URL (ex. /anthropicAPI)
 // ALl incoming requests (GET, PUT, etc.) to this route will be handled by this router
-// app.use("api/anthropicAPI", anthropicRoutes);
+app.use("api/anthropicAPI", anthropicRoutes);
 // app.use("api/googlePlacesAPI", googlePlacesRoutes);
 
 app.use(express.static(path.join(__dirname, "/../client/dist")));

@@ -7,7 +7,8 @@ import Step5 from "../components/Step5";
 import Step6 from "../components/Step6";
 import Step7 from "../components/Step7";
 import Step8 from "../components/Step8";
-import Step9Results from "../components/Step9Results";
+import Step9 from "../components/Step9";
+import Step10Results from "../components/Step10Results";
 import { UserResponses, QuestionPrompts } from "../types/types";
 
 type ContainerProps = {
@@ -112,7 +113,17 @@ function Container({
           />
         )}
         {currentStep === 9 && (
-          <Step9Results
+          <Step9
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
+            userResponses={userResponses}
+            setUserResponses={setUserResponses}
+            questionPrompts={questionPrompts}
+            setQuestionPrompts={setQuestionPrompts}
+          />
+        )}
+        {currentStep === 10 && (
+          <Step10Results
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
             userResponses={userResponses}

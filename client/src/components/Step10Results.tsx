@@ -1,6 +1,6 @@
 import { StepProps } from "../types/types";
 
-function Step9Results({
+function Step10Results({
   currentStep,
   setCurrentStep,
   userResponses,
@@ -13,4 +13,4 @@ function Step9Results({
   return <>test</>;
 }
 
-export default Step9Results;
+export default Step10Results;

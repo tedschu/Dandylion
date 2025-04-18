@@ -12,6 +12,7 @@ function App() {
     response6: "",
     response7: "",
     response8: "",
+    response9: "",
   });
 
   const [questionPrompts, setQuestionPrompts] = useState({
@@ -27,8 +28,9 @@ function App() {
     question6:
       "Are you drawn to natural landscapes, cultural experiences, or urban environments?",
     question7:
-      "How do you feel about touristy areas versus off-the-beaten-path experiences?",
+      "What's your timeframe, and when are you looking to go? For example, do you want to go for 7-10 days during the summer?",
     question8: "What's your ideal balance between relaxation and adventure?",
+    question9: "Where are you located? This will help with cost estimates.",
   });
 
   const [currentStep, setCurrentStep] = useState(1);

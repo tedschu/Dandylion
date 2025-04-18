@@ -9,7 +9,7 @@ import Step7 from "../components/Step7";
 import Step8 from "../components/Step8";
 import Step9 from "../components/Step9";
 import Step10Results from "../components/Step10Results";
-import { UserResponses, QuestionPrompts } from "../types/types";
+import { UserResponses, QuestionPrompts, apiResponse } from "../types/types";
 
 type ContainerProps = {
   currentStep: number;
@@ -18,6 +18,8 @@ type ContainerProps = {
   setUserResponses: React.Dispatch<React.SetStateAction<UserResponses>>;
   questionPrompts: QuestionPrompts;
   setQuestionPrompts: React.Dispatch<React.SetStateAction<QuestionPrompts>>;
+  apiResponse: apiResponse;
+  setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
 };
 
 function Container({
@@ -27,6 +29,8 @@ function Container({
   setUserResponses,
   questionPrompts,
   setQuestionPrompts,
+  apiResponse,
+  setApiResponse,
 }: ContainerProps) {
   return (
     <>

@@ -35,9 +35,7 @@ function App() {
 
   const [currentStep, setCurrentStep] = useState(1);
 
-  const [apiResponse, setApiResponse] = useState({
-    test: "",
-  });
+  const [apiResponse, setApiResponse] = useState({});
 
   return (
     <>
@@ -49,6 +47,8 @@ function App() {
           setUserResponses={setUserResponses}
           questionPrompts={questionPrompts}
           setQuestionPrompts={setQuestionPrompts}
+          apiResponse={apiResponse}
+          setApiResponse={setApiResponse}
         />
       </div>
     </>

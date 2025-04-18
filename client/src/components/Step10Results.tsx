@@ -8,8 +8,6 @@ function Step10Results({
   questionPrompts,
   setQuestionPrompts,
 }: StepProps) {
-  console.log(userResponses);
-
   return <>test</>;
 }
 

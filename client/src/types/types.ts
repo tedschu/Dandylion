@@ -32,3 +32,22 @@ export type QuestionPrompts = {
   question8: string;
   question9: string;
 };
+
+export type Attraction = {
+  destination_name: string;
+  description: string;
+};
+
+export type Destination = {
+  location: string;
+  overview: string;
+  things_to_do: Attraction[];
+  time_to_go: string;
+  estimated_cost: string;
+  helpful_tips: string;
+};
+
+export type apiResponse = {
+  destination: Destination;
+  second_destination: Destination;
+};

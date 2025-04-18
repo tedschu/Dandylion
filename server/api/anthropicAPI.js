@@ -55,6 +55,8 @@ router.post("/recommendation", async (req, res) => {
       response7,
       question8,
       response8,
+      question9,
+      response9,
     } = req.body;
 
     // "stringify" the data to pass to Anthropic, e.g. convert the data object to a string
@@ -75,6 +77,8 @@ router.post("/recommendation", async (req, res) => {
       response7: response7,
       question8: question8,
       response8: response8,
+      question9: question9,
+      response9: response9,
     });
 
     const messages = [
@@ -91,17 +95,17 @@ Here is the user object with the questions and responses:
 
 ${responseString}
 
-Return the result as valid JSON (not as a string) with the following structure:
+Return the result as valid JSON with the following structure:
 
 {
 "destination": {
-    "Location": "your recommendation - this can be a specific town or destination (example: "Florence, Italy"), or several destinations, if the user is doing a more extended vacation)",
-    "Overview": "provide a 2-3 sentence overview of why this was your recommendation, noting how it relates to the user's responses. In this overview, you can also expand on the destinations that you're recommending, if appropriate. So for example, if you recommend Bordeaux and Nice in France, in this overview you can talk about how the broader region ("south of France") fits with their preferences",
-    "What to do while you're there": "provide 5-10 bulleted suggestions (2-3 sentences each) that are specific places, destinations, or things to do that fit with the user's preferences. For instance, if the user has specified wanting to see cultural experiences, make sure that you are focusing on things like historical sites, cultural events (e.g. Mardis Gras). Don't just focus on the most popular destinations or things to do, but reference reviews on the internet and recommendations that would be a best fit even if they're a bit unorthodox. 
+    "location": "your recommendation - this can be a specific town or destination (example: "Florence, Italy"), or several destinations, if the user is doing a more extended vacation)",
+    "overview": "provide a 2-3 sentence overview of why this was your recommendation, noting how it relates to the user's responses. In this overview, you can also expand on the destinations that you're recommending, if appropriate. So for example, if you recommend Bordeaux and Nice in France, in this overview you can talk about how the broader region ("south of France") fits with their preferences",
+    "things_to_do": "provide 5-10 bulleted suggestions (2-3 sentences each) that are specific places, destinations, or things to do that fit with the user's preferences. For instance, if the user has specified wanting to see cultural experiences, make sure that you are focusing on things like historical sites, cultural events (e.g. Mardis Gras). Don't just focus on the most popular destinations or things to do, but reference reviews on the internet and recommendations that would be a best fit even if they're a bit unorthodox. 
     Follow this format for the bulleted responses: [{"destination_name": "Uffizi Gallery in Florence", "description": "Explore the Uffizi Gallery, one of the world's most famous art museums, housing masterpieces by Leonardo da Vinci, Botticelli, and Michelangelo."}, {"destination_name": "another place", "description": "another description"},], 
-    "Good times to go": "provide a few months or seasons that are generally the best times to visit, based on the user's response",
-    "Estimated cost": "provide an estimated cost range for the trip as a number ("$5,000 - $7,000 USD) and a one-sentence explanation, using the responses to help guide you. For instance, if the user is coming from Chicago and has to fly to Florence (if this is the recommended destination), you can look at average ticket prices. You can also look at hotels or places to stay that fit their preferences, and see what the cost per night is in the time of year that they want to travel",
-    "Good things to know": "provide any key insights that would be helpful for the user as they travel there. For instance, if they are going from Chicago to a rural part of Spain or Africa, it may be good to mention how common English is spoken there, and if it'd be good to know basic Spanish. Also note any important considerations on currencies or other key factors as they travel",
+    "time_to_go": "provide a few months or seasons that are generally the best times to visit, based on the user's response",
+    "estimated_cost": "provide an estimated cost range for the trip as a number ("$5,000 - $7,000 USD) and a one-sentence explanation, using the responses to help guide you. For instance, if the user is coming from Chicago and has to fly to Florence (if this is the recommended destination), you can look at average ticket prices. You can also look at hotels or places to stay that fit their preferences, and see what the cost per night is in the time of year that they want to travel",
+    "helpful_tips": "provide any key insights that would be helpful for the user as they travel there. For instance, if they are going from Chicago to a rural part of Spain or Africa, it may be good to mention how common English is spoken there, and if it'd be good to know basic Spanish. Also note any important considerations on currencies or other key factors as they travel",
 },
 "second_destination": {
     // same structure as above
@@ -125,11 +129,13 @@ Important:
     // Call anthropic API function to hit the API and return a response
     const response = await callAnthropicAPI(messages, system);
 
+    const parsedResponse = JSON.parse(response);
+
     // const cleanedResponse = response.replace(/\\'/g, "'");
 
     //const finalResponse = JSON.parse(response);
 
-    res.json(response);
+    res.json(parsedResponse);
   } catch (error) {
     console.error("Error returning data:", error);
     res.status(500).json({

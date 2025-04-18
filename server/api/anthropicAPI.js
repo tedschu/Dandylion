@@ -121,9 +121,11 @@ Important:
     // Call anthropic API function to hit the API and return a response
     const response = await callAnthropicAPI(messages, system);
 
-    const cleanedResponse = response.replace(/\\'/g, "'");
+    console.log(response);
 
-    const finalResponse = JSON.parse(cleanedResponse);
+    // const cleanedResponse = response.replace(/\\'/g, "'");
+
+    const finalResponse = JSON.parse(response);
 
     res.json(finalResponse);
   } catch (error) {

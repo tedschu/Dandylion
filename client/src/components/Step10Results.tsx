@@ -21,6 +21,8 @@ function Step10Results({
     }
   }, [apiResponse]);
 
+  console.log(apiResponse);
+
   return (
     <>
       {hasResponse && (
@@ -28,6 +30,7 @@ function Step10Results({
           <div>
             <h1>{apiResponse?.destination.location}</h1>
             <h2>{apiResponse?.destination.overview}</h2>
+            <h2>Where to stay: {apiResponse?.destination.places_to_stay}</h2>
             {apiResponse?.destination.things_to_do.map((destination) => {
               return (
                 <>
@@ -45,6 +48,7 @@ function Step10Results({
           <div>
             <h1>{apiResponse?.second_destination.location}</h1>
             <h2>{apiResponse?.second_destination.overview}</h2>
+            <h2>{apiResponse?.second_destination.places_to_stay}</h2>
             {apiResponse?.second_destination.things_to_do.map((destination) => {
               return (
                 <>

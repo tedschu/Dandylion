@@ -43,6 +43,7 @@ export type Attraction = {
 export type Destination = {
   location: string;
   overview: string;
+  places_to_stay: string;
   things_to_do: Attraction[];
   time_to_go: string;
   estimated_cost: string;

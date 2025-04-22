@@ -101,6 +101,7 @@ Return the result as valid JSON with the following structure:
 "destination": {
     "location": "your recommendation - this can be a specific town or destination (example: "Florence, Italy"), or several destinations, if the user is doing a more extended vacation)",
     "overview": "provide a 2-3 sentence overview of why this was your recommendation, noting how it relates to the user's responses. In this overview, you can also expand on the destinations that you're recommending, if appropriate. So for example, if you recommend Bordeaux and Nice in France, in this overview you can talk about how the broader region ("south of France") fits with their preferences",
+    "places_to_stay": "for the location you recommended, provide suggestions on where they should stay while they're on vacation. Be specific in your response. For example, if there is a particular resort that gets great reviews and falls within the user's budget, recommend that and note where the resort is. If the user has noted that they want to stay in a remote place, and for example, you find that AirBnb accommodations are popular, recommend that they check out home rentals and note specific locations that would be best based on their preferences", 
     "location_id": "set this to 'null' as it will be populated later by another API call",
     "photos": "set this to an empty array '[]',
     "things_to_do": "provide 5-10 bulleted suggestions (2-3 sentences each) that are specific places, destinations, or things to do that fit with the user's preferences. For instance, if the user has specified wanting to see cultural experiences, make sure that you are focusing on things like historical sites, cultural events (e.g. Mardis Gras). Don't just focus on the most popular destinations or things to do, but reference reviews on the internet and recommendations that would be a best fit even if they're a bit unorthodox. 
@@ -126,7 +127,7 @@ Important:
     ];
 
     const system =
-      "Imagine that you are a travel agent, but with all of the information from the internet at your disposal. You are helping users find a vacation destination that best fits their preferences based on information that they give you. You should respond with a sense of humor, and enthusiasm for the trip that the user is planning. ";
+      "Imagine that you are a travel agent, but with all of the information from the internet at your disposal. You are helping users find a vacation destination that best fits their preferences based on information that they give you. You should respond with a sense of humor, and enthusiasm for the trip that they are planning. ";
 
     // Call anthropic API function to hit the API and return a response
     const response = await callAnthropicAPI(messages, system);

@@ -68,13 +68,13 @@ function Step9({
   return (
     <>
       <div className="stepContainer flexCol">
-        <h3>{questionPrompts.question8}</h3>
+        <h3>{questionPrompts.question9}</h3>
         <form className="userForm flexCol" action="">
           <input
             type="text"
-            placeholder="I'm thinking between $3000 - $5000 in total, but I'm flexible. Ideally it would be less though."
-            value={userResponses.response8}
-            name="response8"
+            placeholder="I'm in Dayton, Ohio."
+            value={userResponses.response9}
+            name="response9"
             onChange={setFormValues}
           />
           <button onClick={() => setCurrentStep(8)}>Go back</button>

@@ -21,6 +21,7 @@ export type UserResponses = {
   response7: string;
   response8: string;
   response9: string;
+  response10: string;
 };
 
 export type QuestionPrompts = {
@@ -33,6 +34,7 @@ export type QuestionPrompts = {
   question7: string;
   question8: string;
   question9: string;
+  question10: string;
 };
 
 export type Attraction = {

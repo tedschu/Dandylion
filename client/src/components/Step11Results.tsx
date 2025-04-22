@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { StepProps } from "../types/types";
 
-function Step10Results({
+function Step11Results({
   currentStep,
   setCurrentStep,
   userResponses,
@@ -69,4 +69,4 @@ function Step10Results({
   );
 }
 
-export default Step10Results;
+export default Step11Results;

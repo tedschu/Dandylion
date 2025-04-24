@@ -1,4 +1,5 @@
 import { StepProps } from "../types/types";
+import { motion } from "motion/react";
 
 function Step1({
   currentStep,

@@ -11,6 +11,7 @@ import Step9 from "../components/Step9";
 import Step10 from "../components/Step10";
 import Step11Results from "../components/Step11Results";
 import { UserResponses, QuestionPrompts, apiResponse } from "../types/types";
+import { AnimatePresence, motion } from "motion/react";
 
 type ContainerProps = {
   currentStep: number;

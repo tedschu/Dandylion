@@ -102,7 +102,7 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
     "location": "Recommended destination (can be specific town or multiple destinations)",
     "overview": "3-4 sentences explaining why this recommendation fits user preferences. In this overview, you can also expand on the destinations that you're recommending, if appropriate. So for example, if you recommend Bordeaux and Nice in France, in this overview you can talk about how the broader region ("south of France") fits with their preferences",
     "places_to_stay": "Specific accommodation suggestions that match user's budget and preferences. For example, if there is a particular resort that gets great reviews and falls within the user's budget, recommend that and note where the resort is. If the user has noted that they want to stay in a remote place, and for example, you find that AirBnb accommodations are popular, recommend that they check out home rentals and note specific locations that would be best based on their preferences",
-    "photos": "[]",
+    "photos": "leave this as an empty array: []",
     "things_to_do": [
       {
         "destination_name": "Attraction/activity name. These recommendations should be specific places, destinations, or things to do that fit with the user's preferences. For instance, if the user has specified wanting to see cultural experiences, make sure that you are focusing on things like historical sites, cultural events (e.g. Mardis Gras). Don't just focus on the most popular destinations or things to do, but reference reviews on the internet and recommendations that would be a best fit to the user's preferences.",
@@ -124,8 +124,7 @@ JSON FORMATTING REQUIREMENTS:
 2. Use "\\n" for necessary line breaks within text
 3. Properly escape all quotes, backslashes and special characters in string values
 4. Ensure all array and object structures are valid JSON
-5. All URLs in photo arrays must be properly formatted and escaped
-6. Do not include any markdown, backticks, or text outside the JSON object`,
+5. Do not include any markdown, backticks, or text outside the JSON object`,
           },
         ],
       },

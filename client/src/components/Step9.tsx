@@ -7,6 +7,8 @@ function Step9({
   setUserResponses,
   questionPrompts,
   setQuestionPrompts,
+  apiResponse,
+  setApiResponse,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
     const tempObj = { ...userResponses };

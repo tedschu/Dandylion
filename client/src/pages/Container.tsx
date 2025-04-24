@@ -34,126 +34,63 @@ function Container({
   apiResponse,
   setApiResponse,
 }: ContainerProps) {
+  const steps = [
+    Step1,
+    Step2,
+    Step3,
+    Step4,
+    Step5,
+    Step6,
+    Step7,
+    Step8,
+    Step9,
+    Step10,
+    Step11Results,
+  ];
+
+  const motionProps = {
+    initial: { opacity: 0, y: -100 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0.2, y: 100 },
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+    },
+  };
+
   return (
     <>
       <div className="pageContainer flexCol">
         <Header />
-        {currentStep === 1 && (
-          <Step1
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-          />
-        )}
-        {currentStep === 2 && (
-          <Step2
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-          />
-        )}
-        {currentStep === 3 && (
-          <Step3
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-          />
-        )}
-        {currentStep === 4 && (
-          <Step4
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-          />
-        )}
-        {currentStep === 5 && (
-          <Step5
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-          />
-        )}
-        {currentStep === 6 && (
-          <Step6
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-          />
-        )}
-        {currentStep === 7 && (
-          <Step7
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-          />
-        )}
-        {currentStep === 8 && (
-          <Step8
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-          />
-        )}
-        {currentStep === 9 && (
-          <Step9
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-            apiResponse={apiResponse}
-            setApiResponse={setApiResponse}
-          />
-        )}
-        {currentStep === 10 && (
-          <Step10
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-            apiResponse={apiResponse}
-            setApiResponse={setApiResponse}
-          />
-        )}
-        {currentStep === 11 && (
-          <Step11Results
-            currentStep={currentStep}
-            setCurrentStep={setCurrentStep}
-            userResponses={userResponses}
-            setUserResponses={setUserResponses}
-            questionPrompts={questionPrompts}
-            setQuestionPrompts={setQuestionPrompts}
-            apiResponse={apiResponse}
-            setApiResponse={setApiResponse}
-          />
-        )}
+
+        {/* Maps through steps array and outputs the component that matches the currentStep state */}
+        {steps.map((ComponentStep, index) => {
+          const stepNumber = index + 1;
+          return (
+            stepNumber === currentStep && (
+              <>
+                <AnimatePresence mode="wait">
+                  <motion.div key={stepNumber} {...motionProps}>
+                    <ComponentStep
+                      key={stepNumber}
+                      currentStep={currentStep}
+                      setCurrentStep={setCurrentStep}
+                      userResponses={userResponses}
+                      setUserResponses={setUserResponses}
+                      questionPrompts={questionPrompts}
+                      setQuestionPrompts={setQuestionPrompts}
+                      apiResponse={stepNumber >= 9 ? apiResponse : undefined}
+                      setApiResponse={
+                        stepNumber >= 9 ? setApiResponse : undefined
+                      }
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </>
+            )
+          );
+        })}
       </div>
     </>
   );

@@ -49,12 +49,12 @@ function Container({
   ];
 
   const motionProps = {
-    initial: { opacity: 0, y: -100 },
+    initial: { opacity: 0.2, y: -100 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0.2, y: 100 },
     transition: {
       type: "spring",
-      stiffness: 300,
+      stiffness: 100,
       damping: 30,
     },
   };

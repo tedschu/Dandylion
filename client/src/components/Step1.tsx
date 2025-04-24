@@ -16,6 +16,8 @@ function Step1({
     setUserResponses(tempObj);
   };
 
+  // TODO: MAKE RESIZABLE INPUT BOX
+
   return (
     <>
       <div className="stepContainer flexCol">

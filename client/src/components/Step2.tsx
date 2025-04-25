@@ -1,4 +1,5 @@
 import { StepProps } from "../types/types";
+import euro_city from "../assets/images/euro-city.png";
 
 function Step2({
   currentStep,
@@ -18,7 +19,11 @@ function Step2({
   return (
     <>
       <div className="stepContainer flexCol">
-        <h3>{questionPrompts.question2}</h3>
+        <div className="questionImageGridContainer">
+          <img src={euro_city} alt="" />
+          <h3>{questionPrompts.question2}</h3>
+          <div></div>
+        </div>
         <form className="userForm flexCol" action="">
           <input
             type="text"
@@ -27,8 +32,10 @@ function Step2({
             name="response2"
             onChange={setFormValues}
           />
-          <button onClick={() => setCurrentStep(1)}>Go back</button>
-          <button onClick={() => setCurrentStep(3)}>Next step</button>
+          <div className="buttonContainer flexRow">
+            <button onClick={() => setCurrentStep(1)}>Go back</button>
+            <button onClick={() => setCurrentStep(3)}>Next step</button>
+          </div>
         </form>
       </div>
     </>

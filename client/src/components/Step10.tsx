@@ -79,8 +79,10 @@ function Step10({
             name="response10"
             onChange={setFormValues}
           />
-          <button onClick={() => setCurrentStep(9)}>Go back</button>
-          <button onClick={handleSubmission}>Show me the results!</button>
+          <div className="buttonContainer flexRow">
+            <button onClick={() => setCurrentStep(9)}>Go back</button>
+            <button onClick={handleSubmission}>Show me the results!</button>
+          </div>
         </form>
       </div>
     </>

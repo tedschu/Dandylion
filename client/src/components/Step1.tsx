@@ -1,5 +1,6 @@
 import { StepProps } from "../types/types";
 import { motion } from "motion/react";
+import beach from "../assets/images/beach.png";
 
 function Step1({
   currentStep,
@@ -21,7 +22,11 @@ function Step1({
   return (
     <>
       <div className="stepContainer flexCol">
-        <h3>{questionPrompts.question1}</h3>
+        <div className="questionImageGridContainer">
+          <img src={beach} alt="" />
+          <h3>{questionPrompts.question1}</h3>
+          <div></div>
+        </div>
         <form className="userForm flexCol" action="">
           <input
             className="userInputBox"
@@ -31,7 +36,9 @@ function Step1({
             name="response1"
             onChange={setFormValues}
           />
-          <button onClick={() => setCurrentStep(2)}>Next step</button>
+          <div className="buttonContainer flexRow">
+            <button onClick={() => setCurrentStep(2)}>Next step</button>
+          </div>
         </form>
       </div>
     </>

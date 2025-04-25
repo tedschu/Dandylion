@@ -27,8 +27,10 @@ function Step5({
             name="response5"
             onChange={setFormValues}
           />
-          <button onClick={() => setCurrentStep(4)}>Go back</button>
-          <button onClick={() => setCurrentStep(6)}>Next step</button>
+          <div className="buttonContainer flexRow">
+            <button onClick={() => setCurrentStep(4)}>Go back</button>
+            <button onClick={() => setCurrentStep(6)}>Next step</button>
+          </div>
         </form>
       </div>
     </>

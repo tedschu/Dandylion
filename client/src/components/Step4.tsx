@@ -1,4 +1,5 @@
 import { StepProps } from "../types/types";
+import lion from "../assets/images/lion.png";
 
 function Step4({
   currentStep,
@@ -18,7 +19,11 @@ function Step4({
   return (
     <>
       <div className="stepContainer flexCol">
-        <h3>{questionPrompts.question4}</h3>
+        <div className="questionImageGridContainer">
+          <img src={lion} alt="" />
+          <h3>{questionPrompts.question2}</h3>
+          <div></div>
+        </div>
         <form className="userForm flexCol" action="">
           <input
             type="text"

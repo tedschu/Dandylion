@@ -30,26 +30,26 @@
   align-items: center;
 }
 
-/* BUTTON STYLING */
-button {
-  border: 1px solid lightgray;
-  padding: 5px 10px;
-  border-radius: 6px;
-  box-shadow: 2px 3px 3px lightgray;
+/* HOME PAGE BACKGROUND STYLING */
+/* Set as an additional, conditional class to 'pageContainer flexCol' */
+.homePageBackground {
+  background-image: url("../src/assets/images/carmel.webp");
+  background-size: cover;
+  background-position: right;
 }
 
-.next {
-  background-color: #34a853;
-  color: white;
-}
-
-.next:hover {
-  background-color: #188d37;
+/* STEP PAGE BACKGROUND STYLING */
+.stepPageBackground {
+  background-image: url("../src/assets/images/water.webp");
+  background-size: cover;
+  background-position: right;
+  background-color: hsla(43, 51%, 92%, 0.9);
+  background-blend-mode: overlay;
 }
 
 /* Component styling */
 .pageContainer {
-  background-color: #f5efe0;
+  /* background-color: #f5efdf; */
   min-height: 100vh;
   gap: 10px;
 }
@@ -64,9 +64,25 @@ button {
   top: 0;
   width: 100%;
   text-align: center;
-  background-color: #1a73e8;
+  /* background-color: #1a73e8; */
+  /* box-shadow: 3px 3px 3px #1a73e8; */
+}
+
+/* BUTTON STYLING */
+button {
+  border: 1px solid lightgray;
+  padding: 5px 10px;
+  border-radius: 6px;
+  /* box-shadow: 2px 3px 3px lightgray; */
+}
+
+.next {
+  background-color: #34a853;
   color: white;
-  box-shadow: 3px 3px 3px #1a73e8;
+}
+
+.next:hover {
+  background-color: #188d37;
 }
 
 .buttonContainer {
@@ -102,8 +118,15 @@ button {
   height: 60px;
   border: none;
   border-radius: 10px;
-  padding: 7px;
+  padding: 10px;
   box-shadow: 2px 3px 3px rgb(232, 232, 232);
+  font-size: 18px;
+}
+
+.userForm input::placeholder {
+  color: rgb(176, 176, 176);
+  font-style: italic;
+  font-size: 16px;
 }
 
 .userInputBox {

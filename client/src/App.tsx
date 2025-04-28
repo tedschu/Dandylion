@@ -36,7 +36,7 @@ function App() {
       "Are there any accessibility needs, dietary restrictions, or travel limitations I should know about?",
   });
 
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const [apiResponse, setApiResponse] = useState({});
 

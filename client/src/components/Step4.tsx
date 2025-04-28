@@ -21,7 +21,7 @@ function Step4({
       <div className="stepContainer flexCol">
         <div className="questionImageGridContainer">
           <img src={lion} alt="" />
-          <h3>{questionPrompts.question2}</h3>
+          <h3>{questionPrompts.question4}</h3>
           <div></div>
         </div>
         <form className="userForm flexCol" action="">

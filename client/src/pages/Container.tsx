@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import Step0Home from "../components/Step0Home";
 import Step1 from "../components/Step1";
 import Step2 from "../components/Step2";
 import Step3 from "../components/Step3";
@@ -35,6 +36,7 @@ function Container({
   setApiResponse,
 }: ContainerProps) {
   const steps = [
+    Step0Home,
     Step1,
     Step2,
     Step3,
@@ -59,14 +61,20 @@ function Container({
     },
   };
 
+  console.log(currentStep);
+
   return (
     <>
-      <div className="pageContainer flexCol">
+      <div
+        className={`pageContainer flexCol ${
+          currentStep === 0 ? "homePageBackground" : "stepPageBackground"
+        }`}
+      >
         <Header />
 
         {/* Maps through steps array and outputs the component that matches the currentStep state */}
         {steps.map((ComponentStep, index) => {
-          const stepNumber = index + 1;
+          const stepNumber = index;
           return (
             stepNumber === currentStep && (
               <>

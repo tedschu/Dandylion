@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 // Attaches (or, mounts) a router (application that handles routes) to a base URL (ex. /anthropicAPI)
 // ALl incoming requests (GET, PUT, etc.) to this route will be handled by this router
 app.use("/api/anthropicAPI", anthropicRoutes);
-// app.use("/api/unsplashAPI", unsplashRoutes);
+app.use("/api/unsplashAPI", unsplashRoutes);
 
 app.use(express.static(path.join(__dirname, "/../client/dist")));
 

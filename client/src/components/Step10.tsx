@@ -61,6 +61,8 @@ function Step10({
 
       const data = await response.json();
 
+      // TODO: Await call to Unsplash API to pull "location" from data.location as searchTerm, then populate photos array with Unsplash results
+
       if (setApiResponse) {
         setApiResponse(data);
       }

@@ -33,7 +33,7 @@ router.post("/image", async (req, res) => {
       throw new Error("No image data returned from OpenAI");
     }
 
-    const imageBuffer = Bugger.from(img.data[0].b64_json, "base64");
+    const imageBuffer = Buffer.from(response.data[0].b64_json, "base64");
     await writeFile("output.png", imageBuffer);
   } catch (error) {
     console.error(error);

@@ -21,7 +21,7 @@ router.post("/image", async (req, res) => {
 
     const response = await api.images.generate({
       model: "dall-e-3",
-      prompt: `Make a realistic-looking, collage image in the style of a postcard of ${location.location}.`,
+      prompt: `Create a vibrant, photo-realistic image of ${location.location}. Include iconic landmarks and natural beauty. If there are multiple locations specified (for example: "Peru: machu picchu, lima"), create a collage of up to 4 scenes showing the destination's highlights. Use bright, inviting colors and a postcard-style border around the entire image.`,
       n: 1,
       size: "1024x1024",
       response_format: "url",

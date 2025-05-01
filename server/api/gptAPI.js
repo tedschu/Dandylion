@@ -13,12 +13,15 @@ const api = new OpenAI({
 });
 
 // TODO: needs to pass in the location from Anthropic response
-router.get("/image", async (req, res) => {
+router.post("/image", async (req, res) => {
   try {
+    const location = req.body;
+
+    console.log(location);
+
     const response = await api.images.generate({
       model: "dall-e-3",
-      prompt:
-        "make a realistic-looking, collage image in the style of a postcard of chicago and the midwest prairie.",
+      prompt: `Make a realistic-looking, collage image in the style of a postcard of ${location.location}.`,
       n: 1,
       size: "1024x1024",
       response_format: "url",

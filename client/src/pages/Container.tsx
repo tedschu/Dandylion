@@ -61,8 +61,6 @@ function Container({
     },
   };
 
-  console.log(currentStep);
-
   return (
     <>
       <div

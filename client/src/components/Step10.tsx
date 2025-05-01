@@ -59,14 +59,30 @@ function Step10({
         throw new Error("failed to get the recommendation");
       }
 
-      const data = await response.json();
+      const textData = await response.json();
 
       // TODO: Await call to Unsplash API to pull "location" from data.location as searchTerm, then populate photos array with Unsplash results
 
       if (setApiResponse) {
-        setApiResponse(data);
+        setApiResponse(textData);
       }
-    } catch (error) {}
+
+      const images = await fetch("/api/gptAPI/image", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          location: textData.destination.location,
+        }),
+      });
+
+      const imgData = await response.json();
+
+      console.log("HEre is imgData:", imgData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

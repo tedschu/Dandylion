@@ -25,19 +25,21 @@ function Step11Results({
     <>
       {hasResponse && (
         <>
-          <div>
+          <div className="stepContainer flexCol">
             <h1>{apiResponse?.destination.location}</h1>
             <h2>{apiResponse?.destination.overview}</h2>
             <img
               src={apiResponse?.destination.photos[0]?.toString() || ""}
               alt=""
+              className="locationImage"
             />
             <h2>Where to stay: {apiResponse?.destination.places_to_stay}</h2>
             {apiResponse?.destination.things_to_do.map((destination) => {
               return (
                 <>
-                  <h2>{destination.destination_name}</h2>
-                  <p>{destination.description}</p>
+                  <p>
+                    {destination.destination_name}: {destination.description}
+                  </p>
                 </>
               );
             })}
@@ -47,7 +49,7 @@ function Step11Results({
               <li>{apiResponse?.destination.helpful_tips}</li>
             </ul>
           </div>
-          <div>
+          <div className="stepContainer flexCol">
             <h1>{apiResponse?.second_destination.location}</h1>
             <h2>{apiResponse?.second_destination.overview}</h2>
             <h2>{apiResponse?.second_destination.places_to_stay}</h2>

@@ -75,6 +75,7 @@ function Step10({
         },
         body: JSON.stringify({
           location: textData.destination.location,
+          overview: textData.destination.overview,
         }),
       });
 
@@ -104,8 +105,6 @@ function Step10({
       console.error(error);
     }
   };
-
-  console.log(apiResponse);
 
   return (
     <>

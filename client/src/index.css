@@ -30,6 +30,20 @@
   align-items: center;
 }
 
+/* Font sizing */
+h1 {
+  font-size: 18px;
+}
+h2 {
+  font-size: 14px;
+}
+li {
+  font-size: 14px;
+}
+p {
+  font-size: 14px;
+}
+
 /* HOME PAGE BACKGROUND STYLING */
 /* Set as an additional, conditional class to 'pageContainer flexCol' */
 .homePageBackground {
@@ -51,12 +65,14 @@
 .pageContainer {
   /* background-color: #f5efdf; */
   min-height: 100vh;
-  gap: 10px;
+  width: 100%;
+  margin-top: 80px;
 }
 
 .stepContainer {
   text-align: center;
   max-width: 950px;
+  padding: 10px;
 }
 
 .header {
@@ -64,8 +80,12 @@
   top: 0;
   width: 100%;
   text-align: center;
-  /* background-color: #1a73e8; */
-  /* box-shadow: 3px 3px 3px #1a73e8; */
+  background-color: #1a73e8;
+  box-shadow: 3px 3px 3px #1a73e8;
+}
+
+.locationImage {
+  width: 80%;
 }
 
 /* BUTTON STYLING */

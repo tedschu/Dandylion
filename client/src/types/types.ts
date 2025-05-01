@@ -47,6 +47,7 @@ export type Destination = {
   overview: string;
   places_to_stay: string;
   things_to_do: Attraction[];
+  photos: String[];
   time_to_go: string;
   estimated_cost: string;
   helpful_tips: string;

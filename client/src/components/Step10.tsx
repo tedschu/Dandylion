@@ -1,3 +1,4 @@
+import { body } from "motion/react-client";
 import { StepProps } from "../types/types";
 
 function Step10({
@@ -63,12 +64,12 @@ function Step10({
 
       // TODO: Await call to Unsplash API to pull "location" from data.location as searchTerm, then populate photos array with Unsplash results
 
-      if (setApiResponse) {
-        setApiResponse(textData);
-      }
+      // if (setApiResponse) {
+      //   setApiResponse(textData);
+      // }
 
       const images = await fetch("/api/gptAPI/image", {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-type": "application/json",
         },
@@ -77,13 +78,34 @@ function Step10({
         }),
       });
 
-      const imgData = await response.json();
+      console.log(
+        "HEre is the body text being passed:",
+        JSON.stringify({
+          location: textData.destination.location,
+        })
+      );
+
+      console.log("Here is images (raw response):", images);
+
+      const imgData = await images.json();
 
       console.log("HEre is imgData:", imgData);
+
+      if (imgData) {
+        const copy = { ...textData };
+        if (copy.destination && copy.destination.photos) {
+          copy.destination.photos.push(imgData.url);
+        }
+        if (setApiResponse) {
+          setApiResponse(copy);
+        }
+      }
     } catch (error) {
       console.error(error);
     }
   };
+
+  console.log(apiResponse);
 
   return (
     <>

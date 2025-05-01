@@ -21,8 +21,6 @@ function Step11Results({
     }
   }, [apiResponse]);
 
-  console.log(apiResponse);
-
   return (
     <>
       {hasResponse && (
@@ -30,6 +28,10 @@ function Step11Results({
           <div>
             <h1>{apiResponse?.destination.location}</h1>
             <h2>{apiResponse?.destination.overview}</h2>
+            <img
+              src={apiResponse?.destination.photos[0]?.toString() || ""}
+              alt=""
+            />
             <h2>Where to stay: {apiResponse?.destination.places_to_stay}</h2>
             {apiResponse?.destination.things_to_do.map((destination) => {
               return (

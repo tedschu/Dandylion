@@ -16,6 +16,7 @@ function Step11Results({
   console.log(apiResponse);
 
   const [hasResponse, setHasResponse] = useState(false);
+  const [isSecondDestinationOpen, setIsSecondDestinationOpen] = useState(false);
 
   useEffect(() => {
     if (apiResponse && apiResponse.destination) {
@@ -93,8 +94,12 @@ function Step11Results({
             </li>
             <li>Other tips: {apiResponse?.destination.helpful_tips}</li>
           </div>
+          {/* Second destination */}
           <div className="resultContainer flexCol">
-            <h1>Second destination:</h1>
+            <h1 onClick={() => setIsSecondDestinationOpen(true)}>
+              Click here to also see a second destination:
+            </h1>
+
             <h1>{apiResponse?.second_destination.location}</h1>
             <h2>{apiResponse?.second_destination.overview}</h2>
             <img

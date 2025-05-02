@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./index.css";
 import Container from "./pages/Container";
+import { apiResponse } from "./types/types";
 
 function App() {
   const [userResponses, setUserResponses] = useState({

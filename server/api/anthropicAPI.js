@@ -57,6 +57,9 @@ router.post("/recommendation", async (req, res) => {
       response8,
       question9,
       response9,
+      question10,
+      response10,
+      firstName,
     } = req.body;
 
     // "stringify" the data to pass to Anthropic, e.g. convert the data object to a string
@@ -79,6 +82,9 @@ router.post("/recommendation", async (req, res) => {
       response8: response8,
       question9: question9,
       response9: response9,
+      question10: question10,
+      response10: response10,
+      firstName: firstName,
     });
 
     const messages = [
@@ -89,7 +95,7 @@ router.post("/recommendation", async (req, res) => {
             type: "text",
             text: `Using the object below, review the questions and then the user's responses to those questions. You will then be returning recommendations on vacation destination that you think would be the best fit for them based on their responses in the format specified below ("destination"), as well as one additional recommendation in the same format ("second_destination"), for their reference. Only return the JSON object requested below, nothing else. 
 
-Make sure that your recommendations follow the parameters of the user's responses. For example, if they say they want to go to a beach destination during the fall, avoid recommending destinations where the fall is the primary hurricane season. Write your response as if you were speaking to them (ex. "You will love this area...")
+Make sure that your recommendations follow the parameters of the user's responses. For example, if they say they want to go to a beach destination during the fall, avoid recommending destinations where the fall is the primary hurricane season. Write your response as if you were speaking to them (ex. "You will love this area..."), using their first name: ${firstName}.
 
 Here is the user object with the questions and responses:
 

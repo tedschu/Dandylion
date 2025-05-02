@@ -56,18 +56,6 @@ p {
   font-size: 14px;
 }
 
-/* HOME PAGE BACKGROUND STYLING */
-/* Set as an additional, conditional class to 'pageContainer flexCol' */
-
-/* STEP PAGE BACKGROUND STYLING */
-.stepPageBackground {
-  /* background-image: url("../src/assets/images/water.webp");
-  background-size: cover;
-  background-position: right; */
-  /* background-color: hsla(43, 51%, 92%, 0.9); */
-  background-blend-mode: overlay;
-}
-
 /* Component styling */
 .pageContainer {
   /* background-color: #f5efdf; */
@@ -79,6 +67,22 @@ p {
   max-width: 950px;
   padding: 10px;
   min-height: 100vh;
+}
+
+.resultContainer {
+  text-align: center;
+  max-width: 950px;
+  padding: 10px;
+  min-height: 100vh;
+  margin: 50px 0 10px 0;
+  background-color: hsl(0, 0%, 100%, 0.5);
+  border-radius: 8px;
+}
+
+.locationImage {
+  width: 60%;
+  min-width: 400px;
+  border-radius: 8px;
 }
 
 .homeContainer {
@@ -100,10 +104,6 @@ p {
   text-align: center;
   /* background-color: #1a73e8; */
   /* box-shadow: 3px 3px 3px #1a73e8; */
-}
-
-.locationImage {
-  width: 80%;
 }
 
 .textBackground {

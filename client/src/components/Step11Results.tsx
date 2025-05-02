@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { StepProps } from "../types/types";
+import { StepProps, apiResponse } from "../types/types";
 import destinationImage from "../assets/output.png";
+import secondDestinationImage from "../assets/output2.png";
 
 function Step11Results({
   currentStep,
@@ -20,13 +21,49 @@ function Step11Results({
     if (apiResponse && apiResponse.destination) {
       setHasResponse(true);
     }
+
+    if (
+      apiResponse?.second_destination?.photos?.length === 0 &&
+      apiResponse?.destination?.photos?.length > 0
+    ) {
+      getSecondImage();
+    }
   }, [apiResponse]);
+
+  // Function to call OpenAI API to get second_Destination image
+  const getSecondImage = async () => {
+    try {
+      console.log("Getting the second image...");
+      const images = await fetch("/api/gptAPI/image_second", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          location: apiResponse?.second_destination.location,
+          overview: apiResponse?.second_destination.overview,
+        }),
+      });
+
+      const imgData = await images.json();
+
+      if (imgData) {
+        const copy = { ...apiResponse };
+        if (copy.second_destination && copy.second_destination.photos) {
+          copy.second_destination.photos.push("eventual_s3_URL");
+        }
+        if (setApiResponse) {
+          setApiResponse(copy as apiResponse);
+        }
+      }
+    } catch (error) {}
+  };
 
   return (
     <>
       {hasResponse && (
         <>
-          <div className="stepContainer flexCol">
+          <div className="resultContainer flexCol">
             <h1>{apiResponse?.destination.location}</h1>
             <h2>{apiResponse?.destination.overview}</h2>
             <img src={destinationImage} alt="" className="locationImage" />
@@ -56,10 +93,16 @@ function Step11Results({
             </li>
             <li>Other tips: {apiResponse?.destination.helpful_tips}</li>
           </div>
-          <div className="stepContainer flexCol">
+          <div className="resultContainer flexCol">
             <h1>Second destination:</h1>
             <h1>{apiResponse?.second_destination.location}</h1>
             <h2>{apiResponse?.second_destination.overview}</h2>
+            <img
+              src={secondDestinationImage}
+              alt=""
+              className="locationImage"
+            />
+
             <h2>{apiResponse?.second_destination.places_to_stay}</h2>
             {apiResponse?.second_destination.things_to_do.map((destination) => {
               return (

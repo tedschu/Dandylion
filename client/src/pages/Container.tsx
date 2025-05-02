@@ -72,11 +72,7 @@ function Container({
 
   return (
     <>
-      <div
-        className={`pageContainer flexCol ${
-          currentStep === 0 ? "homePageBackground" : "stepPageBackground"
-        }`}
-      >
+      <div className={"pageContainer flexCol"}>
         <Header />
 
         {/* Maps through steps array and outputs the component that matches the currentStep state */}
@@ -92,6 +88,7 @@ function Container({
                     style={{
                       width: "100%",
                       display: "flex",
+                      flexDirection: "column",
                       justifyContent: "center",
                       alignItems: "center",
                     }}
@@ -108,8 +105,16 @@ function Container({
                       setApiResponse={
                         stepNumber >= 9 ? setApiResponse : undefined
                       }
-                      userInfo={stepNumber === 0 ? userInfo : undefined}
-                      setUserInfo={stepNumber === 0 ? setUserInfo : undefined}
+                      userInfo={
+                        stepNumber === 0 || stepNumber === 10
+                          ? userInfo
+                          : undefined
+                      }
+                      setUserInfo={
+                        stepNumber === 0 || stepNumber === 10
+                          ? setUserInfo
+                          : undefined
+                      }
                     />
                   </motion.div>
                 </AnimatePresence>

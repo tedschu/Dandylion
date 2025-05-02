@@ -1,5 +1,6 @@
 import { body, text } from "motion/react-client";
-import { StepProps } from "../types/types";
+import { apiResponse, StepProps } from "../types/types";
+import { useEffect, useState } from "react";
 
 function Step10({
   currentStep,
@@ -10,6 +11,8 @@ function Step10({
   setQuestionPrompts,
   apiResponse,
   setApiResponse,
+  userInfo,
+  setUserInfo,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
     const tempObj = { ...userResponses };
@@ -23,8 +26,11 @@ function Step10({
     setCurrentStep(11);
   }
 
+  // Gets trip recommendation for destination and second_destination, and image for first destination (second is in useEffect below, to save load time)
   const getTripResults = async () => {
     try {
+      // Calls Anthropic API, passing questions and user responses (and user's first name)
+      // Returns primary and secondary recommendation objects
       const response = await fetch("/api/anthropicAPI/recommendation", {
         method: "POST",
         headers: {
@@ -51,6 +57,7 @@ function Step10({
           response9: userResponses.response9,
           question10: questionPrompts.question10,
           response10: userResponses.response10,
+          firstName: userInfo?.firstName,
         }),
       });
 
@@ -62,12 +69,8 @@ function Step10({
 
       const textData = await response.json();
 
-      // TODO: Await call to Unsplash API to pull "location" from data.location as searchTerm, then populate photos array with Unsplash results
-
-      // if (setApiResponse) {
-      //   setApiResponse(textData);
-      // }
-
+      // Calls OpenAI API, passing location and overview info from Anthropic response, and user's first name
+      // Returns a postcard-style image for the location
       const images = await fetch("/api/gptAPI/image", {
         method: "POST",
         headers: {
@@ -79,13 +82,6 @@ function Step10({
         }),
       });
 
-      console.log(
-        "HEre is the body text being passed:",
-        JSON.stringify({
-          location: textData.destination.location,
-        })
-      );
-
       console.log("Here is images (raw response):", images);
 
       const imgData = await images.json();
@@ -95,16 +91,55 @@ function Step10({
       if (imgData) {
         const copy = { ...textData };
         if (copy.destination && copy.destination.photos) {
-          copy.destination.photos.push("desintationImage");
+          copy.destination.photos.push("eventual_s3_URL");
         }
         if (setApiResponse) {
-          setApiResponse(copy);
+          setApiResponse(copy as apiResponse);
         }
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  // // useEffect to call OpenAI API for second_destination's image (will call after first image + content loads for user)
+  // useEffect(() => {
+  //   if (
+  //     apiResponse?.second_destination?.photos?.length === 0 &&
+  //     apiResponse?.destination?.photos?.length > 0
+  //   ) {
+  //     getSecondImage();
+  //   }
+  // }, [apiResponse?.destination?.photos]);
+
+  // // Function to call OpenAI API to get second_Destination image
+  // const getSecondImage = async () => {
+  //   try {
+  //     console.log("Getting the second image...");
+  //     const images = await fetch("/api/gptAPI/image_second", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         location: apiResponse?.second_destination.location,
+  //         overview: apiResponse?.second_destination.overview,
+  //       }),
+  //     });
+
+  //     const imgData = await images.json();
+
+  //     if (imgData) {
+  //       const copy = { ...apiResponse };
+  //       if (copy.second_destination && copy.second_destination.photos) {
+  //         copy.second_destination.photos.push("eventual_s3_URL");
+  //       }
+  //       if (setApiResponse) {
+  //         setApiResponse(copy as apiResponse);
+  //       }
+  //     }
+  //   } catch (error) {}
+  // };
 
   return (
     <>

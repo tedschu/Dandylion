@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { StepProps } from "../types/types";
+import destinationImage from "../assets/images/output.png";
 
 function Step11Results({
   currentStep,
@@ -28,11 +29,7 @@ function Step11Results({
           <div className="stepContainer flexCol">
             <h1>{apiResponse?.destination.location}</h1>
             <h2>{apiResponse?.destination.overview}</h2>
-            <img
-              src={apiResponse?.destination.photos[0]?.toString() || ""}
-              alt=""
-              className="locationImage"
-            />
+            <img src={destinationImage} alt="" className="locationImage" />
             <h2>Where to stay: {apiResponse?.destination.places_to_stay}</h2>
             {apiResponse?.destination.things_to_do.map((destination) => {
               return (

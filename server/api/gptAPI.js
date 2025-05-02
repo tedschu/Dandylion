@@ -21,7 +21,7 @@ router.post("/image", async (req, res) => {
 
     const response = await api.images.generate({
       model: "gpt-image-1",
-      prompt: `Create a vibrant, photo-realistic image of ${location.location}. Include iconic landmarks and natural beauty. If there are multiple locations specified (for example: "Peru: machu picchu, lima"), create a collage of up to 4 scenes showing the destination's highlights. Use bright, inviting colors and a simple, postcard-style border around the top and sides of the image. Here is some additional context to include the image as well: ${overview}`,
+      prompt: `Create a vibrant, photo-realistic image of ${location.location} in the style of travel photography. Include iconic landmarks and natural beauty. If there are multiple locations specified (for example: "Peru: machu picchu, lima"), create a collage of up to 4 scenes showing the destination's highlights. Use bright, inviting colors and a simple, postcard-style border around the top and sides of the image. Here is some additional context to include the image as well: ${overview}`,
       n: 1,
       size: "1024x1024",
       // response_format: "url",
@@ -34,7 +34,7 @@ router.post("/image", async (req, res) => {
     }
 
     const imageBuffer = Buffer.from(response.data[0].b64_json, "base64");
-    await writeFile("output.png", imageBuffer);
+    await writeFile("../client/src/assets/output.png", imageBuffer);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });

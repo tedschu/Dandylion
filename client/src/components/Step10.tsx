@@ -1,4 +1,4 @@
-import { body } from "motion/react-client";
+import { body, text } from "motion/react-client";
 import { StepProps } from "../types/types";
 
 function Step10({
@@ -95,7 +95,7 @@ function Step10({
       if (imgData) {
         const copy = { ...textData };
         if (copy.destination && copy.destination.photos) {
-          copy.destination.photos.push(imgData.url);
+          copy.destination.photos.push("desintationImage");
         }
         if (setApiResponse) {
           setApiResponse(copy);

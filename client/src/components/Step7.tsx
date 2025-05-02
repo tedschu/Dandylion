@@ -22,7 +22,7 @@ function Step7({
         <form className="userForm flexCol" action="">
           <input
             type="text"
-            placeholder="I'm thinking between $3000 - $5000 in total, but I'm flexible. Ideally it would be less though."
+            placeholder="Ideally late summer or early fall, and I'd like to go for maybe 6-8 days."
             value={userResponses.response7}
             name="response7"
             onChange={setFormValues}

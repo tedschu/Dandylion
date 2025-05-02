@@ -31,7 +31,7 @@ function Step1({
           <input
             className="userInputBox"
             type="text"
-            placeholder="Be conversational: ex. 'I'm going with my daughter and her two friends.'"
+            placeholder="Be conversational: ex. 'I'm going with my 12-year-old daughter and her two friends.'"
             value={userResponses.response1}
             name="response1"
             onChange={setFormValues}

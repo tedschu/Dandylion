@@ -113,7 +113,7 @@ function Step10({
         <form className="userForm flexCol" action="">
           <input
             type="text"
-            placeholder="Note any travel limitations."
+            placeholder="My daughter is a vegetarian."
             value={userResponses.response10}
             name="response10"
             onChange={setFormValues}

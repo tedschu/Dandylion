@@ -42,18 +42,16 @@ function App() {
 
   return (
     <>
-      <div>
-        <Container
-          currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-          userResponses={userResponses}
-          setUserResponses={setUserResponses}
-          questionPrompts={questionPrompts}
-          setQuestionPrompts={setQuestionPrompts}
-          apiResponse={apiResponse}
-          setApiResponse={setApiResponse}
-        />
-      </div>
+      <Container
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        userResponses={userResponses}
+        setUserResponses={setUserResponses}
+        questionPrompts={questionPrompts}
+        setQuestionPrompts={setQuestionPrompts}
+        apiResponse={apiResponse}
+        setApiResponse={setApiResponse}
+      />
     </>
   );
 }

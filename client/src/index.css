@@ -30,6 +30,18 @@
   align-items: center;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("../src/assets/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+
+  /* background-attachment: fixed; */
+}
+
 /* Font sizing */
 h1 {
   font-size: 18px;
@@ -46,11 +58,6 @@ p {
 
 /* HOME PAGE BACKGROUND STYLING */
 /* Set as an additional, conditional class to 'pageContainer flexCol' */
-.homePageBackground {
-  background-image: url("../src/assets/images/carmel.webp");
-  background-size: cover;
-  background-position: right;
-}
 
 /* STEP PAGE BACKGROUND STYLING */
 .stepPageBackground {
@@ -64,15 +71,25 @@ p {
 /* Component styling */
 .pageContainer {
   /* background-color: #f5efdf; */
-  min-height: 100vh;
   width: 100%;
-  margin-top: 80px;
 }
 
 .stepContainer {
   text-align: center;
   max-width: 950px;
   padding: 10px;
+  min-height: 100vh;
+}
+
+.homeContainer {
+  min-height: 100vh;
+  width: 70%;
+  margin-top: 80px;
+  color: white;
+}
+
+.homeContainer h1 {
+  font-size: 50px;
 }
 
 .header {
@@ -80,8 +97,8 @@ p {
   top: 0;
   width: 100%;
   text-align: center;
-  background-color: #1a73e8;
-  box-shadow: 3px 3px 3px #1a73e8;
+  /* background-color: #1a73e8; */
+  /* box-shadow: 3px 3px 3px #1a73e8; */
 }
 
 .locationImage {

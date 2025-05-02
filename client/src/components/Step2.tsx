@@ -27,7 +27,7 @@ function Step2({
         <form className="userForm flexCol" action="">
           <input
             type="text"
-            placeholder="I'm thinking between $3000 - $5000 in total, but I'm flexible. Ideally it would be less though."
+            placeholder="I'm thinking between $3000 - $5000 in total, but I'm flexible."
             value={userResponses.response2}
             name="response2"
             onChange={setFormValues}

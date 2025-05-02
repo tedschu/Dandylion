@@ -27,7 +27,7 @@ function Step3({
         <form className="userForm flexCol" action="">
           <input
             type="text"
-            placeholder="I'm thinking between $3000 - $5000 in total, but I'm flexible. Ideally it would be less though."
+            placeholder="Our trip to Hawaii two years ago. Those were the most beautiful beaches I've seen."
             value={userResponses.response3}
             name="response3"
             onChange={setFormValues}

@@ -77,7 +77,16 @@ function Container({
             stepNumber === currentStep && (
               <>
                 <AnimatePresence mode="wait">
-                  <motion.div key={stepNumber} {...motionProps}>
+                  <motion.div
+                    key={stepNumber}
+                    {...motionProps}
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <ComponentStep
                       key={stepNumber}
                       currentStep={currentStep}

@@ -89,7 +89,7 @@ router.post("/recommendation", async (req, res) => {
             type: "text",
             text: `Using the object below, review the questions and then the user's responses to those questions. You will then be returning recommendations on vacation destination that you think would be the best fit for them based on their responses in the format specified below ("destination"), as well as one additional recommendation in the same format ("second_destination"), for their reference. Only return the JSON object requested below, nothing else. 
 
-Make sure that your recommendations follow the parameters of the user's responses. For example, if they say they want to go to a beach destination during the fall, avoid recommending destinations where the fall is the primary hurricane season. 
+Make sure that your recommendations follow the parameters of the user's responses. For example, if they say they want to go to a beach destination during the fall, avoid recommending destinations where the fall is the primary hurricane season. Write your response as if you were speaking to them (ex. "You will love this area...")
 
 Here is the user object with the questions and responses:
 

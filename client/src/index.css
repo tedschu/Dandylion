@@ -54,10 +54,10 @@ p {
 
 /* STEP PAGE BACKGROUND STYLING */
 .stepPageBackground {
-  background-image: url("../src/assets/images/water.webp");
+  /* background-image: url("../src/assets/images/water.webp");
   background-size: cover;
-  background-position: right;
-  background-color: hsla(43, 51%, 92%, 0.9);
+  background-position: right; */
+  /* background-color: hsla(43, 51%, 92%, 0.9); */
   background-blend-mode: overlay;
 }
 

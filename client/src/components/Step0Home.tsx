@@ -1,5 +1,4 @@
 import { StepProps } from "../types/types";
-import carmel from "../assets/images/carmel.webp";
 
 function Step0Home({
   currentStep,
@@ -8,28 +7,55 @@ function Step0Home({
   setUserResponses,
   questionPrompts,
   setQuestionPrompts,
+  userInfo,
+  setUserInfo,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const tempObj = { ...userResponses };
-    tempObj[event.target.name as keyof typeof userResponses] =
-      event.target.value;
-    setUserResponses(tempObj);
+    const { name, value } = event.target;
+
+    setUserInfo?.((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
     <>
       <div className="homeContainer flexCol">
-        <h1>FIND YOUR PERFECT TRAVEL DESTINATION</h1>
-        <p>
+        <h1 style={{ marginBottom: "2px" }}>
+          TRAVEL PLANNING THAT IS{" "}
+          <span style={{ fontStyle: "italic" }}>SO YOU</span>
+        </h1>
+        <p className="textBackground">
           Whether it's halfway around the world, or just a few hours away -
-          let's find the perfect spot for you. There's nothing more fun, and
-          sometimes more frustrating, than planning a trip. Maybe
+          there's a perfect place for you. Keep all the fun of planning your
+          next trip, and get rid of the frustration. TRAVEL simply asks you a
+          few questions about who you are and what you're looking to do, and
+          then it scours the world to find you a trip that you'll love. In just
+          five minutes, get detailed recommendations and itineraries for a trip
+          that fits you perfectly.
         </p>
 
-        <div className="buttonContainer flexRow">
-          <button className="next" onClick={() => setCurrentStep(1)}>
-            Next step
-          </button>
+        <div className="buttonContainer flexCol">
+          <div className="formContainer flexRow">
+            <input
+              type="text"
+              placeholder="First name"
+              value={userInfo?.firstName}
+              name="firstName"
+              onChange={setFormValues}
+            />
+            <input
+              type="text"
+              placeholder="email"
+              value={userInfo?.email}
+              name="email"
+              onChange={setFormValues}
+            />
+            <button className="next" onClick={() => setCurrentStep(1)}>
+              Get started
+            </button>
+          </div>
         </div>
       </div>
     </>

@@ -11,7 +11,12 @@ import Step8 from "../components/Step8";
 import Step9 from "../components/Step9";
 import Step10 from "../components/Step10";
 import Step11Results from "../components/Step11Results";
-import { UserResponses, QuestionPrompts, apiResponse } from "../types/types";
+import {
+  UserResponses,
+  QuestionPrompts,
+  apiResponse,
+  UserInfo,
+} from "../types/types";
 import { AnimatePresence, motion } from "motion/react";
 
 type ContainerProps = {
@@ -23,6 +28,8 @@ type ContainerProps = {
   setQuestionPrompts: React.Dispatch<React.SetStateAction<QuestionPrompts>>;
   apiResponse: apiResponse;
   setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
+  userInfo: UserInfo;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
 };
 
 function Container({
@@ -34,6 +41,8 @@ function Container({
   setQuestionPrompts,
   apiResponse,
   setApiResponse,
+  userInfo,
+  setUserInfo,
 }: ContainerProps) {
   const steps = [
     Step0Home,
@@ -99,6 +108,8 @@ function Container({
                       setApiResponse={
                         stepNumber >= 9 ? setApiResponse : undefined
                       }
+                      userInfo={stepNumber === 0 ? userInfo : undefined}
+                      setUserInfo={stepNumber === 0 ? setUserInfo : undefined}
                     />
                   </motion.div>
                 </AnimatePresence>

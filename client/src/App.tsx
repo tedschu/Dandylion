@@ -16,6 +16,11 @@ function App() {
     response10: "",
   });
 
+  const [userInfo, setUserInfo] = useState({
+    firstName: "",
+    email: "",
+  });
+
   const [questionPrompts, setQuestionPrompts] = useState({
     question1:
       "Let's get started. Are you traveling solo, with a partner, friends, or family?",
@@ -51,6 +56,8 @@ function App() {
         setQuestionPrompts={setQuestionPrompts}
         apiResponse={apiResponse}
         setApiResponse={setApiResponse}
+        userInfo={userInfo}
+        setUserInfo={setUserInfo}
       />
     </>
   );

@@ -9,6 +9,8 @@ export type StepProps = {
   setQuestionPrompts: React.Dispatch<React.SetStateAction<QuestionPrompts>>;
   apiResponse?: apiResponse;
   setApiResponse?: React.Dispatch<React.SetStateAction<apiResponse>>;
+  userInfo?: UserInfo;
+  setUserInfo?: React.Dispatch<React.SetStateAction<UserInfo>>;
 };
 
 export type UserResponses = {
@@ -22,6 +24,11 @@ export type UserResponses = {
   response8: string;
   response9: string;
   response10: string;
+};
+
+export type UserInfo = {
+  firstName: string;
+  email: string;
 };
 
 export type QuestionPrompts = {

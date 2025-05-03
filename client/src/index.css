@@ -87,10 +87,14 @@ p {
 
 .homeContainer {
   min-height: 100vh;
-  width: 70%;
+  width: 100%;
   margin-top: 80px;
   color: white;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .homeContainer h1 {
@@ -106,10 +110,18 @@ p {
   /* box-shadow: 3px 3px 3px #1a73e8; */
 }
 
+.bottomContentContainer {
+  bottom: 0;
+  position: fixed;
+  height: 200px;
+  width: 100%;
+  background-color: white;
+}
+
 .textBackground {
   background-color: hsla(190, 36%, 34%, 0.5);
   padding: 30px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 /* BUTTON STYLING */
@@ -133,10 +145,18 @@ button {
 .buttonContainer {
   gap: 15px;
   margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .formContainer {
   gap: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .formContainer input {
@@ -188,4 +208,13 @@ button {
 
 .userInputBox {
   width: 100%;
+}
+
+/* MEDIA QUERIES FOR DESKTOP SIZING */
+
+/* Screen is above 750px */
+@media screen and (min-width: 750px) {
+  .formContainer {
+    flex-direction: row;
+  }
 }

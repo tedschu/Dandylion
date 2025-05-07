@@ -107,9 +107,19 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
 
 {
   "destination": {
-    "location": "Recommended destination (can be specific town or multiple destinations)",
+    "location": "Recommended destination (can be specific town or multiple destinations). Make sure that your recommendation is not the town that they live in (for example, if the user said they live in Minneapolis, do not recommend a trip to Minneapolis)",
     "overview": "3-4 sentences explaining why this recommendation fits user preferences. In this overview, you can also expand on the destinations that you're recommending, if appropriate. So for example, if you recommend Bordeaux and Nice in France, in this overview you can talk about how the broader region ("south of France") fits with their preferences",
-    "places_to_stay": "Specific accommodation suggestions that match user's budget and preferences. For example, if there is a particular resort that gets great reviews and falls within the user's budget, recommend that and note where the resort is. If the user has noted that they want to stay in a remote place, and for example, you find that AirBnb accommodations are popular, recommend that they check out home rentals and note specific locations that would be best based on their preferences",
+    "places_to_stay": "Specific accommodation suggestions that match user's budget and preferences. For example, if there is a particular resort that gets great reviews and falls within the user's budget, recommend that and note where the resort is. If the user has noted that they want to stay in a remote place, and for example, you find that AirBnb accommodations are popular, recommend that they check out home rentals and note specific locations that would be best based on their preferences. Provide the responses in this format: 
+        [
+             {
+                   "place_to_stay": "first recommendation",
+              },
+             {
+                   "place_to_stay": "second recommendation",
+             },
+             // If you have additional recommendations, keep this format.
+       ]
+",
     "photos": "leave this as an empty array: []",
     "things_to_do": [
       {
@@ -119,8 +129,15 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
       // Include 5-7 more activity objects following this format
     ],
     "time_to_go": "Best months/seasons to visit based on user preferences",
+    "length_of_stay": "Note the length of stay, based on the user input",
     "estimated_cost": "Cost range (e.g., '$5,000 - $7,000 USD') with brief explanation. For instance, if the user is coming from Chicago and has to fly to Florence (if this is the recommended destination), you can look at average ticket prices. You can also look at hotels or places to stay that fit their preferences, and see what the cost per night is in the time of year that they want to travel",
-    "helpful_tips": "Key insights for travel to this destination (language, currency, etc.)"
+    "helpful_tips": "Key insights for travel to this destination (language, currency, etc.). If the recommended trip is in the same country that the user is from, do not mention currency or language and stick to other tips like "don't forget comfortable shoes as it's very walkable," or something similar",    
+    "itinerary": "Provide a full suggested itinerary for the user based on their length of stay for this location, incorporating the attraction/activities noted in the destination_name objects that you provided. Try to be specific about your recommendations - for example, for restaurants, avoid generalized recommendations like "try family-friendly restaurants nearby" and instead say something like "try restaurants such as [restaurant name], [restaurant name], or other family-friendly restaurants in the neighborhood". Ensure the text is in the following format: [
+    {
+          "day1": "suggestions for the first day",
+   },
+         // Include additional days in this format
+    ]",
   },
   "second_destination": {
     // Same structure as above for an alternative recommendation

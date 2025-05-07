@@ -57,7 +57,6 @@ function Step0Home({
             </button>
           </div>
         </div>
-        <div className="bottomContentContainer">test</div>
       </div>
     </>
   );

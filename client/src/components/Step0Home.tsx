@@ -23,8 +23,8 @@ function Step0Home({
     <>
       <div className="homeContainer">
         <h1 style={{ marginBottom: "2px" }}>
-          TRAVEL PLANNING THAT IS{" "}
-          <span style={{ fontStyle: "italic" }}>SO YOU</span>
+          Travel planning that is{" "}
+          <span style={{ fontStyle: "italic" }}>so you</span>
         </h1>
         <p className="textBackground">
           Whether it's halfway around the world, or just a few hours away -

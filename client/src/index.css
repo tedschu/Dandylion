@@ -14,14 +14,11 @@
 
 /* COLOR SCHEME:
     PRIMARY: 
-    - Ocean blue: #1A73E8
-    - Tropical green: #34A853
-    - Sunset orange: #FF7043
+    - Blue: #113a67
+    - Yellow: #f7bc21
 
     SUPPORTING:
-    - Sand/Beach Beige: #F5EFE0 (backgrounds)
-    - Mountain purple: #7B68EE 
-    - Golden yellow: #FFCA28 (highlights)
+    - Salmon ("next" buttons): #e87a5d
 */
 
 body,
@@ -162,7 +159,6 @@ h3 {
 .homeContainer {
   min-height: 100vh;
   width: 100%;
-  margin-top: 80px;
   color: white;
   text-align: center;
   display: flex;
@@ -203,8 +199,8 @@ h3 {
   position: absolute;
   bottom: 0;
   left: 20px;
-  width: 50px;
-  z-index: 1;
+  width: 45px;
+  z-index: 2;
 }
 
 /* BUTTON STYLING */
@@ -217,12 +213,12 @@ button {
 }
 
 .next {
-  background-color: #34a853;
+  background-color: #e87a5d;
   color: white;
 }
 
 .next:hover {
-  background-color: #188d37;
+  background-color: #d85a45;
 }
 
 .buttonContainer {

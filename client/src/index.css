@@ -139,6 +139,13 @@ p {
   /* border-radius: 10px; */
 }
 
+.dandelion_corner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 75px;
+}
+
 /* BUTTON STYLING */
 button {
   border: none;

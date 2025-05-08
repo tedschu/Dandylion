@@ -12,8 +12,8 @@
 
 .seed {
   position: absolute;
-  bottom: 50px;
-  left: 50px;
+  bottom: 30px;
+  left: 20px;
   width: 10px;
   height: 10px;
   pointer-events: none;

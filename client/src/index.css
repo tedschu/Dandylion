@@ -68,6 +68,12 @@ p {
   font-size: 14px;
 }
 
+h1,
+h2,
+h3 {
+  color: white;
+}
+
 /* Component styling */
 .pageContainer {
   /* background-color: #f5efdf; */
@@ -77,13 +83,69 @@ p {
 }
 /* Handles data attribute / shifts in background: sunrise to sunset effect */
 .pageContainer[data-question="1"] {
-  background: linear-gradient(to top, #ff9966, #ff5e62, #ffc44d, #6ec3e2);
+  /* background: linear-gradient(to top, #ff9966, #ff5e62, #ffc44d, #6ec3e2); */
+  background: linear-gradient(
+    to bottom,
+    #0e1f46,
+    #1d305b,
+    #223667,
+    #2b4583,
+    #365396,
+    #336589,
+    #2d7a8d,
+    #44b1a0,
+    #54d1be,
+    #dece14
+  );
 }
 .pageContainer[data-question="2"] {
-  background: linear-gradient(to top, #4a90e2, #87ceeb, #f9d423, #ff9966);
+  /* background: linear-gradient(to top, #4a90e2, #87ceeb, #f9d423, #ff9966); */
+  background: linear-gradient(
+    to bottom,
+    #0e1f46,
+    #1d305b,
+    #223667,
+    #2b4583,
+    #365396,
+    #336589,
+    #2d7a8d,
+    #44b1a0,
+    #54d1be,
+    #dece14
+  );
 }
 .pageContainer[data-question="3"] {
-  background: linear-gradient(to top, #614385, #516395, #ff5e62, #ff9966);
+  /* background: linear-gradient(to top, #614385, #516395, #ff5e62, #ff9966); */
+  background: linear-gradient(
+    to bottom,
+    #0e1f46,
+    #1d305b,
+    #223667,
+    #2b4583,
+    #365396,
+    #336589,
+    #2d7a8d,
+    #44b1a0,
+    #54d1be,
+    #dece14
+  );
+}
+
+.pageContainer[data-question="4"] {
+  /* background: linear-gradient(to top, #614385, #516395, #ff5e62, #ff9966); */
+  background: linear-gradient(
+    to bottom,
+    #0e1f46,
+    #1d305b,
+    #223667,
+    #2b4583,
+    #365396,
+    #336589,
+    #2d7a8d,
+    #44b1a0,
+    #54d1be,
+    #dece14
+  );
 }
 
 .stepContainer {

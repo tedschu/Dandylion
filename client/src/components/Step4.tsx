@@ -10,7 +10,7 @@ function Step4({
   questionPrompts,
   setQuestionPrompts,
 }: StepProps) {
-  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =
       event.target.value;
@@ -19,21 +19,21 @@ function Step4({
 
   return (
     <>
-      <div className="stepContainer flexCol">
+      <div className="stepContainer">
         <div className="questionImageGridContainer">
           <img src={lion} alt="" />
           <h3>{questionPrompts.question4}</h3>
           <div></div>
         </div>
-        <form className="userForm flexCol" action="">
-          <input
-            type="text"
-            placeholder="Something like: 'skydiving,' or 'spend three full days at the spa.'"
+        <form className="userForm" action="">
+          <textarea
+            placeholder="I've never gone scuba diving yet, but I think that would be a lot of fun."
+            rows={3}
             value={userResponses.response4}
             name="response4"
             onChange={setFormValues}
           />
-          <div className="buttonContainer flexRow">
+          <div className="buttonContainer">
             <button className="back" onClick={() => setCurrentStep(3)}>
               Go back
             </button>

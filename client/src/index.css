@@ -24,21 +24,6 @@
     - Golden yellow: #FFCA28 (highlights)
 */
 
-/* Universal flex property classes */
-.flexCol {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.flexRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
 body,
 #root {
   /* margin: 0;
@@ -118,8 +103,8 @@ h3 {
   /* background: linear-gradient(to top, #614385, #516395, #ff5e62, #ff9966); */
   background: linear-gradient(
     to bottom,
-    #0e1f46,
-    #1d305b,
+    #10224d,
+    #203462,
     #223667,
     #2b4583,
     #365396,
@@ -152,6 +137,10 @@ h3 {
   text-align: center;
   max-width: 950px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .resultContainer {
@@ -239,7 +228,7 @@ button {
   gap: 15px;
   margin: 15px 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
@@ -261,31 +250,36 @@ button {
 
 .questionImageGridContainer {
   display: grid;
-  grid-template-columns: 20% 60% 20%;
-  width: 95%;
+  grid-template-columns: 30% 70%;
+  width: 90%;
 }
 
 .questionImageGridContainer > img {
-  width: 120px;
+  width: 80px;
   border-radius: 8px;
+  align-self: flex-end;
 }
 
 .questionImageGridContainer h3 {
-  align-self: end;
+  align-self: flex-end;
   font-size: 20px;
   z-index: 1;
+  text-align: right;
+  margin-bottom: 8px;
 }
 
 /* FORM AND INPUT STYLING */
 
 .userForm {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
-.userForm input {
-  width: 100%;
+.userForm textarea {
+  width: 90%;
   height: 60px;
   border: none;
   border-radius: 10px;
@@ -296,7 +290,7 @@ button {
   /* z-index to keep in front of dandelion seeds */
 }
 
-.userForm input::placeholder {
+.userForm textarea::placeholder {
   color: rgb(176, 176, 176);
   font-style: italic;
   font-size: 16px;
@@ -309,8 +303,21 @@ button {
 /* MEDIA QUERIES FOR DESKTOP SIZING */
 
 /* Screen is above 750px */
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 800px) {
   .formContainer {
     flex-direction: row;
+  }
+
+  .questionImageGridContainer {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+  }
+
+  .questionImageGridContainer > img {
+    width: 120px;
+  }
+
+  .questionImageGridContainer h3 {
+    text-align: center;
   }
 }

@@ -9,7 +9,7 @@ function Step2({
   questionPrompts,
   setQuestionPrompts,
 }: StepProps) {
-  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =
       event.target.value;
@@ -18,21 +18,21 @@ function Step2({
 
   return (
     <>
-      <div className="stepContainer flexCol">
+      <div className="stepContainer">
         <div className="questionImageGridContainer">
           <img src={euro_city} alt="" />
           <h3>{questionPrompts.question2}</h3>
           <div></div>
         </div>
-        <form className="userForm flexCol" action="">
-          <input
-            type="text"
+        <form className="userForm" action="">
+          <textarea
             placeholder="I'm thinking between $3000 - $5000 in total, but I'm flexible."
+            rows={3}
             value={userResponses.response2}
             name="response2"
             onChange={setFormValues}
           />
-          <div className="buttonContainer flexRow">
+          <div className="buttonContainer">
             <button className="back" onClick={() => setCurrentStep(1)}>
               Go back
             </button>

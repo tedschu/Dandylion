@@ -14,7 +14,7 @@ function Step10({
   userInfo,
   setUserInfo,
 }: StepProps) {
-  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =
       event.target.value;
@@ -143,17 +143,17 @@ function Step10({
 
   return (
     <>
-      <div className="stepContainer flexCol">
+      <div className="stepContainer">
         <h3>{questionPrompts.question10}</h3>
-        <form className="userForm flexCol" action="">
-          <input
-            type="text"
+        <form className="userForm" action="">
+          <textarea
             placeholder="My daughter is a vegetarian."
+            rows={3}
             value={userResponses.response10}
             name="response10"
             onChange={setFormValues}
           />
-          <div className="buttonContainer flexRow">
+          <div className="buttonContainer">
             <button className="back" onClick={() => setCurrentStep(9)}>
               Go back
             </button>

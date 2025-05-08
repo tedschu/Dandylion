@@ -64,7 +64,7 @@ function Step11Results({
     <>
       {hasResponse && (
         <>
-          <div className="resultContainer flexCol">
+          <div className="resultContainer">
             <h1>{apiResponse?.destination.location}</h1>
             <h2>{apiResponse?.destination.overview}</h2>
             <img src={destinationImage} alt="" className="locationImage" />
@@ -95,7 +95,7 @@ function Step11Results({
             <li>Other tips: {apiResponse?.destination.helpful_tips}</li>
           </div>
           {/* Second destination */}
-          <div className="resultContainer flexCol">
+          <div className="resultContainer">
             <h1 onClick={() => setIsSecondDestinationOpen(true)}>
               Click here to also see a second destination:
             </h1>

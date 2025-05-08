@@ -8,7 +8,7 @@ function Step8({
   questionPrompts,
   setQuestionPrompts,
 }: StepProps) {
-  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =
       event.target.value;
@@ -17,17 +17,17 @@ function Step8({
 
   return (
     <>
-      <div className="stepContainer flexCol">
+      <div className="stepContainer">
         <h3>{questionPrompts.question8}</h3>
-        <form className="userForm flexCol" action="">
-          <input
-            type="text"
+        <form className="userForm" action="">
+          <textarea
             placeholder="I want to hike across the park all day, every day. So I'll say adventure."
+            rows={3}
             value={userResponses.response8}
             name="response8"
             onChange={setFormValues}
           />
-          <div className="buttonContainer flexRow">
+          <div className="buttonContainer">
             <button className="back" onClick={() => setCurrentStep(7)}>
               Go back
             </button>

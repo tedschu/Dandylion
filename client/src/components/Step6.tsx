@@ -9,7 +9,7 @@ function Step6({
   questionPrompts,
   setQuestionPrompts,
 }: StepProps) {
-  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =
       event.target.value;
@@ -18,21 +18,21 @@ function Step6({
 
   return (
     <>
-      <div className="stepContainer flexCol">
+      <div className="stepContainer">
         <div className="questionImageGridContainer">
           <img src={chicago} alt="" />
           <h3>{questionPrompts.question6}</h3>
           <div></div>
         </div>{" "}
-        <form className="userForm flexCol" action="">
-          <input
-            type="text"
+        <form className="userForm" action="">
+          <textarea
             placeholder="I'm looking to see a bit of everything, but mostly I want to experience what it's like to live there."
+            rows={3}
             value={userResponses.response6}
             name="response6"
             onChange={setFormValues}
           />
-          <div className="buttonContainer flexRow">
+          <div className="buttonContainer">
             <button className="back" onClick={() => setCurrentStep(5)}>
               Go back
             </button>

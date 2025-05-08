@@ -10,7 +10,7 @@ function Step9({
   apiResponse,
   setApiResponse,
 }: StepProps) {
-  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =
       event.target.value;
@@ -19,17 +19,17 @@ function Step9({
 
   return (
     <>
-      <div className="stepContainer flexCol">
+      <div className="stepContainer">
         <h3>{questionPrompts.question9}</h3>
-        <form className="userForm flexCol" action="">
-          <input
-            type="text"
+        <form className="userForm" action="">
+          <textarea
             placeholder="I'm based in San Antonio, Texas."
+            rows={3}
             value={userResponses.response9}
             name="response9"
             onChange={setFormValues}
           />
-          <div className="buttonContainer flexRow">
+          <div className="buttonContainer">
             <button className="back" onClick={() => setCurrentStep(8)}>
               Go back
             </button>

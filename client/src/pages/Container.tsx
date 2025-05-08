@@ -20,6 +20,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner from "../assets/dandelion_corner.png";
+import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 
 type ContainerProps = {
   currentStep: number;
@@ -76,9 +77,12 @@ function Container({
     <>
       <div className={"pageContainer flexCol"} data-question={currentStep}>
         <Header />
-        <DandelionSeedsCSS />
-
-        <img src={dandelion_corner} className="dandelion_corner" alt="" />
+        {currentStep > 0 && currentStep < 11 && (
+          <>
+            <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
+            <DandelionSeedsCSS />
+          </>
+        )}
 
         {/* Maps through steps array and outputs the component that matches the currentStep state */}
         {steps.map((ComponentStep, index) => {

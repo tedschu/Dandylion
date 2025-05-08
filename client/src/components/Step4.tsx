@@ -1,5 +1,6 @@
 import { StepProps } from "../types/types";
 import lion from "../assets/images/lion.png";
+import { useState, useEffect } from "react";
 
 function Step4({
   currentStep,

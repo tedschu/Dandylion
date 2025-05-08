@@ -18,6 +18,7 @@ import {
   UserInfo,
 } from "../types/types";
 import { AnimatePresence, motion } from "motion/react";
+import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 
 type ContainerProps = {
   currentStep: number;
@@ -72,8 +73,9 @@ function Container({
 
   return (
     <>
-      <div className={"pageContainer flexCol"}>
+      <div className={"pageContainer flexCol"} data-question={currentStep}>
         <Header />
+        <DandelionSeedsCSS />
 
         {/* Maps through steps array and outputs the component that matches the currentStep state */}
         {steps.map((ComponentStep, index) => {

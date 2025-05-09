@@ -16,6 +16,7 @@ import {
   QuestionPrompts,
   apiResponse,
   UserInfo,
+  PlanTrackType,
 } from "../types/types";
 import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
@@ -33,6 +34,8 @@ type ContainerProps = {
   setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
   userInfo: UserInfo;
   setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
+  planTrack: PlanTrackType;
+  setPlanTrack: React.Dispatch<React.SetStateAction<PlanTrackType>>;
 };
 
 function Container({
@@ -46,6 +49,8 @@ function Container({
   setApiResponse,
   userInfo,
   setUserInfo,
+  planTrack,
+  setPlanTrack,
 }: ContainerProps) {
   const steps = [
     Step0Home,

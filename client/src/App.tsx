@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./index.css";
 import Container from "./pages/Container";
-import { apiResponse } from "./types/types";
+import { apiResponse, PlanTrackType } from "./types/types";
 
 function App() {
   const [userResponses, setUserResponses] = useState({
@@ -42,9 +42,15 @@ function App() {
       "Are there any accessibility needs, dietary restrictions, or travel limitations I should know about?",
   });
 
+  // Used to render step pages based on user's progression
   const [currentStep, setCurrentStep] = useState(0);
 
-  const [apiResponse, setApiResponse] = useState({});
+  // Used to govern rendering of the "I know where I'm going" or "I need help picking" tracks
+  const [planTrack, setPlanTrack] = useState<PlanTrackType>(
+    "destination_unknown"
+  ); // values are "destination_known" OR "destination_unknown"
+
+  const [apiResponse, setApiResponse] = useState<apiResponse>({});
 
   return (
     <>
@@ -59,6 +65,8 @@ function App() {
         setApiResponse={setApiResponse}
         userInfo={userInfo}
         setUserInfo={setUserInfo}
+        planTrack={planTrack}
+        setPlanTrack={setPlanTrack}
       />
     </>
   );

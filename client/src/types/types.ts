@@ -64,3 +64,5 @@ export type apiResponse = {
   destination: Destination;
   second_destination: Destination;
 };
+
+export type PlanTrackType = "destination_known" | "destination_unknown";

@@ -5,10 +5,10 @@ function Path() {
 
   return (
     <>
-      <button onClick={() => navigate("/destination-known")}>
+      <button onClick={() => navigate("/build-plan")}>
         I know where I'm going
       </button>
-      <button onClick={() => navigate("/destination-unknown")}>
+      <button onClick={() => navigate("/find-destination")}>
         I need help picking
       </button>
     </>

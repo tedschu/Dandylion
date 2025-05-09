@@ -79,7 +79,7 @@ function App() {
         <Route path="/path" element={<Path />} />
 
         <Route
-          path="/destination-known"
+          path="/build-plan"
           element={
             <DestinationKnown
               currentStep={currentStep}
@@ -96,7 +96,7 @@ function App() {
           }
         />
         <Route
-          path="/destination-unknown"
+          path="/find-destination"
           element={
             <DestinationUnknown
               currentStep={currentStep}

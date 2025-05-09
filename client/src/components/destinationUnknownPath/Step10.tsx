@@ -1,6 +1,7 @@
 import { body, text } from "motion/react-client";
 import { apiResponse, StepProps } from "../../types/types";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Step10({
   currentStep,
@@ -21,9 +22,11 @@ function Step10({
     setUserResponses(tempObj);
   };
 
+  const navigate = useNavigate();
+
   function handleSubmission() {
     getTripResults();
-    setCurrentStep(11);
+    navigate("/your-destination-plan");
   }
 
   // Gets trip recommendation for destination and second_destination, and image for first destination (second is in useEffect below, to save load time)

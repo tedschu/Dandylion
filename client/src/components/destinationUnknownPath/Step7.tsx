@@ -1,4 +1,5 @@
 import { StepProps } from "../../types/types";
+import redwoods from "../../assets/images/redwoods.png";
 
 function Step7({
   currentStep,
@@ -18,7 +19,11 @@ function Step7({
   return (
     <>
       <div className="stepContainer">
-        <h3>{questionPrompts.question7}</h3>
+        <div className="questionImageGridContainer">
+          <img src={redwoods} alt="" />
+          <h3>{questionPrompts.question5}</h3>
+          <div></div>
+        </div>{" "}
         <form className="userForm" action="">
           <textarea
             placeholder="Ideally late summer or early fall, and I'd like to go for maybe 6-8 days."

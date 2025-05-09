@@ -16,8 +16,6 @@ function Step3({
     setUserResponses(tempObj);
   };
 
-  console.log(userResponses);
-
   return (
     <>
       <div className="stepContainer">

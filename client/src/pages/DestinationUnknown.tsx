@@ -69,8 +69,6 @@ function DestinationUnknown({
     },
   };
 
-  console.log(currentStep);
-
   return (
     <>
       <div className={"pageContainer"} data-question={currentStep}>

@@ -1,5 +1,5 @@
 import { body, text } from "motion/react-client";
-import { apiResponse, StepProps } from "../types/types";
+import { apiResponse, StepProps } from "../../types/types";
 import { useEffect, useState } from "react";
 
 function Step10({

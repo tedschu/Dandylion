@@ -1,7 +1,15 @@
 import { useState } from "react";
 import "./index.css";
-import Container from "./pages/Container";
-import { apiResponse, PlanTrackType } from "./types/types";
+import DestinationUnknown from "./pages/DestinationUnknown";
+import { apiResponse } from "./types/types";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Me from "./pages/Me";
+import ResultsDestinationKnown from "./pages/ResultsDestinationKnown";
+import ResultsDestinationUnknown from "./pages/ResultsDestinationUnknown";
+import Path from "./pages/Path";
+import DestinationKnown from "./pages/DestinationKnown";
 
 function App() {
   const [userResponses, setUserResponses] = useState({
@@ -43,31 +51,87 @@ function App() {
   });
 
   // Used to render step pages based on user's progression
-  const [currentStep, setCurrentStep] = useState(0);
-
-  // Used to govern rendering of the "I know where I'm going" or "I need help picking" tracks
-  const [planTrack, setPlanTrack] = useState<PlanTrackType>(
-    "destination_unknown"
-  ); // values are "destination_known" OR "destination_unknown"
+  const [currentStep, setCurrentStep] = useState(1);
 
   const [apiResponse, setApiResponse] = useState<apiResponse>({});
 
   return (
     <>
-      <Container
-        currentStep={currentStep}
-        setCurrentStep={setCurrentStep}
-        userResponses={userResponses}
-        setUserResponses={setUserResponses}
-        questionPrompts={questionPrompts}
-        setQuestionPrompts={setQuestionPrompts}
-        apiResponse={apiResponse}
-        setApiResponse={setApiResponse}
-        userInfo={userInfo}
-        setUserInfo={setUserInfo}
-        planTrack={planTrack}
-        setPlanTrack={setPlanTrack}
-      />
+      <Routes>
+        <Route
+          index
+          element={
+            <Home
+              currentStep={currentStep}
+              setCurrentStep={setCurrentStep}
+              userResponses={userResponses}
+              setUserResponses={setUserResponses}
+              questionPrompts={questionPrompts}
+              setQuestionPrompts={setQuestionPrompts}
+              apiResponse={apiResponse}
+              setApiResponse={setApiResponse}
+              userInfo={userInfo}
+              setUserInfo={setUserInfo}
+            />
+          }
+        />
+
+        <Route path="/path" element={<Path />} />
+
+        <Route
+          path="/destination-known"
+          element={
+            <DestinationKnown
+              currentStep={currentStep}
+              setCurrentStep={setCurrentStep}
+              userResponses={userResponses}
+              setUserResponses={setUserResponses}
+              questionPrompts={questionPrompts}
+              setQuestionPrompts={setQuestionPrompts}
+              apiResponse={apiResponse}
+              setApiResponse={setApiResponse}
+              userInfo={userInfo}
+              setUserInfo={setUserInfo}
+            />
+          }
+        />
+        <Route
+          path="/destination-unknown"
+          element={
+            <DestinationUnknown
+              currentStep={currentStep}
+              setCurrentStep={setCurrentStep}
+              userResponses={userResponses}
+              setUserResponses={setUserResponses}
+              questionPrompts={questionPrompts}
+              setQuestionPrompts={setQuestionPrompts}
+              apiResponse={apiResponse}
+              setApiResponse={setApiResponse}
+              userInfo={userInfo}
+              setUserInfo={setUserInfo}
+            />
+          }
+        />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/me" element={<Me />} />
+        <Route
+          path="/your-destination-plan"
+          element={
+            <ResultsDestinationUnknown
+              currentStep={currentStep}
+              setCurrentStep={setCurrentStep}
+              userResponses={userResponses}
+              setUserResponses={setUserResponses}
+              questionPrompts={questionPrompts}
+              setQuestionPrompts={setQuestionPrompts}
+              apiResponse={apiResponse}
+              setApiResponse={setApiResponse}
+            />
+          }
+        />
+        <Route path="/your-plan" element={<ResultsDestinationKnown />} />
+      </Routes>
     </>
   );
 }

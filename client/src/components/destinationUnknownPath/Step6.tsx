@@ -1,7 +1,7 @@
-import { StepProps } from "../types/types";
-import temple from "../assets/images/temple.png";
+import { StepProps } from "../../types/types";
+import chicago from "../../assets/images/chicago.png";
 
-function Step3({
+function Step6({
   currentStep,
   setCurrentStep,
   userResponses,
@@ -16,29 +16,27 @@ function Step3({
     setUserResponses(tempObj);
   };
 
-  console.log(userResponses);
-
   return (
     <>
       <div className="stepContainer">
         <div className="questionImageGridContainer">
-          <img src={temple} alt="" />
-          <h3>{questionPrompts.question3}</h3>
+          <img src={chicago} alt="" />
+          <h3>{questionPrompts.question6}</h3>
           <div></div>
-        </div>
+        </div>{" "}
         <form className="userForm" action="">
           <textarea
-            placeholder="Everything about Maui was amazing...the beaches, the food, the natural scenery."
+            placeholder="I'm looking to see a bit of everything, but mostly I want to experience what it's like to live there."
             rows={3}
-            value={userResponses.response3}
-            name="response3"
+            value={userResponses.response6}
+            name="response6"
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="back" onClick={() => setCurrentStep(2)}>
+            <button className="back" onClick={() => setCurrentStep(5)}>
               Go back
             </button>
-            <button className="next" onClick={() => setCurrentStep(4)}>
+            <button className="next" onClick={() => setCurrentStep(7)}>
               Next step
             </button>
           </div>
@@ -48,4 +46,4 @@ function Step3({
   );
 }
 
-export default Step3;
+export default Step6;

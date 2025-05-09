@@ -1,8 +1,6 @@
-import { StepProps } from "../types/types";
-import lion from "../assets/images/lion.png";
-import { useState, useEffect } from "react";
+import { StepProps } from "../../types/types";
 
-function Step4({
+function Step8({
   currentStep,
   setCurrentStep,
   userResponses,
@@ -20,24 +18,20 @@ function Step4({
   return (
     <>
       <div className="stepContainer">
-        <div className="questionImageGridContainer">
-          <img src={lion} alt="" />
-          <h3>{questionPrompts.question4}</h3>
-          <div></div>
-        </div>
+        <h3>{questionPrompts.question8}</h3>
         <form className="userForm" action="">
           <textarea
-            placeholder="I've never gone scuba diving yet, but I think that would be a lot of fun."
+            placeholder="I want to hike across the park all day, every day. So I'll say adventure."
             rows={3}
-            value={userResponses.response4}
-            name="response4"
+            value={userResponses.response8}
+            name="response8"
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="back" onClick={() => setCurrentStep(3)}>
+            <button className="back" onClick={() => setCurrentStep(7)}>
               Go back
             </button>
-            <button className="next" onClick={() => setCurrentStep(5)}>
+            <button className="next" onClick={() => setCurrentStep(9)}>
               Next step
             </button>
           </div>
@@ -47,4 +41,4 @@ function Step4({
   );
 }
 
-export default Step4;
+export default Step8;

@@ -1,4 +1,4 @@
-import { StepProps } from "../types/types";
+import { StepProps } from "../../types/types";
 
 function Step9({
   currentStep,

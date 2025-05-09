@@ -1,7 +1,8 @@
-import { StepProps } from "../types/types";
-import euro_city from "../assets/images/euro-city.png";
+import { StepProps } from "../../types/types";
+import lion from "../../assets/images/lion.png";
+import { useState, useEffect } from "react";
 
-function Step2({
+function Step4({
   currentStep,
   setCurrentStep,
   userResponses,
@@ -20,23 +21,23 @@ function Step2({
     <>
       <div className="stepContainer">
         <div className="questionImageGridContainer">
-          <img src={euro_city} alt="" />
-          <h3>{questionPrompts.question2}</h3>
+          <img src={lion} alt="" />
+          <h3>{questionPrompts.question4}</h3>
           <div></div>
         </div>
         <form className="userForm" action="">
           <textarea
-            placeholder="I'm thinking between $3000 - $5000 in total, but I'm flexible."
+            placeholder="I've never gone scuba diving yet, but I think that would be a lot of fun."
             rows={3}
-            value={userResponses.response2}
-            name="response2"
+            value={userResponses.response4}
+            name="response4"
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="back" onClick={() => setCurrentStep(1)}>
+            <button className="back" onClick={() => setCurrentStep(3)}>
               Go back
             </button>
-            <button className="next" onClick={() => setCurrentStep(3)}>
+            <button className="next" onClick={() => setCurrentStep(5)}>
               Next step
             </button>
           </div>
@@ -46,4 +47,4 @@ function Step2({
   );
 }
 
-export default Step2;
+export default Step4;

@@ -1,6 +1,7 @@
-import { StepProps } from "../types/types";
+import { StepProps } from "../../types/types";
+import eiffel from "../../assets/images/eiffel.png";
 
-function Step8({
+function Step5({
   currentStep,
   setCurrentStep,
   userResponses,
@@ -18,20 +19,24 @@ function Step8({
   return (
     <>
       <div className="stepContainer">
-        <h3>{questionPrompts.question8}</h3>
+        <div className="questionImageGridContainer">
+          <img src={eiffel} alt="" />
+          <h3>{questionPrompts.question5}</h3>
+          <div></div>
+        </div>{" "}
         <form className="userForm" action="">
           <textarea
-            placeholder="I want to hike across the park all day, every day. So I'll say adventure."
+            placeholder="I'd love some warm weather, and I'd like to see the flowers in late Spring."
             rows={3}
-            value={userResponses.response8}
-            name="response8"
+            value={userResponses.response5}
+            name="response5"
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="back" onClick={() => setCurrentStep(7)}>
+            <button className="back" onClick={() => setCurrentStep(4)}>
               Go back
             </button>
-            <button className="next" onClick={() => setCurrentStep(9)}>
+            <button className="next" onClick={() => setCurrentStep(6)}>
               Next step
             </button>
           </div>
@@ -41,4 +46,4 @@ function Step8({
   );
 }
 
-export default Step8;
+export default Step5;

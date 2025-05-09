@@ -165,6 +165,7 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(to top, #ff9966, #ff5e62, #7661c7, #4a6fc4);
 }
 
 .homeContainer h1 {

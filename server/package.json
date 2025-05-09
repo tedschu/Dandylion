@@ -12,6 +12,7 @@
     "nodemon": "^3.1.9",
     "openai": "^4.96.2",
     "path": "^0.12.7",
+    "react-router-dom": "^7.6.0",
     "unsplash-js": "^7.0.19"
   },
   "scripts": {

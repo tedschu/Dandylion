@@ -3,7 +3,7 @@ import { StepProps, apiResponse } from "../types/types";
 import destinationImage from "../assets/output.png";
 import secondDestinationImage from "../assets/output2.png";
 
-function Step11Results({
+function ResultsDestinationUnknown({
   currentStep,
   setCurrentStep,
   userResponses,
@@ -129,4 +129,4 @@ function Step11Results({
   );
 }
 
-export default Step11Results;
+export default ResultsDestinationUnknown;

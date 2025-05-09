@@ -1,8 +1,6 @@
-import { StepProps } from "../types/types";
-import { motion } from "motion/react";
-import beach from "../assets/images/beach.png";
+import { StepProps } from "../../types/types";
 
-function Step1({
+function Step7({
   currentStep,
   setCurrentStep,
   userResponses,
@@ -17,26 +15,23 @@ function Step1({
     setUserResponses(tempObj);
   };
 
-  // TODO: MAKE RESIZABLE INPUT BOX
-
   return (
     <>
       <div className="stepContainer">
-        <div className="questionImageGridContainer">
-          <img src={beach} alt="" />
-          <h3>{questionPrompts.question1}</h3>
-          <div></div>
-        </div>
+        <h3>{questionPrompts.question7}</h3>
         <form className="userForm" action="">
           <textarea
-            placeholder="It'll be me, my husband Jeff, and my two kids, Jack (6) and Nate (9)."
+            placeholder="Ideally late summer or early fall, and I'd like to go for maybe 6-8 days."
             rows={3}
-            value={userResponses.response1}
-            name="response1"
+            value={userResponses.response7}
+            name="response7"
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="next" onClick={() => setCurrentStep(2)}>
+            <button className="back" onClick={() => setCurrentStep(6)}>
+              Go back
+            </button>
+            <button className="next" onClick={() => setCurrentStep(8)}>
               Next step
             </button>
           </div>
@@ -46,4 +41,4 @@ function Step1({
   );
 }
 
-export default Step1;
+export default Step7;

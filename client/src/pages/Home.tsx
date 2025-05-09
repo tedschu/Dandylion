@@ -1,6 +1,7 @@
 import { StepProps } from "../types/types";
+import { useNavigate } from "react-router-dom";
 
-function Step0Home({
+function Home({
   currentStep,
   setCurrentStep,
   userResponses,
@@ -18,6 +19,8 @@ function Step0Home({
       [name]: value,
     }));
   };
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -52,7 +55,7 @@ function Step0Home({
               name="email"
               onChange={setFormValues}
             />
-            <button className="next" onClick={() => setCurrentStep(1)}>
+            <button className="next" onClick={() => navigate("/path")}>
               Get started
             </button>
           </div>
@@ -62,4 +65,4 @@ function Step0Home({
   );
 }
 
-export default Step0Home;
+export default Home;

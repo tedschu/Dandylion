@@ -1,29 +1,26 @@
 import Header from "../components/Header";
-import Step0Home from "../components/Step0Home";
-import Step1 from "../components/Step1";
-import Step2 from "../components/Step2";
-import Step3 from "../components/Step3";
-import Step4 from "../components/Step4";
-import Step5 from "../components/Step5";
-import Step6 from "../components/Step6";
-import Step7 from "../components/Step7";
-import Step8 from "../components/Step8";
-import Step9 from "../components/Step9";
-import Step10 from "../components/Step10";
-import Step11Results from "../components/Step11Results";
+import Step1 from "../components/destinationUnknownPath/Step1";
+import Step2 from "../components/destinationUnknownPath/Step2";
+import Step3 from "../components/destinationUnknownPath/Step3";
+import Step4 from "../components/destinationUnknownPath/Step4";
+import Step5 from "../components/destinationUnknownPath/Step5";
+import Step6 from "../components/destinationUnknownPath/Step6";
+import Step7 from "../components/destinationUnknownPath/Step7";
+import Step8 from "../components/destinationUnknownPath/Step8";
+import Step9 from "../components/destinationUnknownPath/Step9";
+import Step10 from "../components/destinationUnknownPath/Step10";
 import {
   UserResponses,
   QuestionPrompts,
   apiResponse,
   UserInfo,
-  PlanTrackType,
 } from "../types/types";
 import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner from "../assets/dandelion_corner.png";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 
-type ContainerProps = {
+type DestinationKnownProps = {
   currentStep: number;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   userResponses: UserResponses;
@@ -34,11 +31,9 @@ type ContainerProps = {
   setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
   userInfo: UserInfo;
   setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
-  planTrack: PlanTrackType;
-  setPlanTrack: React.Dispatch<React.SetStateAction<PlanTrackType>>;
 };
 
-function Container({
+function DestinationKnown({
   currentStep,
   setCurrentStep,
   userResponses,
@@ -49,11 +44,8 @@ function Container({
   setApiResponse,
   userInfo,
   setUserInfo,
-  planTrack,
-  setPlanTrack,
-}: ContainerProps) {
+}: DestinationKnownProps) {
   const steps = [
-    Step0Home,
     Step1,
     Step2,
     Step3,
@@ -64,7 +56,6 @@ function Container({
     Step8,
     Step9,
     Step10,
-    Step11Results,
   ];
 
   const motionProps = {
@@ -80,18 +71,15 @@ function Container({
 
   return (
     <>
-      <div className={"pageContainer flexCol"} data-question={currentStep}>
+      <div className={"pageContainer"} data-question={currentStep}>
         <Header />
-        {currentStep > 0 && currentStep < 11 && (
-          <>
-            <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
-            <DandelionSeedsCSS />
-          </>
-        )}
+
+        <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
+        <DandelionSeedsCSS />
 
         {/* Maps through steps array and outputs the component that matches the currentStep state */}
         {steps.map((ComponentStep, index) => {
-          const stepNumber = index;
+          const stepNumber = index + 1;
           return (
             stepNumber === currentStep && (
               <>
@@ -141,4 +129,4 @@ function Container({
   );
 }
 
-export default Container;
+export default DestinationKnown;

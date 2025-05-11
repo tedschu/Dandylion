@@ -51,22 +51,22 @@ function App() {
   });
 
   const [questionPromptsKnown, setQuestionPromptsKnown] = useState({
-    question1: "yo what up?",
+    question1: "Let's get started. Where are you planning to go?",
     question2:
-      "What's your budget range, and what aspects of travel do you prioritize spending on?",
-    question3:
-      "What was your favorite vacation experience so far, and what made it special?",
+      "What's your budget range, and what aspects of travel do you prioritize spending on (food, activities, accommodations)?",
+    question3: "Are you traveling solo, with a partner, friends, or family?",
     question4:
-      "What's something you've always wanted to do but haven't had the chance to try yet?",
+      "Are there any specific attractions or experiences you've already planned?",
     question5:
-      "What climate do you prefer, and are there specific seasonal experiences you're seeking (fall foliage, winter sports, etc.)?",
+      "Would you like recommendations for day trips outside the main destination?",
     question6:
-      "Are you drawn to natural landscapes, cultural experiences, urban environments, or a particular combination?",
+      "What aspects of this destination are you most excited to explore? This could be anything from specific attractions to cultural elements or activities.",
     question7: "When are you planning to travel and for how long?",
     question8: "What's your ideal balance between relaxation and adventure?",
-    question9: "Where are you located? This will help with cost estimates.",
+    question9:
+      "What are you hoping to get out of this trip personally? For example, relaxation, new perspectives, adventure, cultural immersion, or something else entirely?",
     question10:
-      "Are there any accessibility needs, dietary restrictions, or travel limitations I should know about?",
+      "Do you have any dietary preferences or restrictions to consider for restaurant recommendations?",
   });
 
   // Used to render step pages based on user's progression

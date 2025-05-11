@@ -6,8 +6,8 @@ function Step8({
   setCurrentStep,
   userResponses,
   setUserResponses,
-  questionPrompts,
-  setQuestionPrompts,
+  questionPromptsKnown,
+  setQuestionPromptsKnown,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
@@ -21,7 +21,7 @@ function Step8({
       <div className="stepContainer">
         <div className="questionImageGridContainer">
           <img src={acropolis} alt="" />
-          <h3>{questionPrompts.question5}</h3>
+          <h3>{questionPromptsKnown?.question8}</h3>
           <div></div>
         </div>{" "}
         <form className="userForm" action="">

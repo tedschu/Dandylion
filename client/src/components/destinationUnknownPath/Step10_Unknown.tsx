@@ -2,14 +2,15 @@ import { body, text } from "motion/react-client";
 import { apiResponse, StepProps } from "../../types/types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import pyramid from "../../assets/images/pyramids.png";
 
 function Step10({
   currentStep,
   setCurrentStep,
   userResponses,
   setUserResponses,
-  questionPrompts,
-  setQuestionPrompts,
+  questionPromptsUnknown,
+  setQuestionPromptsUnknown,
   apiResponse,
   setApiResponse,
   userInfo,
@@ -40,25 +41,25 @@ function Step10({
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          question1: questionPrompts.question1,
+          question1: questionPromptsUnknown?.question1,
           response1: userResponses.response1,
-          question2: questionPrompts.question2,
+          question2: questionPromptsUnknown?.question2,
           response2: userResponses.response2,
-          question3: questionPrompts.question3,
+          question3: questionPromptsUnknown?.question3,
           response3: userResponses.response3,
-          question4: questionPrompts.question4,
+          question4: questionPromptsUnknown?.question4,
           response4: userResponses.response4,
-          question5: questionPrompts.question5,
+          question5: questionPromptsUnknown?.question5,
           response5: userResponses.response5,
-          question6: questionPrompts.question6,
+          question6: questionPromptsUnknown?.question6,
           response6: userResponses.response6,
-          question7: questionPrompts.question7,
+          question7: questionPromptsUnknown?.question7,
           response7: userResponses.response7,
-          question8: questionPrompts.question8,
+          question8: questionPromptsUnknown?.question8,
           response8: userResponses.response8,
-          question9: questionPrompts.question9,
+          question9: questionPromptsUnknown?.question9,
           response9: userResponses.response9,
-          question10: questionPrompts.question10,
+          question10: questionPromptsUnknown?.question10,
           response10: userResponses.response10,
           firstName: userInfo?.firstName,
         }),
@@ -147,7 +148,11 @@ function Step10({
   return (
     <>
       <div className="stepContainer">
-        <h3>{questionPrompts.question10}</h3>
+        <div className="questionImageGridContainer">
+          <img src={pyramid} alt="" />
+          <h3>{questionPromptsUnknown?.question10}</h3>
+          <div></div>
+        </div>{" "}
         <form className="userForm" action="">
           <textarea
             placeholder="My daughter is a vegetarian."

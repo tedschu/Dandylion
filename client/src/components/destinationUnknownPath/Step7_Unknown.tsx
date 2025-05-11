@@ -1,14 +1,13 @@
 import { StepProps } from "../../types/types";
+import redwoods from "../../assets/images/redwoods.png";
 
-function Step9({
+function Step7({
   currentStep,
   setCurrentStep,
   userResponses,
   setUserResponses,
-  questionPrompts,
-  setQuestionPrompts,
-  apiResponse,
-  setApiResponse,
+  questionPromptsUnknown,
+  setQuestionPromptsUnknown,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
@@ -20,20 +19,24 @@ function Step9({
   return (
     <>
       <div className="stepContainer">
-        <h3>{questionPrompts.question9}</h3>
+        <div className="questionImageGridContainer">
+          <img src={redwoods} alt="" />
+          <h3>{questionPromptsUnknown?.question7}</h3>
+          <div></div>
+        </div>{" "}
         <form className="userForm" action="">
           <textarea
-            placeholder="I'm based in San Antonio, Texas."
+            placeholder="Ideally late summer or early fall, and I'd like to go for maybe 6-8 days."
             rows={3}
-            value={userResponses.response9}
-            name="response9"
+            value={userResponses.response7}
+            name="response7"
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="back" onClick={() => setCurrentStep(8)}>
+            <button className="back" onClick={() => setCurrentStep(6)}>
               Go back
             </button>
-            <button className="next" onClick={() => setCurrentStep(10)}>
+            <button className="next" onClick={() => setCurrentStep(8)}>
               Next step
             </button>
           </div>
@@ -43,4 +46,4 @@ function Step9({
   );
 }
 
-export default Step9;
+export default Step7;

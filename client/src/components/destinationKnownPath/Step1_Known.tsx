@@ -1,13 +1,14 @@
 import { StepProps } from "../../types/types";
-import temple from "../../assets/images/temple.png";
+import { motion } from "motion/react";
+import beach from "../../assets/images/beach.png";
 
-function Step3({
+function Step1({
   currentStep,
   setCurrentStep,
   userResponses,
   setUserResponses,
-  questionPrompts,
-  setQuestionPrompts,
+  questionPromptsKnown,
+  setQuestionPromptsKnown,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
@@ -16,27 +17,26 @@ function Step3({
     setUserResponses(tempObj);
   };
 
+  // TODO: MAKE RESIZABLE INPUT BOX
+
   return (
     <>
       <div className="stepContainer">
         <div className="questionImageGridContainer">
-          <img src={temple} alt="" />
-          <h3>{questionPrompts.question3}</h3>
+          <img src={beach} alt="" />
+          <h3>{questionPromptsKnown?.question1}</h3>
           <div></div>
         </div>
         <form className="userForm" action="">
           <textarea
-            placeholder="Everything about Maui was amazing...the beaches, the food, the natural scenery."
+            placeholder="It'll be me, my husband Jeff, and my two kids, Jack (6) and Nate (9)."
             rows={3}
-            value={userResponses.response3}
-            name="response3"
+            value={userResponses.response1}
+            name="response1"
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="back" onClick={() => setCurrentStep(2)}>
-              Go back
-            </button>
-            <button className="next" onClick={() => setCurrentStep(4)}>
+            <button className="next" onClick={() => setCurrentStep(2)}>
               Next step
             </button>
           </div>
@@ -46,4 +46,4 @@ function Step3({
   );
 }
 
-export default Step3;
+export default Step1;

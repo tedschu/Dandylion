@@ -1,14 +1,14 @@
 import Header from "../components/Header";
-import Step1 from "../components/destinationUnknownPath/Step1";
-import Step2 from "../components/destinationUnknownPath/Step2";
-import Step3 from "../components/destinationUnknownPath/Step3";
-import Step4 from "../components/destinationUnknownPath/Step4";
-import Step5 from "../components/destinationUnknownPath/Step5";
-import Step6 from "../components/destinationUnknownPath/Step6";
-import Step7 from "../components/destinationUnknownPath/Step7";
-import Step8 from "../components/destinationUnknownPath/Step8";
-import Step9 from "../components/destinationUnknownPath/Step9";
-import Step10 from "../components/destinationUnknownPath/Step10";
+import Step1 from "../components/destinationKnownPath/Step1_Known";
+import Step2 from "../components/destinationKnownPath/Step2_Known";
+import Step3 from "../components/destinationKnownPath/Step3_Known";
+import Step4 from "../components/destinationKnownPath/Step4_Known";
+import Step5 from "../components/destinationKnownPath/Step5_Known";
+import Step6 from "../components/destinationKnownPath/Step6_Known";
+import Step7 from "../components/destinationKnownPath/Step7_Known";
+import Step8 from "../components/destinationKnownPath/Step8_Known";
+import Step9 from "../components/destinationKnownPath/Step9_Known";
+import Step10 from "../components/destinationKnownPath/Step10_Known";
 import {
   UserResponses,
   QuestionPrompts,
@@ -25,8 +25,10 @@ type DestinationKnownProps = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   userResponses: UserResponses;
   setUserResponses: React.Dispatch<React.SetStateAction<UserResponses>>;
-  questionPrompts: QuestionPrompts;
-  setQuestionPrompts: React.Dispatch<React.SetStateAction<QuestionPrompts>>;
+  questionPromptsKnown: QuestionPrompts;
+  setQuestionPromptsKnown: React.Dispatch<
+    React.SetStateAction<QuestionPrompts>
+  >;
   apiResponse: apiResponse;
   setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
   userInfo: UserInfo;
@@ -38,8 +40,8 @@ function DestinationKnown({
   setCurrentStep,
   userResponses,
   setUserResponses,
-  questionPrompts,
-  setQuestionPrompts,
+  questionPromptsKnown,
+  setQuestionPromptsKnown,
   apiResponse,
   setApiResponse,
   userInfo,
@@ -101,8 +103,8 @@ function DestinationKnown({
                       setCurrentStep={setCurrentStep}
                       userResponses={userResponses}
                       setUserResponses={setUserResponses}
-                      questionPrompts={questionPrompts}
-                      setQuestionPrompts={setQuestionPrompts}
+                      questionPromptsKnown={questionPromptsKnown}
+                      setQuestionPromptsKnown={setQuestionPromptsKnown}
                       apiResponse={stepNumber >= 9 ? apiResponse : undefined}
                       setApiResponse={
                         stepNumber >= 9 ? setApiResponse : undefined

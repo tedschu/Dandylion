@@ -8,8 +8,6 @@ function ResultsDestinationUnknown({
   setCurrentStep,
   userResponses,
   setUserResponses,
-  questionPrompts,
-  setQuestionPrompts,
   apiResponse,
   setApiResponse,
 }: StepProps) {

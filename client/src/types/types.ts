@@ -5,8 +5,14 @@ export type StepProps = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   userResponses: UserResponses;
   setUserResponses: React.Dispatch<React.SetStateAction<UserResponses>>;
-  questionPrompts: QuestionPrompts;
-  setQuestionPrompts: React.Dispatch<React.SetStateAction<QuestionPrompts>>;
+  questionPromptsUnknown?: QuestionPrompts;
+  setQuestionPromptsUnknown?: React.Dispatch<
+    React.SetStateAction<QuestionPrompts>
+  >;
+  questionPromptsKnown?: QuestionPrompts;
+  setQuestionPromptsKnown?: React.Dispatch<
+    React.SetStateAction<QuestionPrompts>
+  >;
   apiResponse?: apiResponse;
   setApiResponse?: React.Dispatch<React.SetStateAction<apiResponse>>;
   userInfo?: UserInfo;

@@ -1,14 +1,13 @@
 import { StepProps } from "../../types/types";
-import lion from "../../assets/images/lion.png";
-import { useState, useEffect } from "react";
+import temple from "../../assets/images/temple.png";
 
-function Step4({
+function Step3({
   currentStep,
   setCurrentStep,
   userResponses,
   setUserResponses,
-  questionPrompts,
-  setQuestionPrompts,
+  questionPromptsUnknown,
+  setQuestionPromptsUnknown,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
@@ -21,23 +20,23 @@ function Step4({
     <>
       <div className="stepContainer">
         <div className="questionImageGridContainer">
-          <img src={lion} alt="" />
-          <h3>{questionPrompts.question4}</h3>
+          <img src={temple} alt="" />
+          <h3>{questionPromptsUnknown?.question3}</h3>
           <div></div>
         </div>
         <form className="userForm" action="">
           <textarea
-            placeholder="I've never gone scuba diving yet, but I think that would be a lot of fun."
+            placeholder="Everything about Maui was amazing...the beaches, the food, the natural scenery."
             rows={3}
-            value={userResponses.response4}
-            name="response4"
+            value={userResponses.response3}
+            name="response3"
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="back" onClick={() => setCurrentStep(3)}>
+            <button className="back" onClick={() => setCurrentStep(2)}>
               Go back
             </button>
-            <button className="next" onClick={() => setCurrentStep(5)}>
+            <button className="next" onClick={() => setCurrentStep(4)}>
               Next step
             </button>
           </div>
@@ -47,4 +46,4 @@ function Step4({
   );
 }
 
-export default Step4;
+export default Step3;

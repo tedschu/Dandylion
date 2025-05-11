@@ -1,14 +1,14 @@
 import Header from "../components/Header";
-import Step1 from "../components/destinationUnknownPath/Step1";
-import Step2 from "../components/destinationUnknownPath/Step2";
-import Step3 from "../components/destinationUnknownPath/Step3";
-import Step4 from "../components/destinationUnknownPath/Step4";
-import Step5 from "../components/destinationUnknownPath/Step5";
-import Step6 from "../components/destinationUnknownPath/Step6";
-import Step7 from "../components/destinationUnknownPath/Step7";
-import Step8 from "../components/destinationUnknownPath/Step8";
-import Step9 from "../components/destinationUnknownPath/Step9";
-import Step10 from "../components/destinationUnknownPath/Step10";
+import Step1 from "../components/destinationUnknownPath/Step1_Unknown";
+import Step2 from "../components/destinationUnknownPath/Step2_Unknown";
+import Step3 from "../components/destinationUnknownPath/Step3_Unknown";
+import Step4 from "../components/destinationUnknownPath/Step4_Unknown";
+import Step5 from "../components/destinationUnknownPath/Step5_Unknown";
+import Step6 from "../components/destinationUnknownPath/Step6_Unknown";
+import Step7 from "../components/destinationUnknownPath/Step7_Unknown";
+import Step8 from "../components/destinationUnknownPath/Step8_Unknown";
+import Step9 from "../components/destinationUnknownPath/Step9_Unknown";
+import Step10 from "../components/destinationUnknownPath/Step10_Unknown";
 import {
   UserResponses,
   QuestionPrompts,
@@ -25,8 +25,10 @@ type DestinationUnknownProps = {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   userResponses: UserResponses;
   setUserResponses: React.Dispatch<React.SetStateAction<UserResponses>>;
-  questionPrompts: QuestionPrompts;
-  setQuestionPrompts: React.Dispatch<React.SetStateAction<QuestionPrompts>>;
+  questionPromptsUnknown: QuestionPrompts;
+  setQuestionPromptsUnknown: React.Dispatch<
+    React.SetStateAction<QuestionPrompts>
+  >;
   apiResponse: apiResponse;
   setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
   userInfo: UserInfo;
@@ -38,8 +40,8 @@ function DestinationUnknown({
   setCurrentStep,
   userResponses,
   setUserResponses,
-  questionPrompts,
-  setQuestionPrompts,
+  questionPromptsUnknown,
+  setQuestionPromptsUnknown,
   apiResponse,
   setApiResponse,
   userInfo,
@@ -101,8 +103,8 @@ function DestinationUnknown({
                       setCurrentStep={setCurrentStep}
                       userResponses={userResponses}
                       setUserResponses={setUserResponses}
-                      questionPrompts={questionPrompts}
-                      setQuestionPrompts={setQuestionPrompts}
+                      questionPromptsUnknown={questionPromptsUnknown}
+                      setQuestionPromptsUnknown={setQuestionPromptsUnknown}
                       apiResponse={stepNumber >= 9 ? apiResponse : undefined}
                       setApiResponse={
                         stepNumber >= 9 ? setApiResponse : undefined

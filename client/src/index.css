@@ -352,6 +352,22 @@ button {
   width: 50%;
   padding: 4px;
   max-width: 380px;
+  position: relative;
+}
+
+.homeBottomBoxNumber {
+  background-color: var(--forest-green);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
 }
 
 /* other classes */

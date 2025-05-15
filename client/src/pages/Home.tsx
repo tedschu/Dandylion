@@ -41,7 +41,9 @@ function Home({
 
           <div className="homeHeroContentContainer">
             <h2 className="heroText">
-              Travel planning that is
+              Travel planning
+              <br />
+              that is
               <span className="heroBold"> so you</span>
             </h2>
 
@@ -81,22 +83,25 @@ function Home({
               <p>
                 Whether you can’t decide on a destination, or know where you’re
                 going but need help figuring out what to do, dandylion will
-                guide you.
+                guide you. It's just a few simple steps:
               </p>
             </div>
             <div className="homeBottomBoxContainer">
               <div className="homeBottomBox">
+                <div className="homeBottomBoxNumber">1</div>
                 <h3>Tell us about yourself</h3>
                 <p>
-                  Answer a few questions that get to the heart of what you
-                  really want to do.{" "}
+                  Help us design your ideal trip by thoughtfully answering a few
+                  quick questions.
                 </p>
               </div>
               <div className="homeBottomBox">
-                <h3>Check out your trip</h3>
+                <div className="homeBottomBoxNumber">2</div>
+
+                <h3>Explore your custom journey</h3>
                 <p>
-                  Get recommended destinations with detailed activities, places
-                  to stay, and full itineraries.{" "}
+                  Get destinations tailored to you, with activities,
+                  accommodations, and detailed daily plans.
                 </p>
               </div>
             </div>

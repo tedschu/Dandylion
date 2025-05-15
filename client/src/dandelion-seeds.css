@@ -46,7 +46,7 @@
   opacity: 0.6;
 }
 .seed:nth-child(7) {
-  animation: float7 18s linear infinite 1.2s;
+  animation: float7 24s linear infinite 1.2s;
   opacity: 0.9;
 }
 .seed:nth-child(8) {
@@ -148,7 +148,7 @@
     opacity: 0.6;
   }
   100% {
-    transform: translate(350px, -720px) rotate(-360deg);
+    transform: translate(350px, -820px) rotate(-360deg);
     opacity: 0;
   }
 }

@@ -12,14 +12,37 @@
   font-family: "Parkinsans";
 }
 
-/* COLOR SCHEME:
-    PRIMARY: 
-    - Blue: #113a67
-    - Yellow: #f7bc21
+/* **** COLOR PALETTE (CSS VARIABLES) **** */
+:root {
+  /* Primary brand colors (colors of the bee) */
+  --brand-blue: #113a67;
+  --brand-yellow: #f7bc21;
 
-    SUPPORTING:
-    - Salmon ("next" buttons): #e87a5d
-*/
+  /* Action / "go" button colors */
+  --action-coral: #e87a5d;
+  --action-coral-hover: #d85a45;
+  --dark-teal: #2a5f8f;
+  --dark-teal-hover: #214b73;
+
+  /* Text / font colors */
+  --text-dark-navy: #0a2540;
+  --text-secondary-gray: #5a6b7f;
+
+  /* Supporting / secondary colors */
+  --teal: #4a9b9b;
+  --forest-green: #3a6b35;
+  --moss-green: #7a9a3d;
+
+  /* Neutral colors */
+  --sky-blue: #b8d5ed;
+  --cream: #f9f5e7;
+  --light-sage: #d2dbbc;
+
+  /* States */
+  --error: #d64045;
+  --success: #3a9679;
+  --warning: #f9ae54;
+}
 
 body,
 #root {
@@ -54,6 +77,34 @@ h1,
 h2,
 h3 {
   color: white;
+}
+
+/* **** Button styling **** */
+button {
+  border-radius: 8px;
+  border: none;
+  padding: 5px;
+}
+
+.login {
+  width: 75px;
+  height: 32px;
+  background-color: var(--action-coral);
+  color: white;
+}
+
+.login:hover {
+  background-color: var(--action-coral-hover);
+}
+
+.next {
+  background-color: var(--action-coral);
+  color: white;
+  padding: 10px;
+}
+
+.next:hover {
+  background-color: var(--action-coral-hover);
 }
 
 /* Component styling */
@@ -157,6 +208,8 @@ h3 {
   border-radius: 8px;
 }
 
+/* ******* HOME PAGE STYLING ******* */
+
 .homeContainer {
   min-height: 100vh;
   width: 100%;
@@ -164,15 +217,80 @@ h3 {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background: linear-gradient(to top, #ff9966, #ff5e62, #7661c7, #4a6fc4);
 }
 
 .homeContainer h1 {
+  font-size: 22px;
+}
+
+.homeContainer h2 {
   font-size: 60px;
   padding: 10px;
 }
+
+.homeHeroContainer {
+  width: 100%;
+  height: 600px;
+  background-image: url("./assets/images/background.jpg");
+  background-size: cover;
+  background-position: top;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeHeroHeaderContainer {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.homeHeroHeaderContainer img {
+  width: 40px;
+  padding: 8px 0 0 8px;
+}
+
+.homeHeroContentContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.homeBottomContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: orange;
+}
+.homeBottomContentContainer {
+  width: 90%;
+  background-color: blue;
+}
+
+.homeBottomTextContainer {
+  text-align: center;
+}
+
+/* Holds the two text boxes describing the steps for the user */
+.homeBottomBoxContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.homeBottomBox {
+  text-align: center;
+  background-color: var(--light-sage);
+  border-radius: 8px;
+}
+
+/* other classes */
 
 .header {
   position: fixed;
@@ -182,7 +300,6 @@ h3 {
   /* background-color: #1a73e8; */
   /* box-shadow: 3px 3px 3px #1a73e8; */
 }
-
 .bottomContentContainer {
   bottom: 0;
   position: fixed;
@@ -205,24 +322,6 @@ h3 {
   z-index: 2;
 }
 
-/* BUTTON STYLING */
-button {
-  border: none;
-  padding: 10px 10px;
-  border-radius: 6px;
-  font-size: 16px;
-  /* box-shadow: 2px 2px 6px rgb(207, 207, 207); */
-}
-
-.next {
-  background-color: #e87a5d;
-  color: white;
-}
-
-.next:hover {
-  background-color: #d85a45;
-}
-
 .buttonContainer {
   gap: 15px;
   margin: 15px 0;
@@ -233,7 +332,7 @@ button {
 }
 
 .formContainer {
-  gap: 5px;
+  gap: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;

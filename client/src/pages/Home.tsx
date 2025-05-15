@@ -1,13 +1,10 @@
 import { StepProps } from "../types/types";
 import { useNavigate } from "react-router-dom";
+import beeLogo from "../assets/bee.png";
 
 function Home({
   currentStep,
   setCurrentStep,
-  userResponses,
-  setUserResponses,
-  questionPrompts,
-  setQuestionPrompts,
   userInfo,
   setUserInfo,
 }: StepProps) {
@@ -25,39 +22,62 @@ function Home({
   return (
     <>
       <div className="homeContainer">
-        <h1 style={{ marginBottom: "2px" }}>
-          Travel planning that is{" "}
-          <span style={{ fontStyle: "italic" }}>so you</span>
-        </h1>
-        <p className="textBackground">
-          Whether it's halfway around the world, or just a few hours away -
-          {/* there's a perfect place for you. Keep all the fun of planning your
-          next trip, and get rid of the frustration. TRAVEL simply asks you a
-          few questions about who you are and what you're looking to do, and
-          then it scours the world to find you a trip that you'll love. In just
-          five minutes, get detailed recommendations and itineraries for a trip
-          that fits you perfectly. */}
-        </p>
-
-        <div className="buttonContainer">
-          <div className="formContainer">
-            <input
-              type="text"
-              placeholder="First name"
-              value={userInfo?.firstName}
-              name="firstName"
-              onChange={setFormValues}
-            />
-            <input
-              type="text"
-              placeholder="email"
-              value={userInfo?.email}
-              name="email"
-              onChange={setFormValues}
-            />
-            <button className="next" onClick={() => navigate("/path")}>
-              Get started
+        {/* TOP HALF / HERO SECTION */}
+        <div className="homeHeroContainer">
+          <div className="homeHeroHeaderContainer">
+            <img src={beeLogo} alt="dandylion bee logo" />
+            <h1>dandylion.ai</h1>
+            <button
+              className="login"
+              style={{
+                alignSelf: "center",
+                justifySelf: "flex-end",
+                margin: "0 12px 0 0",
+              }}
+            >
+              login
             </button>
+          </div>
+
+          <div className="homeHeroContentContainer">
+            <h2 style={{ marginBottom: "2px" }}>
+              Travel planning that is{" "}
+              <span style={{ fontStyle: "italic" }}>so you</span>
+            </h2>
+
+            <div className="buttonContainer">
+              <div className="formContainer">
+                <input
+                  type="text"
+                  placeholder="First name"
+                  value={userInfo?.firstName}
+                  name="firstName"
+                  onChange={setFormValues}
+                />
+                <input
+                  type="text"
+                  placeholder="email"
+                  value={userInfo?.email}
+                  name="email"
+                  onChange={setFormValues}
+                />
+                <button className="next" onClick={() => navigate("/path")}>
+                  Get started
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* BOTTOM HALF / CONTENT SECTION */}
+        <div className="homeBottomContainer">
+          <div className="homeBottomContentContainer">
+            <div className="homeBottomTextContainer">text text</div>
+            <div className="homeBottomBoxContainer">
+              <div className="homeBottomBox">test</div>{" "}
+              <div className="homeBottomBox"></div>
+              <div className="homeBottomBox">test</div>
+            </div>
           </div>
         </div>
       </div>

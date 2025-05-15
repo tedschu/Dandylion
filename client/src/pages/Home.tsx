@@ -1,6 +1,7 @@
 import { StepProps } from "../types/types";
 import { useNavigate } from "react-router-dom";
 import beeLogo from "../assets/bee.png";
+import { MotionCarousel } from "../components/MotionCarousel";
 
 function Home({
   currentStep,
@@ -104,6 +105,9 @@ function Home({
                   accommodations, and detailed daily plans.
                 </p>
               </div>
+            </div>
+            <div className="homeBottomCarouselContainer">
+              <MotionCarousel />
             </div>
           </div>
         </div>

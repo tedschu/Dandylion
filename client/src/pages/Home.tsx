@@ -40,9 +40,9 @@ function Home({
           </div>
 
           <div className="homeHeroContentContainer">
-            <h2 style={{ marginBottom: "2px" }}>
-              Travel planning that is{" "}
-              <span style={{ fontStyle: "italic" }}>so you</span>
+            <h2 className="heroText">
+              Travel planning that is
+              <span className="heroBold"> so you</span>
             </h2>
 
             <div className="buttonContainer">
@@ -72,11 +72,33 @@ function Home({
         {/* BOTTOM HALF / CONTENT SECTION */}
         <div className="homeBottomContainer">
           <div className="homeBottomContentContainer">
-            <div className="homeBottomTextContainer">text text</div>
+            <div className="homeBottomTextContainer">
+              <h2>Keep it simple.</h2>
+              <p>
+                A world of possibilities also means a world of decisions.
+                Dandylion creates a curated plan that is built just for you.
+              </p>
+              <p>
+                Whether you can’t decide on a destination, or know where you’re
+                going but need help figuring out what to do, dandylion will
+                guide you.
+              </p>
+            </div>
             <div className="homeBottomBoxContainer">
-              <div className="homeBottomBox">test</div>{" "}
-              <div className="homeBottomBox"></div>
-              <div className="homeBottomBox">test</div>
+              <div className="homeBottomBox">
+                <h3>Tell us about yourself</h3>
+                <p>
+                  Answer a few questions that get to the heart of what you
+                  really want to do.{" "}
+                </p>
+              </div>
+              <div className="homeBottomBox">
+                <h3>Check out your trip</h3>
+                <p>
+                  Get recommended destinations with detailed activities, places
+                  to stay, and full itineraries.{" "}
+                </p>
+              </div>
             </div>
           </div>
         </div>

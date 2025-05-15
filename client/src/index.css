@@ -1,6 +1,7 @@
 /* <weight>: Use a value from 300 to 800
  <uniquifier>: Use a unique and descriptive class name */
 
+/* Primary logo and text font */
 .parkinsans-font {
   font-family: "Parkinsans", sans-serif;
   font-optical-sizing: auto;
@@ -8,8 +9,34 @@
   font-style: normal;
 }
 
+/* Header font, script (e.g. home page H1) */
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kalam-light {
+  font-family: "Kalam", cursive;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.kalam-regular {
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kalam-bold {
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  font-style: normal;
+}
+
 * {
   font-family: "Parkinsans";
+  color: var(--text-dark-navy);
 }
 
 /* **** COLOR PALETTE (CSS VARIABLES) **** */
@@ -33,10 +60,10 @@
   --forest-green: #3a6b35;
   --moss-green: #7a9a3d;
 
-  /* Neutral colors */
-  --sky-blue: #b8d5ed;
-  --cream: #f9f5e7;
-  --light-sage: #d2dbbc;
+  /* Neutral colors for backgrounds */
+  --back-sky-blue: #b8d5ed;
+  --back-cream: #f9f5e7;
+  --back-light-sage: #d2dbbc;
 
   /* States */
   --error: #d64045;
@@ -71,12 +98,6 @@ li {
 }
 p {
   font-size: 14px;
-}
-
-h1,
-h2,
-h3 {
-  color: white;
 }
 
 /* **** Button styling **** */
@@ -208,12 +229,20 @@ button {
   border-radius: 8px;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  /* background-color: #1a73e8; */
+  /* box-shadow: 3px 3px 3px #1a73e8; */
+}
+
 /* ******* HOME PAGE STYLING ******* */
 
 .homeContainer {
   min-height: 100vh;
   width: 100%;
-  color: white;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -222,16 +251,29 @@ button {
 
 .homeContainer h1 {
   font-size: 22px;
+  color: white;
 }
 
-.homeContainer h2 {
-  font-size: 60px;
-  padding: 10px;
+.heroText {
+  font-size: 70px;
+  font-family: "Pacifico";
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: center;
+  color: white;
+}
+
+.heroBold {
+  font-size: 70px;
+  font-family: "Pacifico";
+  font-weight: 600;
+  line-height: 1.3;
+  color: white;
 }
 
 .homeHeroContainer {
   width: 100%;
-  height: 600px;
+  /* height: 600px; */
   background-image: url("./assets/images/background.jpg");
   background-size: cover;
   background-position: top;
@@ -257,7 +299,11 @@ button {
 .homeHeroContentContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 80%;
+  margin-top: 60px;
+  min-height: 700px;
 }
 
 .homeBottomContainer {
@@ -266,15 +312,29 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: orange;
 }
 .homeBottomContentContainer {
   width: 90%;
-  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .homeBottomTextContainer {
   text-align: center;
+  width: 80%;
+  text-align: center;
+}
+
+.homeBottomTextContainer > h2 {
+  margin: 10px;
+  font-size: 40px;
+  font-family: "Pacifico";
+}
+
+.homeBottomTextContainer > p {
+  font-size: 20px;
 }
 
 /* Holds the two text boxes describing the steps for the user */
@@ -282,24 +342,20 @@ button {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  gap: 10px;
 }
 
 .homeBottomBox {
   text-align: center;
-  background-color: var(--light-sage);
+  background-color: var(--back-cream);
   border-radius: 8px;
+  width: 50%;
+  padding: 4px;
+  max-width: 380px;
 }
 
 /* other classes */
 
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  text-align: center;
-  /* background-color: #1a73e8; */
-  /* box-shadow: 3px 3px 3px #1a73e8; */
-}
 .bottomContentContainer {
   bottom: 0;
   position: fixed;

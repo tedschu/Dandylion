@@ -25,6 +25,7 @@ function Step10({
 
   const navigate = useNavigate();
 
+  // TODO: SEE IF NAVIGATING TO RESULTS IS CAUSING THE FUNCTION TO DROP
   function handleSubmission() {
     getTripResults();
     navigate("/your-destination-plan");
@@ -65,6 +66,8 @@ function Step10({
         }),
       });
 
+      console.log("Here's the Anthropic response: ", response);
+
       if (!response.ok) {
         const textResponse = await response.text();
         console.error("server response:", textResponse);
@@ -72,6 +75,7 @@ function Step10({
       }
 
       const textData = await response.json();
+      console.log("Here is textData from Antrhopic call:", textData);
 
       // Calls OpenAI API, passing location and overview info from Anthropic response, and user's first name
       // Returns a postcard-style image for the location

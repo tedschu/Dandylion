@@ -436,6 +436,7 @@ button {
   z-index: 1;
   text-align: right;
   margin-bottom: 8px;
+  color: white;
 }
 
 /* FORM AND INPUT STYLING */

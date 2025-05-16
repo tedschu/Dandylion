@@ -17,7 +17,6 @@ import {
 } from "../types/types";
 import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
-import dandelion_corner from "../assets/dandelion_corner.png";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 
 type DestinationUnknownProps = {
@@ -70,6 +69,8 @@ function DestinationUnknown({
       damping: 30,
     },
   };
+
+  console.log(userResponses);
 
   return (
     <>

@@ -162,10 +162,14 @@ function Step10({
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="back" onClick={() => setCurrentStep(9)}>
+            <button
+              type="button"
+              className="back"
+              onClick={() => setCurrentStep(9)}
+            >
               Go back
             </button>
-            <button className="next" onClick={handleSubmission}>
+            <button type="button" className="next" onClick={handleSubmission}>
               Show me the results!
             </button>
           </div>

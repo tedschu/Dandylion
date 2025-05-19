@@ -70,8 +70,6 @@ function DestinationUnknown({
     },
   };
 
-  console.log(userResponses);
-
   return (
     <>
       <div className={"pageContainer"} data-question={currentStep}>
@@ -106,20 +104,14 @@ function DestinationUnknown({
                       setUserResponses={setUserResponses}
                       questionPromptsUnknown={questionPromptsUnknown}
                       setQuestionPromptsUnknown={setQuestionPromptsUnknown}
-                      apiResponse={stepNumber >= 9 ? apiResponse : undefined}
-                      setApiResponse={
-                        stepNumber >= 9 ? setApiResponse : undefined
-                      }
+                      apiResponse={apiResponse}
+                      setApiResponse={setApiResponse}
                       userInfo={
                         stepNumber === 0 || stepNumber === 10
                           ? userInfo
                           : undefined
                       }
-                      setUserInfo={
-                        stepNumber === 0 || stepNumber === 10
-                          ? setUserInfo
-                          : undefined
-                      }
+                      setUserInfo={setUserInfo}
                     />
                   </motion.div>
                 </AnimatePresence>

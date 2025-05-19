@@ -34,7 +34,11 @@ function Step1({
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="next" onClick={() => setCurrentStep(2)}>
+            <button
+              type="button"
+              className="next"
+              onClick={() => setCurrentStep(2)}
+            >
               Next step
             </button>
           </div>

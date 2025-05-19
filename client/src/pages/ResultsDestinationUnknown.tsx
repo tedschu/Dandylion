@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { StepProps, apiResponse } from "../types/types";
 import destinationImage from "../assets/output.png";
 import secondDestinationImage from "../assets/output2.png";
+import Header from "../components/Header";
 
 function ResultsDestinationUnknown({
   currentStep,
@@ -33,22 +34,26 @@ function ResultsDestinationUnknown({
   // }, [apiResponse]);
 
   // // TODO: USEEFFECT ON PAGE LOAD TO CALL GETTRIPRESULTS() AND THEN TO CALL GETSECONDIMAGE()
-  // useEffect(() => {
-  //   // This doesn't check everything
-  //   // if (userInfo?.firstName !== "" && userResponses.response1 !== "") {
-  //   //   getTripResults();
-  //   // }
 
-  //   const hasValidResponses = () => {
-  //     // Check first name, and then loop through userResponses object to ensure all keys have values (e.g. not "")
-  //     if (userInfo?.firstName === '') return false
+  useEffect(() => {
+    const hasValidResponses = () => {
+      // Check first name, and then loop through userResponses object to ensure all keys have values (e.g. not "")
+      if (userInfo?.firstName === "") return false;
+      for (let i = 1; i <= 10; i++) {
+        if (userResponses[`response${i}` as keyof typeof userResponses] === "")
+          return false;
+      }
+      return true;
+    };
 
-  //     for (let i = 1)
+    console.log("Here's hasValidResponses result:", hasValidResponses());
 
-  //   }
-  // }, []);
+    if (hasValidResponses() === true) {
+      getTripResults();
+    }
+  }, []);
 
-  console.log("here is response1:", userResponses);
+  console.log("here is response1:", userResponses["response1"]);
 
   // Gets trip recommendation for destination and second_destination, and image for first destination (second is in useEffect below, to save load time)
   const getTripResults = async () => {
@@ -122,6 +127,7 @@ function ResultsDestinationUnknown({
         }
         if (setApiResponse) {
           setApiResponse(copy as apiResponse);
+          setHasResponse(true);
         }
       }
     } catch (error) {
@@ -157,72 +163,90 @@ function ResultsDestinationUnknown({
       }
     } catch (error) {}
   };
+  console.log(apiResponse);
 
   return (
     <>
-      {hasResponse && (
-        <>
-          <div className="resultContainer">
-            <h1>{apiResponse?.destination.location}</h1>
-            <h2>{apiResponse?.destination.overview}</h2>
-            <img src={destinationImage} alt="" className="locationImage" />
-            <p>
-              <span style={{ fontWeight: "bold" }}>Where to stay:</span>{" "}
-              {apiResponse?.destination.places_to_stay}
-            </p>
-            <h2>Here are some things to do while you're there:</h2>
-            {apiResponse?.destination.things_to_do.map((destination) => {
-              return (
-                <>
-                  <li>
-                    <span style={{ fontWeight: "bold" }}>
-                      {destination.destination_name}
-                    </span>
-                    : {destination.description}
-                  </li>
-                </>
-              );
-            })}
-            <h2>Some important things to plan for:</h2>
+      <div className="resultPageContainer">
+        <Header />
+        {hasResponse === false && (
+          <>
+            {/* PUT COMPONENT FOR LOADING STATE HERE */}
+            <h1>test</h1>
+          </>
+        )}
+        {hasResponse && (
+          <>
+            <div className="resultContentContainer">
+              <h1>{apiResponse?.destination.location}</h1>
+              <h2>{apiResponse?.destination.overview}</h2>
+              <img src={destinationImage} alt="" className="locationImage" />
+              <p>
+                <span style={{ fontWeight: "bold" }}>Where to stay:</span>{" "}
+                {apiResponse?.destination.places_to_stay.map((place) => {
+                  return (
+                    <>
+                      <li>{place.place_to_stay}</li>
+                    </>
+                  );
+                })}
+              </p>
+              <h2>Here are some things to do while you're there:</h2>
+              {apiResponse?.destination.things_to_do.map((destination) => {
+                return (
+                  <>
+                    <li>
+                      <span style={{ fontWeight: "bold" }}>
+                        {destination.destination_name}
+                      </span>
+                      : {destination.description}
+                    </li>
+                  </>
+                );
+              })}
+              <h2>Some important things to plan for:</h2>
 
-            <li>Best time to go: {apiResponse?.destination.time_to_go}</li>
-            <li>
-              Estimated cost for the trip:{" "}
-              {apiResponse?.destination.estimated_cost}
-            </li>
-            <li>Other tips: {apiResponse?.destination.helpful_tips}</li>
-          </div>
-          {/* Second destination */}
-          <div className="resultContainer">
-            <h1 onClick={() => setIsSecondDestinationOpen(true)}>
-              Click here to also see a second destination:
-            </h1>
+              <li>Best time to go: {apiResponse?.destination.time_to_go}</li>
+              <li>
+                Estimated cost for the trip:{" "}
+                {apiResponse?.destination.estimated_cost}
+              </li>
+              <li>Other tips: {apiResponse?.destination.helpful_tips}</li>
+            </div>
+            {/* Second destination */}
+            <div className="resultContentContainer">
+              <h1 onClick={() => setIsSecondDestinationOpen(true)}>
+                Click here to also see a second destination:
+              </h1>
 
-            <h1>{apiResponse?.second_destination.location}</h1>
-            <h2>{apiResponse?.second_destination.overview}</h2>
-            <img
-              src={secondDestinationImage}
-              alt=""
-              className="locationImage"
-            />
+              <h1>{apiResponse?.second_destination.location}</h1>
+              <h2>{apiResponse?.second_destination.overview}</h2>
+              <img
+                src={secondDestinationImage}
+                alt=""
+                className="locationImage"
+              />
 
-            <h2>{apiResponse?.second_destination.places_to_stay}</h2>
-            {apiResponse?.second_destination.things_to_do.map((destination) => {
-              return (
-                <>
-                  <h2>{destination.destination_name}</h2>
-                  <p>{destination.description}</p>
-                </>
-              );
-            })}
-            <ul>
-              <li>{apiResponse?.destination.time_to_go}</li>
-              <li>{apiResponse?.destination.estimated_cost}</li>
-              <li>{apiResponse?.destination.helpful_tips}</li>
-            </ul>
-          </div>
-        </>
-      )}
+              <h2>{apiResponse?.second_destination.places_to_stay}</h2>
+              {apiResponse?.second_destination.things_to_do.map(
+                (destination) => {
+                  return (
+                    <>
+                      <h2>{destination.destination_name}</h2>
+                      <p>{destination.description}</p>
+                    </>
+                  );
+                }
+              )}
+              <ul>
+                <li>{apiResponse?.destination.time_to_go}</li>
+                <li>{apiResponse?.destination.estimated_cost}</li>
+                <li>{apiResponse?.destination.helpful_tips}</li>
+              </ul>
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 }

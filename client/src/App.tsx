@@ -147,7 +147,19 @@ function App() {
             />
           }
         />
-        <Route path="/your-plan" element={<ResultsDestinationKnown />} />
+        <Route
+          path="/your-plan"
+          element={
+            <ResultsDestinationKnown
+            // currentStep={currentStep}
+            // setCurrentStep={setCurrentStep}
+            // userResponses={userResponses}
+            // setUserResponses={setUserResponses}
+            // apiResponse={apiResponse}
+            // setApiResponse={setApiResponse}
+            />
+          }
+        />
       </Routes>
     </>
   );

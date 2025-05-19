@@ -25,10 +25,11 @@ function Step10({
 
   const navigate = useNavigate();
 
-  // TODO: SEE IF NAVIGATING TO RESULTS IS CAUSING THE FUNCTION TO DROP
   function handleClick() {
     navigate("/your-destination-plan");
   }
+
+  console.log("Here is the userresponses state on Step10:", userResponses);
 
   return (
     <>
@@ -47,10 +48,14 @@ function Step10({
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button className="back" onClick={() => setCurrentStep(9)}>
+            <button
+              type="button"
+              className="back"
+              onClick={() => setCurrentStep(9)}
+            >
               Go back
             </button>
-            <button className="next" onClick={handleClick}>
+            <button type="button" className="next" onClick={handleClick}>
               Show me the results!
             </button>
           </div>

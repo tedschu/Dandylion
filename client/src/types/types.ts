@@ -55,10 +55,14 @@ export type Attraction = {
   description: string;
 };
 
+export type PlaceToStay = {
+  place_to_stay: string;
+};
+
 export type Destination = {
   location: string;
   overview: string;
-  places_to_stay: string;
+  places_to_stay: PlaceToStay[];
   things_to_do: Attraction[];
   photos: String[];
   time_to_go: string;

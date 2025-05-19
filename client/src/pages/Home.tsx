@@ -1,7 +1,7 @@
 import { StepProps } from "../types/types";
 import { useNavigate } from "react-router-dom";
 import beeLogo from "../assets/bee.png";
-import { MotionCarousel } from "../components/MotionCarousel";
+import kyoto from "../assets/images/destinations/kyoto.png";
 
 function Home({
   currentStep,
@@ -106,8 +106,19 @@ function Home({
                 </p>
               </div>
             </div>
-            <div className="homeBottomCarouselContainer">
-              <MotionCarousel />
+            <div className="homeBottomExampleContainer">
+              <img src={kyoto} alt="" style={{ width: "300px" }} />
+              <p
+                style={{
+                  fontSize: "30px",
+                  width: "220px",
+                  padding: "15px",
+                  textAlign: "left",
+                }}
+              >
+                {userInfo?.firstName}, you may like the historic achitecture,
+                beatuiful stuff, great food..
+              </p>
             </div>
           </div>
         </div>

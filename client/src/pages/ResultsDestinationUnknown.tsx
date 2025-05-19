@@ -10,24 +10,124 @@ function ResultsDestinationUnknown({
   setUserResponses,
   apiResponse,
   setApiResponse,
+  questionPromptsUnknown,
+  userInfo,
 }: StepProps) {
-  console.log(apiResponse);
-
+  // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
   const [isSecondDestinationOpen, setIsSecondDestinationOpen] = useState(false);
 
-  useEffect(() => {
-    if (apiResponse && apiResponse.destination) {
-      setHasResponse(true);
-    }
+  // // UseEffect to get image for second destination
+  // // Runs after first destination has loaded completely
+  // useEffect(() => {
+  //   if (apiResponse && apiResponse.destination) {
+  //     setHasResponse(true);
+  //   }
 
-    if (
-      apiResponse?.second_destination?.photos?.length === 0 &&
-      apiResponse?.destination?.photos?.length > 0
-    ) {
-      getSecondImage();
+  //   if (
+  //     apiResponse?.second_destination?.photos?.length === 0 &&
+  //     apiResponse?.destination?.photos?.length > 0
+  //   ) {
+  //     getSecondImage();
+  //   }
+  // }, [apiResponse]);
+
+  // // TODO: USEEFFECT ON PAGE LOAD TO CALL GETTRIPRESULTS() AND THEN TO CALL GETSECONDIMAGE()
+  // useEffect(() => {
+  //   // This doesn't check everything
+  //   // if (userInfo?.firstName !== "" && userResponses.response1 !== "") {
+  //   //   getTripResults();
+  //   // }
+
+  //   const hasValidResponses = () => {
+  //     // Check first name, and then loop through userResponses object to ensure all keys have values (e.g. not "")
+  //     if (userInfo?.firstName === '') return false
+
+  //     for (let i = 1)
+
+  //   }
+  // }, []);
+
+  console.log("here is response1:", userResponses);
+
+  // Gets trip recommendation for destination and second_destination, and image for first destination (second is in useEffect below, to save load time)
+  const getTripResults = async () => {
+    try {
+      // Calls Anthropic API, passing questions and user responses (and user's first name)
+      // Returns primary and secondary recommendation objects
+      const response = await fetch("/api/anthropicAPI/recommendation", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          question1: questionPromptsUnknown?.question1,
+          response1: userResponses.response1,
+          question2: questionPromptsUnknown?.question2,
+          response2: userResponses.response2,
+          question3: questionPromptsUnknown?.question3,
+          response3: userResponses.response3,
+          question4: questionPromptsUnknown?.question4,
+          response4: userResponses.response4,
+          question5: questionPromptsUnknown?.question5,
+          response5: userResponses.response5,
+          question6: questionPromptsUnknown?.question6,
+          response6: userResponses.response6,
+          question7: questionPromptsUnknown?.question7,
+          response7: userResponses.response7,
+          question8: questionPromptsUnknown?.question8,
+          response8: userResponses.response8,
+          question9: questionPromptsUnknown?.question9,
+          response9: userResponses.response9,
+          question10: questionPromptsUnknown?.question10,
+          response10: userResponses.response10,
+          firstName: userInfo?.firstName,
+        }),
+      });
+
+      console.log("Here's the Anthropic response: ", response);
+
+      if (!response.ok) {
+        const textResponse = await response.text();
+        console.error("server response:", textResponse);
+        throw new Error("failed to get the recommendation");
+      }
+
+      const textData = await response.json();
+      console.log("Here is textData from Antrhopic call:", textData);
+
+      // Calls OpenAI API, passing location and overview info from Anthropic response, and user's first name
+      // Returns a postcard-style image for the location
+      const images = await fetch("/api/gptAPI/image", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          location: textData.destination.location,
+          overview: textData.destination.overview,
+        }),
+      });
+
+      console.log("Here is images (raw response):", images);
+
+      const imgData = await images.json();
+
+      console.log("HEre is imgData:", imgData);
+
+      if (imgData) {
+        const copy = { ...textData };
+        if (copy.destination && copy.destination.photos) {
+          copy.destination.photos.push("eventual_s3_URL");
+        }
+        if (setApiResponse) {
+          setApiResponse(copy as apiResponse);
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
-  }, [apiResponse]);
+  };
 
   // Function to call OpenAI API to get second_Destination image
   const getSecondImage = async () => {

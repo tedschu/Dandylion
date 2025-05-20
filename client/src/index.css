@@ -216,7 +216,8 @@ button {
 
 .moon {
   position: absolute;
-  width: 80px;
+  width: 90px;
+  transition: right 1s ease-in-out;
 }
 
 /* **** RESULTS PAGE STYLING **** */

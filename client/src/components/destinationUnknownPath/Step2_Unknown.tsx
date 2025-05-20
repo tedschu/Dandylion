@@ -1,5 +1,6 @@
 import { StepProps } from "../../types/types";
 import venetian from "../../assets/images/venetian.png";
+import moon from "../../assets/moon.png";
 
 function Step2({
   currentStep,

@@ -211,6 +211,12 @@ button {
   justify-content: center;
   align-items: center;
   width: 95%;
+  position: relative;
+}
+
+.moon {
+  position: absolute;
+  width: 80px;
 }
 
 /* **** RESULTS PAGE STYLING **** */

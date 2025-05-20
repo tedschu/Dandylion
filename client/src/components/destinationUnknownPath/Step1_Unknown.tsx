@@ -1,6 +1,7 @@
 import { StepProps } from "../../types/types";
 import { motion } from "motion/react";
 import beach from "../../assets/images/beach.png";
+import moon from "../../assets/moon.png";
 
 function Step1({
   currentStep,
@@ -22,7 +23,9 @@ function Step1({
       <div className="stepContainer">
         <div className="questionImageGridContainer">
           <img src={beach} alt="" />
+
           <h3>{questionPromptsUnknown?.question1}</h3>
+
           <div></div>
         </div>
         <form className="userForm" action="">

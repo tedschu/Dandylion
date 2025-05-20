@@ -18,6 +18,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
+import moon from "../assets/moon.png";
 
 type DestinationUnknownProps = {
   currentStep: number;
@@ -70,10 +71,31 @@ function DestinationUnknown({
     },
   };
 
+  const moonPosition = {
+    1: "10px",
+    2: "7px",
+    3: "4px",
+    4: "0px",
+    5: "-4px",
+    6: "-8px",
+    7: "-12px",
+    8: "-17px",
+    9: "-22px",
+    10: "-27px",
+  };
+
+  const moonShift = moonPosition[currentStep as keyof typeof moonPosition];
+
   return (
     <>
       <div className={"pageContainer"} data-question={currentStep}>
         <Header />
+        <img
+          className="moon"
+          src={moon}
+          alt=""
+          style={{ top: "60px", right: `${moonShift}` }}
+        />
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS />

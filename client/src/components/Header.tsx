@@ -6,7 +6,9 @@ function Header() {
   return (
     <>
       <div className="header">
-        <h1 onClick={() => navigate("/")}>dandylion</h1>
+        <h1 onClick={() => navigate("/")} style={{ color: "white" }}>
+          dandylion.ai
+        </h1>
       </div>
     </>
   );

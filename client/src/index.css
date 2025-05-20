@@ -403,19 +403,63 @@ button {
 }
 
 .pathContentContainer {
-  width: 80%;
+  width: 90%;
   background-color: rgb(255, 255, 255, 0.9);
-  height: 80vh;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 1000px;
+  padding: 5px;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 60vh;
 }
 
 .pathContentContainer > h2 {
   font-size: 35px;
-  color: var(--teal);
+  color: var(--action-coral);
+  text-align: center;
+  padding: 0 0 10px 0;
+}
+
+.pathSelectorBox {
+  display: flex;
+  width: 85%;
+  background-color: lightgray;
+  padding: 15px;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  max-width: 400px;
+  cursor: pointer;
+}
+
+.pathSelectorBox:hover {
+  /* box-shadow: 5px 5px 8px var(--dark-teal); */
+  background-color: var(--back-sky-blue);
+}
+
+.pathSelectorBoxText {
+  display: flex;
+  flex-direction: column;
+  line-height: 0;
+}
+
+.pathSelectorBoxText > h3 {
+  font-size: 18px;
+}
+
+.pathSelectorBoxText > p {
+  font-size: 13px;
+}
+
+.pathSelectorBox > img {
+  position: absolute;
+  right: 10px;
 }
 
 /* other classes */

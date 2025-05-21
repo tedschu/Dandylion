@@ -19,19 +19,19 @@ function Results_Full_Unknown({
         <img src={destinationImage} alt="" className="locationImage" />
         <p>
           <span style={{ fontWeight: "bold" }}>Where to stay:</span>{" "}
-          {apiResponse?.destination.places_to_stay.map((place) => {
+          {apiResponse?.destination.places_to_stay.map((place, index) => {
             return (
               <>
-                <li>{place.place_to_stay}</li>
+                <li key={index}>{place.place_to_stay}</li>
               </>
             );
           })}
         </p>
         <h2>Here are some things to do while you're there:</h2>
-        {apiResponse?.destination.things_to_do.map((destination) => {
+        {apiResponse?.destination.things_to_do.map((destination, index) => {
           return (
             <>
-              <li>
+              <li key={index}>
                 <span style={{ fontWeight: "bold" }}>
                   {destination.destination_name}
                 </span>
@@ -49,13 +49,14 @@ function Results_Full_Unknown({
         <li>Other tips: {apiResponse?.destination.helpful_tips}</li>
         <h2>Here's a full suggested itinerary made for you:</h2>
         {apiResponse.destination.itinerary.map((day, index) => {
-          let dayNum = index + 1;
           return (
             <>
               {/* TODO: NEED TO REVISE THE STRUCTURE OF THE ITINERARY OBJECT, OR FIGURE OUT HOW TO DISPLAY THE DATA IN DAY */}
-              <li>
-                <span style={{ fontWeight: "bold" }}>{`Day ${dayNum}`}</span>:{" "}
-                {day}
+              <li key={index}>
+                <span
+                  style={{ fontWeight: "bold" }}
+                >{`Day ${day.day_num}`}</span>
+                : {day.plan}
               </li>
             </>
           );
@@ -73,27 +74,31 @@ function Results_Full_Unknown({
 
         <p>
           <span style={{ fontWeight: "bold" }}>Where to stay:</span>{" "}
-          {apiResponse?.second_destination.places_to_stay.map((place) => {
-            return (
-              <>
-                <li>{place.place_to_stay}</li>
-              </>
-            );
-          })}
+          {apiResponse?.second_destination.places_to_stay.map(
+            (place, index) => {
+              return (
+                <>
+                  <li key={index}>{place.place_to_stay}</li>
+                </>
+              );
+            }
+          )}
         </p>
         <h2>Here are some things to do while you're there:</h2>
-        {apiResponse?.second_destination.things_to_do.map((destination) => {
-          return (
-            <>
-              <li>
-                <span style={{ fontWeight: "bold" }}>
-                  {destination.destination_name}
-                </span>
-                : {destination.description}
-              </li>
-            </>
-          );
-        })}
+        {apiResponse?.second_destination.things_to_do.map(
+          (destination, index) => {
+            return (
+              <>
+                <li key={index}>
+                  <span style={{ fontWeight: "bold" }}>
+                    {destination.destination_name}
+                  </span>
+                  : {destination.description}
+                </li>
+              </>
+            );
+          }
+        )}
         <h2>Some important things to plan for:</h2>
 
         <li>Best time to go: {apiResponse?.second_destination.time_to_go}</li>

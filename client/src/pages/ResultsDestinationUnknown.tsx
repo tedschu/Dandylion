@@ -26,7 +26,8 @@ function ResultsDestinationUnknown({
   const [showFullResults, setShowFullResults] = useState(false);
   const [isAnthropicLoading, setIsAnthropicLoading] = useState(false);
 
-  // ******* TODO: THIS IS CALLING GETTRIPRESULTS() TWICE ON PAGE LOAD - NEED TO FIGURE OUT BETTER DEPENDENCY
+  // ******* TODO: THIS IS CALLING GETTRIPRESULTS() TWICE ON PAGE LOAD
+  // *** Try useRef to ensure the calls only happens once
 
   // On page load, calls getTripResults() IF all userResponse fields are populated
   useEffect(() => {

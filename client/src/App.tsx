@@ -38,7 +38,7 @@ function App() {
     question3:
       "What was your favorite vacation experience so far, and what made it special?",
     question4:
-      "What's something you've always wanted to do but haven't had the chance to try yet?",
+      "What's something you've always wanted to do but haven't had the chance to try yet (or just haven't done in a while)?",
     question5:
       "What climate do you prefer, and are there specific seasonal experiences you're seeking (fall foliage, winter sports, etc.)?",
     question6:

@@ -101,10 +101,21 @@ p {
 }
 
 /* **** Button styling **** */
+
+.buttonContainer {
+  gap: 15px;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 button {
   border-radius: 8px;
   border: none;
   padding: 5px;
+  cursor: pointer;
 }
 
 .login {
@@ -122,21 +133,34 @@ button {
   background-color: var(--action-coral);
   color: white;
   padding: 10px;
+  font-size: 16px;
 }
 
 .next:hover {
   background-color: var(--action-coral-hover);
 }
 
+.back {
+  background-color: var(--back-cream);
+  color: var(--text-secondary-gray);
+  padding: 10px;
+  font-size: 16px;
+}
+
 /* Component styling */
 .pageContainer {
   /* background-color: #f5efdf; */
   width: 100%;
-  background: linear-gradient(to top, #ff9966, #ff5e62, #7661c7, #4a6fc4);
   transition: background 2s ease;
 }
 /* Handles data attribute / shifts in background: sunrise to sunset effect */
-.pageContainer[data-question="1"] {
+.pageContainer[data-question="1"],
+.pageContainer[data-question="2"],
+.pageContainer[data-question="3"],
+.pageContainer[data-question="4"],
+.pageContainer[data-question="5"],
+.pageContainer[data-question="6"],
+.pageContainer[data-question="7"] {
   /* background: linear-gradient(to top, #ff9966, #ff5e62, #ffc44d, #6ec3e2); */
   background: linear-gradient(
     to bottom,
@@ -152,40 +176,10 @@ button {
     #dece14
   );
 }
-.pageContainer[data-question="2"] {
-  /* background: linear-gradient(to top, #4a90e2, #87ceeb, #f9d423, #ff9966); */
-  background: linear-gradient(
-    to bottom,
-    #0e1f46,
-    #1d305b,
-    #223667,
-    #2b4583,
-    #365396,
-    #336589,
-    #2d7a8d,
-    #44b1a0,
-    #54d1be,
-    #dece14
-  );
-}
-.pageContainer[data-question="3"] {
-  /* background: linear-gradient(to top, #614385, #516395, #ff5e62, #ff9966); */
-  background: linear-gradient(
-    to bottom,
-    #10224d,
-    #203462,
-    #223667,
-    #2b4583,
-    #365396,
-    #336589,
-    #2d7a8d,
-    #44b1a0,
-    #54d1be,
-    #dece14
-  );
-}
 
-.pageContainer[data-question="4"] {
+.pageContainer[data-question="8"],
+.pageContainer[data-question="9"],
+.pageContainer[data-question="10"] {
   /* background: linear-gradient(to top, #614385, #516395, #ff5e62, #ff9966); */
   background: linear-gradient(
     to bottom,
@@ -198,7 +192,8 @@ button {
     #2d7a8d,
     #44b1a0,
     #54d1be,
-    #dece14
+    #dece14,
+    #deb614
   );
 }
 
@@ -215,7 +210,7 @@ button {
 }
 
 .moon {
-  position: absolute;
+  position: fixed;
   width: 90px;
   transition: right 1s ease-in-out;
 }
@@ -491,15 +486,6 @@ button {
   left: 20px;
   width: 45px;
   z-index: 2;
-}
-
-.buttonContainer {
-  gap: 15px;
-  margin: 15px 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 .formContainer {

@@ -72,16 +72,16 @@ function DestinationUnknown({
   };
 
   const moonPosition = {
-    1: "10px",
-    2: "7px",
-    3: "4px",
-    4: "0px",
-    5: "-4px",
-    6: "-8px",
-    7: "-12px",
-    8: "-17px",
-    9: "-22px",
-    10: "-27px",
+    1: "80px",
+    2: "65px",
+    3: "50px",
+    4: "35px",
+    5: "20px",
+    6: "5px",
+    7: "-10px",
+    8: "-25px",
+    9: "-40px",
+    10: "-55px",
   };
 
   const moonShift = moonPosition[currentStep as keyof typeof moonPosition];

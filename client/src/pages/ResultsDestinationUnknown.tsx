@@ -128,6 +128,7 @@ function ResultsDestinationUnknown({
         if (setApiResponse) {
           setApiResponse(copy as apiResponse);
           setHasResponse(true);
+          getSecondImage();
         }
       }
     } catch (error) {
@@ -227,22 +228,43 @@ function ResultsDestinationUnknown({
                 className="locationImage"
               />
 
-              <h2>{apiResponse?.second_destination.places_to_stay}</h2>
+              <p>
+                <span style={{ fontWeight: "bold" }}>Where to stay:</span>{" "}
+                {apiResponse?.second_destination.places_to_stay.map((place) => {
+                  return (
+                    <>
+                      <li>{place.place_to_stay}</li>
+                    </>
+                  );
+                })}
+              </p>
+              <h2>Here are some things to do while you're there:</h2>
               {apiResponse?.second_destination.things_to_do.map(
                 (destination) => {
                   return (
                     <>
-                      <h2>{destination.destination_name}</h2>
-                      <p>{destination.description}</p>
+                      <li>
+                        <span style={{ fontWeight: "bold" }}>
+                          {destination.destination_name}
+                        </span>
+                        : {destination.description}
+                      </li>
                     </>
                   );
                 }
               )}
-              <ul>
-                <li>{apiResponse?.destination.time_to_go}</li>
-                <li>{apiResponse?.destination.estimated_cost}</li>
-                <li>{apiResponse?.destination.helpful_tips}</li>
-              </ul>
+              <h2>Some important things to plan for:</h2>
+
+              <li>
+                Best time to go: {apiResponse?.second_destination.time_to_go}
+              </li>
+              <li>
+                Estimated cost for the trip:{" "}
+                {apiResponse?.second_destination.estimated_cost}
+              </li>
+              <li>
+                Other tips: {apiResponse?.second_destination.helpful_tips}
+              </li>
             </div>
           </>
         )}

@@ -69,6 +69,12 @@
   --error: #d64045;
   --success: #3a9679;
   --warning: #f9ae54;
+
+  /* Material design colors (for progress indiccator */
+  --md-sys-color-primary: #113a67;
+  --md-sys-color-on-primary: #f7bc21;
+  --md-sys-color-primary-container: #4a9b9b;
+  --md-sys-color-on-primary-container: #2a5f8f;
 }
 
 body,
@@ -145,6 +151,16 @@ button {
   color: var(--text-secondary-gray);
   padding: 10px;
   font-size: 16px;
+}
+
+/* **** ALERT AND POPUP WINDOW STYLING **** */
+
+.alert {
+  background-color: var(--warning);
+  border-radius: 9px;
+  padding: 0px 10px;
+  margin: 10px;
+  font-size: 13px;
 }
 
 /* Component styling */

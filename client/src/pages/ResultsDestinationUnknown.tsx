@@ -3,6 +3,9 @@ import { StepProps, apiResponse } from "../types/types";
 import destinationImage from "../assets/output.png";
 import secondDestinationImage from "../assets/output2.png";
 import Header from "../components/Header";
+import "@material/web/progress/circular-progress.js";
+import { MdCircularProgress } from "@material/web/progress/circular-progress.js";
+import ResultsLoadingState from "../components/ResultsLoadingState";
 
 function ResultsDestinationUnknown({
   currentStep,
@@ -17,28 +20,12 @@ function ResultsDestinationUnknown({
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
   const [isSecondDestinationOpen, setIsSecondDestinationOpen] = useState(false);
+  const [apiRetries, setApiRetries] = useState(0);
 
-  // // UseEffect to get image for second destination
-  // // Runs after first destination has loaded completely
-  // useEffect(() => {
-  //   if (apiResponse && apiResponse.destination) {
-  //     setHasResponse(true);
-  //   }
-
-  //   if (
-  //     apiResponse?.second_destination?.photos?.length === 0 &&
-  //     apiResponse?.destination?.photos?.length > 0
-  //   ) {
-  //     getSecondImage();
-  //   }
-  // }, [apiResponse]);
-
-  // // TODO: USEEFFECT ON PAGE LOAD TO CALL GETTRIPRESULTS() AND THEN TO CALL GETSECONDIMAGE()
-
+  // On page load, calls getTripResults() IF all userResponse fields are populated
   useEffect(() => {
     const hasValidResponses = () => {
       // Check first name, and then loop through userResponses object to ensure all keys have values (e.g. not "")
-      if (userInfo?.firstName === "") return false;
       for (let i = 1; i <= 10; i++) {
         if (userResponses[`response${i}` as keyof typeof userResponses] === "")
           return false;
@@ -95,7 +82,16 @@ function ResultsDestinationUnknown({
       if (!response.ok) {
         const textResponse = await response.text();
         console.error("server response:", textResponse);
-        throw new Error("failed to get the recommendation");
+
+        // Retries the Anthropic API every 3 seconds (for 3 tries) if there's a
+        // 529 error, meaning the API is currently overloaded
+        if (response.status == 529) {
+          console.log("Error: Anthropic API is overloaded");
+          setTimeout(retryAnthropicAPIOnError, 3000);
+          return;
+        } else {
+          throw new Error("failed to get the recommendation");
+        }
       }
 
       const textData = await response.json();
@@ -128,11 +124,29 @@ function ResultsDestinationUnknown({
         if (setApiResponse) {
           setApiResponse(copy as apiResponse);
           setHasResponse(true);
-          getSecondImage();
         }
       }
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (hasResponse && apiResponse) {
+      getSecondImage();
+    }
+  }, [hasResponse]);
+
+  // Calls Anthropic API up to 3 times via getTripResults() if there is a 529 error
+  // from Anthropic response.
+  const retryAnthropicAPIOnError = () => {
+    let maxRetries = 3;
+
+    console.log("Anthropic API error...retrying...");
+
+    if (apiRetries < maxRetries) {
+      getTripResults();
+      setApiRetries((prev) => prev + 1);
     }
   };
 
@@ -170,12 +184,10 @@ function ResultsDestinationUnknown({
     <>
       <div className="resultPageContainer">
         <Header />
-        {hasResponse === false && (
-          <>
-            {/* PUT COMPONENT FOR LOADING STATE HERE */}
-            <h1>test</h1>
-          </>
-        )}
+        {/* Loading state component, including progress bar and image carousel */}
+        {hasResponse === false && <ResultsLoadingState />}
+
+        {/* Results content */}
         {hasResponse && (
           <>
             <div className="resultContentContainer">

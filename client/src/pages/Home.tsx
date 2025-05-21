@@ -2,6 +2,7 @@ import { StepProps } from "../types/types";
 import { useNavigate } from "react-router-dom";
 import beeLogo from "../assets/bee.png";
 import kyoto from "../assets/images/destinations/kyoto.png";
+import { useState } from "react";
 
 function Home({
   currentStep,
@@ -9,6 +10,8 @@ function Home({
   userInfo,
   setUserInfo,
 }: StepProps) {
+  const [showAlert, setShowAlert] = useState(false);
+
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
@@ -19,6 +22,17 @@ function Home({
   };
 
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (
+      userInfo?.email !== "" &&
+      userInfo?.firstName !== "" &&
+      /@/.test(userInfo?.email ?? "")
+    ) {
+      navigate("/path");
+      setShowAlert(false);
+    } else setShowAlert(true);
+  };
 
   return (
     <>
@@ -64,11 +78,16 @@ function Home({
                   name="email"
                   onChange={setFormValues}
                 />
-                <button className="next" onClick={() => navigate("/path")}>
+                <button className="next" onClick={() => handleClick()}>
                   Get started
                 </button>
               </div>
             </div>
+            {showAlert && (
+              <div className="alert">
+                <h3>Make sure you've added your name and email.</h3>
+              </div>
+            )}
           </div>
         </div>
 

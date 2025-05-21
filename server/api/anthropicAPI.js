@@ -134,7 +134,8 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
     "helpful_tips": "Key insights for travel to this destination (language, currency, etc.). If the recommended trip is in the same country that the user is from, do not mention currency or language and stick to other tips like "don't forget comfortable shoes as it's very walkable," or something similar",    
     "itinerary": "Provide a full suggested itinerary for the user based on their length of stay for this location, incorporating the attraction/activities noted in the destination_name objects that you provided. Try to be specific about your recommendations - for example, for restaurants, avoid generalized recommendations like "try family-friendly restaurants nearby" and instead say something like "try restaurants such as [restaurant name], [restaurant name], or other family-friendly restaurants in the neighborhood". Ensure the text is in the following format: [
     {
-          "day1": "suggestions for the first day",
+          "dayNum": "day number (for example, 1 for the first day)",
+          "plan": "suggestions for the first day",
    },
          // Include additional days in this format
     ]",

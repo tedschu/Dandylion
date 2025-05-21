@@ -6,6 +6,8 @@ import Header from "../components/Header";
 import "@material/web/progress/circular-progress.js";
 import { MdCircularProgress } from "@material/web/progress/circular-progress.js";
 import ResultsLoadingState from "../components/ResultsLoadingState";
+import Results_Pre_Unknown from "../components/destinationUnknownPath/results/Results_Pre_Unknown";
+import Results_Full_Unknown from "../components/destinationUnknownPath/results/Results_Full_Unknown";
 
 function ResultsDestinationUnknown({
   currentStep,
@@ -21,6 +23,10 @@ function ResultsDestinationUnknown({
   const [hasResponse, setHasResponse] = useState(false);
   const [isSecondDestinationOpen, setIsSecondDestinationOpen] = useState(false);
   const [apiRetries, setApiRetries] = useState(0);
+  const [showFullResults, setShowFullResults] = useState(false);
+  const [isAnthropicLoading, setIsAnthropicLoading] = useState(false);
+
+  // ******* TODO: THIS IS CALLING GETTRIPRESULTS() TWICE ON PAGE LOAD - NEED TO FIGURE OUT BETTER DEPENDENCY
 
   // On page load, calls getTripResults() IF all userResponse fields are populated
   useEffect(() => {
@@ -44,6 +50,10 @@ function ResultsDestinationUnknown({
 
   // Gets trip recommendation for destination and second_destination, and image for first destination (second is in useEffect below, to save load time)
   const getTripResults = async () => {
+    if (isAnthropicLoading) return;
+
+    setIsAnthropicLoading(true);
+
     try {
       // Calls Anthropic API, passing questions and user responses (and user's first name)
       // Returns primary and secondary recommendation objects
@@ -90,6 +100,7 @@ function ResultsDestinationUnknown({
           setTimeout(retryAnthropicAPIOnError, 3000);
           return;
         } else {
+          setIsAnthropicLoading(false);
           throw new Error("failed to get the recommendation");
         }
       }
@@ -124,18 +135,13 @@ function ResultsDestinationUnknown({
         if (setApiResponse) {
           setApiResponse(copy as apiResponse);
           setHasResponse(true);
+          setIsAnthropicLoading(false);
         }
       }
     } catch (error) {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    if (hasResponse && apiResponse) {
-      getSecondImage();
-    }
-  }, [hasResponse]);
 
   // Calls Anthropic API up to 3 times via getTripResults() if there is a 529 error
   // from Anthropic response.
@@ -147,8 +153,17 @@ function ResultsDestinationUnknown({
     if (apiRetries < maxRetries) {
       getTripResults();
       setApiRetries((prev) => prev + 1);
+    } else {
+      setIsAnthropicLoading(false);
     }
   };
+
+  // Calls for second_destination's image once the first image and content has loaded
+  useEffect(() => {
+    if (hasResponse && apiResponse) {
+      getSecondImage();
+    }
+  }, [hasResponse]);
 
   // Function to call OpenAI API to get second_Destination image
   const getSecondImage = async () => {
@@ -178,7 +193,10 @@ function ResultsDestinationUnknown({
       }
     } catch (error) {}
   };
-  console.log(apiResponse);
+
+  const tempFullResults = () => {
+    setShowFullResults(true);
+  };
 
   return (
     <>
@@ -187,99 +205,29 @@ function ResultsDestinationUnknown({
         {/* Loading state component, including progress bar and image carousel */}
         {hasResponse === false && <ResultsLoadingState />}
 
-        {/* Results content */}
-        {hasResponse && (
+        {/* Partial (unpaid) results content */}
+        {hasResponse && apiResponse && !showFullResults && (
           <>
-            <div className="resultContentContainer">
-              <h1>{apiResponse?.destination.location}</h1>
-              <h2>{apiResponse?.destination.overview}</h2>
-              <img src={destinationImage} alt="" className="locationImage" />
-              <p>
-                <span style={{ fontWeight: "bold" }}>Where to stay:</span>{" "}
-                {apiResponse?.destination.places_to_stay.map((place) => {
-                  return (
-                    <>
-                      <li>{place.place_to_stay}</li>
-                    </>
-                  );
-                })}
-              </p>
-              <h2>Here are some things to do while you're there:</h2>
-              {apiResponse?.destination.things_to_do.map((destination) => {
-                return (
-                  <>
-                    <li>
-                      <span style={{ fontWeight: "bold" }}>
-                        {destination.destination_name}
-                      </span>
-                      : {destination.description}
-                    </li>
-                  </>
-                );
-              })}
-              <h2>Some important things to plan for:</h2>
-
-              <li>Best time to go: {apiResponse?.destination.time_to_go}</li>
-              <li>
-                Estimated cost for the trip:{" "}
-                {apiResponse?.destination.estimated_cost}
-              </li>
-              <li>Other tips: {apiResponse?.destination.helpful_tips}</li>
-            </div>
-            {/* Second destination */}
-            <div className="resultContentContainer">
-              <h1 onClick={() => setIsSecondDestinationOpen(true)}>
-                Click here to also see a second destination:
-              </h1>
-
-              <h1>{apiResponse?.second_destination.location}</h1>
-              <h2>{apiResponse?.second_destination.overview}</h2>
-              <img
-                src={secondDestinationImage}
-                alt=""
-                className="locationImage"
-              />
-
-              <p>
-                <span style={{ fontWeight: "bold" }}>Where to stay:</span>{" "}
-                {apiResponse?.second_destination.places_to_stay.map((place) => {
-                  return (
-                    <>
-                      <li>{place.place_to_stay}</li>
-                    </>
-                  );
-                })}
-              </p>
-              <h2>Here are some things to do while you're there:</h2>
-              {apiResponse?.second_destination.things_to_do.map(
-                (destination) => {
-                  return (
-                    <>
-                      <li>
-                        <span style={{ fontWeight: "bold" }}>
-                          {destination.destination_name}
-                        </span>
-                        : {destination.description}
-                      </li>
-                    </>
-                  );
-                }
-              )}
-              <h2>Some important things to plan for:</h2>
-
-              <li>
-                Best time to go: {apiResponse?.second_destination.time_to_go}
-              </li>
-              <li>
-                Estimated cost for the trip:{" "}
-                {apiResponse?.second_destination.estimated_cost}
-              </li>
-              <li>
-                Other tips: {apiResponse?.second_destination.helpful_tips}
-              </li>
-            </div>
+            <Results_Pre_Unknown
+              apiResponse={apiResponse}
+              setIsSecondDestinationOpen={setIsSecondDestinationOpen}
+            />
           </>
         )}
+
+        {/* Full (paid) results content */}
+        {hasResponse && apiResponse && showFullResults && (
+          <>
+            <Results_Full_Unknown
+              apiResponse={apiResponse}
+              setIsSecondDestinationOpen={setIsSecondDestinationOpen}
+            />
+          </>
+        )}
+
+        <button onClick={() => tempFullResults()}>
+          Show full (paid) results
+        </button>
       </div>
     </>
   );

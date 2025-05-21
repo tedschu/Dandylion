@@ -68,6 +68,7 @@ export type Destination = {
   time_to_go: string;
   estimated_cost: string;
   helpful_tips: string;
+  itinerary: [];
 };
 
 export type apiResponse = {

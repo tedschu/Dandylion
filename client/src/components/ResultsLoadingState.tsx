@@ -37,56 +37,66 @@ function ResultsLoadingState() {
 
   return (
     <>
-      {/* @ts-ignore */}
-      <CircularProgress color="#f7bc21" />
+      <div className="resultLoadingContainer">
+        {/* @ts-ignore */}
+        <CircularProgress color="#f7bc21" />
 
-      <h2>It takes a moment to cover the entire world...</h2>
+        <h2 style={{ textAlign: "center" }}>
+          It takes a moment to cover the entire world.
+        </h2>
 
-      <h1 style={{ color: "var(--brand-yellow)", margin: "0" }}>
-        Here are some of the places you could go:
-      </h1>
+        <h1
+          style={{
+            color: "var(--action-coral)",
+            margin: "0",
+            textAlign: "center",
+          }}
+        >
+          Here are some of the places you could go:
+        </h1>
 
-      {/* Image carousel container */}
-      <div
-        style={{
-          position: "relative",
-          width: "90%",
-          maxWidth: "400px",
-          aspectRatio: "3/4",
-          overflow: "hidden",
-          margin: "20px auto",
-        }}
-      >
-        {images.map((image, index) => (
-          <Slide
-            key={index}
-            direction="left"
-            in={index === currentIndex}
-            timeout={500}
-            mountOnEnter
-            unmountOnExit
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-              }}
+        {/* Image carousel container */}
+        <div
+          style={{
+            position: "relative",
+            width: "90%",
+            maxWidth: "400px",
+            aspectRatio: "3/4",
+            overflow: "hidden",
+            margin: "20px auto",
+          }}
+        >
+          {images.map((image, index) => (
+            <Slide
+              key={index}
+              direction="left"
+              in={index === currentIndex}
+              timeout={500}
+              mountOnEnter
+              unmountOnExit
             >
-              <img
-                src={image}
-                alt={`Loading image ${index + 1}`}
+              <div
                 style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
                   width: "100%",
                   height: "100%",
-                  objectFit: "contain",
                 }}
-              />
-            </div>
-          </Slide>
-        ))}
+              >
+                <img
+                  src={image}
+                  alt={`Loading image ${index + 1}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
+            </Slide>
+          ))}
+        </div>
       </div>
     </>
   );

@@ -6,6 +6,9 @@ import Header from "../components/Header";
 import ResultsLoadingState from "../components/ResultsLoadingState";
 import Results_Pre_Unknown from "../components/destinationUnknownPath/results/Results_Pre_Unknown";
 import Results_Full_Unknown from "../components/destinationUnknownPath/results/Results_Full_Unknown";
+import moon from "../assets/moon.png";
+import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
+import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 
 function ResultsDestinationUnknown({
   currentStep,
@@ -190,13 +193,18 @@ function ResultsDestinationUnknown({
     } catch (error) {}
   };
 
-  const tempFullResults = () => {
-    setShowFullResults(true);
-  };
-
   return (
     <>
       <div className="resultPageContainer">
+        <img
+          className="moon"
+          src={moon}
+          alt=""
+          style={{ top: "60px", right: "-40px" }}
+        />
+
+        <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
+        <DandelionSeedsCSS />
         {/* Loading state component, including progress bar and image carousel */}
         {hasResponse === false && <ResultsLoadingState />}
 
@@ -206,6 +214,8 @@ function ResultsDestinationUnknown({
             <Results_Pre_Unknown
               apiResponse={apiResponse}
               setIsSecondDestinationOpen={setIsSecondDestinationOpen}
+              setShowFullResults={setShowFullResults}
+              hasResponse={hasResponse}
             />
           </>
         )}
@@ -219,10 +229,6 @@ function ResultsDestinationUnknown({
             />
           </>
         )}
-        {/*  TEMPORARY BUTTON TO TOGGLE BETWEEN INITIAL (UNPAID) AND FULL (PAID) RESULTS */}
-        <button onClick={() => tempFullResults()}>
-          Show full (paid) results
-        </button>
       </div>
     </>
   );

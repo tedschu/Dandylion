@@ -135,8 +135,7 @@ function Home({
                   textAlign: "left",
                 }}
               >
-                {userInfo?.firstName}, you may like the historic achitecture,
-                beatuiful stuff, great food..
+                {userInfo?.firstName}, [Results page mockup]
               </p>
             </div>
           </div>

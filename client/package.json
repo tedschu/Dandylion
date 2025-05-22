@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@material/web": "^2.3.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.1.0",
     "motion": "^12.9.0",
     "popmotion": "^11.0.5",
     "react": "^19.0.0",

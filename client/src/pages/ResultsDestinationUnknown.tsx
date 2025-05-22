@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StepProps, apiResponse } from "../types/types";
 import destinationImage from "../assets/output.png";
 import secondDestinationImage from "../assets/output2.png";
 import Header from "../components/Header";
-import "@material/web/progress/circular-progress.js";
-import { MdCircularProgress } from "@material/web/progress/circular-progress.js";
 import ResultsLoadingState from "../components/ResultsLoadingState";
 import Results_Pre_Unknown from "../components/destinationUnknownPath/results/Results_Pre_Unknown";
 import Results_Full_Unknown from "../components/destinationUnknownPath/results/Results_Full_Unknown";
@@ -22,12 +20,13 @@ function ResultsDestinationUnknown({
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
   const [isSecondDestinationOpen, setIsSecondDestinationOpen] = useState(false);
-  const [apiRetries, setApiRetries] = useState(0);
+
   const [showFullResults, setShowFullResults] = useState(false);
   const [isAnthropicLoading, setIsAnthropicLoading] = useState(false);
 
-  // ******* TODO: THIS IS CALLING GETTRIPRESULTS() TWICE ON PAGE LOAD
-  // *** Try useRef to ensure the calls only happens once
+  // useRef is appropriate for this since it doesn't require a re-render
+  // and is just counting api calls.
+  const apiRetriesRef = useRef(0);
 
   // On page load, calls getTripResults() IF all userResponse fields are populated
   useEffect(() => {
@@ -40,14 +39,10 @@ function ResultsDestinationUnknown({
       return true;
     };
 
-    console.log("Here's hasValidResponses result:", hasValidResponses());
-
     if (hasValidResponses() === true) {
       getTripResults();
     }
   }, []);
-
-  console.log("here is response1:", userResponses["response1"]);
 
   // Gets trip recommendation for destination and second_destination, and image for first destination (second is in useEffect below, to save load time)
   const getTripResults = async () => {
@@ -151,9 +146,9 @@ function ResultsDestinationUnknown({
 
     console.log("Anthropic API error...retrying...");
 
-    if (apiRetries < maxRetries) {
+    if (apiRetriesRef.current < maxRetries) {
       getTripResults();
-      setApiRetries((prev) => prev + 1);
+      apiRetriesRef.current += 1;
     } else {
       setIsAnthropicLoading(false);
     }
@@ -225,7 +220,7 @@ function ResultsDestinationUnknown({
             />
           </>
         )}
-
+        {/*  TEMPORARY BUTTON TO TOGGLE BETWEEN INITIAL (UNPAID) AND FULL (PAID) RESULTS */}
         <button onClick={() => tempFullResults()}>
           Show full (paid) results
         </button>

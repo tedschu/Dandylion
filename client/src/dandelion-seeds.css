@@ -1,6 +1,6 @@
 /* dandelion-seeds.css */
 .seeds-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -21,7 +21,7 @@
 
 /* Apply different animations to each seed */
 .seed:nth-child(1) {
-  animation: float1 15s linear infinite;
+  animation: float1 20s linear infinite;
   opacity: 1;
 }
 .seed:nth-child(2) {
@@ -87,17 +87,18 @@
 /* Define all the float keyframe animations */
 @keyframes float1 {
   0% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotate (1800deg);
     opacity: 0;
   }
   10% {
-    opacity: 0.7;
+    opacity: 0.8;
   }
   90% {
-    opacity: 0.7;
+    opacity: 0.8;
   }
   100% {
-    transform: translate(600px, -600px);
+    /* translate(X axis (from start), Y axis) */
+    transform: translate(500px, -1300px);
     opacity: 0;
   }
 }
@@ -165,7 +166,7 @@
     opacity: 0.7;
   }
   100% {
-    transform: translate(450px, -680px) rotate(360deg);
+    transform: translate(450px, -1180px) rotate(360deg);
     opacity: 0;
   }
 }
@@ -199,7 +200,7 @@
     opacity: 0.7;
   }
   100% {
-    transform: translate(380px, -750px) rotate(360deg);
+    transform: translate(380px, -1450px) rotate(360deg);
     opacity: 0;
   }
 }
@@ -233,7 +234,7 @@
     opacity: 0.8;
   }
   100% {
-    transform: translate(480px, -690px) rotate(360deg);
+    transform: translate(280px, -890px) rotate(360deg);
     opacity: 0;
   }
 }

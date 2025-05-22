@@ -197,7 +197,6 @@ function ResultsDestinationUnknown({
   return (
     <>
       <div className="resultPageContainer">
-        <Header />
         {/* Loading state component, including progress bar and image carousel */}
         {hasResponse === false && <ResultsLoadingState />}
 

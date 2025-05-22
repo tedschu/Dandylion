@@ -25,6 +25,8 @@ function ResultsLoadingState() {
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // TODO: RE-WRITE TO SIMPLIFY AND ENSURE THAT IMAGES ARE NOT CUT OFF
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -40,16 +42,19 @@ function ResultsLoadingState() {
 
       <h2>It takes a moment to cover the entire world...</h2>
 
+      <h1 style={{ color: "var(--brand-yellow)", margin: "0" }}>
+        Here are some of the places you could go:
+      </h1>
+
       {/* Image carousel container */}
       <div
         style={{
           position: "relative",
+          width: "90%",
           maxWidth: "400px",
-          maxHeight: "600px",
-          width: "80%",
-          height: "80%",
+          aspectRatio: "3/4",
+          overflow: "hidden",
           margin: "20px auto",
-          borderRadius: "8px",
         }}
       >
         {images.map((image, index) => (
@@ -76,7 +81,7 @@ function ResultsLoadingState() {
                 style={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover",
+                  objectFit: "contain",
                 }}
               />
             </div>

@@ -400,16 +400,26 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
     "length_of_stay": "Note the length of stay, based on the user input",
     "estimated_cost": "Cost range (e.g., '$5,000 - $7,000 USD') with brief explanation. For instance, if the user is coming from Chicago and has to fly to Florence, you can look at average ticket prices. Base cost estimates on typical ranges for the destination and season. If specific current prices aren't available, use representative ranges with appropriate caveats.",
     "helpful_tips": "Key insights for travel to this destination (language, currency, etc.). If the recommended trip is in the same country that the user is from, do not mention currency or language and stick to other tips like "don't forget comfortable shoes as it's very walkable," or something similar",    
-    "itinerary": "Provide a full suggested itinerary for the user based on their length of stay for this location, incorporating the attraction/activities noted in the things_to_do object that you provided. Try to be specific about your recommendations - for example, for restaurants, avoid generalized recommendations like "try family-friendly restaurants nearby" and instead say something like "try restaurants such as [restaurant name], [restaurant name], or other family-friendly restaurants in the neighborhood". Ensure the text is in the following format: [
+    "itinerary": "Create a detailed day-by-day itinerary that includes:
+          - Specific timing suggestions (morning/afternoon/evening)
+          - Named restaurants, attractions, and activities from your 'things_to_do' recommendations
+          - Logical geographic flow to minimize travel time
+          - Specific restaurant names rather than general categories
+          - Transportation suggestions between activities when relevant
+          - Alternative options for weather-dependent activities
+          - Realistic pacing with appropriate time allocations
+          - ensure restaurant recommendations align with any dietary preferences mentioned
+  Ensure the text is in the following format: [
     {
           "day_num": "day number (for example, 1 for the first day)",
-          "plan": "Suggestions for the first day. Also, where appropriate, also offer alternative suggestions for specific portions of the day, particularly if it's a shorter trip, like 1-3 days (for example, 'Start the day with a walk along Cannon Beach or even a stroll down the main shopping district of Braeside.",
+          "plan": "Detailed time-block suggestions with specific venue names, timing, and alternatives.",
    },
          // Include additional days in this format
     ]",
   },
-
 }
+
+IMPORTANT: For the itinerary, be highly specific. Instead of 'visit museums in the morning,' say 'Morning: Visit the Metropolitan Museum of Art (allow 3 hours), focusing on the Egyptian wing which matches your interest in ancient cultures.' Always include specific restaurant names, exact attraction names, and realistic timing.
 
 JSON FORMATTING REQUIREMENTS:
 1. All string values must be on a single line with no actual line breaks

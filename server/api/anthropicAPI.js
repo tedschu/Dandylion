@@ -19,7 +19,7 @@ async function callAnthropicAPI(messages, system = "") {
   try {
     const response = await anthropic.messages.create({
       model: "claude-3-5-haiku-20241022",
-      max_tokens: 4000,
+      max_tokens: 6000,
       temperature: 0.9,
       system: system,
       messages: messages,
@@ -396,6 +396,14 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
       },
       // Include 5-7 more activity objects following this format (6-8 in total)
     ],
+    "restaurants": "Provide restaurant or dining recommendations based on the user's preferences and some of the best restaurants (by ratings, popularity) in the user's destination" [
+            {
+              "restaurant_name": "name of restaurant",
+              "restaurant_type": "type of cuisine: italian, american, french, etc.",
+              "description": "overview of the restaurant and why it is potentially a good fit for the user, based on their preferences."
+            },
+            // Include at least 4 more restaurants or dining options in this format
+    ],
     "time_to_go": "Best months/seasons to visit based on user preferences. If the user already mentioned specific dates that they have booked, you can provide comments on the timing (for example, 'August is the best time to go to Hawaii - great choice!')",
     "length_of_stay": "Note the length of stay, based on the user input",
     "estimated_cost": "Cost range (e.g., '$5,000 - $7,000 USD') with brief explanation. For instance, if the user is coming from Chicago and has to fly to Florence, you can look at average ticket prices. Base cost estimates on typical ranges for the destination and season. If specific current prices aren't available, use representative ranges with appropriate caveats.",
@@ -404,7 +412,7 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
           - Specific timing suggestions (morning/afternoon/evening)
           - Named restaurants, attractions, and activities from your 'things_to_do' recommendations
           - Logical geographic flow to minimize travel time
-          - Specific restaurant names rather than general categories
+          - Specific restaurant recommendations from some of the best restaurants in the destination area
           - Transportation suggestions between activities when relevant
           - Alternative options for weather-dependent activities
           - Realistic pacing with appropriate time allocations
@@ -412,7 +420,11 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
   Ensure the text is in the following format: [
     {
           "day_num": "day number (for example, 1 for the first day)",
-          "plan": "Detailed time-block suggestions with specific venue names, timing, and alternatives.",
+          "overview": "Short summary of day's destination and activities. For example: 'Central Park and Midtown'",
+          "morning": "Provide 2-3 sentences with detailed time-block suggestions with specific venue names, restaurants or dining options, timing, and alternatives.",
+          "afternoon": "Provide 2-3 sentences with detailed time-block suggestions with specific venue names, restaurants or dining options, timing, and alternatives.",
+          "evening": "Provide 2-3 sentences with detailed time-block suggestions with specific venue names, restaurants or dining options, timing, and alternatives.",
+
    },
          // Include additional days in this format
     ]",

@@ -34,7 +34,7 @@ async function callAnthropicAPI(messages, system = "") {
 
 // routes
 
-// POSTs the questions + user responses to Anthropic messages API, returning the travel recommendations
+// "Unknown" path (e.g. user needs a destination and itinerary / suggestions) call to get recommendations
 router.post("/recommendation", async (req, res) => {
   try {
     // get passed info from body, put it into message and system prompt arrays, call on caller function, return results
@@ -132,7 +132,7 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
     "length_of_stay": "Note the length of stay, based on the user input",
     "estimated_cost": "Cost range (e.g., '$5,000 - $7,000 USD') with brief explanation. For instance, if the user is coming from Chicago and has to fly to Florence (if this is the recommended destination), you can look at average ticket prices. You can also look at hotels or places to stay that fit their preferences, and see what the cost per night is in the time of year that they want to travel",
     "helpful_tips": "Key insights for travel to this destination (language, currency, etc.). If the recommended trip is in the same country that the user is from, do not mention currency or language and stick to other tips like "don't forget comfortable shoes as it's very walkable," or something similar",    
-    "itinerary": "Provide a full suggested itinerary for the user based on their length of stay for this location, incorporating the attraction/activities noted in the destination_name objects that you provided. Try to be specific about your recommendations - for example, for restaurants, avoid generalized recommendations like "try family-friendly restaurants nearby" and instead say something like "try restaurants such as [restaurant name], [restaurant name], or other family-friendly restaurants in the neighborhood". Ensure the text is in the following format: [
+    "itinerary": "Provide a full suggested itinerary for the user based on their length of stay for this location, incorporating the attraction/activities noted in the things_to_do objects that you provided. Try to be specific about your recommendations - for example, for restaurants, avoid generalized recommendations like "try family-friendly restaurants nearby" and instead say something like "try restaurants such as [restaurant name], [restaurant name], or other family-friendly restaurants in the neighborhood". Ensure the text is in the following format: [
     {
           "day_num": "day number (for example, 1 for the first day)",
           "plan": "suggestions for the first day",
@@ -308,5 +308,140 @@ JSON FORMATTING REQUIREMENTS:
 // 3. Properly escape all quotes, backslashes and special characters in string values
 // 4. Ensure all array and object structures are valid JSON
 // 5. Do not include any markdown, backticks, or text outside the JSON object
+
+// "Known" path (e.g. user knows destination already) call to get recommendations
+router.post("/recommendation-known", async (req, res) => {
+  try {
+    // get passed info from body, put it into message and system prompt arrays, call on caller function, return results
+    const {
+      question1,
+      response1,
+      question2,
+      response2,
+      question3,
+      response3,
+      question4,
+      response4,
+      question5,
+      response5,
+      question6,
+      response6,
+      question7,
+      response7,
+      question8,
+      response8,
+      firstName,
+    } = req.body;
+
+    // "stringify" the data to pass to Anthropic, e.g. convert the data object to a string
+    const responseString = JSON.stringify({
+      question1: question1,
+      response1: response1,
+      question2: question2,
+      response2: response2,
+      question3: question3,
+      response3: response3,
+      question4: question4,
+      response4: response4,
+      question5: question5,
+      response5: response5,
+      question6: question6,
+      response6: response6,
+      question7: question7,
+      response7: response7,
+      question8: question8,
+      response8: response8,
+      firstName: firstName,
+    });
+
+    const messages = [
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: `Using the object below, review the questions and then the user's responses to those questions. You will then be returning vacation recommendations that you think would be the best fit for them based on their responses in the format specified below. Only return the JSON object requested below, nothing else. 
+
+Make sure that your recommendations follow the parameters of the user's responses. For example, if they note that their budget is $5,000, don't recommend a vacation that will cost more than that.
+
+Write your response as if you were speaking to them (ex. "You will love this area..."), using their first name: ${firstName}.
+
+Here is the user object with the questions and responses:
+
+${responseString}
+
+Return ONLY a valid, properly escaped JSON object with the following structure:
+
+{
+  "destination": {
+    "location": "Using the details provided in response1, return the destination (or destinations) they'll be going to. For example, if they noted they're traveling to San Francisco and Napa, return 'San Francisco and Napa'",
+    "overview": "3-4 sentences reviewing the highlights of the trip, and why the recommendations match the user preferences. In this overview, you can also expand on the recommendations you provided, if appropriate. For example, if the user mentioned going to Portland but also asked for towns along the coast, you can mention the specifics and a few activities that would be highlights.",
+    "places_to_stay": "Specific accommodation suggestions that match user's budget and preferences. If they already specified hotels that they have booked, return those responses. For example, if there is a particular resort that gets great reviews and falls within the user's budget, recommend that and note where the resort is. If the user has noted that they want to stay in a remote place, and for example, you find that AirBnb accommodations are popular, recommend that they check out home rentals and note specific locations that would be best based on their preferences. Provide the responses in this format: 
+        [
+             {
+                   "place_to_stay": "first recommendation",
+              },
+             {
+                   "place_to_stay": "second recommendation",
+             },
+             // If you have additional recommendations, keep this format.
+       ]
+",
+    "photos": "leave this as an empty array: []",
+    "things_to_do": [
+      {
+        "destination_name": "Attraction/activity name. These recommendations should be specific places, destinations, or things to do that fit with the user's preferences. For instance, if the user has specified wanting to see cultural experiences, make sure that you are focusing on things like historical sites, cultural events (e.g. Mardis Gras). Don't just focus on the most popular destinations or things to do, but reference reviews on the internet and recommendations that would be a best fit to the user's preferences.",
+        "description": "2-3 sentence description of this activity and why it fits user preferences",
+      },
+      // Include 5-7 more activity objects following this format (6-8 in total)
+    ],
+    "time_to_go": "Best months/seasons to visit based on user preferences. If the user already mentioned specific dates that they have booked, you can provide comments on the timing (for example, 'August is the best time to go to Hawaii - great choice!')",
+    "length_of_stay": "Note the length of stay, based on the user input",
+    "estimated_cost": "Cost range (e.g., '$5,000 - $7,000 USD') with brief explanation. For instance, if the user is coming from Chicago and has to fly to Florence, you can look at average ticket prices. You can also look at hotels or places to stay that fit their preferences, and see what the cost per night is in the time of year that they want to travel",
+    "helpful_tips": "Key insights for travel to this destination (language, currency, etc.). If the recommended trip is in the same country that the user is from, do not mention currency or language and stick to other tips like "don't forget comfortable shoes as it's very walkable," or something similar",    
+    "itinerary": "Provide a full suggested itinerary for the user based on their length of stay for this location, incorporating the attraction/activities noted in the things_to_do object that you provided. Try to be specific about your recommendations - for example, for restaurants, avoid generalized recommendations like "try family-friendly restaurants nearby" and instead say something like "try restaurants such as [restaurant name], [restaurant name], or other family-friendly restaurants in the neighborhood". Ensure the text is in the following format: [
+    {
+          "day_num": "day number (for example, 1 for the first day)",
+          "plan": "Suggestions for the first day. Also, where appropriate, also offer alternative suggestions for specific portions of the day, particularly if it's a shorter trip, like 1-3 days (for example, 'Start the day with a walk along Cannon Beach or even a stroll down the main shopping district of Braeside.",
+   },
+         // Include additional days in this format
+    ]",
+  },
+
+}
+
+JSON FORMATTING REQUIREMENTS:
+1. All string values must be on a single line with no actual line breaks
+2. Use "\\n" for necessary line breaks within text
+3. Properly escape all quotes, backslashes and special characters in string values
+4. Ensure all array and object structures are valid JSON
+5. Do not include any markdown, backticks, or text outside the JSON object`,
+          },
+        ],
+      },
+    ];
+
+    const system =
+      "Imagine that you are a travel agent, but with all of the information from the internet at your disposal. You are helping users that have a general vacation destination in mind figure out the best things to do while they're there. You should respond with a sense of humor, and enthusiasm for the trip that they are planning. ";
+
+    // Call anthropic API function to hit the API and return a response
+    const response = await callAnthropicAPI(messages, system);
+
+    console.log(response);
+    const parsedResponse = JSON.parse(response);
+
+    // const cleanedResponse = response.replace(/\\'/g, "'");
+
+    //const finalResponse = JSON.parse(response);
+
+    res.json(parsedResponse);
+  } catch (error) {
+    console.error("Error returning data:", error);
+    res.status(500).json({
+      error: "Failed to retrieve a response",
+      response: error.response,
+    });
+  }
+});
 
 module.exports = router;

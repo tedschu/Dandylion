@@ -143,6 +143,8 @@ function App() {
               setUserResponses={setUserResponses}
               apiResponse={apiResponse}
               setApiResponse={setApiResponse}
+              userInfo={userInfo}
+              questionPromptsUnknown={questionPromptsUnknown}
             />
           }
         />
@@ -150,12 +152,14 @@ function App() {
           path="/your-plan"
           element={
             <ResultsDestinationKnown
-            // currentStep={currentStep}
-            // setCurrentStep={setCurrentStep}
-            // userResponses={userResponses}
-            // setUserResponses={setUserResponses}
-            // apiResponse={apiResponse}
-            // setApiResponse={setApiResponse}
+              currentStep={currentStep}
+              setCurrentStep={setCurrentStep}
+              userResponses={userResponses}
+              setUserResponses={setUserResponses}
+              apiResponse={apiResponse}
+              setApiResponse={setApiResponse}
+              userInfo={userInfo}
+              questionPromptsKnown={questionPromptsKnown}
             />
           }
         />

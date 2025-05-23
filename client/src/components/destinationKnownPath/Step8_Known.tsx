@@ -44,7 +44,7 @@ function Step8({
             placeholder="My daughter is a vegetarian, and loves really good breakfast spots."
             rows={3}
             value={userResponses.response8}
-            name="response10"
+            name="response8"
             onChange={setFormValues}
           />
           <div className="buttonContainer">

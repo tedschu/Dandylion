@@ -22,7 +22,10 @@ function Results_Full_Unknown({
           {apiResponse?.destination.places_to_stay.map((place, index) => {
             return (
               <>
-                <li key={index}>{place.place_to_stay}</li>
+                <li key={index}>
+                  {place.name}: {place.why_recommended}. Cost is{" "}
+                  {place.price_range}
+                </li>
               </>
             );
           })}
@@ -61,52 +64,6 @@ function Results_Full_Unknown({
             </>
           );
         })}
-      </div>
-      {/* Second destination */}
-      <div className="resultContentContainer">
-        <h1 onClick={() => setIsSecondDestinationOpen(true)}>
-          Click here to also see a second destination:
-        </h1>
-
-        <h1>{apiResponse?.second_destination.location}</h1>
-        <h2>{apiResponse?.second_destination.overview}</h2>
-        <img src={secondDestinationImage} alt="" className="locationImage" />
-
-        <p>
-          <span style={{ fontWeight: "bold" }}>Where to stay:</span>{" "}
-          {apiResponse?.second_destination.places_to_stay.map(
-            (place, index) => {
-              return (
-                <>
-                  <li key={index}>{place.place_to_stay}</li>
-                </>
-              );
-            }
-          )}
-        </p>
-        <h2>Here are some things to do while you're there:</h2>
-        {apiResponse?.second_destination.things_to_do.map(
-          (destination, index) => {
-            return (
-              <>
-                <li key={index}>
-                  <span style={{ fontWeight: "bold" }}>
-                    {destination.destination_name}
-                  </span>
-                  : {destination.description}
-                </li>
-              </>
-            );
-          }
-        )}
-        <h2>Some important things to plan for:</h2>
-
-        <li>Best time to go: {apiResponse?.second_destination.time_to_go}</li>
-        <li>
-          Estimated cost for the trip:{" "}
-          {apiResponse?.second_destination.estimated_cost}
-        </li>
-        <li>Other tips: {apiResponse?.second_destination.helpful_tips}</li>
       </div>
     </>
   );

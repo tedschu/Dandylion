@@ -32,7 +32,7 @@ function ResultsDestinationKnown({
   useEffect(() => {
     const hasValidResponses = () => {
       // Check first name, and then loop through userResponses object to ensure all keys have values (e.g. not "")
-      for (let i = 1; i <= 10; i++) {
+      for (let i = 1; i <= 8; i++) {
         if (userResponses[`response${i}` as keyof typeof userResponses] === "")
           return false;
       }
@@ -47,6 +47,7 @@ function ResultsDestinationKnown({
   // Gets trip recommendation for destination and second_destination, and image for first destination (second is in useEffect below, to save load time)
   const getTripResults = async () => {
     if (isAnthropicLoading) return;
+    console.log("Calling Antrhopic API...");
 
     setIsAnthropicLoading(true);
 

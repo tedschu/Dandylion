@@ -378,12 +378,13 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
     "overview": "3-4 sentences reviewing the highlights of the trip, and why the recommendations match the user preferences. In this overview, you can also expand on the recommendations you provided, if appropriate. For example, if the user mentioned going to Portland but also asked for towns along the coast, you can mention the specifics and a few activities that would be highlights.",
     "places_to_stay": "Specific accommodation suggestions that match user's budget and preferences. If they already specified hotels that they have booked, return those responses. For example, if there is a particular resort that gets great reviews and falls within the user's budget, recommend that and note where the resort is. If the user has noted that they want to stay in a remote place, and for example, you find that AirBnb accommodations are popular, recommend that they check out home rentals and note specific locations that would be best based on their preferences. Provide the responses in this format: 
         [
-             {
-                   "place_to_stay": "first recommendation",
+              {
+                "name": "accommodation name. If it's not a specific hotel (ex. Airbnb), it's ok to be a bit more general (for example: 'AirBnb homes on the waterfront')",
+                "type": "hotel/airbnb/resort/etc",
+                "location": "specific area/neighborhood", 
+                "why_recommended": "brief explanation matching user preferences",
+                "price_range": "estimated nightly rate range"
               },
-             {
-                   "place_to_stay": "second recommendation",
-             },
              // If you have additional recommendations, keep this format.
        ]
 ",
@@ -397,7 +398,7 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
     ],
     "time_to_go": "Best months/seasons to visit based on user preferences. If the user already mentioned specific dates that they have booked, you can provide comments on the timing (for example, 'August is the best time to go to Hawaii - great choice!')",
     "length_of_stay": "Note the length of stay, based on the user input",
-    "estimated_cost": "Cost range (e.g., '$5,000 - $7,000 USD') with brief explanation. For instance, if the user is coming from Chicago and has to fly to Florence, you can look at average ticket prices. You can also look at hotels or places to stay that fit their preferences, and see what the cost per night is in the time of year that they want to travel",
+    "estimated_cost": "Cost range (e.g., '$5,000 - $7,000 USD') with brief explanation. For instance, if the user is coming from Chicago and has to fly to Florence, you can look at average ticket prices. Base cost estimates on typical ranges for the destination and season. If specific current prices aren't available, use representative ranges with appropriate caveats.",
     "helpful_tips": "Key insights for travel to this destination (language, currency, etc.). If the recommended trip is in the same country that the user is from, do not mention currency or language and stick to other tips like "don't forget comfortable shoes as it's very walkable," or something similar",    
     "itinerary": "Provide a full suggested itinerary for the user based on their length of stay for this location, incorporating the attraction/activities noted in the things_to_do object that you provided. Try to be specific about your recommendations - for example, for restaurants, avoid generalized recommendations like "try family-friendly restaurants nearby" and instead say something like "try restaurants such as [restaurant name], [restaurant name], or other family-friendly restaurants in the neighborhood". Ensure the text is in the following format: [
     {
@@ -422,7 +423,7 @@ JSON FORMATTING REQUIREMENTS:
     ];
 
     const system =
-      "Imagine that you are a travel agent, but with all of the information from the internet at your disposal. You are helping users that have a general vacation destination in mind figure out the best things to do while they're there. You should respond with a sense of humor, and enthusiasm for the trip that they are planning. ";
+      "You are an enthusiastic travel expert with comprehensive destination knowledge. Provide personalized recommendations that closely match the user's stated preferences, budget, and travel style. Be specific rather than generic, and explain why each recommendation fits their particular needs.";
 
     // Call anthropic API function to hit the API and return a response
     const response = await callAnthropicAPI(messages, system);

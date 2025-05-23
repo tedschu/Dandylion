@@ -28,8 +28,8 @@ export type UserResponses = {
   response6: string;
   response7: string;
   response8: string;
-  response9: string;
-  response10: string;
+  response9?: string;
+  response10?: string;
 };
 
 export type UserInfo = {
@@ -46,8 +46,8 @@ export type QuestionPrompts = {
   question6: string;
   question7: string;
   question8: string;
-  question9: string;
-  question10: string;
+  question9?: string;
+  question10?: string;
 };
 
 export type Attraction = {
@@ -56,7 +56,10 @@ export type Attraction = {
 };
 
 export type PlaceToStay = {
-  place_to_stay: string;
+  place_to_stay?: string;
+  name?: string;
+  why_recommended?: string;
+  price_range?: string;
 };
 
 export type Destination = {

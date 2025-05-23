@@ -29,7 +29,10 @@ function Results_Pre_Unknown({
           {apiResponse?.destination.places_to_stay.map((place) => {
             return (
               <>
-                <li>{place.place_to_stay}</li>
+                <li>
+                  {place.name}: {place.why_recommended}. Cost is{" "}
+                  {place.price_range}
+                </li>
               </>
             );
           })}

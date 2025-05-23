@@ -51,22 +51,21 @@ function App() {
   });
 
   const [questionPromptsKnown, setQuestionPromptsKnown] = useState({
-    question1: "Let's get started. Where are you planning to go?",
+    question1:
+      "What's your trip looking like so far? Tell us about your destination(s), dates, or other big plans.",
     question2:
       "What's your budget range, and what aspects of travel do you prioritize spending on (food, activities, accommodations)?",
     question3: "Are you traveling solo, with a partner, friends, or family?",
     question4:
-      "Are there any specific attractions or experiences you've already planned?",
+      "What are you most excited to see or do? This could be specific attractions you've already planned or general interests like food, culture, nightlife, etc.",
     question5:
-      "Would you like recommendations for day trips outside the main destination?",
+      "Are you interested in staying mostly in your main destination or exploring surrounding areas and day trips too?",
     question6:
-      "What aspects of this destination are you most excited to explore? This could be anything from specific attractions to cultural elements or activities.",
-    question7: "When are you planning to travel and for how long?",
-    question8: "What's your ideal balance between relaxation and adventure?",
-    question9:
+      "What's your preferred pace - packed itineraries and lots of activities, or more leisurely with downtime built in?",
+    question7:
       "What are you hoping to get out of this trip personally? For example, relaxation, new perspectives, adventure, cultural immersion, or something else entirely?",
-    question10:
-      "Do you have any dietary preferences or restrictions to consider for restaurant recommendations?",
+    question8:
+      "Last question: Any dietary preferences, restrictions, or food experiences you're particularly excited about?",
   });
 
   // Used to render step pages based on user's progression

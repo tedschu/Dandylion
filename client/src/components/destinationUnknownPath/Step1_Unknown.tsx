@@ -1,7 +1,8 @@
 import { StepProps } from "../../types/types";
 import { motion } from "motion/react";
 import beach from "../../assets/images/beach.png";
-import moon from "../../assets/moon.png";
+import { useState } from "react";
+import bee from "../../assets/bee.png";
 
 function Step1({
   currentStep,
@@ -11,6 +12,8 @@ function Step1({
   questionPromptsUnknown,
   setQuestionPromptsUnknown,
 }: StepProps) {
+  const [showTipBox, setShowTipBox] = useState(true);
+
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =

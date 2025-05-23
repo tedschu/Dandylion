@@ -26,7 +26,7 @@ function Step7({
         </div>{" "}
         <form className="userForm" action="">
           <textarea
-            placeholder="Ideally late summer or early fall, and I'd like to go for maybe 6-8 days."
+            placeholder="I mostly just want to be able to just spend a lot of quality time with the kids at the beach."
             rows={3}
             value={userResponses.response7}
             name="response7"

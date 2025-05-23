@@ -26,7 +26,7 @@ function Step6({
         </div>{" "}
         <form className="userForm" action="">
           <textarea
-            placeholder="I'm looking to see a bit of everything, but mostly I want to experience what it's like to live there."
+            placeholder="I want at least one planned activity every day, but the rest to be more flexible."
             rows={3}
             value={userResponses.response6}
             name="response6"

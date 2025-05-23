@@ -7,8 +7,7 @@ import Step5 from "../components/destinationKnownPath/Step5_Known";
 import Step6 from "../components/destinationKnownPath/Step6_Known";
 import Step7 from "../components/destinationKnownPath/Step7_Known";
 import Step8 from "../components/destinationKnownPath/Step8_Known";
-import Step9 from "../components/destinationKnownPath/Step9_Known";
-import Step10 from "../components/destinationKnownPath/Step10_Known";
+
 import {
   UserResponses,
   QuestionPrompts,
@@ -17,8 +16,8 @@ import {
 } from "../types/types";
 import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
-import dandelion_corner from "../assets/dandelion_corner.png";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
+import moon from "../assets/moon.png";
 
 type DestinationKnownProps = {
   currentStep: number;
@@ -47,18 +46,7 @@ function DestinationKnown({
   userInfo,
   setUserInfo,
 }: DestinationKnownProps) {
-  const steps = [
-    Step1,
-    Step2,
-    Step3,
-    Step4,
-    Step5,
-    Step6,
-    Step7,
-    Step8,
-    Step9,
-    Step10,
-  ];
+  const steps = [Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8];
 
   const motionProps = {
     initial: { opacity: 0.2, y: -100 },
@@ -71,10 +59,29 @@ function DestinationKnown({
     },
   };
 
+  const moonPosition = {
+    1: "80px",
+    2: "65px",
+    3: "50px",
+    4: "35px",
+    5: "20px",
+    6: "5px",
+    7: "-10px",
+    8: "-25px",
+  };
+
+  const moonShift = moonPosition[currentStep as keyof typeof moonPosition];
+
   return (
     <>
       <div className={"pageContainer"} data-question={currentStep}>
         <Header />
+        <img
+          className="moon"
+          src={moon}
+          alt=""
+          style={{ top: "60px", right: `${moonShift}` }}
+        />
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS />
@@ -105,20 +112,14 @@ function DestinationKnown({
                       setUserResponses={setUserResponses}
                       questionPromptsKnown={questionPromptsKnown}
                       setQuestionPromptsKnown={setQuestionPromptsKnown}
-                      apiResponse={stepNumber >= 9 ? apiResponse : undefined}
-                      setApiResponse={
-                        stepNumber >= 9 ? setApiResponse : undefined
-                      }
+                      apiResponse={apiResponse}
+                      setApiResponse={setApiResponse}
                       userInfo={
-                        stepNumber === 0 || stepNumber === 10
+                        stepNumber === 0 || stepNumber === 8
                           ? userInfo
                           : undefined
                       }
-                      setUserInfo={
-                        stepNumber === 0 || stepNumber === 10
-                          ? setUserInfo
-                          : undefined
-                      }
+                      setUserInfo={setUserInfo}
                     />
                   </motion.div>
                 </AnimatePresence>

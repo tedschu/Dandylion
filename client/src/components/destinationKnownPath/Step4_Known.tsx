@@ -27,7 +27,7 @@ function Step4({
         </div>
         <form className="userForm" action="">
           <textarea
-            placeholder="I've never gone scuba diving yet, but I think that would be a lot of fun."
+            placeholder="I'm really excited about the Highline Trail - that's a must-see. I'd love to find other great hiking spots in the park."
             rows={3}
             value={userResponses.response4}
             name="response4"

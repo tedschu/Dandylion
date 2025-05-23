@@ -26,7 +26,7 @@ function Step5({
         </div>{" "}
         <form className="userForm" action="">
           <textarea
-            placeholder="I'd love some warm weather, and I'd like to see the flowers in late Spring."
+            placeholder="Since we'll be in Boston for a week, it may be interesting to try out a day trip or two."
             rows={3}
             value={userResponses.response5}
             name="response5"

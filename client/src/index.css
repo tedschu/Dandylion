@@ -231,6 +231,40 @@ button {
   transition: right 1s ease-in-out;
 }
 
+/* Alert on step1 (both paths) to encourage detailed responses */
+.reminderBox {
+  display: flex;
+  gap: 10px;
+  background-color: var(--back-sky-blue);
+  border-radius: 8px;
+  padding: 2px 10px;
+  position: relative;
+  margin: 20px 15px 0 15px;
+}
+
+.reminderBox > img {
+  width: 40px;
+  position: absolute;
+  bottom: -22px;
+  left: -18px;
+}
+
+.reminderBox-close {
+  position: absolute;
+  top: -22px;
+  left: -7px;
+  font-size: 15px;
+  color: white;
+  background-color: var(--brand-yellow);
+  border-radius: 100%;
+  width: 20px;
+  cursor: pointer;
+}
+
+.reminderBox-close:hover {
+  background-color: var(--action-coral-hover);
+}
+
 /* **** RESULTS PAGE STYLING **** */
 .resultPageContainer {
   width: 100%;

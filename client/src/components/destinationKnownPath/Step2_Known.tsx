@@ -26,7 +26,7 @@ function Step2({
         </div>
         <form className="userForm" action="">
           <textarea
-            placeholder="I'm thinking between $3000 - $5000 in total, but I'm flexible."
+            placeholder="I'm thinking between $1,500 - $2,000 in total, but I'm flexible. I usually spend the most on good restaurants."
             rows={3}
             value={userResponses.response2}
             name="response2"

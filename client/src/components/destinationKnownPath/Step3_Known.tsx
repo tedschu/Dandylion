@@ -26,7 +26,7 @@ function Step3({
         </div>
         <form className="userForm" action="">
           <textarea
-            placeholder="Everything about Maui was amazing...the beaches, the food, the natural scenery."
+            placeholder="I'm traveling with my friend Hannah and her daughter, Kim, who is 9."
             rows={3}
             value={userResponses.response3}
             name="response3"

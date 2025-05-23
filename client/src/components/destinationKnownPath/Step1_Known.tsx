@@ -1,6 +1,8 @@
 import { StepProps } from "../../types/types";
 import { motion } from "motion/react";
 import beach from "../../assets/images/beach.png";
+import bee from "../../assets/bee.png";
+import { useState } from "react";
 
 function Step1({
   currentStep,
@@ -10,6 +12,8 @@ function Step1({
   questionPromptsKnown,
   setQuestionPromptsKnown,
 }: StepProps) {
+  const [showTipBox, setShowTipBox] = useState(true);
+
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =
@@ -27,7 +31,7 @@ function Step1({
         </div>
         <form className="userForm" action="">
           <textarea
-            placeholder="It'll be me, my husband Jeff, and my two kids, Jack (6) and Nate (9)."
+            placeholder="We're flying into San Francisco on June 17, and the plan is to stay there a few nights and then go to Napa for a few nights. We have a wine tour booked on 6/20."
             rows={3}
             value={userResponses.response1}
             name="response1"

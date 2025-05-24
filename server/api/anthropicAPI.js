@@ -417,15 +417,26 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
           - Alternative options for weather-dependent activities
           - Realistic pacing with appropriate time allocations
           - ensure restaurant recommendations align with any dietary preferences mentioned
+          - Detailed "activities" plan that is a minimum of 150-200 words
   Ensure the text is in the following format: [
     {
-          "day_num": "day number (for example, 1 for the first day)",
-          "overview": "Short summary of day's destination and activities. For example: 'Central Park and Midtown'",
-          "morning": "Provide 2-3 sentences with detailed time-block suggestions with specific venue names, restaurants or dining options, timing, and alternatives.",
-          "afternoon": "Provide 2-3 sentences with detailed time-block suggestions with specific venue names, restaurants or dining options, timing, and alternatives.",
-          "evening": "Provide 2-3 sentences with detailed time-block suggestions with specific venue names, restaurants or dining options, timing, and alternatives.",
-
-   },
+     "day_num": 1,
+  "morning": {
+    "time": "9:00 AM - 12:00 PM",
+    "activities": "Start your day exploring Chinatown, beginning at the iconic Dragon Gate on Grant Avenue. Spend time browsing the traditional herb shops, tea stores, and souvenir markets along Grant Avenue and Stockton Street. Don't miss the beautiful murals in Portsmouth Square and the historic temples like Tin How Temple. The narrow alleyways like Waverly Place offer authentic glimpses of daily life. Allow 2-3 hours to properly explore this vibrant neighborhood, and consider timing your visit to catch the morning dim sum crowds for an authentic cultural experience.",
+    "dining": "For breakfast, head to Golden Boy Pizza on Green Street for their famous focaccia squares - they offer excellent vegetarian options including their margherita and veggie combinations. The casual atmosphere and local favorite status make it perfect for starting your San Francisco adventure."
+  },
+    "afternoon": {
+      "time": "12:00 PM - 5:00 PM", 
+      "activities": "Detailed afternoon activities",
+      "dining": "Lunch recommendations"
+    },
+    "evening": {
+      "time": "5:00 PM - 9:00 PM",
+      "activities": "Evening plans",
+      "dining": "Dinner suggestions"
+    }
+  },
          // Include additional days in this format
     ]",
   },
@@ -445,7 +456,7 @@ JSON FORMATTING REQUIREMENTS:
     ];
 
     const system =
-      "You are an enthusiastic travel expert with comprehensive destination knowledge. Provide personalized recommendations that closely match the user's stated preferences, budget, and travel style. Be specific rather than generic, and explain why each recommendation fits their particular needs.";
+      "You are an enthusiastic local travel expert who loves sharing detailed, insider knowledge. Write as if you're personally guiding a friend through the destination. Be conversational, specific, and generous with details - include timing, what to expect, why places are special, and practical tips.";
 
     // Call anthropic API function to hit the API and return a response
     const response = await callAnthropicAPI(messages, system);
@@ -468,3 +479,5 @@ JSON FORMATTING REQUIREMENTS:
 });
 
 module.exports = router;
+
+// 1. All string values must be on a single line with no actual line breaks

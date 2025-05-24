@@ -18,9 +18,9 @@ const anthropic = new Anthropic({
 async function callAnthropicAPI(messages, system = "") {
   try {
     const response = await anthropic.messages.create({
-      model: "claude-3-5-haiku-20241022",
-      max_tokens: 6000,
-      temperature: 0.9,
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 8000,
+      temperature: 0.7,
       system: system,
       messages: messages,
     });
@@ -421,6 +421,7 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
   Ensure the text is in the following format: [
     {
      "day_num": 1,
+     "summary": "Provide a brief summary of the day's destinations",
   "morning": {
     "time": "9:00 AM - 12:00 PM",
     "activities": "Start your day exploring Chinatown, beginning at the iconic Dragon Gate on Grant Avenue. Spend time browsing the traditional herb shops, tea stores, and souvenir markets along Grant Avenue and Stockton Street. Don't miss the beautiful murals in Portsmouth Square and the historic temples like Tin How Temple. The narrow alleyways like Waverly Place offer authentic glimpses of daily life. Allow 2-3 hours to properly explore this vibrant neighborhood, and consider timing your visit to catch the morning dim sum crowds for an authentic cultural experience.",

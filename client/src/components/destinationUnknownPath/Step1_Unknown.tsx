@@ -1,8 +1,10 @@
 import { StepProps } from "../../types/types";
-import { motion } from "motion/react";
+import { hasWarned, motion } from "motion/react";
 import beach from "../../assets/images/beach.png";
 import { useState } from "react";
 import bee from "../../assets/bee.png";
+import badWords from "../../utils/badWords";
+import BadWordsAlert from "../BadWordsAlert";
 
 function Step1({
   currentStep,
@@ -12,13 +14,34 @@ function Step1({
   questionPromptsUnknown,
   setQuestionPromptsUnknown,
 }: StepProps) {
-  const [showTipBox, setShowTipBox] = useState(true);
+  const [showBadWordsAlert, setShowBadWordsAlert] = useState(false);
 
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =
       event.target.value;
     setUserResponses(tempObj);
+  };
+
+  function handleClick() {
+    if (hasBadWords()) {
+      setShowBadWordsAlert(true);
+      setTimeout(() => {
+        setShowBadWordsAlert(false);
+      }, 3000);
+    } else {
+      setCurrentStep(2);
+    }
+  }
+
+  // return true if there are matching words from badWords
+  const hasBadWords = () => {
+    for (let word of badWords) {
+      if (userResponses.response1.includes(word)) {
+        return true;
+      }
+    }
+    return false;
   };
 
   return (
@@ -40,13 +63,16 @@ function Step1({
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button
-              type="button"
-              className="next"
-              onClick={() => setCurrentStep(2)}
-            >
-              Next step
-            </button>
+            {!showBadWordsAlert && (
+              <button
+                type="button"
+                className="next"
+                onClick={() => handleClick()}
+              >
+                Next step
+              </button>
+            )}
+            {showBadWordsAlert && <BadWordsAlert />}
           </div>
         </form>
       </div>

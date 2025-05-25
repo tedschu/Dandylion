@@ -19,6 +19,8 @@ import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 import moon from "../assets/moon.png";
+import badWords from "../utils/badWords";
+import { useEffect } from "react";
 
 type DestinationUnknownProps = {
   currentStep: number;
@@ -85,6 +87,8 @@ function DestinationUnknown({
   };
 
   const moonShift = moonPosition[currentStep as keyof typeof moonPosition];
+
+  console.log(userResponses, currentStep);
 
   return (
     <>

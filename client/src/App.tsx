@@ -72,6 +72,8 @@ function App() {
   const [currentStep, setCurrentStep] = useState(1);
 
   const [apiResponse, setApiResponse] = useState<apiResponse>({});
+  // Shows BadWordsAlert component in question paths if a user types a "bad word"
+  const [showBadWordsAlert, setShowBadWordsAlert] = useState(false);
 
   return (
     <>
@@ -110,6 +112,8 @@ function App() {
               setApiResponse={setApiResponse}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
+              showBadWordsAlert={showBadWordsAlert}
+              setShowBadWordsAlert={setShowBadWordsAlert}
             />
           }
         />
@@ -127,6 +131,8 @@ function App() {
               setApiResponse={setApiResponse}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
+              showBadWordsAlert={showBadWordsAlert}
+              setShowBadWordsAlert={setShowBadWordsAlert}
             />
           }
         />

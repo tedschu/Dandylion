@@ -3,7 +3,7 @@ import { hasWarned, motion } from "motion/react";
 import beach from "../../assets/images/beach.png";
 import { useState } from "react";
 import bee from "../../assets/bee.png";
-import badWords from "../../utils/badWords";
+import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
 
 function Step1({
@@ -13,9 +13,9 @@ function Step1({
   setUserResponses,
   questionPromptsUnknown,
   setQuestionPromptsUnknown,
+  showBadWordsAlert,
+  setShowBadWordsAlert,
 }: StepProps) {
-  const [showBadWordsAlert, setShowBadWordsAlert] = useState(false);
-
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =
@@ -24,7 +24,7 @@ function Step1({
   };
 
   function handleClick() {
-    if (hasBadWords()) {
+    if (containsBadWords(userResponses.response1)) {
       setShowBadWordsAlert(true);
       setTimeout(() => {
         setShowBadWordsAlert(false);
@@ -33,16 +33,6 @@ function Step1({
       setCurrentStep(2);
     }
   }
-
-  // return true if there are matching words from badWords
-  const hasBadWords = () => {
-    for (let word of badWords) {
-      if (userResponses.response1.includes(word)) {
-        return true;
-      }
-    }
-    return false;
-  };
 
   return (
     <>

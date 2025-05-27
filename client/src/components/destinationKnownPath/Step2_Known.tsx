@@ -1,5 +1,7 @@
 import { StepProps } from "../../types/types";
 import venetian from "../../assets/images/venetian.png";
+import { containsBadWords } from "../../utils/containsBadWords";
+import BadWordsAlert from "../BadWordsAlert";
 
 function Step2({
   currentStep,
@@ -8,6 +10,8 @@ function Step2({
   setUserResponses,
   questionPromptsKnown,
   setQuestionPromptsKnown,
+  showBadWordsAlert,
+  setShowBadWordsAlert,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
@@ -15,6 +19,17 @@ function Step2({
       event.target.value;
     setUserResponses(tempObj);
   };
+
+  function handleClick() {
+    if (containsBadWords(userResponses.response2)) {
+      setShowBadWordsAlert(true);
+      setTimeout(() => {
+        setShowBadWordsAlert(false);
+      }, 3000);
+    } else {
+      setCurrentStep(3);
+    }
+  }
 
   return (
     <>
@@ -40,13 +55,16 @@ function Step2({
             >
               Go back
             </button>
-            <button
-              type="button"
-              className="next"
-              onClick={() => setCurrentStep(3)}
-            >
-              Next step
-            </button>
+            {!showBadWordsAlert && (
+              <button
+                type="button"
+                className="next"
+                onClick={() => handleClick()}
+              >
+                Next step
+              </button>
+            )}
+            {showBadWordsAlert && <BadWordsAlert />}
           </div>
         </form>
       </div>

@@ -1,5 +1,7 @@
 import { StepProps } from "../../types/types";
 import chicago from "../../assets/images/chicago.png";
+import { containsBadWords } from "../../utils/containsBadWords";
+import BadWordsAlert from "../BadWordsAlert";
 
 function Step6({
   currentStep,
@@ -8,6 +10,8 @@ function Step6({
   setUserResponses,
   questionPromptsUnknown,
   setQuestionPromptsUnknown,
+  showBadWordsAlert,
+  setShowBadWordsAlert,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
@@ -15,6 +19,17 @@ function Step6({
       event.target.value;
     setUserResponses(tempObj);
   };
+
+  function handleClick() {
+    if (containsBadWords(userResponses.response6)) {
+      setShowBadWordsAlert(true);
+      setTimeout(() => {
+        setShowBadWordsAlert(false);
+      }, 3000);
+    } else {
+      setCurrentStep(7);
+    }
+  }
 
   return (
     <>
@@ -40,13 +55,16 @@ function Step6({
             >
               Go back
             </button>
-            <button
-              type="button"
-              className="next"
-              onClick={() => setCurrentStep(7)}
-            >
-              Next step
-            </button>
+            {!showBadWordsAlert && (
+              <button
+                type="button"
+                className="next"
+                onClick={() => handleClick()}
+              >
+                Next step
+              </button>
+            )}
+            {showBadWordsAlert && <BadWordsAlert />}
           </div>
         </form>
       </div>

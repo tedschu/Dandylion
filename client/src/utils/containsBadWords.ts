@@ -39,6 +39,8 @@ const badWords = [
   "felching",
   "fuck",
   "fucker",
+  "fucking",
+  "fuckstick",
   "f u c k",
   "fudgepacker",
   "fudge packer",
@@ -87,4 +89,9 @@ const badWords = [
   "wtf",
 ];
 
-export default badWords;
+export const containsBadWords = (text: string) => {
+  return badWords.some((word) => {
+    const regex = new RegExp(`\\b${word}\\b`, "i");
+    return regex.test(text);
+  });
+};

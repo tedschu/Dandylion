@@ -19,7 +19,6 @@ import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 import moon from "../assets/moon.png";
-import badWords from "../utils/badWords";
 import { useEffect } from "react";
 
 type DestinationUnknownProps = {
@@ -35,6 +34,8 @@ type DestinationUnknownProps = {
   setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
   userInfo: UserInfo;
   setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
+  showBadWordsAlert: boolean;
+  setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function DestinationUnknown({
@@ -48,6 +49,8 @@ function DestinationUnknown({
   setApiResponse,
   userInfo,
   setUserInfo,
+  showBadWordsAlert,
+  setShowBadWordsAlert,
 }: DestinationUnknownProps) {
   const steps = [
     Step1,
@@ -87,8 +90,6 @@ function DestinationUnknown({
   };
 
   const moonShift = moonPosition[currentStep as keyof typeof moonPosition];
-
-  console.log(userResponses, currentStep);
 
   return (
     <>
@@ -138,6 +139,8 @@ function DestinationUnknown({
                           : undefined
                       }
                       setUserInfo={setUserInfo}
+                      showBadWordsAlert={showBadWordsAlert}
+                      setShowBadWordsAlert={setShowBadWordsAlert}
                     />
                   </motion.div>
                 </AnimatePresence>

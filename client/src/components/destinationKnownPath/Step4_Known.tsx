@@ -1,6 +1,8 @@
 import { StepProps } from "../../types/types";
 import lion from "../../assets/images/lion.png";
 import { useState, useEffect } from "react";
+import { containsBadWords } from "../../utils/containsBadWords";
+import BadWordsAlert from "../BadWordsAlert";
 
 function Step4({
   currentStep,
@@ -9,6 +11,8 @@ function Step4({
   setUserResponses,
   questionPromptsKnown,
   setQuestionPromptsKnown,
+  showBadWordsAlert,
+  setShowBadWordsAlert,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
@@ -16,6 +20,17 @@ function Step4({
       event.target.value;
     setUserResponses(tempObj);
   };
+
+  function handleClick() {
+    if (containsBadWords(userResponses.response4)) {
+      setShowBadWordsAlert(true);
+      setTimeout(() => {
+        setShowBadWordsAlert(false);
+      }, 3000);
+    } else {
+      setCurrentStep(5);
+    }
+  }
 
   return (
     <>
@@ -41,13 +56,16 @@ function Step4({
             >
               Go back
             </button>
-            <button
-              type="button"
-              className="next"
-              onClick={() => setCurrentStep(5)}
-            >
-              Next step
-            </button>
+            {!showBadWordsAlert && (
+              <button
+                type="button"
+                className="next"
+                onClick={() => handleClick()}
+              >
+                Next step
+              </button>
+            )}
+            {showBadWordsAlert && <BadWordsAlert />}
           </div>
         </form>
       </div>

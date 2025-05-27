@@ -32,6 +32,8 @@ type DestinationKnownProps = {
   setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
   userInfo: UserInfo;
   setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
+  showBadWordsAlert: boolean;
+  setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function DestinationKnown({
@@ -45,6 +47,8 @@ function DestinationKnown({
   setApiResponse,
   userInfo,
   setUserInfo,
+  showBadWordsAlert,
+  setShowBadWordsAlert,
 }: DestinationKnownProps) {
   const steps = [Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8];
 
@@ -120,6 +124,8 @@ function DestinationKnown({
                           : undefined
                       }
                       setUserInfo={setUserInfo}
+                      showBadWordsAlert={showBadWordsAlert}
+                      setShowBadWordsAlert={setShowBadWordsAlert}
                     />
                   </motion.div>
                 </AnimatePresence>

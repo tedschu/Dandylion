@@ -3,6 +3,8 @@ import { motion } from "motion/react";
 import beach from "../../assets/images/beach.png";
 import bee from "../../assets/bee.png";
 import { useState } from "react";
+import { containsBadWords } from "../../utils/containsBadWords";
+import BadWordsAlert from "../BadWordsAlert";
 
 function Step1({
   currentStep,
@@ -11,6 +13,8 @@ function Step1({
   setUserResponses,
   questionPromptsKnown,
   setQuestionPromptsKnown,
+  showBadWordsAlert,
+  setShowBadWordsAlert,
 }: StepProps) {
   const [showTipBox, setShowTipBox] = useState(true);
 
@@ -20,6 +24,17 @@ function Step1({
       event.target.value;
     setUserResponses(tempObj);
   };
+
+  function handleClick() {
+    if (containsBadWords(userResponses.response1)) {
+      setShowBadWordsAlert(true);
+      setTimeout(() => {
+        setShowBadWordsAlert(false);
+      }, 3000);
+    } else {
+      setCurrentStep(2);
+    }
+  }
 
   return (
     <>
@@ -38,13 +53,16 @@ function Step1({
             onChange={setFormValues}
           />
           <div className="buttonContainer">
-            <button
-              type="button"
-              className="next"
-              onClick={() => setCurrentStep(2)}
-            >
-              Next step
-            </button>
+            {!showBadWordsAlert && (
+              <button
+                type="button"
+                className="next"
+                onClick={() => handleClick()}
+              >
+                Next step
+              </button>
+            )}
+            {showBadWordsAlert && <BadWordsAlert />}
           </div>
         </form>
       </div>

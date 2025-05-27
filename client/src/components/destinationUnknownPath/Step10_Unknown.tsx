@@ -3,6 +3,8 @@ import { apiResponse, StepProps } from "../../types/types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import pyramid from "../../assets/images/pyramids.png";
+import { containsBadWords } from "../../utils/containsBadWords";
+import BadWordsAlert from "../BadWordsAlert";
 
 function Step10({
   currentStep,
@@ -15,6 +17,8 @@ function Step10({
   setApiResponse,
   userInfo,
   setUserInfo,
+  showBadWordsAlert,
+  setShowBadWordsAlert,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
@@ -26,7 +30,14 @@ function Step10({
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate("/your-destination-plan");
+    if (containsBadWords(userResponses.response10 ?? "")) {
+      setShowBadWordsAlert(true);
+      setTimeout(() => {
+        setShowBadWordsAlert(false);
+      }, 3000);
+    } else {
+      navigate("/your-destination-plan");
+    }
   }
 
   console.log("Here is the userresponses state on Step10:", userResponses);
@@ -55,9 +66,16 @@ function Step10({
             >
               Go back
             </button>
-            <button type="button" className="next" onClick={handleClick}>
-              Show me the results!
-            </button>
+            {!showBadWordsAlert && (
+              <button
+                type="button"
+                className="next"
+                onClick={() => handleClick()}
+              >
+                Show me the results!
+              </button>
+            )}
+            {showBadWordsAlert && <BadWordsAlert />}
           </div>
         </form>
       </div>

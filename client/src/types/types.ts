@@ -17,6 +17,8 @@ export type StepProps = {
   setApiResponse?: React.Dispatch<React.SetStateAction<apiResponse>>;
   userInfo?: UserInfo;
   setUserInfo?: React.Dispatch<React.SetStateAction<UserInfo>>;
+  showBadWordsAlert: boolean;
+  setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type UserResponses = {

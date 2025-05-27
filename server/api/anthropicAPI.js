@@ -19,7 +19,7 @@ async function callAnthropicAPI(messages, system = "") {
   try {
     const response = await anthropic.messages.create({
       model: "claude-sonnet-4-20250514",
-      max_tokens: 8000,
+      max_tokens: 10000,
       temperature: 0.7,
       system: system,
       messages: messages,
@@ -111,12 +111,13 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
     "overview": "3-4 sentences explaining why this recommendation fits user preferences. In this overview, you can also expand on the destinations that you're recommending, if appropriate. So for example, if you recommend Bordeaux and Nice in France, in this overview you can talk about how the broader region ("south of France") fits with their preferences",
     "places_to_stay": "Specific accommodation suggestions that match user's budget and preferences. For example, if there is a particular resort that gets great reviews and falls within the user's budget, recommend that and note where the resort is. If the user has noted that they want to stay in a remote place, and for example, you find that AirBnb accommodations are popular, recommend that they check out home rentals and note specific locations that would be best based on their preferences. Provide the responses in this format: 
         [
-             {
-                   "place_to_stay": "first recommendation",
+              {
+                "name": "accommodation name. If it's not a specific hotel (ex. Airbnb), it's ok to be a bit more general (for example: 'AirBnb homes on the waterfront')",
+                "type": "hotel/airbnb/resort/etc",
+                "location": "specific area/neighborhood", 
+                "why_recommended": "brief explanation matching user preferences",
+                "price_range": "estimated nightly rate range"
               },
-             {
-                   "place_to_stay": "second recommendation",
-             },
              // If you have additional recommendations, keep this format.
        ]
 ",
@@ -126,16 +127,35 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
         "destination_name": "Attraction/activity name. These recommendations should be specific places, destinations, or things to do that fit with the user's preferences. For instance, if the user has specified wanting to see cultural experiences, make sure that you are focusing on things like historical sites, cultural events (e.g. Mardis Gras). Don't just focus on the most popular destinations or things to do, but reference reviews on the internet and recommendations that would be a best fit to the user's preferences.",
         "description": "2-3 sentence description of this activity and why it fits user preferences",
       },
-      // Include 5-7 more activity objects following this format
+      // Include 5-7 more activity objects following this format (6-8 in total)
+    ],
+    "restaurants": "Provide restaurant or dining recommendations based on the user's preferences and some of the best restaurants (by ratings, popularity) in the user's destination" [
+            {
+              "restaurant_name": "name of restaurant",
+              "restaurant_type": "type of cuisine: italian, american, french, etc.",
+              "description": "overview of the restaurant and why it is potentially a good fit for the user, based on their preferences."
+            },
+            // Include at least 2 more restaurants or dining options in this format
     ],
     "time_to_go": "Best months/seasons to visit based on user preferences",
     "length_of_stay": "Note the length of stay, based on the user input",
-    "estimated_cost": "Cost range (e.g., '$5,000 - $7,000 USD') with brief explanation. For instance, if the user is coming from Chicago and has to fly to Florence (if this is the recommended destination), you can look at average ticket prices. You can also look at hotels or places to stay that fit their preferences, and see what the cost per night is in the time of year that they want to travel",
+    "estimated_cost": "Cost range (e.g., '$5,000 - $7,000 USD') with brief explanation. For instance, if the user is coming from Chicago and has to fly to Florence (if this is the recommended destination), you can look at average ticket prices. If specific current prices aren't available, use representative ranges with appropriate caveats.",
     "helpful_tips": "Key insights for travel to this destination (language, currency, etc.). If the recommended trip is in the same country that the user is from, do not mention currency or language and stick to other tips like "don't forget comfortable shoes as it's very walkable," or something similar",    
-    "itinerary": "Provide a full suggested itinerary for the user based on their length of stay for this location, incorporating the attraction/activities noted in the things_to_do objects that you provided. Try to be specific about your recommendations - for example, for restaurants, avoid generalized recommendations like "try family-friendly restaurants nearby" and instead say something like "try restaurants such as [restaurant name], [restaurant name], or other family-friendly restaurants in the neighborhood". Ensure the text is in the following format: [
+    "itinerary": "Create a detailed day-by-day itinerary that includes:
+          - Specific timing suggestions (morning/afternoon/evening)
+          - Named restaurants, attractions, and activities from your 'things_to_do' recommendations
+          - Logical geographic flow to minimize travel time
+          - Specific restaurant recommendations from some of the best restaurants in the destination area
+          - Transportation suggestions between activities when relevant
+          - Alternative options for weather-dependent activities
+          - Realistic pacing with appropriate time allocations
+          - ensure restaurant recommendations align with any dietary preferences mentioned
+          - Detailed "plan" that is a minimum of 100-150 words
+  Ensure the text is in the following format: [
     {
           "day_num": "day number (for example, 1 for the first day)",
-          "plan": "suggestions for the first day",
+          "summary": "Provide a brief summary of the day's destinations",
+          "plan": "Detailed recommendations for activities and dining throughout the day",
    },
          // Include additional days in this format
     ]",
@@ -144,6 +164,9 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
     // Same structure as above for an alternative recommendation
   }
 }
+
+IMPORTANT: For the itinerary, be highly specific. Instead of 'visit museums in the morning,' say 'Morning: Visit the Metropolitan Museum of Art (allow 3 hours), focusing on the Egyptian wing which matches your interest in ancient cultures.' Always include specific restaurant names, exact attraction names, and realistic timing.
+
 
 JSON FORMATTING REQUIREMENTS:
 1. All string values must be on a single line with no actual line breaks

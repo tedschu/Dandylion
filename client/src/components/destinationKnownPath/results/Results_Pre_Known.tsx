@@ -23,7 +23,7 @@ function Results_Pre_Unknown({
       <div className="resultContentContainer">
         <h1>{apiResponse?.destination.location}</h1>
         <h2>{apiResponse?.destination.overview}</h2>
-        <img src={destinationImage} alt="" className="locationImage" />
+        {/* <img src={destinationImage} alt="" className="locationImage" /> */}
         <p>
           <span style={{ fontWeight: "bold" }}>Where to stay:</span>{" "}
           {apiResponse?.destination.places_to_stay.map((place) => {

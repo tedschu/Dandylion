@@ -293,14 +293,15 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 85%;
   max-width: 750px;
   background-color: var(--back-cream);
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
   z-index: 2;
   border: 5px solid var(--brand-yellow);
   margin: 40px 0 20px 0;
+  box-sizing: border-box;
 }
 
 .locationImage {

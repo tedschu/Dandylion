@@ -52,11 +52,11 @@ function Results_Full_Unknown({
           return (
             <>
               {/* TODO: NEED TO REVISE THE STRUCTURE OF THE ITINERARY OBJECT, OR FIGURE OUT HOW TO DISPLAY THE DATA IN DAY */}
-              <li key={index}>
-                <span
-                  style={{ fontWeight: "bold" }}
-                >{`Day ${day.day_num}`}</span>
-                : {day.plan}
+              <h2
+                style={{ alignSelf: "flex-start" }}
+              >{`Day ${day.day_num}: summary`}</h2>
+              <li style={{ paddingLeft: "15px" }} key={index}>
+                {day.plan}
               </li>
             </>
           );

@@ -101,6 +101,28 @@ function ResultsDestinationKnown({
       const textData = await response.json();
       console.log("Here is textData from Antrhopic call:", textData);
 
+      // Progressive loading: first updates apiResponse and hasResponse with Anthropic (text) response, and then calls for image in background
+      // I'm doing this because waiting for all calls to load could take over a minute
+      if (textData) {
+        try {
+          if (textData.destination) {
+            setApiResponse(textData);
+            setHasResponse(true);
+          } else {
+            console.log("Invalid response structure", textData);
+            throw new Error("invalid recommendation data structure from API");
+          }
+        } catch (error) {
+          console.error("error processing API response:", error);
+          throw new Error("Failing to process recommenadtion data");
+        } finally {
+          setIsAnthropicLoading(false);
+        }
+      } else {
+        setIsAnthropicLoading(false);
+        throw new Error("Empty response from API");
+      }
+
       // Calls OpenAI API, passing location and overview info from Anthropic response, and user's first name
       // Returns a postcard-style image for the location
       const images = await fetch("/api/gptAPI/image", {
@@ -120,17 +142,19 @@ function ResultsDestinationKnown({
 
       console.log("HEre is imgData:", imgData);
 
-      if (imgData) {
-        const copy = { ...textData };
-        if (copy.destination && copy.destination.photos) {
-          copy.destination.photos.push("eventual_s3_URL");
-        }
-        if (setApiResponse) {
-          setApiResponse(copy as apiResponse);
-          setHasResponse(true);
-          setIsAnthropicLoading(false);
-        }
-      }
+      // TODO: Update state with S3 URL once the GPT response comes in *********************
+
+      // if (imgData) {
+      //   const copy = { ...textData };
+      //   if (copy.destination && copy.destination.photos) {
+      //     copy.destination.photos.push("eventual_s3_URL");
+      //   }
+      //   if (setApiResponse) {
+      //     setApiResponse(copy as apiResponse);
+      //     setHasResponse(true);
+      //     setIsAnthropicLoading(false);
+      //   }
+      // }
     } catch (error) {
       console.error(error);
     }
@@ -149,42 +173,6 @@ function ResultsDestinationKnown({
     } else {
       setIsAnthropicLoading(false);
     }
-  };
-
-  // Calls for second_destination's image once the first image and content has loaded
-  useEffect(() => {
-    if (hasResponse && apiResponse) {
-      getSecondImage();
-    }
-  }, [hasResponse]);
-
-  // Function to call OpenAI API to get second_Destination image
-  const getSecondImage = async () => {
-    try {
-      console.log("Getting the second image...");
-      const images = await fetch("/api/gptAPI/image_second", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          location: apiResponse?.second_destination.location,
-          overview: apiResponse?.second_destination.overview,
-        }),
-      });
-
-      const imgData = await images.json();
-
-      if (imgData) {
-        const copy = { ...apiResponse };
-        if (copy.second_destination && copy.second_destination.photos) {
-          copy.second_destination.photos.push("eventual_s3_URL");
-        }
-        if (setApiResponse) {
-          setApiResponse(copy as apiResponse);
-        }
-      }
-    } catch (error) {}
   };
 
   return (

@@ -14,7 +14,7 @@ export type StepProps = {
     React.SetStateAction<QuestionPrompts>
   >;
   apiResponse?: apiResponse;
-  setApiResponse?: React.Dispatch<React.SetStateAction<apiResponse>>;
+  setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
   userInfo?: UserInfo;
   setUserInfo?: React.Dispatch<React.SetStateAction<UserInfo>>;
   showBadWordsAlert: boolean;

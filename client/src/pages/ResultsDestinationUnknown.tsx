@@ -9,6 +9,7 @@ import Results_Full_Unknown from "../components/destinationUnknownPath/results/R
 import moon from "../assets/moon.png";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
+import { text } from "motion/react-client";
 
 function ResultsDestinationUnknown({
   currentStep,
@@ -107,6 +108,28 @@ function ResultsDestinationUnknown({
       const textData = await response.json();
       console.log("Here is textData from Antrhopic call:", textData);
 
+      // Progressive loading: first updates apiResponse and hasResponse with Anthropic (text) response, and then calls for image in background
+      // I'm doing this because waiting for all calls to load could take over a minute
+      if (textData) {
+        try {
+          if (textData.destination && textData.second_destination) {
+            setApiResponse(textData);
+            setHasResponse(true);
+          } else {
+            console.log("Invalid response structure", textData);
+            throw new Error("invalid recommendation data structure from API");
+          }
+        } catch (error) {
+          console.error("error processing API response:", error);
+          throw new Error("Failing to process recommenadtion data");
+        } finally {
+          setIsAnthropicLoading(false);
+        }
+      } else {
+        setIsAnthropicLoading(false);
+        throw new Error("Empty response from API");
+      }
+
       // Calls OpenAI API, passing location and overview info from Anthropic response, and user's first name
       // Returns a postcard-style image for the location
       const images = await fetch("/api/gptAPI/image", {
@@ -126,17 +149,18 @@ function ResultsDestinationUnknown({
 
       console.log("HEre is imgData:", imgData);
 
-      if (imgData) {
-        const copy = { ...textData };
-        if (copy.destination && copy.destination.photos) {
-          copy.destination.photos.push("eventual_s3_URL");
-        }
-        if (setApiResponse) {
-          setApiResponse(copy as apiResponse);
-          setHasResponse(true);
-          setIsAnthropicLoading(false);
-        }
-      }
+      // TODO: Update state with S3 URL once the GPT response comes in *********************
+
+      // if (imgData) {
+      //   const copy = { ...textData };
+      //   if (copy.destination && copy.destination.photos) {
+      //     copy.destination.photos.push("eventual_s3_URL");
+      //   }
+      //   if (setApiResponse) {
+      //     setApiResponse(copy as apiResponse);
+
+      //   }
+      // }
     } catch (error) {
       console.error(error);
     }
@@ -180,6 +204,7 @@ function ResultsDestinationUnknown({
       });
 
       const imgData = await images.json();
+      // TODO: Update state with S3 URL once the GPT response comes in *********************
 
       if (imgData) {
         const copy = { ...apiResponse };

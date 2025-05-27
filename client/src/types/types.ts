@@ -58,10 +58,17 @@ export type Attraction = {
 };
 
 export type PlaceToStay = {
-  place_to_stay?: string;
   name?: string;
   why_recommended?: string;
   price_range?: string;
+  location?: string;
+  type?: string;
+};
+
+export type Restaurants = {
+  description: string;
+  restaurant_name: string;
+  restaurant_type: string;
 };
 
 export type Destination = {
@@ -74,6 +81,7 @@ export type Destination = {
   estimated_cost: string;
   helpful_tips: string;
   itinerary: [];
+  restaurants: Restaurants[];
 };
 
 export type apiResponse = {

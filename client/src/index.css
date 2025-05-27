@@ -297,11 +297,54 @@ button {
   max-width: 750px;
   background-color: var(--back-cream);
   border-radius: 10px;
-  padding: 15px;
   z-index: 2;
   border: 5px solid var(--brand-yellow);
   margin: 40px 0 20px 0;
   box-sizing: border-box;
+}
+
+.resultContentContainer > h1 {
+  margin: 10px;
+  font-family: "Pacifico";
+  font-size: 35px;
+}
+
+.resultsFullContentContainer {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.resultPreviewText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+.resultPreviewText > h2 {
+  color: var(--dark-teal);
+}
+
+.resultsUpgradeContentContainer {
+  background-color: var(--brand-yellow);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0 0 0;
+  padding: 0 0 15px 0;
+}
+
+.resultsUpgradeContentContainer * {
+  color: var(--brand-blue);
+}
+
+.resultsUpgradeContentContainer > h2 {
+  font-size: 20px;
 }
 
 .locationImage {

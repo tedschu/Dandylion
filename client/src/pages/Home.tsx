@@ -1,7 +1,7 @@
 import { StepProps } from "../types/types";
 import { useNavigate } from "react-router-dom";
 import beeLogo from "../assets/bee.png";
-import kyoto from "../assets/images/destinations/kyoto.png";
+import prague from "../assets/prague_homepage.png";
 import example_result from "../assets/recommendation-example_cropped.png";
 import { useState } from "react";
 
@@ -146,20 +146,85 @@ function Home({
                 />
               </svg>
             </div>
+            <h3 style={{ color: "var(--action-coral)", fontSize: "26px" }}>
+              Maybe you'll go to...
+            </h3>
             <div className="homeBottomExampleContainer">
-              <img src={example_result} alt="" style={{ width: "500px" }} />
-              <div className="homeBottomExampleText">
-                <h3>All of this is made for you:</h3>
-                <li>
-                  Recommendations on destinations to visit based entirely on
-                  your preferences
-                </li>
-                <li>The best places to stay and eat that fit your lifestyle</li>
-                <li>Detailed itineraries for the length of your trip</li>
-                <li>Advice on local customs and tips on traveling</li>
-                <li>And (of course) much more!</li>
+              <div className="homeBottomExampleContentContainer">
+                <h2
+                  style={{
+                    fontFamily: "Pacifico",
+                    fontSize: "30px",
+                    margin: "15px 0",
+                  }}
+                >
+                  Prague, Czech Republic
+                </h2>
+                <p style={{ textAlign: "left" }}>
+                  Prague is absolutely perfect for you two! This enchanting city
+                  has all the charm of Amsterdam with its winding cobblestone
+                  streets, stunning bridges spanning the Vitava River, and
+                  incredible Gothic and Baroque architecture. October is ideal
+                  timing - you'll catch beautiful autumn colors while avoiding
+                  summer crowds. The city is incredibly walkable and perfect for
+                  getting wonderfully lost in its maze-like Old Town, plus Czech
+                  cuisine has fantastic vegan options and the cost of living
+                  makes your $1,000 budget go far!
+                </p>
+                <img
+                  src={prague}
+                  alt=""
+                  style={{ borderRadius: "10px", width: "90%" }}
+                />
+                <div
+                  style={{
+                    width: "80%",
+                    height: "2px",
+                    backgroundColor: "var(--action-coral)",
+                    margin: "35px 0 10px 0",
+                  }}
+                />
+
+                <h3
+                  style={{
+                    margin: "20px 0 10px 0",
+                    fontSize: "22px",
+                    color: "var(--brand-blue)",
+                  }}
+                >
+                  Your travel plan will include:
+                </h3>
+                <div
+                  style={{
+                    backgroundColor: "rgba(255, 139, 102, 0.2)",
+                    width: "75%",
+                    borderRadius: "10px",
+                    padding: "20px",
+                  }}
+                >
+                  <li>Recommendations on destinations and things to see</li>
+                  <li>
+                    The best places to stay and eat that fit your lifestyle
+                  </li>
+                  <li>Detailed itineraries for the length of your trip</li>
+                  <li>Advice on local customs and tips on traveling</li>
+                  <li>And (of course) much more!</li>
+                </div>
+                <img
+                  src={beeLogo}
+                  style={{ width: "50px", margin: "20px 0 5px 0" }}
+                  alt=""
+                />
               </div>
             </div>
+
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="next"
+              style={{ margin: "20px 0" }}
+            >
+              Ready to get started?
+            </button>
           </div>
         </div>
       </div>

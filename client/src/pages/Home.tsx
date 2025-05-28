@@ -125,9 +125,40 @@ function Home({
                   tailored to the trip you want.
                 </p>
               </div>
+              {/* SVG dotted line */}
+              <svg
+                style={{
+                  position: "absolute",
+                  top: "150px", // Adjust based on your layout
+                  left: "65%",
+                  width: "300px",
+                  height: "250px",
+                  pointerEvents: "none",
+                  zIndex: 1,
+                }}
+              >
+                <path
+                  d="M 240 20 Q 270 60 250 90 Q 170 130 180 170 Q 150 210 120 230"
+                  stroke="var(--action-coral)"
+                  strokeWidth="5"
+                  strokeDasharray="8,6"
+                  fill="none"
+                />
+              </svg>
             </div>
             <div className="homeBottomExampleContainer">
               <img src={example_result} alt="" style={{ width: "500px" }} />
+              <div className="homeBottomExampleText">
+                <h3>All of this is made for you:</h3>
+                <li>
+                  Recommendations on destinations to visit based entirely on
+                  your preferences
+                </li>
+                <li>The best places to stay and eat that fit your lifestyle</li>
+                <li>Detailed itineraries for the length of your trip</li>
+                <li>Advice on local customs and tips on traveling</li>
+                <li>And (of course) much more!</li>
+              </div>
             </div>
           </div>
         </div>

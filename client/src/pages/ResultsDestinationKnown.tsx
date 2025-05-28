@@ -16,6 +16,8 @@ function ResultsDestinationKnown({
   setApiResponse,
   questionPromptsKnown,
   userInfo,
+  showAPIErrorMessage,
+  setShowAPIErrorMessage,
 }: StepProps) {
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
@@ -172,6 +174,7 @@ function ResultsDestinationKnown({
       apiRetriesRef.current += 1;
     } else {
       setIsAnthropicLoading(false);
+      setShowAPIErrorMessage(true);
     }
   };
 
@@ -188,7 +191,12 @@ function ResultsDestinationKnown({
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS />
         {/* Loading state component, including progress bar and image carousel */}
-        {hasResponse === false && <ResultsLoadingState />}
+        {hasResponse === false && (
+          <ResultsLoadingState
+            showAPIErrorMessage={showAPIErrorMessage}
+            setShowAPIErrorMessage={setShowAPIErrorMessage}
+          />
+        )}
 
         {/* Partial (unpaid) results content */}
         {hasResponse && apiResponse && !showFullResults && (

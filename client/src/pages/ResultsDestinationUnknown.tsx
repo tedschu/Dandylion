@@ -20,6 +20,8 @@ function ResultsDestinationUnknown({
   setApiResponse,
   questionPromptsUnknown,
   userInfo,
+  showAPIErrorMessage,
+  setShowAPIErrorMessage,
 }: StepProps) {
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
@@ -27,7 +29,6 @@ function ResultsDestinationUnknown({
 
   const [showFullResults, setShowFullResults] = useState(false);
   const [isAnthropicLoading, setIsAnthropicLoading] = useState(false);
-  const [showAPIErrorMessage, setShowAPIErrorMessage] = useState(false);
 
   // useRef is appropriate for this since it doesn't require a re-render
   // and is just counting api calls.

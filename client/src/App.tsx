@@ -74,6 +74,7 @@ function App() {
   const [apiResponse, setApiResponse] = useState<apiResponse>({});
   // Shows BadWordsAlert component in question paths if a user types a "bad word"
   const [showBadWordsAlert, setShowBadWordsAlert] = useState(false);
+  const [showAPIErrorMessage, setShowAPIErrorMessage] = useState(false);
 
   return (
     <>
@@ -151,6 +152,8 @@ function App() {
               setApiResponse={setApiResponse}
               userInfo={userInfo}
               questionPromptsUnknown={questionPromptsUnknown}
+              showAPIErrorMessage={showAPIErrorMessage}
+              setShowAPIErrorMessage={setShowAPIErrorMessage}
             />
           }
         />
@@ -166,6 +169,8 @@ function App() {
               setApiResponse={setApiResponse}
               userInfo={userInfo}
               questionPromptsKnown={questionPromptsKnown}
+              showAPIErrorMessage={showAPIErrorMessage}
+              setShowAPIErrorMessage={setShowAPIErrorMessage}
             />
           }
         />

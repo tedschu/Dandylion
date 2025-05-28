@@ -10,6 +10,7 @@ import newOrleans from "../assets/images/destinations/new_orleans.png";
 import olympic from "../assets/images/destinations/olympic_national_park.png";
 import thailand from "../assets/images/destinations/thailand.png";
 import { CircularProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 type ResultsLoadingStateProps = {
   showAPIErrorMessage: boolean;
@@ -42,6 +43,13 @@ function ResultsLoadingState({
 
     return () => clearInterval(interval);
   }, [images.length]);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/");
+    setShowAPIErrorMessage(false);
+  };
 
   return (
     <>
@@ -116,6 +124,9 @@ function ResultsLoadingState({
               Our systems are overloaded and we're currently unable to get your
               travel recommendations. Please try again soon.{" "}
             </p>
+            <button type="button" onClick={() => handleClick()}>
+              Home
+            </button>
           </>
         )}
       </div>

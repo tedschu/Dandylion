@@ -2,6 +2,7 @@ import { StepProps } from "../types/types";
 import { useNavigate } from "react-router-dom";
 import beeLogo from "../assets/bee.png";
 import kyoto from "../assets/images/destinations/kyoto.png";
+import example_result from "../assets/recommendation-example_cropped.png";
 import { useState } from "react";
 
 function Home({
@@ -102,7 +103,7 @@ function Home({
               </p>
               <p>
                 Whether you can’t decide on a destination, or know where you’re
-                going but need help figuring out what to do, dandylion will
+                going but need help figuring out the details, dandylion will
                 guide you. It's just a few simple steps:
               </p>
             </div>
@@ -120,23 +121,13 @@ function Home({
 
                 <h3>Explore your custom journey</h3>
                 <p>
-                  Get destinations tailored to you, with activities,
-                  accommodations, and detailed daily plans.
+                  Get destinations, detailed daily plans, and much more that is
+                  tailored to the trip you want.
                 </p>
               </div>
             </div>
             <div className="homeBottomExampleContainer">
-              <img src={kyoto} alt="" style={{ width: "300px" }} />
-              <p
-                style={{
-                  fontSize: "30px",
-                  width: "220px",
-                  padding: "15px",
-                  textAlign: "left",
-                }}
-              >
-                {userInfo?.firstName}, [Results page mockup]
-              </p>
+              <img src={example_result} alt="" style={{ width: "500px" }} />
             </div>
           </div>
         </div>

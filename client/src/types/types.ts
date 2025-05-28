@@ -80,11 +80,19 @@ export type Destination = {
   time_to_go: string;
   estimated_cost: string;
   helpful_tips: string;
-  itinerary: [];
+  itinerary: Itinerary[];
   restaurants: Restaurants[];
 };
 
 export type apiResponse = {
   destination: Destination;
   second_destination: Destination;
+};
+
+export type Itinerary = {
+  day_num: number;
+  summary: string;
+  morning: string;
+  afternoon: string;
+  evening: string;
 };

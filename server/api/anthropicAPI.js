@@ -155,7 +155,9 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
     {
           "day_num": "day number (for example, 1 for the first day)",
           "summary": "Provide a brief summary of the day's destinations",
-          "plan": "Detailed recommendations for activities and dining throughout the day",
+          "morning": "Detailed recommendations for activities and dining",
+          "afternoon": "Detailed recommendations for activities and dining",
+          "evening": "Detailed recommendations for activities and dining",
    },
          // Include additional days in this format
     ]",

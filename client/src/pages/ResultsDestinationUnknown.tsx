@@ -27,6 +27,7 @@ function ResultsDestinationUnknown({
 
   const [showFullResults, setShowFullResults] = useState(false);
   const [isAnthropicLoading, setIsAnthropicLoading] = useState(false);
+  const [showAPIErrorMessage, setShowAPIErrorMessage] = useState(false);
 
   // useRef is appropriate for this since it doesn't require a re-render
   // and is just counting api calls.
@@ -95,7 +96,7 @@ function ResultsDestinationUnknown({
 
         // Retries the Anthropic API every 3 seconds (for 3 tries) if there's a
         // 529 error, meaning the API is currently overloaded
-        if (response.status == 529) {
+        if (response.status == 529 || response.status == 500) {
           console.log("Error: Anthropic API is overloaded");
           setTimeout(retryAnthropicAPIOnError, 3000);
           return;
@@ -178,6 +179,7 @@ function ResultsDestinationUnknown({
       apiRetriesRef.current += 1;
     } else {
       setIsAnthropicLoading(false);
+      setShowAPIErrorMessage(true);
     }
   };
 
@@ -221,17 +223,17 @@ function ResultsDestinationUnknown({
   return (
     <>
       <div className="resultPageContainer">
-        <img
-          className="moon"
-          src={moon}
-          alt=""
-          style={{ top: "60px", right: "-40px" }}
-        />
+        <img className="moon scrollout" src={moon} alt="" />
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS />
         {/* Loading state component, including progress bar and image carousel */}
-        {hasResponse === false && <ResultsLoadingState />}
+        {hasResponse === false && (
+          <ResultsLoadingState
+            showAPIErrorMessage={showAPIErrorMessage}
+            setShowAPIErrorMessage={setShowAPIErrorMessage}
+          />
+        )}
 
         {/* Partial (unpaid) results content */}
         {hasResponse && apiResponse && !showFullResults && (

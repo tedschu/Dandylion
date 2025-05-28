@@ -227,8 +227,24 @@ button {
 
 .moon {
   position: fixed;
+  top: 60px;
+  right: -40px;
   width: 110px;
   transition: right 1s ease-in-out;
+}
+@keyframes moonScrollout {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(80px);
+  }
+}
+
+.scrollout {
+  animation-name: moonScrollout;
+  animation-timeline: scroll(block nearest);
+  animation-fill-mode: forwards;
 }
 
 /* Alert on step1 (both paths) to encourage detailed responses */
@@ -301,7 +317,7 @@ button {
   border: 5px solid var(--brand-yellow);
   margin: 40px 0 20px 0;
   box-sizing: border-box;
-  padding: 0 0 10px 0;
+  /* padding: 0 0 10px 0; */
 }
 
 .resultContentContainer h1 {
@@ -312,7 +328,7 @@ button {
 
 .resultContentContainer h2 {
   font-size: 20px;
-  margin: 10px 0 5px 0;
+  margin: 15px 0 5px 0;
 }
 
 .resultContentContainer li {
@@ -341,14 +357,23 @@ button {
 }
 
 .resultsInfoBox {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: var(--back-light-sage);
   border-radius: 10px;
-  padding: 5px 15px;
-  margin: 10px 0;
+  padding: 5px 15px 15px 15px;
+  margin: 15px 0;
+  text-align: left;
+}
+
+.resultsItineraryContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0 20px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.resultsItineraryContainer li {
+  padding-left: 15px;
 }
 
 .resultPreviewText {

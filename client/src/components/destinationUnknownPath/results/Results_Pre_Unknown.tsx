@@ -78,7 +78,7 @@ function Results_Pre_Unknown({
             Further customize, save and share your itinerary based on your
             preferences
           </li>
-          <h3>Get all of this and more for $7!</h3>
+          <h3>Get all of this and more for $9!</h3>
 
           {/*  TEMPORARY BUTTON TO TOGGLE BETWEEN INITIAL (UNPAID) AND FULL (PAID) RESULTS */}
           {hasResponse && (

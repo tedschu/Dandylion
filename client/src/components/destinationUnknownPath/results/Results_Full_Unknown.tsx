@@ -16,22 +16,24 @@ function Results_Full_Unknown({
       <div className="resultContentContainer">
         <div className="resultsFullContentContainer">
           <h1>{apiResponse?.destination.location}</h1>
-          <h2>{apiResponse?.destination.overview}</h2>
-          <img src={destinationImage} alt="" className="locationImage" />
-          <p>
-            <span style={{ fontWeight: "bold" }}>Where to stay:</span>{" "}
-            {apiResponse?.destination.places_to_stay.map((place, index) => {
-              return (
-                <>
-                  <li key={index}>
-                    <span style={{ fontWeight: "bold" }}>{place.name}</span> in{" "}
-                    {place.location}: {place.why_recommended}.{" "}
-                    {place.price_range}.
-                  </li>
-                </>
-              );
-            })}
+          <p className="resultsFullDescription">
+            {apiResponse?.destination.overview}
           </p>
+          <img src={destinationImage} alt="" className="locationImage" />
+          <h2>Where to stay:</h2>
+
+          {apiResponse?.destination.places_to_stay.map((place, index) => {
+            return (
+              <>
+                <li key={index}>
+                  <span style={{ fontWeight: "bold" }}>{place.name}</span> in{" "}
+                  {place.location}: {place.why_recommended}. {place.price_range}
+                  .
+                </li>
+              </>
+            );
+          })}
+
           <h2>Here are some things to do while you're there:</h2>
           {apiResponse?.destination.things_to_do.map((destination, index) => {
             return (
@@ -45,22 +47,28 @@ function Results_Full_Unknown({
               </>
             );
           })}
-          <h2>Some important things to plan for:</h2>
+          <div className="resultsInfoBox">
+            <h2>Some important things to plan for:</h2>
 
-          <li>Best time to go: {apiResponse?.destination.time_to_go}</li>
-          <li>
-            Estimated cost for the trip:{" "}
-            {apiResponse?.destination.estimated_cost}
-          </li>
-          <li>Other tips: {apiResponse?.destination.helpful_tips}</li>
-          <h2>Here's a full suggested itinerary made for you:</h2>
+            <li>Best time to go: {apiResponse?.destination.time_to_go}</li>
+            <li>
+              Estimated cost for the trip:{" "}
+              {apiResponse?.destination.estimated_cost}
+            </li>
+            <li>Other tips: {apiResponse?.destination.helpful_tips}</li>
+          </div>
+          <h2>Here's an itinerary made for you:</h2>
           {apiResponse.destination.itinerary.map((day, index) => {
             return (
               <>
                 {/* TODO: NEED TO REVISE THE STRUCTURE OF THE ITINERARY OBJECT, OR FIGURE OUT HOW TO DISPLAY THE DATA IN DAY */}
-                <h2
-                  style={{ alignSelf: "flex-start" }}
-                >{`Day ${day.day_num}: ${day.summary}`}</h2>
+                <h3
+                  style={{
+                    alignSelf: "flex-start",
+                    margin: "10px 0 5px 0",
+                    color: "var(--teal)",
+                  }}
+                >{`Day ${day.day_num}: ${day.summary}`}</h3>
                 <li style={{ paddingLeft: "15px" }} key={index}>
                   {day.plan}
                 </li>

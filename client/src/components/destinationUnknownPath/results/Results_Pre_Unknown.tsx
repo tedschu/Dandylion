@@ -31,9 +31,7 @@ function Results_Pre_Unknown({
           {/* Removed image load for pre results to reduce time-to-load */}
           {/* <img src={destinationImage} alt="" className="locationImage" /> */}
 
-          <h2>
-            Here are a few things we'd recommend for you while you're there:
-          </h2>
+          <h2>Things to do:</h2>
           <li>
             <span style={{ fontWeight: "bold" }}>
               {apiResponse?.destination.things_to_do[0].destination_name}

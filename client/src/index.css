@@ -301,12 +301,30 @@ button {
   border: 5px solid var(--brand-yellow);
   margin: 40px 0 20px 0;
   box-sizing: border-box;
+  padding: 0 0 10px 0;
 }
 
-.resultContentContainer > h1 {
+.resultContentContainer h1 {
   margin: 10px;
   font-family: "Pacifico";
-  font-size: 35px;
+  font-size: 40px;
+}
+
+.resultContentContainer h2 {
+  font-size: 20px;
+  margin: 10px 0 5px 0;
+}
+
+.resultContentContainer li {
+  list-style: none;
+  margin: 3px 0;
+}
+
+.resultContentContainer li:before {
+  content: "•";
+  color: var(--action-coral);
+  display: inline-block;
+  margin: 0 10px 0 0;
 }
 
 .resultsFullContentContainer {
@@ -317,6 +335,22 @@ button {
   align-items: center;
 }
 
+.resultsFullDescription {
+  font-size: 16px;
+  margin: 0;
+}
+
+.resultsInfoBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--back-light-sage);
+  border-radius: 10px;
+  padding: 5px 15px;
+  margin: 10px 0;
+}
+
 .resultPreviewText {
   display: flex;
   flex-direction: column;
@@ -325,7 +359,7 @@ button {
   width: 90%;
 }
 .resultPreviewText > h2 {
-  color: var(--dark-teal);
+  /* color: var(--dark-teal); */
 }
 
 .resultsUpgradeContentContainer {
@@ -348,9 +382,9 @@ button {
 }
 
 .locationImage {
-  width: 60%;
-  min-width: 400px;
+  width: 95%;
   border-radius: 8px;
+  margin: 15px 0;
 }
 
 .header {
@@ -701,5 +735,9 @@ button {
 
   .questionImageGridContainer h3 {
     text-align: center;
+  }
+
+  .locationImage {
+    width: 75%;
   }
 }

@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums (allowed values)
+enum PlanType {
+  DESTINATION_KNOWN
+  DESTINATION_UNKNOWN
+}
+
+enum PlanStatus {
+  COMPLETED
+  ERROR
+  DRAFT
+}
+
+
+//  DB models
+
+model User {
+  id Int @id @default(autoincrement())
+  first_name String
+  email String @unique
+  password_hash String
+  login_count Int @default(0)
+  last_login DateTime?
+  // Verify that I'll be using this:
+  email_verified Boolean @default(false) 
+  created_at DateTime @default(now())
+  plan Plan[]
+}
+
+model Plan {
+  plan_id Int @id @default(autoincrement())
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int
+  plan_type PlanType
+  status PlanStatus @default(DRAFT)
+  result_data Json?
+  is_paid Boolean @default(false)
+  order_id String?
+  created_at DateTime @default(now())
+  was_modified Boolean @default(false)
+}
+
+

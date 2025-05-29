@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
+    "@prisma/client": "^6.8.2",
     "body-parser": "^2.2.0",
     "concurrently": "^9.1.2",
     "cors": "^2.8.5",
@@ -17,5 +18,8 @@
   },
   "scripts": {
     "start:dev": "concurrently \"nodemon ./index.js\" \"cd .. && cd client && npm run dev\""
+  },
+  "devDependencies": {
+    "prisma": "^6.8.2"
   }
 }

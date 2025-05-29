@@ -62,7 +62,7 @@
 
   /* Neutral colors for backgrounds */
   --back-sky-blue: #b8d5ed;
-  --back-cream: #f9f5e7;
+  --back-cream: rgb(249, 245, 231);
   --back-light-sage: #d2dbbc;
 
   /* States */
@@ -509,9 +509,8 @@ button {
 }
 
 .homeHeroDestinationBox {
-  position: absolute;
   width: 70%;
-  bottom: -110px;
+  bottom: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

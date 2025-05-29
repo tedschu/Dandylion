@@ -92,21 +92,21 @@ function Home({
                 <h3>Make sure you've added your name and email.</h3>
               </div>
             )}
-          </div>
-          <div className="homeHeroDestinationBox">
-            <div
-              style={{
-                backgroundColor: "rgb(249, 245, 231, 0.8)",
-                // border: "6px solid var(--brand-yellow)",
-                borderRadius: "30px",
-                padding: "10px",
-              }}
-              className="testing"
-            >
-              <h2 style={{ fontSize: "30px" }}>
-                Skip the endless research. Get a personalized day-by-day
-                itinerary in minutes.
-              </h2>
+            <div className="homeHeroDestinationBox">
+              <div
+                style={{
+                  backgroundColor: "rgb(249, 245, 231, 0.4)",
+                  // border: "6px solid var(--brand-yellow)",
+                  borderRadius: "30px",
+                  padding: "10px",
+                }}
+                className="testing"
+              >
+                <h2 style={{ fontSize: "30px" }}>
+                  Skip the endless research. Get a personalized day-by-day
+                  itinerary in minutes.
+                </h2>
+              </div>
             </div>
           </div>
         </div>

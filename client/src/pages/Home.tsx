@@ -91,21 +91,23 @@ function Home({
             )}
           </div>
         </div>
+        <div className="divider"> t</div>
 
         {/* BOTTOM HALF / CONTENT SECTION */}
         <div className="homeBottomContainer">
           <div className="homeBottomContentContainer">
             <div className="homeBottomTextContainer">
-              <h2>Keep it simple.</h2>
+              <h2>
+                Skip the endless research. Get a personalized day-by-day
+                itinerary in minutes.
+              </h2>
               <p>
-                A world of possibilities also means a world of decisions.
-                Dandylion creates a curated plan that is built just for you.
+                Travel planning shouldn't feel overwhelming. Whether you're
+                stuck choosing a destination or know where you're going but need
+                help with the details, Dandylion creates a curated plan built
+                around your travel style.
               </p>
-              <p>
-                Whether you can’t decide on a destination, or know where you’re
-                going but need help figuring out the details, dandylion will
-                guide you. It's just a few simple steps:
-              </p>
+              <p>It's just a few simple steps:</p>
             </div>
             <div className="homeBottomBoxContainer">
               <div className="homeBottomBox">
@@ -130,7 +132,7 @@ function Home({
                 style={{
                   position: "absolute",
                   top: "150px", // Adjust based on your layout
-                  left: "65%",
+                  left: "70%",
                   width: "300px",
                   height: "250px",
                   pointerEvents: "none",
@@ -138,7 +140,7 @@ function Home({
                 }}
               >
                 <path
-                  d="M 240 20 Q 270 60 250 90 Q 170 130 180 170 Q 150 210 120 230"
+                  d="M 260 20 Q 270 60 250 90 Q 170 130 180 170 Q 150 210 120 230"
                   stroke="var(--action-coral)"
                   strokeWidth="5"
                   strokeDasharray="8,6"
@@ -160,7 +162,7 @@ function Home({
                 >
                   Prague, Czech Republic
                 </h2>
-                <p style={{ textAlign: "left" }}>
+                <p style={{ textAlign: "left", fontSize: "18px" }}>
                   Prague is absolutely perfect for you two! This enchanting city
                   has all the charm of Amsterdam with its winding cobblestone
                   streets, stunning bridges spanning the Vitava River, and

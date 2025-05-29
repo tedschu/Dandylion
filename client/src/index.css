@@ -469,7 +469,7 @@ button {
 }
 
 .homeHeroContainer {
-  width: 100%;
+  width: 98%;
   /* height: 600px; */
   background-image: url("./assets/images/background.jpg");
   background-size: cover;
@@ -478,6 +478,8 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 30px;
+  margin: 5px 0;
 }
 
 .homeHeroHeaderContainer {
@@ -500,7 +502,7 @@ button {
   align-items: center;
   width: 80%;
   margin-top: 60px;
-  min-height: 700px;
+  min-height: 500px;
 }
 
 .divider {

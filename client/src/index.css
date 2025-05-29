@@ -469,7 +469,7 @@ button {
 }
 
 .homeHeroContainer {
-  width: 98%;
+  width: 99%;
   /* height: 600px; */
   background-image: url("./assets/images/background.jpg");
   background-size: cover;
@@ -479,7 +479,10 @@ button {
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  margin: 5px 0;
+  margin: 5px;
+  border: 6px solid var(--brand-yellow);
+  box-sizing: border-box;
+  position: relative;
 }
 
 .homeHeroHeaderContainer {
@@ -501,8 +504,18 @@ button {
   justify-content: center;
   align-items: center;
   width: 80%;
-  margin-top: 60px;
-  min-height: 500px;
+  margin-top: 40px;
+  min-height: 600px;
+}
+
+.homeHeroDestinationBox {
+  position: absolute;
+  width: 70%;
+  bottom: -110px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .divider {
@@ -516,7 +529,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 99%;
   /* background: linear-gradient(
     to bottom,
     #0e1f46,
@@ -530,7 +543,9 @@ button {
     #54d1be,
     #dece14
   ); */
-  background-color: var(--brand-blue);
+  border: 6px solid var(--brand-yellow);
+  box-sizing: border-box;
+  border-radius: 30px;
 }
 .homeBottomContentContainer {
   width: 90%;
@@ -538,7 +553,6 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(245, 249, 251);
   /* background-color: var(--back-cream); */
 }
 

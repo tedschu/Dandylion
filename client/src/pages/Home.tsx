@@ -2,6 +2,9 @@ import { StepProps } from "../types/types";
 import { useNavigate } from "react-router-dom";
 import beeLogo from "../assets/bee.png";
 import prague from "../assets/prague_homepage.png";
+import kyoto from "../assets/images/destinations/kyoto.png";
+import paraguay from "../assets/images/destinations/paraguay.png";
+import mexico from "../assets/images/destinations/mexico.png";
 import example_result from "../assets/recommendation-example_cropped.png";
 import { useState } from "react";
 
@@ -90,8 +93,24 @@ function Home({
               </div>
             )}
           </div>
+          <div className="homeHeroDestinationBox">
+            <div
+              style={{
+                backgroundColor: "rgb(249, 245, 231, 0.8)",
+                // border: "6px solid var(--brand-yellow)",
+                borderRadius: "30px",
+                padding: "10px",
+              }}
+              className="testing"
+            >
+              <h2 style={{ fontSize: "30px" }}>
+                Skip the endless research. Get a personalized day-by-day
+                itinerary in minutes.
+              </h2>
+            </div>
+          </div>
         </div>
-        <div className="divider"> t</div>
+        {/* <div className="divider"> t</div>
 
         {/* BOTTOM HALF / CONTENT SECTION */}
         <div className="homeBottomContainer">
@@ -128,7 +147,7 @@ function Home({
                 </p>
               </div>
               {/* SVG dotted line */}
-              <svg
+              {/* <svg
                 style={{
                   position: "absolute",
                   top: "150px", // Adjust based on your layout
@@ -146,7 +165,7 @@ function Home({
                   strokeDasharray="8,6"
                   fill="none"
                 />
-              </svg>
+              </svg> */}
             </div>
             <h3 style={{ color: "var(--action-coral)", fontSize: "26px" }}>
               Maybe you'll go to...

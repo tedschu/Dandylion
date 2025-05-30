@@ -43,8 +43,8 @@ model User {
 }
 
 model Plan {
-  plan_id Int @id @default(autoincrement())
-  user User @relation(fields: [user_id], references: [id])
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id Int
   plan_type PlanType
   status PlanStatus @default(DRAFT)
@@ -53,6 +53,14 @@ model Plan {
   order_id String?
   created_at DateTime @default(now())
   was_modified Boolean @default(false)
+  userResponse UserResponse[]
+  // Note: Image S3 URL is stored in result_data Json object
 }
 
+model UserResponse {
+  id Int @id @default(autoincrement())
+  plan Plan @relation(fields: [plan_id], references: [id])
+  plan_id Int
+  user_question_response_data Json
+}
 

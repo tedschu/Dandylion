@@ -27,16 +27,16 @@ function Home({
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    if (
-      userInfo?.email !== "" &&
-      userInfo?.firstName !== "" &&
-      /@/.test(userInfo?.email ?? "")
-    ) {
-      navigate("/path");
-      setShowAlert(false);
-    } else setShowAlert(true);
-  };
+  // const handleClick = () => {
+  //   if (
+  //     userInfo?.email !== "" &&
+  //     userInfo?.firstName !== "" &&
+  //     /@/.test(userInfo?.email ?? "")
+  //   ) {
+  //     navigate("/path");
+  //     setShowAlert(false);
+  //   } else setShowAlert(true);
+  // };
 
   return (
     <>
@@ -68,7 +68,7 @@ function Home({
 
             <div className="buttonContainer">
               <div className="formContainer">
-                <input
+                {/* <input
                   type="text"
                   placeholder="First name"
                   value={userInfo?.firstName}
@@ -81,8 +81,8 @@ function Home({
                   value={userInfo?.email}
                   name="email"
                   onChange={setFormValues}
-                />
-                <button className="next" onClick={() => handleClick()}>
+                /> */}
+                <button className="next" onClick={() => navigate("/path")}>
                   Get started
                 </button>
               </div>
@@ -92,7 +92,7 @@ function Home({
                 <h3>Make sure you've added your name and email.</h3>
               </div>
             )}
-            <div className="homeHeroDestinationBox">
+            {/* <div className="homeHeroDestinationBox">
               <div
                 style={{
                   backgroundColor: "rgb(249, 245, 231, 0.4)",
@@ -107,7 +107,7 @@ function Home({
                   itinerary in minutes.
                 </h2>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* <div className="divider"> t</div>

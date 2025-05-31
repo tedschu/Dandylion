@@ -72,12 +72,16 @@ function Step10({
                 className="next"
                 onClick={() => handleClick()}
               >
-                Show me the results!
+                See my travel plan
               </button>
             )}
             {showBadWordsAlert && <BadWordsAlert />}
           </div>
         </form>
+        <h1>
+          TODO: BUILD A MODAL WINDOW TO LOGIN / REGISTER, AND THEN RUN API AND
+          NAV TO RESULTS PAGE
+        </h1>
       </div>
     </>
   );

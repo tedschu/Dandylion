@@ -39,6 +39,7 @@ export type UserResponses = {
 export type UserInfo = {
   firstName: string;
   email: string;
+  password?: string;
 };
 
 export type QuestionPrompts = {

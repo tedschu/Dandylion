@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import pyramid from "../../assets/images/pyramids.png";
 import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
+import Register from "../Register";
 
 function Step10({
   currentStep,
@@ -27,7 +28,13 @@ function Step10({
     setUserResponses(tempObj);
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const navigate = useNavigate();
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
   function handleClick() {
     if (containsBadWords(userResponses.response10 ?? "")) {
@@ -36,7 +43,8 @@ function Step10({
         setShowBadWordsAlert(false);
       }, 3000);
     } else {
-      navigate("/your-destination-plan");
+      // navigate("/your-destination-plan");
+      openModal();
     }
   }
 
@@ -78,10 +86,13 @@ function Step10({
             {showBadWordsAlert && <BadWordsAlert />}
           </div>
         </form>
-        <h1>
-          TODO: BUILD A MODAL WINDOW TO LOGIN / REGISTER, AND THEN RUN API AND
-          NAV TO RESULTS PAGE
-        </h1>
+        {isModalOpen && (
+          <Register
+            setIsModalOpen={setIsModalOpen}
+            userInfo={userInfo}
+            setUserInfo={setUserInfo}
+          />
+        )}
       </div>
     </>
   );

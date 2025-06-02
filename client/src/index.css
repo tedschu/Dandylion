@@ -135,6 +135,16 @@ button {
   background-color: var(--action-coral-hover);
 }
 
+.register {
+  height: 32px;
+  background-color: var(--action-coral);
+  color: white;
+}
+
+.register:hover {
+  background-color: var(--action-coral-hover);
+}
+
 .next {
   background-color: var(--action-coral);
   color: white;
@@ -826,6 +836,44 @@ button {
 
 .userInputBox {
   width: 100%;
+}
+
+/* ***** REGISTER MODAL COMPONENT STYLING ***** */
+.registerModalOverlay {
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(17, 58, 103, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.registerModalContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width: 85%;
+  min-height: fit-content;
+  border: 3px solid var(--brand-yellow);
+  border-radius: 12px;
+  padding: 10px;
+  box-sizing: border-box;
+  max-width: 700px;
+  position: relative;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* MEDIA QUERIES FOR DESKTOP SIZING */

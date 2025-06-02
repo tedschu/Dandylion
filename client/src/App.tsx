@@ -28,6 +28,7 @@ function App() {
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     email: "",
+    password: "",
   });
 
   const [questionPromptsUnknown, setQuestionPromptsUnknown] = useState({

@@ -1,18 +1,26 @@
-const express = require("express");
+import express from "express";
 // creates an instance of Express
 const app = express();
 // allows frontend to make requests to backend
-const cors = require("cors");
+import cors from "cors";
 
 // Node.js utility for working with file / directory paths
-const path = require("path");
+import path from "path";
+import { fileURLToPath } from "url";
 
 // Sets the port to receive HTTP requests from frontend
 const port = process.env.PORT || 8080;
 
-// Imports the router modules for the API files (google, anthropic) and stores in varaibles
-const anthropicRoutes = require("./api/anthropicAPI");
-const gptRoutes = require("./api/gptAPI");
+// Imports the router modules for the API and other route files (google, anthropic)  and stores in varaibles
+import anthropicRoutes from "./api/anthropicAPI.js";
+import gptRoutes from "./api/gptAPI.js";
+import authRoutes from "./auth/index.js";
+
+import { PrismaClient } from "./generated/prisma/client.ts";
+const prisma = new PrismaClient();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // *** Middleware setup
 // Allows API to receive requests from different ports / domains (e.g. server on 8080, frontend on 3000)
@@ -31,11 +39,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// Register / create the API routes
+// Register / create the routes
 // Attaches (or, mounts) a router (application that handles routes) to a base URL (ex. /anthropicAPI)
 // ALl incoming requests (GET, PUT, etc.) to this route will be handled by this router
 app.use("/api/anthropicAPI", anthropicRoutes);
 app.use("/api/gptAPI", gptRoutes);
+app.use("/auth", authRoutes);
 
 app.use(express.static(path.join(__dirname, "/../client/dist")));
 

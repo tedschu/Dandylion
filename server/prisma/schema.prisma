@@ -5,8 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "../generated/prisma"
+  moduleFormat = "esm"
 }
 
 datasource db {
@@ -33,7 +34,7 @@ model User {
   id Int @id @default(autoincrement())
   first_name String
   email String @unique
-  password_hash String
+  password String
   login_count Int @default(0)
   last_login DateTime?
   // Verify that I'll be using this:

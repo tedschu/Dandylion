@@ -1,10 +1,14 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const dotenv = require("dotenv");
-const path = require("path");
-const OpenAI = require("openai");
-const { writeFile } = require("fs/promises");
-const { write } = require("fs");
+import dotenv from "dotenv";
+import path from "path";
+import OpenAI from "openai";
+import { writeFile } from "fs/promises";
+import { write } from "fs";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, "..", ".env") });
 
@@ -70,4 +74,4 @@ router.post("/image_second", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

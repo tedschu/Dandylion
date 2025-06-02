@@ -1,8 +1,12 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const Anthropic = require("@anthropic-ai/sdk");
-const dotenv = require("dotenv");
-const path = require("path");
+import Anthropic from "@anthropic-ai/sdk";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Points to the .env file
 // __dirname specifies the absolute path to the directory (folder) that contains this file (anthropicAPI.js)
@@ -504,6 +508,6 @@ JSON FORMATTING REQUIREMENTS:
   }
 });
 
-module.exports = router;
+export default router;
 
 // 1. All string values must be on a single line with no actual line breaks

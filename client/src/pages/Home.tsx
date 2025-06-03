@@ -8,22 +8,8 @@ import mexico from "../assets/images/destinations/mexico.png";
 import example_result from "../assets/recommendation-example_cropped.png";
 import { useState } from "react";
 
-function Home({
-  currentStep,
-  setCurrentStep,
-  userInfo,
-  setUserInfo,
-}: StepProps) {
+function Home({ currentStep, setCurrentStep }: StepProps) {
   const [showAlert, setShowAlert] = useState(false);
-
-  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-
-    setUserInfo?.((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
 
   const navigate = useNavigate();
 

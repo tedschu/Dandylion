@@ -10,6 +10,7 @@ import ResultsDestinationKnown from "./pages/ResultsDestinationKnown";
 import ResultsDestinationUnknown from "./pages/ResultsDestinationUnknown";
 import Path from "./pages/Path";
 import DestinationKnown from "./pages/DestinationKnown";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   const storedToken = localStorage.getItem("token");
@@ -27,11 +28,14 @@ function App() {
     response10: "",
   });
 
-  const [userInfo, setUserInfo] = useState({
-    firstName: "",
-    email: "",
-    password: "",
-  });
+  // **** REMOVING AS I'M REPLACING WITH USECONTEXT / PROVIDERS
+  // const [userInfo, setUserInfo] = useState({
+  //   firstName: "",
+  //   email: "",
+  //   password: "",
+  // });
+  // const [isLoggedIn, setIsLoggedIn] = useState(!!storedToken);
+  // const [token, setToken] = useState(storedToken || "");
 
   const [questionPromptsUnknown, setQuestionPromptsUnknown] = useState({
     question1:
@@ -78,125 +82,121 @@ function App() {
   // Shows BadWordsAlert component in question paths if a user types a "bad word"
   const [showBadWordsAlert, setShowBadWordsAlert] = useState(false);
   const [showAPIErrorMessage, setShowAPIErrorMessage] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(!!storedToken);
-  const [token, setToken] = useState(storedToken || "");
-
-  console.log(isLoggedIn);
 
   return (
     <>
-      <Routes>
-        <Route
-          index
-          element={
-            <Home
-              currentStep={currentStep}
-              setCurrentStep={setCurrentStep}
-              userResponses={userResponses}
-              setUserResponses={setUserResponses}
-              questionPromptsUnknown={questionPromptsUnknown}
-              setQuestionPromptsUnknown={setQuestionPromptsUnknown}
-              apiResponse={apiResponse}
-              setApiResponse={setApiResponse}
-              userInfo={userInfo}
-              setUserInfo={setUserInfo}
-            />
-          }
-        />
+      <AuthProvider>
+        <Routes>
+          <Route
+            index
+            element={
+              <Home
+                currentStep={currentStep}
+                setCurrentStep={setCurrentStep}
+                userResponses={userResponses}
+                setUserResponses={setUserResponses}
+                questionPromptsUnknown={questionPromptsUnknown}
+                setQuestionPromptsUnknown={setQuestionPromptsUnknown}
+                apiResponse={apiResponse}
+                setApiResponse={setApiResponse}
+              />
+            }
+          />
 
-        <Route path="/path" element={<Path />} />
+          <Route path="/path" element={<Path />} />
 
-        <Route
-          path="/build-plan"
-          element={
-            <DestinationKnown
-              currentStep={currentStep}
-              setCurrentStep={setCurrentStep}
-              userResponses={userResponses}
-              setUserResponses={setUserResponses}
-              questionPromptsKnown={questionPromptsKnown}
-              setQuestionPromptsKnown={setQuestionPromptsKnown}
-              apiResponse={apiResponse}
-              setApiResponse={setApiResponse}
-              userInfo={userInfo}
-              setUserInfo={setUserInfo}
-              showBadWordsAlert={showBadWordsAlert}
-              setShowBadWordsAlert={setShowBadWordsAlert}
-            />
-          }
-        />
-        <Route
-          path="/find-destination"
-          element={
-            <DestinationUnknown
-              currentStep={currentStep}
-              setCurrentStep={setCurrentStep}
-              userResponses={userResponses}
-              setUserResponses={setUserResponses}
-              questionPromptsUnknown={questionPromptsUnknown}
-              setQuestionPromptsUnknown={setQuestionPromptsUnknown}
-              apiResponse={apiResponse}
-              setApiResponse={setApiResponse}
-              userInfo={userInfo}
-              setUserInfo={setUserInfo}
-              showBadWordsAlert={showBadWordsAlert}
-              setShowBadWordsAlert={setShowBadWordsAlert}
-              isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-            />
-          }
-        />
+          <Route
+            path="/build-plan"
+            element={
+              <DestinationKnown
+                currentStep={currentStep}
+                setCurrentStep={setCurrentStep}
+                userResponses={userResponses}
+                setUserResponses={setUserResponses}
+                questionPromptsKnown={questionPromptsKnown}
+                setQuestionPromptsKnown={setQuestionPromptsKnown}
+                apiResponse={apiResponse}
+                setApiResponse={setApiResponse}
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+                showBadWordsAlert={showBadWordsAlert}
+                setShowBadWordsAlert={setShowBadWordsAlert}
+              />
+            }
+          />
+          <Route
+            path="/find-destination"
+            element={
+              <DestinationUnknown
+                currentStep={currentStep}
+                setCurrentStep={setCurrentStep}
+                userResponses={userResponses}
+                setUserResponses={setUserResponses}
+                questionPromptsUnknown={questionPromptsUnknown}
+                setQuestionPromptsUnknown={setQuestionPromptsUnknown}
+                apiResponse={apiResponse}
+                setApiResponse={setApiResponse}
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+                showBadWordsAlert={showBadWordsAlert}
+                setShowBadWordsAlert={setShowBadWordsAlert}
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            }
+          />
 
-        <Route
-          path="/login"
-          element={
-            <Login
-              isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-              userInfo={userInfo}
-              setUserInfo={setUserInfo}
-              setToken={setToken}
-            />
-          }
-        />
-        <Route path="/me" element={<Me />} />
-        <Route
-          path="/your-destination-plan"
-          element={
-            <ResultsDestinationUnknown
-              currentStep={currentStep}
-              setCurrentStep={setCurrentStep}
-              userResponses={userResponses}
-              setUserResponses={setUserResponses}
-              apiResponse={apiResponse}
-              setApiResponse={setApiResponse}
-              userInfo={userInfo}
-              questionPromptsUnknown={questionPromptsUnknown}
-              showAPIErrorMessage={showAPIErrorMessage}
-              setShowAPIErrorMessage={setShowAPIErrorMessage}
-              isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-            />
-          }
-        />
-        <Route
-          path="/your-plan"
-          element={
-            <ResultsDestinationKnown
-              currentStep={currentStep}
-              setCurrentStep={setCurrentStep}
-              userResponses={userResponses}
-              setUserResponses={setUserResponses}
-              apiResponse={apiResponse}
-              setApiResponse={setApiResponse}
-              userInfo={userInfo}
-              questionPromptsKnown={questionPromptsKnown}
-              showAPIErrorMessage={showAPIErrorMessage}
-              setShowAPIErrorMessage={setShowAPIErrorMessage}
-            />
-          }
-        />
-      </Routes>
+          <Route
+            path="/login"
+            element={
+              <Login
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+                setToken={setToken}
+              />
+            }
+          />
+          <Route path="/me" element={<Me />} />
+          <Route
+            path="/your-destination-plan"
+            element={
+              <ResultsDestinationUnknown
+                currentStep={currentStep}
+                setCurrentStep={setCurrentStep}
+                userResponses={userResponses}
+                setUserResponses={setUserResponses}
+                apiResponse={apiResponse}
+                setApiResponse={setApiResponse}
+                userInfo={userInfo}
+                questionPromptsUnknown={questionPromptsUnknown}
+                showAPIErrorMessage={showAPIErrorMessage}
+                setShowAPIErrorMessage={setShowAPIErrorMessage}
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            }
+          />
+          <Route
+            path="/your-plan"
+            element={
+              <ResultsDestinationKnown
+                currentStep={currentStep}
+                setCurrentStep={setCurrentStep}
+                userResponses={userResponses}
+                setUserResponses={setUserResponses}
+                apiResponse={apiResponse}
+                setApiResponse={setApiResponse}
+                userInfo={userInfo}
+                questionPromptsKnown={questionPromptsKnown}
+                showAPIErrorMessage={showAPIErrorMessage}
+                setShowAPIErrorMessage={setShowAPIErrorMessage}
+              />
+            }
+          />
+        </Routes>
+      </AuthProvider>
     </>
   );
 }

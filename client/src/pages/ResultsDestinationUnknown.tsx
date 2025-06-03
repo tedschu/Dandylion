@@ -10,6 +10,7 @@ import moon from "../assets/moon.png";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 import { text } from "motion/react-client";
+import { useAuth } from "../contexts/AuthContext";
 
 function ResultsDestinationUnknown({
   currentStep,
@@ -19,12 +20,11 @@ function ResultsDestinationUnknown({
   apiResponse,
   setApiResponse,
   questionPromptsUnknown,
-  userInfo,
   showAPIErrorMessage,
   setShowAPIErrorMessage,
-  isLoggedIn,
-  setIsLoggedIn,
 }: StepProps) {
+  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
+
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
   const [isSecondDestinationOpen, setIsSecondDestinationOpen] = useState(false);
@@ -226,11 +226,7 @@ function ResultsDestinationUnknown({
   return (
     <>
       <div className="resultPageContainer">
-        <Header
-          isLoggedIn={isLoggedIn}
-          userInfo={userInfo}
-          setIsLoggedIn={setIsLoggedIn}
-        />
+        <Header />
         <img className="moon scrollout" src={moon} alt="" />
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />

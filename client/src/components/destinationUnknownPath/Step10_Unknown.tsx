@@ -6,6 +6,7 @@ import pyramid from "../../assets/images/pyramids.png";
 import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
 import Register from "../Register";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Step10({
   currentStep,
@@ -16,13 +17,11 @@ function Step10({
   setQuestionPromptsUnknown,
   apiResponse,
   setApiResponse,
-  userInfo,
-  setUserInfo,
   showBadWordsAlert,
   setShowBadWordsAlert,
-  isLoggedIn,
-  setIsLoggedIn,
 }: StepProps) {
+  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
+
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =

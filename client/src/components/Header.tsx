@@ -7,14 +7,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
-type HeaderProps = {
-  isLoggedIn: boolean;
-  userInfo: UserInfo;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-function Header({ isLoggedIn, setIsLoggedIn, userInfo }: HeaderProps) {
+function Header() {
+  const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

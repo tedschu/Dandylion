@@ -20,6 +20,7 @@ import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 import moon from "../assets/moon.png";
 import { useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 type DestinationUnknownProps = {
   currentStep: number;
@@ -32,12 +33,8 @@ type DestinationUnknownProps = {
   >;
   apiResponse: apiResponse;
   setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
-  userInfo: UserInfo;
-  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
   showBadWordsAlert: boolean;
   setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function DestinationUnknown({
@@ -49,13 +46,11 @@ function DestinationUnknown({
   setQuestionPromptsUnknown,
   apiResponse,
   setApiResponse,
-  userInfo,
-  setUserInfo,
   showBadWordsAlert,
   setShowBadWordsAlert,
-  isLoggedIn,
-  setIsLoggedIn,
 }: DestinationUnknownProps) {
+  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
+
   const steps = [
     Step1,
     Step2,
@@ -137,16 +132,8 @@ function DestinationUnknown({
                       setQuestionPromptsUnknown={setQuestionPromptsUnknown}
                       apiResponse={apiResponse}
                       setApiResponse={setApiResponse}
-                      userInfo={
-                        stepNumber === 0 || stepNumber === 10
-                          ? userInfo
-                          : undefined
-                      }
-                      setUserInfo={setUserInfo}
                       showBadWordsAlert={showBadWordsAlert}
                       setShowBadWordsAlert={setShowBadWordsAlert}
-                      isLoggedIn={isLoggedIn}
-                      setIsLoggedIn={setIsLoggedIn}
                     />
                   </motion.div>
                 </AnimatePresence>

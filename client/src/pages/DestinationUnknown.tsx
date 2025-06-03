@@ -36,6 +36,8 @@ type DestinationUnknownProps = {
   setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
   showBadWordsAlert: boolean;
   setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function DestinationUnknown({
@@ -51,6 +53,8 @@ function DestinationUnknown({
   setUserInfo,
   showBadWordsAlert,
   setShowBadWordsAlert,
+  isLoggedIn,
+  setIsLoggedIn,
 }: DestinationUnknownProps) {
   const steps = [
     Step1,
@@ -141,6 +145,8 @@ function DestinationUnknown({
                       setUserInfo={setUserInfo}
                       showBadWordsAlert={showBadWordsAlert}
                       setShowBadWordsAlert={setShowBadWordsAlert}
+                      isLoggedIn={isLoggedIn}
+                      setIsLoggedIn={setIsLoggedIn}
                     />
                   </motion.div>
                 </AnimatePresence>

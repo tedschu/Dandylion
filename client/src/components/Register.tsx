@@ -1,18 +1,33 @@
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserInfo } from "../types/types";
 
 type RegisterProps = {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   userInfo: UserInfo;
   setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Register({ setIsModalOpen, userInfo, setUserInfo }: RegisterProps) {
+function Register({
+  setIsModalOpen,
+  userInfo,
+  setUserInfo,
+  isLoggedIn,
+  setIsLoggedIn,
+}: RegisterProps) {
   // Will always show as a modal, whereas login will be a page accessed from hamburger menu
+
+  const [registerError, setRegisterError] = useState(false);
+
+  const navigate = useNavigate();
 
   // Submit button for account registration via Dandylion
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    registerUser();
   };
 
   // Handles form values
@@ -27,7 +42,38 @@ function Register({ setIsModalOpen, userInfo, setUserInfo }: RegisterProps) {
     }));
   };
 
-  console.log(userInfo);
+  const registerUser = async () => {
+    try {
+      const response = await fetch("/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userInfo.email,
+          firstName: userInfo.firstName,
+          password: userInfo.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      console.log(data);
+
+      if (!response.ok) {
+        throw new Error(data.error || "Registration failed.");
+      } else {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.user.id);
+        setIsLoggedIn(true);
+        navigate("/your-destination-plan");
+        setIsModalOpen(false);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+      setRegisterError(true);
+    }
+  };
 
   return (
     <>
@@ -80,7 +126,13 @@ function Register({ setIsModalOpen, userInfo, setUserInfo }: RegisterProps) {
             </div>
           </form>
           <h4>
-            Already have an account? <span>Sign in</span>
+            Already have an account?{" "}
+            <span
+              onClick={() => navigate("/login")}
+              style={{ cursor: "pointer" }}
+            >
+              Sign in
+            </span>
           </h4>
         </div>
       </div>

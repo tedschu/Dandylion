@@ -76,6 +76,7 @@ function App() {
   // Shows BadWordsAlert component in question paths if a user types a "bad word"
   const [showBadWordsAlert, setShowBadWordsAlert] = useState(false);
   const [showAPIErrorMessage, setShowAPIErrorMessage] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
@@ -135,11 +136,18 @@ function App() {
               setUserInfo={setUserInfo}
               showBadWordsAlert={showBadWordsAlert}
               setShowBadWordsAlert={setShowBadWordsAlert}
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
             />
           }
         />
 
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          }
+        />
         <Route path="/me" element={<Me />} />
         <Route
           path="/your-destination-plan"
@@ -155,6 +163,8 @@ function App() {
               questionPromptsUnknown={questionPromptsUnknown}
               showAPIErrorMessage={showAPIErrorMessage}
               setShowAPIErrorMessage={setShowAPIErrorMessage}
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
             />
           }
         />

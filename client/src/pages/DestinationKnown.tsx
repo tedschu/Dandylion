@@ -34,6 +34,8 @@ type DestinationKnownProps = {
   setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
   showBadWordsAlert: boolean;
   setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function DestinationKnown({
@@ -49,6 +51,8 @@ function DestinationKnown({
   setUserInfo,
   showBadWordsAlert,
   setShowBadWordsAlert,
+  isLoggedIn,
+  setIsLoggedIn,
 }: DestinationKnownProps) {
   const steps = [Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8];
 

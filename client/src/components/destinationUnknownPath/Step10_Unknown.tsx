@@ -20,6 +20,8 @@ function Step10({
   setUserInfo,
   showBadWordsAlert,
   setShowBadWordsAlert,
+  isLoggedIn,
+  setIsLoggedIn,
 }: StepProps) {
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
@@ -91,6 +93,8 @@ function Step10({
             setIsModalOpen={setIsModalOpen}
             userInfo={userInfo}
             setUserInfo={setUserInfo}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
           />
         )}
       </div>

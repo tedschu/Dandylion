@@ -21,6 +21,8 @@ export type StepProps = {
   setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
   showAPIErrorMessage: boolean;
   setShowAPIErrorMessage: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type UserResponses = {

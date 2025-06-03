@@ -22,6 +22,8 @@ function ResultsDestinationUnknown({
   userInfo,
   showAPIErrorMessage,
   setShowAPIErrorMessage,
+  isLoggedIn,
+  setIsLoggedIn,
 }: StepProps) {
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
@@ -224,6 +226,11 @@ function ResultsDestinationUnknown({
   return (
     <>
       <div className="resultPageContainer">
+        <Header
+          isLoggedIn={isLoggedIn}
+          userInfo={userInfo}
+          setIsLoggedIn={setIsLoggedIn}
+        />
         <img className="moon scrollout" src={moon} alt="" />
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />

@@ -41,8 +41,6 @@ router.post("/register", async (req, res) => {
       },
     });
 
-    console.log(newUser);
-
     const token = jwt.sign(
       {
         exp: Math.floor(Date.now() / 1000) + 60 * 60 * 48,

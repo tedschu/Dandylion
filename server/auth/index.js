@@ -66,4 +66,62 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await prisma.user.findFirst({
+      where: {
+        email: {
+          equals: email,
+          mode: "insensitive",
+        },
+      },
+    });
+
+    //checks if the user exists
+    const userMatch = await prisma.user.findUnique({
+      where: {
+        id: user.id,
+      },
+      select: {
+        id: true,
+        first_name: true,
+        password: true,
+      },
+    });
+
+    if (!userMatch) {
+      return res.status(401).send({ message: "Invalid login credentials" });
+    }
+
+    const passMatch = await bcrypt.compare(password, userMatch.password);
+    if (!passMatch) {
+      return res.status(401).send({ message: "Invalid login credentials" });
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        login_count: {
+          increment: 1,
+        },
+        last_login: new Date().toISOString(),
+      },
+    });
+
+    const token = jwt.sign(
+      {
+        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 48,
+        data: { id: userMatch.id, email: userMatch.email },
+      },
+      process.env.JWT_SECRET
+    );
+    res.status(200).send({ token: token, id: userMatch.id });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 export default router;

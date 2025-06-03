@@ -12,6 +12,8 @@ import Path from "./pages/Path";
 import DestinationKnown from "./pages/DestinationKnown";
 
 function App() {
+  const storedToken = localStorage.getItem("token");
+
   const [userResponses, setUserResponses] = useState({
     response1: "",
     response2: "",
@@ -76,7 +78,10 @@ function App() {
   // Shows BadWordsAlert component in question paths if a user types a "bad word"
   const [showBadWordsAlert, setShowBadWordsAlert] = useState(false);
   const [showAPIErrorMessage, setShowAPIErrorMessage] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!storedToken);
+  const [token, setToken] = useState(storedToken || "");
+
+  console.log(isLoggedIn);
 
   return (
     <>
@@ -145,7 +150,13 @@ function App() {
         <Route
           path="/login"
           element={
-            <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <Login
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              userInfo={userInfo}
+              setUserInfo={setUserInfo}
+              setToken={setToken}
+            />
           }
         />
         <Route path="/me" element={<Me />} />

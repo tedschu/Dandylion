@@ -53,6 +53,7 @@ function Home({
                 justifySelf: "flex-end",
                 margin: "0 12px 0 0",
               }}
+              onClick={() => navigate("/login")}
             >
               login
             </button>

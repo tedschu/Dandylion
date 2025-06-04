@@ -7,8 +7,9 @@ import paraguay from "../assets/images/destinations/paraguay.png";
 import mexico from "../assets/images/destinations/mexico.png";
 import example_result from "../assets/recommendation-example_cropped.png";
 import { useState } from "react";
+import { QuestionsResponsesProvider } from "../contexts/QuestionsResponsesContext";
 
-function Home({ currentStep, setCurrentStep }: StepProps) {
+function Home() {
   const [showAlert, setShowAlert] = useState(false);
 
   const navigate = useNavigate();

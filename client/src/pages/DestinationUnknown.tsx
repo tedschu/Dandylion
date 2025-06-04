@@ -9,47 +9,32 @@ import Step7 from "../components/destinationUnknownPath/Step7_Unknown";
 import Step8 from "../components/destinationUnknownPath/Step8_Unknown";
 import Step9 from "../components/destinationUnknownPath/Step9_Unknown";
 import Step10 from "../components/destinationUnknownPath/Step10_Unknown";
-import {
-  UserResponses,
-  QuestionPrompts,
-  apiResponse,
-  UserInfo,
-} from "../types/types";
+
 import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 import moon from "../assets/moon.png";
 import { useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
+import { useAppContext } from "../contexts/AppContext";
 
-type DestinationUnknownProps = {
-  currentStep: number;
-  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-  userResponses: UserResponses;
-  setUserResponses: React.Dispatch<React.SetStateAction<UserResponses>>;
-  questionPromptsUnknown: QuestionPrompts;
-  setQuestionPromptsUnknown: React.Dispatch<
-    React.SetStateAction<QuestionPrompts>
-  >;
-  apiResponse: apiResponse;
-  setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
-  showBadWordsAlert: boolean;
-  setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-function DestinationUnknown({
-  currentStep,
-  setCurrentStep,
-  userResponses,
-  setUserResponses,
-  questionPromptsUnknown,
-  setQuestionPromptsUnknown,
-  apiResponse,
-  setApiResponse,
-  showBadWordsAlert,
-  setShowBadWordsAlert,
-}: DestinationUnknownProps) {
+function DestinationUnknown() {
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
+  const {
+    currentStep,
+    setCurrentStep,
+    userResponses,
+    setUserResponses,
+    questionPromptsUnknown,
+    setQuestionPromptsUnknown,
+  } = useQuestionsResponses();
+  const {
+    apiResponse,
+    setApiResponse,
+    showBadWordsAlert,
+    setShowBadWordsAlert,
+  } = useAppContext();
 
   const steps = [
     Step1,

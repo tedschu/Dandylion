@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { StepProps, apiResponse } from "../types/types";
+import { apiResponse } from "../types/types";
 import destinationImage from "../assets/output.png";
 import secondDestinationImage from "../assets/output2.png";
 import Header from "../components/Header";
@@ -11,19 +11,24 @@ import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 import { text } from "motion/react-client";
 import { useAuth } from "../contexts/AuthContext";
+import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
+import { useAppContext } from "../contexts/AppContext";
 
-function ResultsDestinationUnknown({
-  currentStep,
-  setCurrentStep,
-  userResponses,
-  setUserResponses,
-  apiResponse,
-  setApiResponse,
-  questionPromptsUnknown,
-  showAPIErrorMessage,
-  setShowAPIErrorMessage,
-}: StepProps) {
+function ResultsDestinationUnknown() {
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
+  const {
+    currentStep,
+    setCurrentStep,
+    userResponses,
+    setUserResponses,
+    questionPromptsUnknown,
+  } = useQuestionsResponses();
+  const {
+    apiResponse,
+    setApiResponse,
+    showAPIErrorMessage,
+    setShowAPIErrorMessage,
+  } = useAppContext();
 
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);

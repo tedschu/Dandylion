@@ -1,29 +1,29 @@
 import React, { SetStateAction } from "react";
 
-export type StepProps = {
-  currentStep: number;
-  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-  userResponses: UserResponses;
-  setUserResponses: React.Dispatch<React.SetStateAction<UserResponses>>;
-  questionPromptsUnknown?: QuestionPrompts;
-  setQuestionPromptsUnknown?: React.Dispatch<
-    React.SetStateAction<QuestionPrompts>
-  >;
-  questionPromptsKnown?: QuestionPrompts;
-  setQuestionPromptsKnown?: React.Dispatch<
-    React.SetStateAction<QuestionPrompts>
-  >;
-  apiResponse?: apiResponse;
-  setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
-  userInfo?: UserInfo;
-  setUserInfo?: React.Dispatch<React.SetStateAction<UserInfo>>;
-  showBadWordsAlert: boolean;
-  setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
-  showAPIErrorMessage: boolean;
-  setShowAPIErrorMessage: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-};
+// export type StepProps = {
+//   currentStep: number;
+//   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+//   userResponses: UserResponses;
+//   setUserResponses: React.Dispatch<React.SetStateAction<UserResponses>>;
+//   questionPromptsUnknown?: QuestionPrompts;
+//   setQuestionPromptsUnknown?: React.Dispatch<
+//     React.SetStateAction<QuestionPrompts>
+//   >;
+//   questionPromptsKnown?: QuestionPrompts;
+//   setQuestionPromptsKnown?: React.Dispatch<
+//     React.SetStateAction<QuestionPrompts>
+//   >;
+//   apiResponse?: apiResponse;
+//   setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
+//   userInfo?: UserInfo;
+//   setUserInfo?: React.Dispatch<React.SetStateAction<UserInfo>>;
+//   showBadWordsAlert: boolean;
+//   setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
+//   showAPIErrorMessage: boolean;
+//   setShowAPIErrorMessage: React.Dispatch<React.SetStateAction<boolean>>;
+//   isLoggedIn: boolean;
+//   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+// };
 
 export type UserResponses = {
   response1: string;
@@ -34,8 +34,8 @@ export type UserResponses = {
   response6: string;
   response7: string;
   response8: string;
-  response9?: string;
-  response10?: string;
+  response9: string;
+  response10: string;
 };
 
 export type UserInfo = {
@@ -44,7 +44,7 @@ export type UserInfo = {
   password?: string;
 };
 
-export type QuestionPrompts = {
+export type QuestionPromptsUnknown = {
   question1: string;
   question2: string;
   question3: string;
@@ -53,8 +53,19 @@ export type QuestionPrompts = {
   question6: string;
   question7: string;
   question8: string;
-  question9?: string;
-  question10?: string;
+  question9: string;
+  question10: string;
+};
+
+export type QuestionPromptsKnown = {
+  question1: string;
+  question2: string;
+  question3: string;
+  question4: string;
+  question5: string;
+  question6: string;
+  question7: string;
+  question8: string;
 };
 
 export type Attraction = {

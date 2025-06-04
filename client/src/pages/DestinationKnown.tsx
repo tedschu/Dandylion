@@ -8,52 +8,32 @@ import Step6 from "../components/destinationKnownPath/Step6_Known";
 import Step7 from "../components/destinationKnownPath/Step7_Known";
 import Step8 from "../components/destinationKnownPath/Step8_Known";
 
-import {
-  UserResponses,
-  QuestionPrompts,
-  apiResponse,
-  UserInfo,
-} from "../types/types";
 import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 import moon from "../assets/moon.png";
+import { useAuth } from "../contexts/AuthContext";
+import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
+import { useAppContext } from "../contexts/AppContext";
 
-type DestinationKnownProps = {
-  currentStep: number;
-  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-  userResponses: UserResponses;
-  setUserResponses: React.Dispatch<React.SetStateAction<UserResponses>>;
-  questionPromptsKnown: QuestionPrompts;
-  setQuestionPromptsKnown: React.Dispatch<
-    React.SetStateAction<QuestionPrompts>
-  >;
-  apiResponse: apiResponse;
-  setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
-  userInfo: UserInfo;
-  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
-  showBadWordsAlert: boolean;
-  setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-};
+function DestinationKnown() {
+  const {
+    currentStep,
+    setCurrentStep,
+    userResponses,
+    setUserResponses,
+    questionPromptsKnown,
+    setQuestionPromptsKnown,
+  } = useQuestionsResponses();
 
-function DestinationKnown({
-  currentStep,
-  setCurrentStep,
-  userResponses,
-  setUserResponses,
-  questionPromptsKnown,
-  setQuestionPromptsKnown,
-  apiResponse,
-  setApiResponse,
-  userInfo,
-  setUserInfo,
-  showBadWordsAlert,
-  setShowBadWordsAlert,
-  isLoggedIn,
-  setIsLoggedIn,
-}: DestinationKnownProps) {
+  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
+  const {
+    apiResponse,
+    setApiResponse,
+    showBadWordsAlert,
+    setShowBadWordsAlert,
+  } = useAppContext();
+
   const steps = [Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8];
 
   const motionProps = {

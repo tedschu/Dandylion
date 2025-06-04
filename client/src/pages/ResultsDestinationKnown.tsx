@@ -1,24 +1,30 @@
 import { useEffect, useRef, useState } from "react";
-import { StepProps, apiResponse } from "../types/types";
 import ResultsLoadingState from "../components/ResultsLoadingState";
 import Results_Pre_Known from "../components/destinationKnownPath/results/Results_Pre_Known";
 import Results_Full_Known from "../components/destinationKnownPath/results/Results_Full_Known";
 import moon from "../assets/moon.png";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
+import { useAuth } from "../contexts/AuthContext";
+import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
+import { useAppContext } from "../contexts/AppContext";
 
-function ResultsDestinationKnown({
-  currentStep,
-  setCurrentStep,
-  userResponses,
-  setUserResponses,
-  apiResponse,
-  setApiResponse,
-  questionPromptsKnown,
-  userInfo,
-  showAPIErrorMessage,
-  setShowAPIErrorMessage,
-}: StepProps) {
+function ResultsDestinationKnown() {
+  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
+  const {
+    currentStep,
+    setCurrentStep,
+    userResponses,
+    setUserResponses,
+    questionPromptsKnown,
+  } = useQuestionsResponses();
+  const {
+    apiResponse,
+    setApiResponse,
+    showAPIErrorMessage,
+    setShowAPIErrorMessage,
+  } = useAppContext();
+
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
   const [isSecondDestinationOpen, setIsSecondDestinationOpen] = useState(false);

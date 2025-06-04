@@ -1,23 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { UserInfo } from "../types/types";
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
-type LoginProps = {
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userInfo: UserInfo;
-  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-  setToken: React.Dispatch<React.SetStateAction<string>>;
-};
-
-function Login({
-  userInfo,
-  setUserInfo,
-  isLoggedIn,
-  setIsLoggedIn,
-  setToken,
-}: LoginProps) {
+function Login() {
+  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn, token, setToken } =
+    useAuth();
   const [loginFailed, setLoginFailed] = useState(false);
 
   const navigate = useNavigate();
@@ -58,6 +46,9 @@ function Login({
       );
 
       const data = await response.json();
+
+      console.log("Here is userInfo: ", userInfo);
+      console.log("HEre is data from response:", data);
 
       if (!response.ok) {
         throw new Error("Login failed");

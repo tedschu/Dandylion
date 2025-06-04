@@ -66,6 +66,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+//  TODO: THE ID NUMBERS WHEN LOGGING IN ARE COMING BACK WRONG
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;

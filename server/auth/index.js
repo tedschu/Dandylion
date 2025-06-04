@@ -66,10 +66,12 @@ router.post("/register", async (req, res) => {
   }
 });
 
-//  TODO: THE ID NUMBERS WHEN LOGGING IN ARE COMING BACK WRONG
+// Logs in a user
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    console.log(email, password);
 
     const user = await prisma.user.findFirst({
       where: {
@@ -79,6 +81,8 @@ router.post("/login", async (req, res) => {
         },
       },
     });
+
+    console.log("Here is user:", user);
 
     //checks if the user exists
     const userMatch = await prisma.user.findUnique({

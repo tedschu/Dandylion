@@ -12,11 +12,29 @@ router.post("/plan", verifyToken, async (req, res) => {
     const result_data = req.body.result_data;
     const plan_type = req.body.plan_type;
     const user_id = parseInt(req.user);
+    const form_data = req.body.form_data;
+
+    // create a new plan row
+    const newPlan = await prisma.plan.create({
+      data: {
+        user_id: user_id,
+        plan_type: plan_type,
+        status: "DRAFT",
+        result_data: result_data,
+      },
+    });
+
+    const newUserResponse = await prisma.userResponse.create({
+      data: {
+        plan_id: newPlan.id,
+        user_question_response_data: form_data,
+      },
+    });
 
     res.json({
       success: true,
-      message: "data received",
-      //   data: { user_id, result_data, plan_type },
+      plan: newPlan,
+      form_data: newUserResponse,
     });
   } catch (error) {
     console.error(error);

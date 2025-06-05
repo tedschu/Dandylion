@@ -1,5 +1,5 @@
-const express = require("express");
-const jwt = require("jsonwebtoken");
+import express from "express";
+import jwt from "jsonwebtoken";
 
 // Middleware to verify token and allow for loading of user data
 function verifyToken(req, res, next) {
@@ -20,4 +20,4 @@ function verifyToken(req, res, next) {
   });
 }
 
-module.exports = { verifyToken };
+export default verifyToken;

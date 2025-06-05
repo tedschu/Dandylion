@@ -15,6 +15,7 @@ const port = process.env.PORT || 8080;
 import anthropicRoutes from "./api/anthropicAPI.js";
 import gptRoutes from "./api/gptAPI.js";
 import authRoutes from "./auth/index.js";
+import userRoutes from "./api/users.js";
 
 import { PrismaClient } from "./generated/prisma/client.ts";
 const prisma = new PrismaClient();
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
 app.use("/api/anthropicAPI", anthropicRoutes);
 app.use("/api/gptAPI", gptRoutes);
 app.use("/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 app.use(express.static(path.join(__dirname, "/../client/dist")));
 

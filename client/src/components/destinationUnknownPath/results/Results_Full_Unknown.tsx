@@ -38,7 +38,7 @@ function Results_Full_Unknown({
           {apiResponse?.destination.things_to_do.map((destination, index) => {
             return (
               <>
-                <li key={index}>
+                <li key={`${destination.destination_name} - ${index}`}>
                   <span style={{ fontWeight: "bold" }}>
                     {destination.destination_name}
                   </span>

@@ -11,8 +11,8 @@ router.post("/plan", verifyToken, async (req, res) => {
   try {
     const result_data = req.body.result_data;
     const plan_type = req.body.plan_type;
-    const user_id = parseInt(req.user);
     const form_data = req.body.form_data;
+    const user_id = parseInt(req.user);
 
     // create a new plan row
     const newPlan = await prisma.plan.create({

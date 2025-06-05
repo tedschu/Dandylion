@@ -37,15 +37,19 @@ function Step10({
     setIsModalOpen(true);
   };
 
+  // On "see results" button, first checks for "bad words" and alerts if found
+  // Then, if user is logged in, goes to destination plan
+  // If not logged in, opens register / login modal
   function handleClick() {
     if (containsBadWords(userResponses.response10 ?? "")) {
       setShowBadWordsAlert(true);
       setTimeout(() => {
         setShowBadWordsAlert(false);
       }, 3000);
-    } else {
-      // navigate("/your-destination-plan");
+    } else if (!isLoggedIn) {
       openModal();
+    } else if (isLoggedIn) {
+      navigate("/your-destination-plan");
     }
   }
 

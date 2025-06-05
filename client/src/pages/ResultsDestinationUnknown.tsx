@@ -41,6 +41,8 @@ function ResultsDestinationUnknown() {
   // and is just counting api calls.
   const apiRetriesRef = useRef(0);
 
+  const storedToken = localStorage.getItem("token");
+
   // On page load, calls getTripResults() IF all userResponse fields are populated
   useEffect(() => {
     const hasValidResponses = () => {
@@ -124,6 +126,7 @@ function ResultsDestinationUnknown() {
           if (textData.destination && textData.second_destination) {
             setApiResponse(textData);
             setHasResponse(true);
+            postPlanAndFormData();
           } else {
             console.log("Invalid response structure", textData);
             throw new Error("invalid recommendation data structure from API");
@@ -226,6 +229,53 @@ function ResultsDestinationUnknown() {
         }
       }
     } catch (error) {}
+  };
+
+  const postPlanAndFormData = async () => {
+    try {
+      const response = await fetch("/api/users/plan", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${storedToken}`,
+        },
+        body: JSON.stringify({
+          result_data: apiResponse,
+          plan_type: "DESTINATION_UNKNOWN",
+          form_data: {
+            question1: questionPromptsUnknown?.question1,
+            response1: userResponses.response1,
+            question2: questionPromptsUnknown?.question2,
+            response2: userResponses.response2,
+            question3: questionPromptsUnknown?.question3,
+            response3: userResponses.response3,
+            question4: questionPromptsUnknown?.question4,
+            response4: userResponses.response4,
+            question5: questionPromptsUnknown?.question5,
+            response5: userResponses.response5,
+            question6: questionPromptsUnknown?.question6,
+            response6: userResponses.response6,
+            question7: questionPromptsUnknown?.question7,
+            response7: userResponses.response7,
+            question8: questionPromptsUnknown?.question8,
+            response8: userResponses.response8,
+            question9: questionPromptsUnknown?.question9,
+            response9: userResponses.response9,
+            question10: questionPromptsUnknown?.question10,
+            response10: userResponses.response10,
+            firstName: userInfo?.firstName,
+          },
+        }),
+      });
+
+      console.log("Here is response:", response);
+
+      const data = await response.json();
+
+      console.log("Here is data:", data);
+    } catch (error) {
+      console.error("Error posting the plan data:", error);
+    }
   };
 
   return (

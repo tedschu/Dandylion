@@ -57,6 +57,10 @@ function Login() {
         localStorage.setItem("token", data.token); // SETS TOKEN TO LOCALSTORAGE IN BROWSER
         localStorage.setItem("userId", data.id); // SETS USER ID INTO LOCALSTORAGE TO HELP WITH RENDERING USER DATA ON GAME AND ACCOUNT PAGES
         setToken(data.token);
+        setUserInfo((prev) => ({
+          ...prev,
+          firstName: data.firstName,
+        }));
         setIsLoggedIn(true);
         setLoginFailed(false);
         navigate("/me");
@@ -69,30 +73,42 @@ function Login() {
 
   return (
     <>
-      <p>[Continue with Google]</p>
-      <p>OR</p>
-      <form action="" className="registerForm" onSubmit={submit}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="text"
-          placeholder="name@example.com"
-          name="email"
-          value={userInfo.email}
-          onChange={setFormValues}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          //   placeholder="example: Count Woofula"
-          name="password"
-          value={userInfo.password}
-          onChange={setFormValues}
-        />
+      <div className="loginContainer">
+        <div className="loginContentContainer">
+          <p>[Continue with Google]</p>
+          <p>OR</p>
+          <form action="" className="registerForm" onSubmit={submit}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="text"
+              placeholder="name@example.com"
+              name="email"
+              value={userInfo.email}
+              onChange={setFormValues}
+            />
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              //   placeholder="example: Count Woofula"
+              name="password"
+              value={userInfo.password}
+              onChange={setFormValues}
+            />
 
-        <div className="registerButtonContainer">
-          <button className="register">Sign in</button>
+            <div className="registerButtonContainer">
+              <button className="register">Sign in</button>
+            </div>
+          </form>
+          {loginFailed && (
+            <div
+              className="loginFailAlert"
+              style={{ color: "var(--error)", marginTop: "20px" }}
+            >
+              Login error. Forget your password?
+            </div>
+          )}
         </div>
-      </form>
+      </div>
     </>
   );
 }

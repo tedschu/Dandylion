@@ -1,4 +1,3 @@
-import { StepProps } from "../types/types";
 import { useNavigate } from "react-router-dom";
 import beeLogo from "../assets/bee.png";
 import prague from "../assets/prague_homepage.png";
@@ -8,8 +7,11 @@ import mexico from "../assets/images/destinations/mexico.png";
 import example_result from "../assets/recommendation-example_cropped.png";
 import { useState } from "react";
 import { QuestionsResponsesProvider } from "../contexts/QuestionsResponsesContext";
+import { useAuth } from "../contexts/AuthContext";
+import { div } from "motion/react-client";
 
 function Home() {
+  const { isLoggedIn } = useAuth();
   const [showAlert, setShowAlert] = useState(false);
 
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ function Home() {
   //   } else setShowAlert(true);
   // };
 
+  console.log(isLoggedIn);
   return (
     <>
       <div className="homeContainer">
@@ -33,17 +36,31 @@ function Home() {
           <div className="homeHeroHeaderContainer">
             <img src={beeLogo} alt="dandylion bee logo" />
             <h1>dandylion.ai</h1>
-            <button
-              className="login"
-              style={{
-                alignSelf: "center",
-                justifySelf: "flex-end",
-                margin: "0 12px 0 0",
-              }}
-              onClick={() => navigate("/login")}
-            >
-              login
-            </button>
+            {isLoggedIn ? (
+              <button
+                className="login"
+                style={{
+                  alignSelf: "center",
+                  justifySelf: "flex-end",
+                  margin: "0 12px 0 0",
+                }}
+                onClick={() => navigate("/me")}
+              >
+                My trips
+              </button>
+            ) : (
+              <button
+                className="login"
+                style={{
+                  alignSelf: "center",
+                  justifySelf: "flex-end",
+                  margin: "0 12px 0 0",
+                }}
+                onClick={() => navigate("/login")}
+              >
+                login
+              </button>
+            )}
           </div>
 
           <div className="homeHeroContentContainer">

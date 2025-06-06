@@ -361,6 +361,10 @@ button {
   align-items: center;
 }
 
+.resultsFullContentContainer > h1 {
+  text-align: center;
+}
+
 .resultsFullDescription {
   font-size: 16px;
   margin: 0;
@@ -762,6 +766,60 @@ button {
   right: 10px;
 }
 
+/* ***** MY ACCOUNT (ME) SCREEN ***** */
+.myAccountContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    #0e1f46,
+    #1d305b,
+    #223667,
+    #2b4583,
+    #365396,
+    #336589,
+    #2d7a8d,
+    #44b1a0,
+    #54d1be,
+    #dece14
+  );
+}
+
+.myAccountContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  max-width: 950px;
+  background-color: var(--back-cream);
+  border-radius: 10px;
+  z-index: 2;
+  border: 5px solid var(--brand-yellow);
+  margin: 80px 0 20px 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* ***** LOGIN SCREEN ***** */
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.loginContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* other classes */
 
 .bottomContentContainer {
@@ -890,6 +948,14 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.registerForm > input {
+  margin-bottom: 5px;
+}
+
+.registerButtonContainer {
+  margin: 10px 0 0 0;
 }
 
 /* MEDIA QUERIES FOR DESKTOP SIZING */

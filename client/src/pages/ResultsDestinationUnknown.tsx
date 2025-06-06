@@ -126,7 +126,7 @@ function ResultsDestinationUnknown() {
           if (textData.destination && textData.second_destination) {
             setApiResponse(textData);
             setHasResponse(true);
-            postPlanAndFormData();
+            postPlanAndFormData(textData);
           } else {
             console.log("Invalid response structure", textData);
             throw new Error("invalid recommendation data structure from API");
@@ -231,7 +231,8 @@ function ResultsDestinationUnknown() {
     } catch (error) {}
   };
 
-  const postPlanAndFormData = async () => {
+  console.log(apiResponse);
+  const postPlanAndFormData = async (textData: apiResponse) => {
     try {
       const response = await fetch("/api/users/plan", {
         method: "POST",
@@ -240,7 +241,7 @@ function ResultsDestinationUnknown() {
           Authorization: `Bearer ${storedToken}`,
         },
         body: JSON.stringify({
-          result_data: apiResponse,
+          result_data: textData,
           plan_type: "DESTINATION_UNKNOWN",
           form_data: {
             question1: questionPromptsUnknown?.question1,

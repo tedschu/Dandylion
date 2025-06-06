@@ -42,6 +42,39 @@ router.post("/plan", verifyToken, async (req, res) => {
   }
 });
 
-// PUT update the plan row for id (plan id) and user_id to add the image S3 URLs
+// TODO: PUT update the plan row for id (plan id) and user_id to add the image S3 URLs
+
+// GET to pull all trips for a given user (rendered on the "Me" page)
+router.get("/my-plans", verifyToken, async (req, res) => {
+  try {
+    const allPlans = await prisma.plan.findMany({
+      where: {
+        user_id: parseInt(req.user),
+      },
+      orderBy: {
+        id: "desc",
+      },
+      select: {
+        plan_type: true,
+        result_data: true,
+        created_at: true,
+      },
+    });
+
+    const plansFormattedDates = allPlans.map((plan) => ({
+      plan_type: plan.plan_type,
+      result_data: plan.result_data,
+      created_at: plan.created_at.toLocaleString(),
+    }));
+
+    res.status(200).send({
+      plansFormattedDates,
+    });
+    console.log(allPlans);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
 
 export default router;

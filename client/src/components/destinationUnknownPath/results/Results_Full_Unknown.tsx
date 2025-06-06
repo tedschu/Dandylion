@@ -25,7 +25,7 @@ function Results_Full_Unknown({
           {apiResponse?.destination.places_to_stay.map((place, index) => {
             return (
               <>
-                <li key={index}>
+                <li key={`${place.name} - ${index}`}>
                   <span style={{ fontWeight: "bold" }}>{place.name}</span> in{" "}
                   {place.location}: {place.why_recommended}. {place.price_range}
                   .
@@ -77,9 +77,9 @@ function Results_Full_Unknown({
                       color: "var(--teal)",
                     }}
                   >{`Day ${day.day_num}: ${day.summary}`}</h3>
-                  <li key={index}>{day.morning}</li>
-                  <li key={index}>{day.afternoon}</li>
-                  <li key={index}>{day.evening}</li>
+                  <li key={`${day.summary} - ${index}`}>{day.morning}</li>
+                  <li key={`${day.summary} - ${index}`}>{day.afternoon}</li>
+                  <li key={`${day.summary} - ${index}`}>{day.evening}</li>
                 </>
               );
             })}
@@ -104,7 +104,7 @@ function Results_Full_Unknown({
             (place, index) => {
               return (
                 <>
-                  <li key={index}>
+                  <li key={`${place.name} - ${index}`}>
                     <span style={{ fontWeight: "bold" }}>{place.name}</span> in{" "}
                     {place.location}: {place.why_recommended}.{" "}
                     {place.price_range}.
@@ -119,7 +119,7 @@ function Results_Full_Unknown({
             (destination, index) => {
               return (
                 <>
-                  <li key={index}>
+                  <li key={`${destination.destination_name} - ${index}`}>
                     <span style={{ fontWeight: "bold" }}>
                       {destination.destination_name}
                     </span>
@@ -159,9 +159,9 @@ function Results_Full_Unknown({
                       color: "var(--teal)",
                     }}
                   >{`Day ${day.day_num}: ${day.summary}`}</h3>
-                  <li key={index}>{day.morning}</li>
-                  <li key={index}>{day.afternoon}</li>
-                  <li key={index}>{day.evening}</li>
+                  <li key={`${day.summary} - ${index}`}>{day.morning}</li>
+                  <li key={`${day.summary} - ${index}`}>{day.afternoon}</li>
+                  <li key={`${day.summary} - ${index}`}>{day.evening}</li>
                 </>
               );
             })}

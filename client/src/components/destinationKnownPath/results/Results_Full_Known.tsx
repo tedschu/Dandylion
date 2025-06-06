@@ -22,7 +22,7 @@ function Results_Full_Unknown({
           {apiResponse?.destination.places_to_stay.map((place, index) => {
             return (
               <>
-                <li key={index}>
+                <li key={`${place.name} - ${index}`}>
                   {place.name}: {place.why_recommended}. Cost is{" "}
                   {place.price_range}
                 </li>
@@ -34,7 +34,7 @@ function Results_Full_Unknown({
         {apiResponse?.destination.things_to_do.map((destination, index) => {
           return (
             <>
-              <li key={index}>
+              <li key={`${destination.destination_name} - ${index}`}>
                 <span style={{ fontWeight: "bold" }}>
                   {destination.destination_name}
                 </span>
@@ -55,7 +55,7 @@ function Results_Full_Unknown({
           return (
             <>
               {/* TODO: NEED TO REVISE THE STRUCTURE OF THE ITINERARY OBJECT, OR FIGURE OUT HOW TO DISPLAY THE DATA IN DAY */}
-              <li key={index}>
+              <li key={`${day.summary} - ${index}`}>
                 <span
                   style={{ fontWeight: "bold" }}
                 >{`Day ${day.day_num}`}</span>

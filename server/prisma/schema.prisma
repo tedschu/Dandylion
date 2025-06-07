@@ -41,6 +41,7 @@ model User {
   email_verified Boolean @default(false) 
   created_at DateTime @default(now())
   plan Plan[]
+  planShares PlanShares[]
 }
 
 model Plan {
@@ -55,7 +56,19 @@ model Plan {
   created_at DateTime @default(now())
   was_modified Boolean @default(false)
   userResponse UserResponse[]
+  planShares PlanShares[]
   // Note: Image S3 URL is stored in result_data Json object
+}
+
+// Table to handle plans that are shared with other people via email addresses
+model PlanShares {
+  id Int @id @default(autoincrement())
+  plan Plan @relation(fields: [plan_id], references: [id])
+  plan_id Int
+  email String
+  invited_by_user_id Int
+  user User @relation(fields: [invited_by_user_id], references: [id])
+  created_at DateTime @default(now())
 }
 
 model UserResponse {

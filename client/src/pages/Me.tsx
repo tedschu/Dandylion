@@ -58,20 +58,22 @@ function Me() {
       <div className="myAccountContainer">
         <Header />
         <h1 style={{ color: "white", textAlign: "center" }}>
-          Hey there, {userInfo.firstName}. Here are the plans you've purchased:
+          Hey there! Here are the plans you've purchased:
         </h1>
 
         {userPlans.map((plan) => {
           return (
             <>
               <div className="myAccountContentContainer">
-                <img src={testIMage} alt="" style={{ width: "80px" }} />
-                <div>
-                  <h2>{plan.result_data.destination.location}</h2>
-                  {plan.result_data.second_destination && (
-                    <h2> {plan.result_data.second_destination.location}</h2>
-                  )}
-                  <p>Created on: {plan.created_at.split(",")[0]}</p>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <img src={testIMage} alt="" style={{ width: "80px" }} />
+                  <div>
+                    <h2>{plan.result_data.destination.location}</h2>
+                    {plan.result_data.second_destination && (
+                      <h2> {plan.result_data.second_destination.location}</h2>
+                    )}
+                    <p>Created on: {plan.created_at.split(",")[0]}</p>
+                  </div>
                 </div>
                 <button>View plan</button>
               </div>
@@ -79,6 +81,7 @@ function Me() {
           );
         })}
 
+        <h1>TODO: ADD PLANS THAT HAVE BEEN SHARED WITH YOU</h1>
         <button onClick={() => navigate("/")}>Go home</button>
       </div>
     </>

@@ -77,4 +77,27 @@ router.get("/my-plans", verifyToken, async (req, res) => {
   }
 });
 
+// GET for name and email to update userInfo state on Home page
+router.get("/me", verifyToken, async (req, res) => {
+  try {
+    const userData = await prisma.user.findFirst({
+      where: {
+        id: parseInt(req.user),
+      },
+      select: {
+        first_name: true,
+        email: true,
+      },
+    });
+
+    res.status(200).send({
+      firstName: userData.first_name,
+      email: userData.email,
+    });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 export default router;

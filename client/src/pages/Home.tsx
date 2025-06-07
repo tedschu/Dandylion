@@ -5,13 +5,15 @@ import kyoto from "../assets/images/destinations/kyoto.png";
 import paraguay from "../assets/images/destinations/paraguay.png";
 import mexico from "../assets/images/destinations/mexico.png";
 import example_result from "../assets/recommendation-example_cropped.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { QuestionsResponsesProvider } from "../contexts/QuestionsResponsesContext";
 import { useAuth } from "../contexts/AuthContext";
 import { div } from "motion/react-client";
 
 function Home() {
-  const { isLoggedIn } = useAuth();
+  const storedToken = localStorage.getItem("token");
+
+  const { isLoggedIn, token, setUserInfo } = useAuth();
   const [showAlert, setShowAlert] = useState(false);
 
   const navigate = useNavigate();
@@ -27,7 +29,35 @@ function Home() {
   //   } else setShowAlert(true);
   // };
 
-  console.log(isLoggedIn);
+  useEffect(() => {
+    getUserData();
+  }, [isLoggedIn, token]);
+
+  const getUserData = async () => {
+    try {
+      const response = await fetch("/api/users/me", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${storedToken}`,
+        },
+      });
+
+      const data = await response.json();
+
+      console.log("Here is data:", data);
+
+      if (response.ok) {
+        setUserInfo({
+          firstName: data.firstName,
+          email: data.email,
+        });
+      }
+    } catch (error) {
+      console.error("error fetching user data:", error);
+    }
+  };
+
   return (
     <>
       <div className="homeContainer">

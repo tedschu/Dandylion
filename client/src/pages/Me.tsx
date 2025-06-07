@@ -3,14 +3,20 @@ import Header from "../components/Header";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { h2 } from "motion/react-client";
+import testIMage from "../assets/images/destinations/italy.png";
 
 type Plan = {
   result_data: {
     destination: {
       location: string;
     };
+    second_destination: {
+      location: string;
+    };
     // add other properties if needed
   };
+  plan_type: string;
+  created_at: string;
   // add other properties if needed
 };
 
@@ -37,8 +43,6 @@ function Me() {
 
       const data = await response.json();
 
-      const finalData = JSON.stringify(data.plansFormattedDates);
-
       console.log(data);
 
       if (data) {
@@ -47,24 +51,35 @@ function Me() {
     } catch (error) {}
   };
 
+  console.log(userPlans);
+
   return (
     <>
       <div className="myAccountContainer">
         <Header />
-        <div className="myAccountContentContainer">
-          <h1>
-            Hey there, {userInfo.firstName}. Your email: {userInfo.email}
-          </h1>
-          {userPlans.map((plan) => {
-            return (
-              <>
-                <h2>test {plan.result_data.destination.location}</h2>
-              </>
-            );
-          })}
+        <h1 style={{ color: "white", textAlign: "center" }}>
+          Hey there, {userInfo.firstName}. Here are the plans you've purchased:
+        </h1>
 
-          <button onClick={() => navigate("/")}>Go home</button>
-        </div>
+        {userPlans.map((plan) => {
+          return (
+            <>
+              <div className="myAccountContentContainer">
+                <img src={testIMage} alt="" style={{ width: "80px" }} />
+                <div>
+                  <h2>{plan.result_data.destination.location}</h2>
+                  {plan.result_data.second_destination && (
+                    <h2> {plan.result_data.second_destination.location}</h2>
+                  )}
+                  <p>Created on: {plan.created_at.split(",")[0]}</p>
+                </div>
+                <button>View plan</button>
+              </div>
+            </>
+          );
+        })}
+
+        <button onClick={() => navigate("/")}>Go home</button>
       </div>
     </>
   );

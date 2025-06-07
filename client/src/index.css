@@ -769,6 +769,7 @@ button {
 /* ***** MY ACCOUNT (ME) SCREEN ***** */
 .myAccountContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -790,7 +791,7 @@ button {
 
 .myAccountContentContainer {
   display: flex;
-  flex-direction: column;
+  gap: 15px;
   justify-content: center;
   align-items: center;
   width: 85%;
@@ -799,9 +800,16 @@ button {
   border-radius: 10px;
   z-index: 2;
   border: 5px solid var(--brand-yellow);
-  margin: 80px 0 20px 0;
+  margin: 20px 0 20px 0;
   box-sizing: border-box;
   text-align: center;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.myAccountContentContainer h2,
+p {
+  text-align: left;
 }
 
 /* ***** LOGIN SCREEN ***** */

@@ -58,6 +58,7 @@ router.get("/my-plans", verifyToken, async (req, res) => {
         plan_type: true,
         result_data: true,
         created_at: true,
+        id: true,
       },
     });
 
@@ -65,6 +66,7 @@ router.get("/my-plans", verifyToken, async (req, res) => {
       plan_type: plan.plan_type,
       result_data: plan.result_data,
       created_at: plan.created_at.toLocaleString(),
+      id: plan.id,
     }));
 
     res.status(200).send({

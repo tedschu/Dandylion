@@ -4,6 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { h2 } from "motion/react-client";
 import testIMage from "../assets/images/destinations/italy.png";
+import { apiResponse } from "../types/types";
 
 type Plan = {
   result_data: {
@@ -17,7 +18,13 @@ type Plan = {
   };
   plan_type: string;
   created_at: string;
+  id: number;
   // add other properties if needed
+};
+
+type PlanResultsProps = {
+  result_data: apiResponse;
+  plan_type: string;
 };
 
 function Me() {
@@ -51,8 +58,6 @@ function Me() {
     } catch (error) {}
   };
 
-  console.log(userPlans);
-
   return (
     <>
       <div className="myAccountContainer">
@@ -75,7 +80,9 @@ function Me() {
                     <p>Created on: {plan.created_at.split(",")[0]}</p>
                   </div>
                 </div>
-                <button>View plan</button>
+                <button onClick={() => navigate(`/plans/${plan.id}`)}>
+                  View plan
+                </button>
               </div>
             </>
           );

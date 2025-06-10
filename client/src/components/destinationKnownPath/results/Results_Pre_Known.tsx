@@ -9,7 +9,7 @@ type ResultsProps = {
   setShowFullResults: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Results_Pre_Unknown({
+function Results_Pre_Known({
   apiResponse,
   setIsSecondDestinationOpen,
   hasResponse,
@@ -71,4 +71,4 @@ function Results_Pre_Unknown({
   );
 }
 
-export default Results_Pre_Unknown;
+export default Results_Pre_Known;

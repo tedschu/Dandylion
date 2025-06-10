@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Me from "./pages/Me";
 import ResultsDestinationKnown from "./pages/ResultsDestinationKnown";
 import ResultsDestinationUnknown from "./pages/ResultsDestinationUnknown";
+import PlanDetail from "./pages/PlanDetail";
 import Path from "./pages/Path";
 import DestinationKnown from "./pages/DestinationKnown";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -40,6 +41,8 @@ function App() {
                 element={<ResultsDestinationUnknown />}
               />
               <Route path="/your-plan" element={<ResultsDestinationKnown />} />
+
+              <Route path="/plans/:plan_id" element={<PlanDetail />} />
             </Routes>
           </AppProvider>
         </QuestionsResponsesProvider>

@@ -7,7 +7,7 @@ type ResultsProps = {
   setIsSecondDestinationOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Results_Full_Unknown({
+function Results_Full_Known({
   apiResponse,
   setIsSecondDestinationOpen,
 }: ResultsProps) {
@@ -69,4 +69,4 @@ function Results_Full_Unknown({
   );
 }
 
-export default Results_Full_Unknown;
+export default Results_Full_Known;

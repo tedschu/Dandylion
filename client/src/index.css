@@ -794,8 +794,8 @@ button {
   gap: 25px;
   justify-content: space-between;
   align-items: center;
-  /* width: 85%; */
-  max-width: 950px;
+  width: 90%;
+  max-width: 800px;
   background-color: var(--back-cream);
   border-radius: 10px;
   z-index: 2;
@@ -810,6 +810,40 @@ button {
 .myAccountContentContainer h2,
 p {
   text-align: left;
+  font-size: 16px;
+}
+
+/* ***** SHARING PLAN COMPONENT ***** */
+.shareContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  max-width: 800px;
+  background-color: var(--back-sky-blue);
+  border-radius: 12px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.shareFormContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.shareFormInputContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.shareFormEmailList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 /* ***** LOGIN SCREEN ***** */
@@ -1008,5 +1042,11 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .myAccountContentContainer h2,
+  p {
+    text-align: left;
+    font-size: 18px;
   }
 }

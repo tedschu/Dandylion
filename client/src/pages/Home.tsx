@@ -45,8 +45,6 @@ function Home() {
 
       const data = await response.json();
 
-      console.log("Here is data:", data);
-
       if (response.ok) {
         setUserInfo({
           firstName: data.firstName,

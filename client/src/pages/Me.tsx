@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { h2 } from "motion/react-client";
 import testIMage from "../assets/images/destinations/italy.png";
 import { apiResponse } from "../types/types";
+import SharePlan from "../components/SharePlan";
 
 type Plan = {
   result_data: {
@@ -50,8 +51,6 @@ function Me() {
 
       const data = await response.json();
 
-      console.log(data);
-
       if (data) {
         setUserPlans(data.plansFormattedDates);
       }
@@ -71,7 +70,15 @@ function Me() {
             <>
               <div className="myAccountContentContainer">
                 <div style={{ display: "flex", gap: "10px" }}>
-                  <img src={testIMage} alt="" style={{ width: "80px" }} />
+                  <img
+                    src={testIMage}
+                    alt=""
+                    style={{
+                      maxWidth: "100px",
+                      height: "auto",
+                      objectFit: "contain",
+                    }}
+                  />
                   <div>
                     <h2>{plan.result_data.destination.location}</h2>
                     {plan.result_data.second_destination && (
@@ -80,16 +87,32 @@ function Me() {
                     <p>Created on: {plan.created_at.split(",")[0]}</p>
                   </div>
                 </div>
-                <button onClick={() => navigate(`/plans/${plan.id}`)}>
-                  View plan
-                </button>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                  }}
+                >
+                  <button
+                    className="register"
+                    onClick={() => navigate(`/plans/${plan.id}`)}
+                  >
+                    View plan
+                  </button>
+                  <button>Share plan</button>
+                </div>
               </div>
             </>
           );
         })}
 
         <h1>TODO: ADD PLANS THAT HAVE BEEN SHARED WITH YOU</h1>
-        <button onClick={() => navigate("/")}>Go home</button>
+        <button className="login" onClick={() => navigate("/")}>
+          Go home
+        </button>
+        {/* TEMPORARY FOR TESTING - REMOVE */}
+        <SharePlan />
       </div>
     </>
   );

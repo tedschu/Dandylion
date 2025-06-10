@@ -102,7 +102,7 @@ export type Destination = {
 
 export type apiResponse = {
   destination: Destination;
-  second_destination?: Destination;
+  second_destination: Destination;
 };
 
 export type Itinerary = {

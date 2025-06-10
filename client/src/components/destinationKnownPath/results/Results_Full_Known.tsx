@@ -4,13 +4,9 @@ import { apiResponse } from "../../../types/types";
 
 type ResultsProps = {
   apiResponse: apiResponse;
-  setIsSecondDestinationOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Results_Full_Known({
-  apiResponse,
-  setIsSecondDestinationOpen,
-}: ResultsProps) {
+function Results_Full_Known({ apiResponse }: ResultsProps) {
   return (
     <>
       <div className="resultContentContainer">

@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { apiResponse } from "../types/types";
 import { useEffect, useState } from "react";
 import Results_Full_Unknown from "../components/destinationUnknownPath/results/Results_Full_Unknown";
+import Results_Full_Known from "../components/destinationKnownPath/results/Results_Full_Known";
+import Header from "../components/Header";
 
 type PlanDetailType = {
   plan_type: string;
@@ -29,25 +31,25 @@ function PlanDetail() {
 
       const data = await response.json();
 
-      console.log("Here is the planDetail data: ", data);
+      console.log("Here is the planDetail data: ", data.planData);
 
       if (data) {
-        setPlanData(data);
+        setPlanData(data.planData);
       }
     } catch (error) {}
   };
 
-  console.log("Here is planData state: ", planData);
-
   return (
     <>
-      {planData && planData.plan_type === "DESTINATION_UNKNOWN" && (
-        <Results_Full_Unknown apiResponse={planData.result_data} />
-      )}
-
-      {planData && planData.plan_type === "DESTINATION_KNOWN" && (
-        <Results_Full_Known apiResponse={planData.result_data} />
-      )}
+      <div className="resultPageContainer">
+        <Header />
+        {planData && planData.plan_type === "DESTINATION_UNKNOWN" && (
+          <Results_Full_Unknown apiResponse={planData.result_data} />
+        )}
+        {planData && planData.plan_type === "DESTINATION_KNOWN" && (
+          <Results_Full_Known apiResponse={planData.result_data} />
+        )}
+      </div>
     </>
   );
 }

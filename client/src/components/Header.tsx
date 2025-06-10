@@ -60,7 +60,7 @@ function Header() {
               },
             }}
           >
-            <MenuItem onClick={() => navigate("/me")}>My account</MenuItem>
+            <MenuItem onClick={() => navigate("/me")}>My plans</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </div>

@@ -427,7 +427,7 @@ button {
 }
 
 .header {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   width: 100%;
   text-align: center;
@@ -791,6 +791,14 @@ button {
 
 .myAccountContentContainer {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 70px 0 0 0;
+}
+
+.myAccountPlanContainer {
+  display: flex;
   gap: 25px;
   justify-content: space-between;
   align-items: center;
@@ -1044,7 +1052,7 @@ p {
     align-items: center;
   }
 
-  .myAccountContentContainer h2,
+  .myAccountPlanContainer h2,
   p {
     text-align: left;
     font-size: 18px;

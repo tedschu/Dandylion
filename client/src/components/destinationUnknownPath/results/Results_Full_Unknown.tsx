@@ -73,9 +73,15 @@ function Results_Full_Unknown({ apiResponse }: ResultsProps) {
                       color: "var(--teal)",
                     }}
                   >{`Day ${day.day_num}: ${day.summary}`}</h3>
-                  <li key={`${day.summary} - ${index}`}>{day.morning}</li>
-                  <li key={`${day.summary} - ${index}`}>{day.afternoon}</li>
-                  <li key={`${day.summary} - ${index}`}>{day.evening}</li>
+                  <li key={`${day.day_num} - morning - ${index}`}>
+                    {day.morning}
+                  </li>
+                  <li key={`${day.day_num} - afternoon - ${index}`}>
+                    {day.afternoon}
+                  </li>
+                  <li key={`${day.day_num} - evening - ${index}`}>
+                    {day.evening}
+                  </li>
                 </>
               );
             })}
@@ -155,9 +161,15 @@ function Results_Full_Unknown({ apiResponse }: ResultsProps) {
                       color: "var(--teal)",
                     }}
                   >{`Day ${day.day_num}: ${day.summary}`}</h3>
-                  <li key={`${day.summary} - ${index}`}>{day.morning}</li>
-                  <li key={`${day.summary} - ${index}`}>{day.afternoon}</li>
-                  <li key={`${day.summary} - ${index}`}>{day.evening}</li>
+                  <li key={`${day.day_num} - morning - ${index}`}>
+                    {day.morning}
+                  </li>
+                  <li key={`${day.day_num} - afternoon - ${index}`}>
+                    {day.afternoon}
+                  </li>
+                  <li key={`${day.day_num} - evening - ${index}`}>
+                    {day.evening}
+                  </li>
                 </>
               );
             })}

@@ -79,41 +79,39 @@ function DestinationKnown() {
           const stepNumber = index + 1;
           return (
             stepNumber === currentStep && (
-              <>
-                <AnimatePresence mode="wait">
-                  <motion.div
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={stepNumber}
+                  {...motionProps}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <ComponentStep
                     key={stepNumber}
-                    {...motionProps}
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <ComponentStep
-                      key={stepNumber}
-                      currentStep={currentStep}
-                      setCurrentStep={setCurrentStep}
-                      userResponses={userResponses}
-                      setUserResponses={setUserResponses}
-                      questionPromptsKnown={questionPromptsKnown}
-                      setQuestionPromptsKnown={setQuestionPromptsKnown}
-                      apiResponse={apiResponse}
-                      setApiResponse={setApiResponse}
-                      userInfo={
-                        stepNumber === 0 || stepNumber === 8
-                          ? userInfo
-                          : undefined
-                      }
-                      setUserInfo={setUserInfo}
-                      showBadWordsAlert={showBadWordsAlert}
-                      setShowBadWordsAlert={setShowBadWordsAlert}
-                    />
-                  </motion.div>
-                </AnimatePresence>
-              </>
+                    currentStep={currentStep}
+                    setCurrentStep={setCurrentStep}
+                    userResponses={userResponses}
+                    setUserResponses={setUserResponses}
+                    questionPromptsKnown={questionPromptsKnown}
+                    setQuestionPromptsKnown={setQuestionPromptsKnown}
+                    apiResponse={apiResponse}
+                    setApiResponse={setApiResponse}
+                    userInfo={
+                      stepNumber === 0 || stepNumber === 8
+                        ? userInfo
+                        : undefined
+                    }
+                    setUserInfo={setUserInfo}
+                    showBadWordsAlert={showBadWordsAlert}
+                    setShowBadWordsAlert={setShowBadWordsAlert}
+                  />
+                </motion.div>
+              </AnimatePresence>
             )
           );
         })}

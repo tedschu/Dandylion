@@ -61,14 +61,15 @@ function Me() {
     <>
       <div className="myAccountContainer">
         <Header />
-        <h1 style={{ color: "white", textAlign: "center" }}>
-          Hey there! Here are the plans you've purchased:
-        </h1>
 
-        {userPlans.map((plan) => {
-          return (
-            <>
-              <div className="myAccountContentContainer">
+        <div className="myAccountContentContainer">
+          <h1 style={{ color: "white", textAlign: "center" }}>
+            Hey there! Here are the plans you've purchased:
+          </h1>
+
+          {userPlans.map((plan) => {
+            return (
+              <div className="myAccountPlanContainer">
                 <div style={{ display: "flex", gap: "10px" }}>
                   <img
                     src={testIMage}
@@ -103,16 +104,16 @@ function Me() {
                   <button>Share plan</button>
                 </div>
               </div>
-            </>
-          );
-        })}
+            );
+          })}
 
-        <h1>TODO: ADD PLANS THAT HAVE BEEN SHARED WITH YOU</h1>
-        <button className="login" onClick={() => navigate("/")}>
-          Go home
-        </button>
-        {/* TEMPORARY FOR TESTING - REMOVE */}
-        <SharePlan />
+          <h1>TODO: ADD PLANS THAT HAVE BEEN SHARED WITH YOU</h1>
+          <button className="login" onClick={() => navigate("/")}>
+            Go home
+          </button>
+          {/* TEMPORARY FOR TESTING - REMOVE */}
+          <SharePlan />
+        </div>
       </div>
     </>
   );

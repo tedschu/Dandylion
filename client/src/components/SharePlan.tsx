@@ -5,10 +5,7 @@ function SharePlan() {
     <>
       <div className="shareContentContainer">
         <h1>Share your plan</h1>
-        <p>
-          Invite others to see your plan (they'll create a free account to
-          view):
-        </p>
+        <p>Invite others to see your plan:</p>
         <form className="shareFormContainer" action="">
           <div className="shareFormInputContainer">
             <input type="text" />

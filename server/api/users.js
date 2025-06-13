@@ -3,6 +3,7 @@ const router = express.Router();
 import jwt from "jsonwebtoken";
 import { PrismaClient } from "../generated/prisma/client.ts";
 import verifyToken from "../utilities/verifyToken.mjs";
+import { verify } from "crypto";
 
 const prisma = new PrismaClient();
 
@@ -59,20 +60,56 @@ router.get("/my-plans", verifyToken, async (req, res) => {
         result_data: true,
         created_at: true,
         id: true,
+        planShares: {
+          select: {
+            email: true,
+          },
+        },
       },
     });
+
+    console.log(allPlans);
 
     const plansFormattedDates = allPlans.map((plan) => ({
       plan_type: plan.plan_type,
       result_data: plan.result_data,
       created_at: plan.created_at.toLocaleString(),
       id: plan.id,
+      shared_with: plan.planShares.map((share) => share.email),
     }));
 
     res.status(200).send({
       plansFormattedDates,
     });
     console.log(allPlans);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+// ADD THIS TO ABOVE ROUTE AND THEN DELETE
+// GET to pull all users shared on a given trip, by the trip owner (rendered on the "Me" page)
+router.get("/plan-shared-users", verifyToken, async (req, res) => {
+  try {
+    // Finds all users that a given plan has been shared with
+
+    const plan_id = req.body.plan_id;
+
+    const getSharedUsers = await prisma.planShares.findMany({
+      where: {
+        plan_id: plan_id,
+      },
+      select: {
+        email: true,
+      },
+    });
+
+    const allSharedUsers = getSharedUsers.map((user) => user.email);
+
+    res.status(200).send({
+      allSharedUsers,
+    });
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -145,6 +182,33 @@ router.get("/plans-shared-with-me", verifyToken, async (req, res) => {
 
     res.status(200).send({
       plansFormattedDates,
+    });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+// Create a post route to add shared users to a plan
+router.post("/share-plan-users", verifyToken, async (req, res) => {
+  try {
+    const user_id = req.user;
+    const plan_id = req.body.plan_id;
+    const emails = req.body.emails;
+
+    await prisma.planShares.createMany({
+      data: emails.map((email) => ({
+        plan_id: plan_id,
+        email: email,
+        invited_by_user_id: user_id,
+      })),
+      skipDuplicates: true,
+    });
+
+    res.status(200).send({
+      message: "Plan shared successfully",
+      shared_with: emails.length,
+      plan_id: plan_id,
     });
   } catch (error) {
     console.log(error);

@@ -69,6 +69,7 @@ model PlanShares {
   invited_by_user_id Int
   user User @relation(fields: [invited_by_user_id], references: [id])
   created_at DateTime @default(now())
+  @@unique([plan_id, email]) // ensures that no one can share a plan with an email twice
 }
 
 model UserResponse {

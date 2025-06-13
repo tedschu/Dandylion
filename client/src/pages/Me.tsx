@@ -19,6 +19,7 @@ type Plan = {
   plan_type: string;
   created_at: string;
   id: number;
+  shared_with: [];
 };
 
 type SharedPlan = {
@@ -55,6 +56,7 @@ function Me() {
     getUserSharedPlans();
   }, []);
 
+  // Gets all plans created by the user
   const getUserPlans = async () => {
     try {
       const response = await fetch("/api/users/my-plans", {
@@ -75,6 +77,7 @@ function Me() {
     }
   };
 
+  // Gets all plans that were shared with the user
   const getUserSharedPlans = async () => {
     try {
       const response = await fetch("/api/users/plans-shared-with-me", {
@@ -95,7 +98,7 @@ function Me() {
     }
   };
 
-  console.log(userSharedPlans);
+  // For a given plan, gets all users
 
   return (
     <>
@@ -131,6 +134,7 @@ function Me() {
                           </h2>
                         )}
                         <p>Created on: {plan.created_at.split(",")[0]}</p>
+                        <p>Shared with: {plan.shared_with}</p>
                       </div>
                     </div>
                     <div

@@ -1,6 +1,7 @@
 import { useAuth } from "../contexts/AuthContext";
 
 function SharePlan() {
+  // ADD A CHECK TO ENSURE A USER ISN'T ADDING THEMSELVES TO SHARE (EMAIL)
   return (
     <>
       <div className="shareContentContainer">

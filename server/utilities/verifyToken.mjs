@@ -15,6 +15,7 @@ function verifyToken(req, res, next) {
       return res.status(403).send({ error: "Failed to authenticate token." });
 
     req.user = decodedUser.data.id;
+    req.email = decodedUser.data.email;
 
     next();
   });

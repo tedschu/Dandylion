@@ -102,4 +102,54 @@ router.get("/me", verifyToken, async (req, res) => {
   }
 });
 
+// GET to pull all trips shared with a given user (rendered on the "Me" page)
+router.get("/plans-shared-with-me", verifyToken, async (req, res) => {
+  try {
+    // Finds all shared plans for a user by email in planShares table
+    // Includes relational fields from Plan and User tables to grab plan data, and who shared the plan
+    const allPlanShares = await prisma.planShares.findMany({
+      where: {
+        email: req.email,
+      },
+      orderBy: {
+        id: "desc",
+      },
+      include: {
+        plan: {
+          select: {
+            plan_type: true,
+            result_data: true,
+            created_at: true,
+            id: true,
+          },
+        },
+        user: {
+          select: {
+            email: true,
+            first_name: true,
+          },
+        },
+      },
+    });
+
+    console.log(allPlanShares);
+
+    const plansFormattedDates = allPlanShares.map((plan) => ({
+      plan_type: plan.plan.plan_type,
+      result_data: plan.plan.result_data,
+      created_at: plan.plan.created_at.toLocaleString(),
+      id: plan.plan.id,
+      invited_by_name: plan.user.first_name,
+      invited_by_email: plan.user.email,
+    }));
+
+    res.status(200).send({
+      plansFormattedDates,
+    });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 export default router;

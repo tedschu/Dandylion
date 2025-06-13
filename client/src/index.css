@@ -427,7 +427,7 @@ button {
 }
 
 .header {
-  /* position: fixed; */
+  position: fixed;
   top: 0;
   width: 100%;
   text-align: center;
@@ -436,6 +436,7 @@ button {
   /* background-color: #1a73e8; */
   overflow: visible;
   /* box-shadow: 3px 3px 3px #1a73e8; */
+  z-index: 2;
 }
 
 .navMenu {
@@ -808,17 +809,23 @@ button {
   border-radius: 10px;
   z-index: 2;
   border: 5px solid var(--brand-yellow);
-  margin: 20px 10px;
+  margin: 10px 10px;
   box-sizing: border-box;
   text-align: center;
   padding: 15px;
   box-sizing: border-box;
 }
 
-.myAccountContentContainer h2,
+.myAccountPlanText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.myAccountPlanText > h2,
 p {
+  font-size: 14px;
   text-align: left;
-  font-size: 16px;
 }
 
 /* ***** SHARING PLAN COMPONENT ***** */
@@ -1050,11 +1057,5 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-  .myAccountPlanContainer h2,
-  p {
-    text-align: left;
-    font-size: 18px;
   }
 }

@@ -93,6 +93,7 @@ router.post("/login", async (req, res) => {
         id: true,
         first_name: true,
         password: true,
+        email: true,
       },
     });
 
@@ -122,13 +123,12 @@ router.post("/login", async (req, res) => {
       },
       process.env.JWT_SECRET
     );
-    res
-      .status(200)
-      .send({
-        token: token,
-        id: userMatch.id,
-        firstName: userMatch.first_name,
-      });
+    res.status(200).send({
+      token: token,
+      id: userMatch.id,
+      firstName: userMatch.first_name,
+      email: userMatch.email,
+    });
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

@@ -1,4 +1,5 @@
 import { useAuth } from "../contexts/AuthContext";
+import { useAppContext } from "../contexts/AppContext";
 import { useState } from "react";
 
 function SharePlan() {
@@ -7,6 +8,7 @@ function SharePlan() {
   const [sharedEmails, setSharedEmails] = useState<string[]>([]);
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn, token, setToken } =
     useAuth();
+  const { planID } = useAppContext();
   const [showAlert, setShowAlert] = useState(false);
 
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -71,7 +73,12 @@ function SharePlan() {
               type="text"
               placeholder="name@example.com"
               name="email"
-              style={{ border: "none", width: "200px", borderRadius: "5px" }}
+              style={{
+                border: "none",
+                width: "200px",
+                borderRadius: "5px",
+                padding: "3px",
+              }}
             />
             <button>Add</button>
           </div>

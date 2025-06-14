@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useAuth } from "../contexts/AuthContext";
+import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 import { h2, span } from "motion/react-client";
 import testIMage from "../assets/images/destinations/italy.png";
@@ -45,6 +46,7 @@ type PlanResultsProps = {
 
 function Me() {
   const { userInfo } = useAuth();
+  const { planID, setPlanID } = useAppContext();
   const storedToken = localStorage.getItem("token");
   const [userPlans, setUserPlans] = useState<Plan[]>([]);
   const [userSharedPlans, setUserSharedPlans] = useState<SharedPlan[]>([]);
@@ -98,7 +100,12 @@ function Me() {
     }
   };
 
-  // For a given plan, gets all users
+  const openSharePlan = (id: number) => {
+    // Update planID state value
+    // Open modal with SharePlan component
+
+    setPlanID(id);
+  };
 
   return (
     <>
@@ -158,7 +165,12 @@ function Me() {
                       >
                         View plan
                       </button>
-                      <button>Share plan</button>
+                      <button
+                        type="button"
+                        onClick={() => openSharePlan(plan.id)}
+                      >
+                        Share plan
+                      </button>
                     </div>
                   </div>
                 );

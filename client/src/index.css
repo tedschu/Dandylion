@@ -826,6 +826,7 @@ button {
 p {
   font-size: 14px;
   text-align: left;
+  margin: 2px 0;
 }
 
 /* ***** SHARING PLAN COMPONENT ***** */
@@ -859,6 +860,17 @@ p {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin: 10px 0;
+}
+
+.emailPill {
+  padding: 7px 10px;
+  background-color: var(--success);
+  border-radius: 20px;
+  position: relative;
+  color: white;
+  display: flex;
+  font-size: 14px;
 }
 
 /* ***** LOGIN SCREEN ***** */

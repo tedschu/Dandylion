@@ -68,8 +68,6 @@ router.get("/my-plans", verifyToken, async (req, res) => {
       },
     });
 
-    console.log(allPlans);
-
     const plansFormattedDates = allPlans.map((plan) => ({
       plan_type: plan.plan_type,
       result_data: plan.result_data,

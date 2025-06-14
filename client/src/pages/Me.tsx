@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { h2 } from "motion/react-client";
+import { h2, span } from "motion/react-client";
 import testIMage from "../assets/images/destinations/italy.png";
 import { apiResponse } from "../types/types";
 import SharePlan from "../components/SharePlan";
@@ -129,12 +129,20 @@ function Me() {
                         <h2>{plan.result_data.destination.location}</h2>
                         {plan.result_data.second_destination && (
                           <h2>
-                            {" "}
                             {plan.result_data.second_destination.location}
                           </h2>
                         )}
+
                         <p>Created on: {plan.created_at.split(",")[0]}</p>
-                        <p>Shared with: {plan.shared_with}</p>
+                        {plan.shared_with.length > 0 && (
+                          <p>
+                            Shared with:{" "}
+                            {plan.shared_with.map((email) => {
+                              return <span>{email} </span>;
+                            })}{" "}
+                            {/* {plan.shared_with.length} others */}
+                          </p>
+                        )}
                       </div>
                     </div>
                     <div

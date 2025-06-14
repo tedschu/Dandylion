@@ -61,7 +61,7 @@ function Header() {
             }}
           >
             <MenuItem style={{ fontWeight: "bold" }}>
-              Hey, {userInfo.firstName}
+              Hey, {userInfo.email}
             </MenuItem>
             <MenuItem onClick={() => navigate("/me")}>My plans</MenuItem>
             <MenuItem onClick={() => navigate("/path")}>Start a plan</MenuItem>

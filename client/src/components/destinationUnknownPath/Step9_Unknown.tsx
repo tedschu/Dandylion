@@ -1,20 +1,25 @@
-import { StepProps } from "../../types/types";
 import surfboards from "../../assets/images/surfboards.png";
 import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
+import { useAppContext } from "../../contexts/AppContext";
+import { useQuestionsResponses } from "../../contexts/QuestionsResponsesContext";
 
-function Step9({
-  currentStep,
-  setCurrentStep,
-  userResponses,
-  setUserResponses,
-  questionPromptsUnknown,
-  setQuestionPromptsUnknown,
-  apiResponse,
-  setApiResponse,
-  showBadWordsAlert,
-  setShowBadWordsAlert,
-}: StepProps) {
+function Step9() {
+  const {
+    currentStep,
+    setCurrentStep,
+    userResponses,
+    setUserResponses,
+    questionPromptsUnknown,
+    setQuestionPromptsUnknown,
+  } = useQuestionsResponses();
+  const {
+    apiResponse,
+    setApiResponse,
+    showBadWordsAlert,
+    setShowBadWordsAlert,
+  } = useAppContext();
+
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =

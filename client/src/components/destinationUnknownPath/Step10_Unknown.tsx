@@ -7,20 +7,27 @@ import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
 import RegisterWithPlan from "../RegisterWithPlan";
 import { useAuth } from "../../contexts/AuthContext";
+import { useAppContext } from "../../contexts/AppContext";
+import { useQuestionsResponses } from "../../contexts/QuestionsResponsesContext";
 
-function Step10({
-  currentStep,
-  setCurrentStep,
-  userResponses,
-  setUserResponses,
-  questionPromptsUnknown,
-  setQuestionPromptsUnknown,
-  apiResponse,
-  setApiResponse,
-  showBadWordsAlert,
-  setShowBadWordsAlert,
-}: StepProps) {
+function Step10() {
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
+  const {
+    currentStep,
+    setCurrentStep,
+    userResponses,
+    setUserResponses,
+    questionPromptsUnknown,
+    setQuestionPromptsUnknown,
+  } = useQuestionsResponses();
+  const {
+    apiResponse,
+    setApiResponse,
+    showBadWordsAlert,
+    setShowBadWordsAlert,
+  } = useAppContext();
+
+  // TODO: UPDATE ALL STEP PAGES TO HAVE CONTEXT RATHER THAN PROP VALUES ****************************
 
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };

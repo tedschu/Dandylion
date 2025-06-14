@@ -1,21 +1,28 @@
-import { StepProps } from "../../types/types";
 import { hasWarned, motion } from "motion/react";
 import beach from "../../assets/images/beach.png";
 import { useState } from "react";
 import bee from "../../assets/bee.png";
 import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
+import { useAppContext } from "../../contexts/AppContext";
+import { useQuestionsResponses } from "../../contexts/QuestionsResponsesContext";
 
-function Step1({
-  currentStep,
-  setCurrentStep,
-  userResponses,
-  setUserResponses,
-  questionPromptsUnknown,
-  setQuestionPromptsUnknown,
-  showBadWordsAlert,
-  setShowBadWordsAlert,
-}: StepProps) {
+function Step1() {
+  const {
+    currentStep,
+    setCurrentStep,
+    userResponses,
+    setUserResponses,
+    questionPromptsUnknown,
+    setQuestionPromptsUnknown,
+  } = useQuestionsResponses();
+  const {
+    apiResponse,
+    setApiResponse,
+    showBadWordsAlert,
+    setShowBadWordsAlert,
+  } = useAppContext();
+
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =

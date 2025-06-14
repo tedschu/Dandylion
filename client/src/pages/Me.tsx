@@ -46,7 +46,14 @@ type PlanResultsProps = {
 
 function Me() {
   const { userInfo } = useAuth();
-  const { planID, setPlanID } = useAppContext();
+  const {
+    planShareData,
+    setPlanShareData,
+    isShareModalOpen,
+    setIsShareModalOpen,
+    shouldRefreshPlans,
+    setShouldRefreshPlans,
+  } = useAppContext();
   const storedToken = localStorage.getItem("token");
   const [userPlans, setUserPlans] = useState<Plan[]>([]);
   const [userSharedPlans, setUserSharedPlans] = useState<SharedPlan[]>([]);
@@ -57,6 +64,13 @@ function Me() {
     getUserPlans();
     getUserSharedPlans();
   }, []);
+
+  useEffect(() => {
+    if (shouldRefreshPlans) {
+      getUserPlans();
+      setShouldRefreshPlans(false);
+    }
+  }, [shouldRefreshPlans]);
 
   // Gets all plans created by the user
   const getUserPlans = async () => {
@@ -100,11 +114,16 @@ function Me() {
     }
   };
 
-  const openSharePlan = (id: number) => {
+  const openSharePlan = (id: number, destination: string) => {
     // Update planID state value
     // Open modal with SharePlan component
 
-    setPlanID(id);
+    setPlanShareData((prevState) => ({
+      ...prevState,
+      planID: id,
+      destination: destination,
+    }));
+    setIsShareModalOpen(true);
   };
 
   return (
@@ -119,9 +138,9 @@ function Me() {
                 Hey there! Here are the plans you've purchased:
               </h1>
 
-              {userPlans.map((plan) => {
+              {userPlans.map((plan, index) => {
                 return (
-                  <div className="myAccountPlanContainer">
+                  <div className="myAccountPlanContainer" key={index}>
                     <div style={{ display: "flex", gap: "10px" }}>
                       <img
                         src={testIMage}
@@ -144,8 +163,8 @@ function Me() {
                         {plan.shared_with.length > 0 && (
                           <p>
                             Shared with:{" "}
-                            {plan.shared_with.map((email) => {
-                              return <span>{email} </span>;
+                            {plan.shared_with.map((email, index) => {
+                              return <span key={index}>{email} </span>;
                             })}{" "}
                             {/* {plan.shared_with.length} others */}
                           </p>
@@ -167,7 +186,12 @@ function Me() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => openSharePlan(plan.id)}
+                        onClick={() =>
+                          openSharePlan(
+                            plan.id,
+                            plan.result_data.destination.location
+                          )
+                        }
                       >
                         Share plan
                       </button>
@@ -255,8 +279,7 @@ function Me() {
           <button className="login" onClick={() => navigate("/")}>
             Go home
           </button>
-          {/* TEMPORARY FOR TESTING - REMOVE */}
-          <SharePlan />
+          {isShareModalOpen && <SharePlan />}
         </div>
       </div>
     </>

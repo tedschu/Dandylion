@@ -58,6 +58,7 @@ const badWords = [
   "jagoff",
   "jerk",
   "jizz",
+  "kidnap",
   "kill",
   "knobend",
   "knob end",

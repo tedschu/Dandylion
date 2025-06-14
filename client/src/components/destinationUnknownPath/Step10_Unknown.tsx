@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import pyramid from "../../assets/images/pyramids.png";
 import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
-import Register from "../Register";
+import RegisterWithPlan from "../RegisterWithPlan";
 import { useAuth } from "../../contexts/AuthContext";
 
 function Step10({
@@ -91,15 +91,7 @@ function Step10({
             {showBadWordsAlert && <BadWordsAlert />}
           </div>
         </form>
-        {isModalOpen && (
-          <Register
-            setIsModalOpen={setIsModalOpen}
-            userInfo={userInfo}
-            setUserInfo={setUserInfo}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-          />
-        )}
+        {isModalOpen && <RegisterWithPlan setIsModalOpen={setIsModalOpen} />}
       </div>
     </>
   );

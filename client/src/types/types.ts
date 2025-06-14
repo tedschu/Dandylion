@@ -1,30 +1,5 @@
 import React, { SetStateAction } from "react";
 
-// export type StepProps = {
-//   currentStep: number;
-//   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-//   userResponses: UserResponses;
-//   setUserResponses: React.Dispatch<React.SetStateAction<UserResponses>>;
-//   questionPromptsUnknown?: QuestionPrompts;
-//   setQuestionPromptsUnknown?: React.Dispatch<
-//     React.SetStateAction<QuestionPrompts>
-//   >;
-//   questionPromptsKnown?: QuestionPrompts;
-//   setQuestionPromptsKnown?: React.Dispatch<
-//     React.SetStateAction<QuestionPrompts>
-//   >;
-//   apiResponse?: apiResponse;
-//   setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
-//   userInfo?: UserInfo;
-//   setUserInfo?: React.Dispatch<React.SetStateAction<UserInfo>>;
-//   showBadWordsAlert: boolean;
-//   setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
-//   showAPIErrorMessage: boolean;
-//   setShowAPIErrorMessage: React.Dispatch<React.SetStateAction<boolean>>;
-//   isLoggedIn: boolean;
-//   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-// };
-
 export type UserResponses = {
   response1: string;
   response2: string;
@@ -111,4 +86,9 @@ export type Itinerary = {
   morning: string;
   afternoon: string;
   evening: string;
+};
+
+export type PlanShareData = {
+  planID: number | null;
+  destination: string;
 };

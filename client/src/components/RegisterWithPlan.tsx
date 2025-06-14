@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { UserInfo } from "../types/types";
 import { useAuth } from "../contexts/AuthContext";
 
-type RegisterProps = {
+type RegisterWithPlanProps = {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Register({ setIsModalOpen }: RegisterProps) {
+function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
   // Will always show as a modal, whereas login will be a page accessed from hamburger menu
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn, token, setToken } =
     useAuth();
@@ -216,4 +216,4 @@ function Register({ setIsModalOpen }: RegisterProps) {
   );
 }
 
-export default Register;
+export default RegisterWithPlan;

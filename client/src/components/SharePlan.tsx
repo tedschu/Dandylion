@@ -8,7 +8,13 @@ function SharePlan() {
   const [sharedEmails, setSharedEmails] = useState<string[]>([]);
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn, token, setToken } =
     useAuth();
-  const { planID } = useAppContext();
+  const {
+    planShareData,
+    isShareModalOpen,
+    setIsShareModalOpen,
+    shouldRefreshPlans,
+    setShouldRefreshPlans,
+  } = useAppContext();
   const [showAlert, setShowAlert] = useState(false);
 
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,12 +55,15 @@ function SharePlan() {
         },
         body: JSON.stringify({
           // UPDATE PLAN_ID TO BE DYNAMIC WHEN THIS COMPONENT IS RENDERED INSIDE OF INDIVIDUAL PLAN COMPONENTS *********
-          plan_id: 16,
+          plan_id: planShareData.planID,
           emails: sharedEmails,
         }),
       });
 
       const data = await response.json();
+
+      setShouldRefreshPlans(true);
+      setIsShareModalOpen(false);
 
       //  TODO: ADD EMAIL SENDING FUNCTIONALITY **************
     } catch (error) {
@@ -64,61 +73,78 @@ function SharePlan() {
 
   return (
     <>
-      <div className="shareContentContainer">
-        <h1>Share your plan</h1>
-        <p>Invite others to see your plan:</p>
-        <form className="shareFormContainer" action="" onSubmit={submit}>
-          <div className="shareFormInputContainer">
-            <input
-              type="text"
-              placeholder="name@example.com"
-              name="email"
-              style={{
-                border: "none",
-                width: "200px",
-                borderRadius: "5px",
-                padding: "3px",
-              }}
-            />
-            <button>Add</button>
+      <div className="shareModalOverlay">
+        <div className="shareContentContainer">
+          <div
+            className="close"
+            onClick={() => setIsShareModalOpen(false)}
+            style={{
+              position: "absolute",
+              top: "6px",
+              left: "10px",
+              cursor: "pointer",
+            }}
+          >
+            X
           </div>
-          {showAlert && (
-            <h2 style={{ color: "red" }}>
-              You can't share this plan with your email
-            </h2>
-          )}
-          <div className="shareFormEmailList">
-            {sharedEmails.map((email, index) => (
-              <div className="emailPill" key={index}>
-                {email}
-                <div
-                  onClick={() => removeEmail(email)}
-                  style={{
-                    backgroundColor: "#298064",
-                    marginLeft: "5px",
-                    borderRadius: "50%",
-                    width: "20px",
-                    height: "20px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "13px",
-                    color: "white",
-                  }}
-                >
-                  x
+          <h1 style={{ fontSize: "20px" }}>
+            Share your plan for <span>{planShareData.destination}</span>
+          </h1>
+          <p>Invite others to see your plan:</p>
+          <form className="shareFormContainer" action="" onSubmit={submit}>
+            <div className="shareFormInputContainer">
+              <input
+                type="text"
+                placeholder="name@example.com"
+                name="email"
+                style={{
+                  border: "none",
+                  width: "200px",
+                  borderRadius: "5px",
+                  padding: "3px",
+                }}
+              />
+              <button>Add</button>
+            </div>
+            {showAlert && (
+              <h2 style={{ color: "red" }}>
+                You can't share this plan with your email
+              </h2>
+            )}
+            <div className="shareFormEmailList">
+              {sharedEmails.map((email, index) => (
+                <div className="emailPill" key={index}>
+                  {email}
+                  <div
+                    onClick={() => removeEmail(email)}
+                    style={{
+                      backgroundColor: "#298064",
+                      marginLeft: "5px",
+                      borderRadius: "50%",
+                      width: "20px",
+                      height: "20px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontSize: "13px",
+                      color: "white",
+                      cursor: "pointer",
+                    }}
+                  >
+                    x
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </form>
-        <button
-          className="register"
-          type="button"
-          onClick={() => shareEmails()}
-        >
-          Send invites
-        </button>
+              ))}
+            </div>
+          </form>
+          <button
+            className="register"
+            type="button"
+            onClick={() => shareEmails()}
+          >
+            Send invites
+          </button>
+        </div>
       </div>
     </>
   );

@@ -167,8 +167,6 @@ router.get("/plans-shared-with-me", verifyToken, async (req, res) => {
       },
     });
 
-    console.log(allPlanShares);
-
     const plansFormattedDates = allPlanShares.map((plan) => ({
       plan_type: plan.plan.plan_type,
       result_data: plan.plan.result_data,

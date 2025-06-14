@@ -14,6 +14,7 @@ import DestinationKnown from "./pages/DestinationKnown";
 import { AuthProvider } from "./contexts/AuthContext";
 import { QuestionsResponsesProvider } from "./contexts/QuestionsResponsesContext";
 import { AppProvider } from "./contexts/AppContext";
+import Register from "./pages/Register";
 
 function App() {
   const storedToken = localStorage.getItem("token");
@@ -35,6 +36,8 @@ function App() {
               />
 
               <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+
               <Route path="/me" element={<Me />} />
               <Route
                 path="/your-destination-plan"

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { apiResponse } from "../types/types";
+import { apiResponse, PlanShareData } from "../types/types";
 
 type AppContextType = {
   apiResponse: apiResponse;
@@ -8,8 +8,12 @@ type AppContextType = {
   setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
   showAPIErrorMessage: boolean;
   setShowAPIErrorMessage: React.Dispatch<React.SetStateAction<boolean>>;
-  planID: number;
-  setPlanID: React.Dispatch<React.SetStateAction<number>>;
+  planShareData: PlanShareData;
+  setPlanShareData: React.Dispatch<React.SetStateAction<PlanShareData>>;
+  isShareModalOpen: boolean;
+  setIsShareModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  shouldRefreshPlans: boolean;
+  setShouldRefreshPlans: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -23,8 +27,16 @@ export function AppProvider({ children }: AppProviderProps) {
   // Shows BadWordsAlert component in question paths if a user types a "bad word"
   const [showBadWordsAlert, setShowBadWordsAlert] = useState(false);
   const [showAPIErrorMessage, setShowAPIErrorMessage] = useState(false);
-  // To store plan_id which will be passed to DB in SharePlan component
-  const [planID, setPlanID] = useState(0);
+  // To store plan_id and destination to help load the SharePlan component
+  const [planShareData, setPlanShareData] = useState<PlanShareData>({
+    planID: null,
+    destination: "",
+  });
+  // Governs whether the SharePlan modal is open, for a user to share a plan with other users
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  // Governs whether to re-render plans after a user shares plans
+  // (e.g. will render the emails they just shared with)
+  const [shouldRefreshPlans, setShouldRefreshPlans] = useState(false);
 
   const value = {
     apiResponse,
@@ -33,8 +45,12 @@ export function AppProvider({ children }: AppProviderProps) {
     setShowBadWordsAlert,
     showAPIErrorMessage,
     setShowAPIErrorMessage,
-    planID,
-    setPlanID,
+    planShareData,
+    setPlanShareData,
+    isShareModalOpen,
+    setIsShareModalOpen,
+    shouldRefreshPlans,
+    setShouldRefreshPlans,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

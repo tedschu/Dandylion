@@ -269,8 +269,6 @@ function ResultsDestinationUnknown() {
         }),
       });
 
-      console.log("Here is response:", response);
-
       const data = await response.json();
 
       console.log("Here is data:", data);
@@ -282,7 +280,7 @@ function ResultsDestinationUnknown() {
   return (
     <>
       <div className="resultPageContainer">
-        {hasResponse === false && <Header />}
+        <Header />
         <img className="moon scrollout" src={moon} alt="" />
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
@@ -300,7 +298,6 @@ function ResultsDestinationUnknown() {
           <>
             <Results_Pre_Unknown
               apiResponse={apiResponse}
-              setIsSecondDestinationOpen={setIsSecondDestinationOpen}
               setShowFullResults={setShowFullResults}
               hasResponse={hasResponse}
             />
@@ -310,10 +307,7 @@ function ResultsDestinationUnknown() {
         {/* Full (paid) results content */}
         {hasResponse && apiResponse && showFullResults && (
           <>
-            <Results_Full_Unknown
-              apiResponse={apiResponse}
-              setIsSecondDestinationOpen={setIsSecondDestinationOpen}
-            />
+            <Results_Full_Unknown apiResponse={apiResponse} />
           </>
         )}
       </div>

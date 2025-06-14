@@ -20,7 +20,7 @@ import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
 import { useAppContext } from "../contexts/AppContext";
 
 function DestinationUnknown() {
-  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
+  // const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
   const {
     currentStep,
     setCurrentStep,

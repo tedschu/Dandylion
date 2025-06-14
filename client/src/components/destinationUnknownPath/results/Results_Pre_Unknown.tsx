@@ -4,14 +4,12 @@ import { apiResponse } from "../../../types/types";
 
 type ResultsProps = {
   apiResponse: apiResponse;
-  setIsSecondDestinationOpen: React.Dispatch<React.SetStateAction<boolean>>;
   hasResponse: boolean;
   setShowFullResults: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function Results_Pre_Unknown({
   apiResponse,
-  setIsSecondDestinationOpen,
   hasResponse,
   setShowFullResults,
 }: ResultsProps) {
@@ -19,7 +17,6 @@ function Results_Pre_Unknown({
     setShowFullResults(true);
   };
 
-  console.log(apiResponse);
   return (
     <>
       <div className="resultContentContainer">

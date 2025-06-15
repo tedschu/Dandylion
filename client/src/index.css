@@ -458,7 +458,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 75%;
   max-width: 750px;
   background-color: var(--back-cream);
   border-radius: 10px;

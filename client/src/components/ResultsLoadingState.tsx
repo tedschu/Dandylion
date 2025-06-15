@@ -11,6 +11,8 @@ import olympic from "../assets/images/destinations/olympic_national_park.png";
 import thailand from "../assets/images/destinations/thailand.png";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
 
 type ResultsLoadingStateProps = {
   showAPIErrorMessage: boolean;
@@ -51,17 +53,54 @@ function ResultsLoadingState({
     setShowAPIErrorMessage(false);
   };
 
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    setProgress(0); // Start at 0
+
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        const increment = 100 / 300;
+
+        const newProgress = oldProgress + increment;
+
+        // Stop at 100%
+        if (newProgress >= 100) {
+          return 100;
+        }
+
+        return newProgress;
+      });
+    }, 100);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
     <>
       <div className="resultLoadingContainer">
         {!showAPIErrorMessage && (
           <>
             {/* @ts-ignore */}
-            <CircularProgress color="#f7bc21" />
+            {/* <CircularProgress color="#f7bc21" /> */}
 
             <h2 style={{ textAlign: "center" }}>
               It takes a moment to cover the entire world.
             </h2>
+            <Box
+              sx={{
+                width: "80%",
+                margin: "10px 0 15px 0",
+                backgroundColor: "#e0e0e0",
+                "& .MuiLinearProgress-bar": {
+                  backgroundColor: "var(--brand-blue)",
+                },
+              }}
+            >
+              <LinearProgress variant="determinate" value={progress} />
+            </Box>
 
             <h1
               style={{

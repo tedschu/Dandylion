@@ -111,7 +111,7 @@ function ResultsDestinationUnknown() {
         // 529 error, meaning the API is currently overloaded
         if (response.status == 529 || response.status == 500) {
           console.log("Error: Anthropic API is overloaded");
-          setTimeout(retryAnthropicAPIOnError, 3000);
+          setTimeout(retryAnthropicAPIOnError, 4000);
           return;
         } else {
           setIsAnthropicLoading(false);

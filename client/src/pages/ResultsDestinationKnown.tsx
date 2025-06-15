@@ -157,7 +157,7 @@ function ResultsDestinationKnown() {
 
       console.log("HEre is imgData:", imgData);
 
-      // TODO: Update state with S3 URL once the GPT response comes in *********************
+      // TODO: Update state with S3 URL once the GPT response comes in *******************
 
       // if (imgData) {
       //   const copy = { ...textData };

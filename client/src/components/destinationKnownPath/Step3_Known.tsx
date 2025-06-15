@@ -1,18 +1,25 @@
-import { StepProps } from "../../types/types";
 import temple from "../../assets/images/temple.png";
 import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
+import { useAppContext } from "../../contexts/AppContext";
+import { useQuestionsResponses } from "../../contexts/QuestionsResponsesContext";
 
-function Step3({
-  currentStep,
-  setCurrentStep,
-  userResponses,
-  setUserResponses,
-  questionPromptsKnown,
-  setQuestionPromptsKnown,
-  showBadWordsAlert,
-  setShowBadWordsAlert,
-}: StepProps) {
+function Step3() {
+  const {
+    currentStep,
+    setCurrentStep,
+    userResponses,
+    setUserResponses,
+    questionPromptsKnown,
+    setQuestionPromptsKnown,
+  } = useQuestionsResponses();
+  const {
+    apiResponse,
+    setApiResponse,
+    showBadWordsAlert,
+    setShowBadWordsAlert,
+  } = useAppContext();
+
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =

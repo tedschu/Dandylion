@@ -1,21 +1,28 @@
-import { StepProps } from "../../types/types";
 import { motion } from "motion/react";
 import beach from "../../assets/images/beach.png";
 import bee from "../../assets/bee.png";
 import { useState } from "react";
 import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
+import { useAppContext } from "../../contexts/AppContext";
+import { useQuestionsResponses } from "../../contexts/QuestionsResponsesContext";
 
-function Step1({
-  currentStep,
-  setCurrentStep,
-  userResponses,
-  setUserResponses,
-  questionPromptsKnown,
-  setQuestionPromptsKnown,
-  showBadWordsAlert,
-  setShowBadWordsAlert,
-}: StepProps) {
+function Step1() {
+  const {
+    currentStep,
+    setCurrentStep,
+    userResponses,
+    setUserResponses,
+    questionPromptsKnown,
+    setQuestionPromptsKnown,
+  } = useQuestionsResponses();
+  const {
+    apiResponse,
+    setApiResponse,
+    showBadWordsAlert,
+    setShowBadWordsAlert,
+  } = useAppContext();
+
   const [showTipBox, setShowTipBox] = useState(true);
 
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

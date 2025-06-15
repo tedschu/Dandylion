@@ -1,5 +1,5 @@
 import { body, text } from "motion/react-client";
-import { apiResponse, StepProps } from "../../types/types";
+import { apiResponse } from "../../types/types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import pyramid from "../../assets/images/pyramids.png";
@@ -59,8 +59,6 @@ function Step10() {
       navigate("/your-destination-plan");
     }
   }
-
-  console.log("Here is the userresponses state on Step10:", userResponses);
 
   return (
     <>

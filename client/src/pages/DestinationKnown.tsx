@@ -60,6 +60,8 @@ function DestinationKnown() {
 
   const moonShift = moonPosition[currentStep as keyof typeof moonPosition];
 
+  console.log(currentStep);
+
   return (
     <>
       <div className={"pageContainer"} data-question={currentStep}>

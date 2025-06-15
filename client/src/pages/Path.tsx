@@ -2,9 +2,23 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import arrow from "../assets/icons/arrow_forward.png";
 import bee from "../assets/bee.png";
+import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
 
 function Path() {
+  const { currentStep, setCurrentStep } = useQuestionsResponses();
+
   const navigate = useNavigate();
+
+  // Uses setCurrentStep(1) to reset in case the user is creating multiple plans (e.g. will end on 10 for the previous)
+  const handleKnownDestinationClick = () => {
+    setCurrentStep(1);
+    navigate("/build-plan");
+  };
+
+  const handleUnknownDestinationClick = () => {
+    setCurrentStep(1);
+    navigate("/find-destination");
+  };
 
   return (
     <>
@@ -15,7 +29,7 @@ function Path() {
           <div className="pathSelectorBox">
             <div
               className="pathSelectorBoxText"
-              onClick={() => navigate("/build-plan")}
+              onClick={() => handleKnownDestinationClick()}
             >
               <h3>I know my destination.</h3>
               <p>I want a plan for while I'm there.</p>
@@ -24,7 +38,7 @@ function Path() {
           </div>
           <div
             className="pathSelectorBox"
-            onClick={() => navigate("/find-destination")}
+            onClick={() => handleUnknownDestinationClick()}
           >
             <div className="pathSelectorBoxText">
               <h3>I need destination ideas.</h3>

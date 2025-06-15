@@ -18,17 +18,6 @@ function Home() {
 
   const navigate = useNavigate();
 
-  // const handleClick = () => {
-  //   if (
-  //     userInfo?.email !== "" &&
-  //     userInfo?.firstName !== "" &&
-  //     /@/.test(userInfo?.email ?? "")
-  //   ) {
-  //     navigate("/path");
-  //     setShowAlert(false);
-  //   } else setShowAlert(true);
-  // };
-
   useEffect(() => {
     getUserData();
   }, [isLoggedIn, token]);

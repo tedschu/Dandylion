@@ -15,6 +15,8 @@ function PlanDetail() {
   const [planData, setPlanData] = useState<PlanDetailType>();
   const storedToken = localStorage.getItem("token");
 
+  const planId = parseInt(plan_id || "0");
+
   useEffect(() => {
     getPlanDetail();
   }, [plan_id]);
@@ -31,8 +33,6 @@ function PlanDetail() {
 
       const data = await response.json();
 
-      console.log("Here is the planDetail data: ", data.planData);
-
       if (data) {
         setPlanData(data.planData);
       }
@@ -44,10 +44,16 @@ function PlanDetail() {
       <div className="resultPageContainer">
         <Header />
         {planData && planData.plan_type === "DESTINATION_UNKNOWN" && (
-          <Results_Full_Unknown apiResponse={planData.result_data} />
+          <Results_Full_Unknown
+            apiResponse={planData.result_data}
+            planID={planId}
+          />
         )}
         {planData && planData.plan_type === "DESTINATION_KNOWN" && (
-          <Results_Full_Known apiResponse={planData.result_data} />
+          <Results_Full_Known
+            apiResponse={planData.result_data}
+            planID={planId}
+          />
         )}
       </div>
     </>

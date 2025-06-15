@@ -228,9 +228,9 @@ function Me() {
                 Here are the plans that have been shared with you:
               </h1>
 
-              {userSharedPlans.map((plan) => {
+              {userSharedPlans.map((plan, index) => {
                 return (
-                  <div className="myAccountPlanContainer">
+                  <div className="myAccountPlanContainer" key={index}>
                     <div style={{ display: "flex", gap: "10px" }}>
                       <img
                         src={testIMage}

@@ -1,15 +1,52 @@
 import destinationImage from "../../../assets/output.png";
 import secondDestinationImage from "../../../assets/output2.png";
 import { apiResponse } from "../../../types/types";
+import ShareIcon from "@mui/icons-material/Share";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { useAppContext } from "../../../contexts/AppContext";
+import SharePlan from "../../SharePlan";
 
 type ResultsProps = {
   apiResponse: apiResponse;
+  planID: number;
 };
 
-function Results_Full_Unknown({ apiResponse }: ResultsProps) {
+function Results_Full_Unknown({ apiResponse, planID }: ResultsProps) {
+  const {
+    isShareModalOpen,
+    setIsShareModalOpen,
+    planShareData,
+    setPlanShareData,
+  } = useAppContext();
+
+  const openSharePlan = (id: number, destination: string) => {
+    // Update planID state value
+    // Open modal with SharePlan component
+
+    setPlanShareData((prevState) => ({
+      ...prevState,
+      planID: id,
+      destination: destination,
+    }));
+    setIsShareModalOpen(true);
+  };
+
   return (
     <>
       <div className="resultContentContainer">
+        {isShareModalOpen && <SharePlan />}
+        <button
+          type="button"
+          className="shareTest"
+          onClick={() =>
+            openSharePlan(planID, apiResponse.destination.location)
+          }
+        >
+          <ShareIcon sx={{ fontSize: "medium" }} />
+        </button>
+        <button type="button" className="shareTest2">
+          <ModeEditIcon sx={{ fontSize: "medium" }} />
+        </button>
         <div className="resultsFullContentContainer">
           <h1>{apiResponse?.destination.location}</h1>
           <p className="resultsFullDescription">

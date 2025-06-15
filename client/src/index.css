@@ -328,6 +328,7 @@ button {
   margin: 80px 0 20px 0;
   box-sizing: border-box;
   /* padding: 0 0 10px 0; */
+  position: relative;
 }
 
 .resultContentContainer h1 {
@@ -449,7 +450,7 @@ button {
 }
 
 .navMenu * {
-  color: white;
+  color: #ffffff;
 }
 
 .resultLoadingContainer {
@@ -464,6 +465,42 @@ button {
   padding: 10px;
   z-index: 2;
   border: 5px solid var(--brand-yellow);
+}
+
+.shareTest {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: var(--brand-blue);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.shareTest * {
+  color: var(--action-coral);
+}
+
+.shareTest2 {
+  position: absolute;
+  top: 42px;
+  right: 5px;
+  background-color: var(--brand-blue);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.shareTest2 * {
+  color: var(--action-coral);
 }
 
 /* ******* HOME PAGE STYLING ******* */

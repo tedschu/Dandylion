@@ -4,6 +4,7 @@ import { apiResponse } from "../../../types/types";
 
 type ResultsProps = {
   apiResponse: apiResponse;
+  planID: number;
 };
 
 function Results_Full_Known({ apiResponse }: ResultsProps) {

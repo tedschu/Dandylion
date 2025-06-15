@@ -37,6 +37,9 @@ function ResultsDestinationUnknown() {
   const [showFullResults, setShowFullResults] = useState(false);
   const [isAnthropicLoading, setIsAnthropicLoading] = useState(false);
 
+  // Stores planID from the DB route response, to pass to Results_Full component (enables sharing functionality)
+  const [planId, setPlanId] = useState<number>();
+
   // useRef is appropriate for this since it doesn't require a re-render
   // and is just counting api calls.
   const apiRetriesRef = useRef(0);
@@ -271,6 +274,7 @@ function ResultsDestinationUnknown() {
 
       const data = await response.json();
 
+      setPlanId(parseInt(data.plan.id));
       console.log("Here is data:", data);
     } catch (error) {
       console.error("Error posting the plan data:", error);
@@ -307,7 +311,10 @@ function ResultsDestinationUnknown() {
         {/* Full (paid) results content */}
         {hasResponse && apiResponse && showFullResults && (
           <>
-            <Results_Full_Unknown apiResponse={apiResponse} />
+            <Results_Full_Unknown
+              apiResponse={apiResponse}
+              planID={planId ?? 0}
+            />
           </>
         )}
       </div>

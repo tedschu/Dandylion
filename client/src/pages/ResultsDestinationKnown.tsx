@@ -8,6 +8,7 @@ import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 import { useAuth } from "../contexts/AuthContext";
 import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
 import { useAppContext } from "../contexts/AppContext";
+import { apiResponse } from "../types/types";
 
 function ResultsDestinationKnown() {
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -25,12 +26,17 @@ function ResultsDestinationKnown() {
     setShowAPIErrorMessage,
   } = useAppContext();
 
+  const storedToken = localStorage.getItem("token");
+
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
   const [isSecondDestinationOpen, setIsSecondDestinationOpen] = useState(false);
 
   const [showFullResults, setShowFullResults] = useState(false);
   const [isAnthropicLoading, setIsAnthropicLoading] = useState(false);
+
+  // Stores planID from the DB route response, to pass to Results_Full component (enables sharing functionality)
+  const [planId, setPlanId] = useState<number>();
 
   // useRef is appropriate for this since it doesn't require a re-render
   // and is just counting api calls.
@@ -116,6 +122,7 @@ function ResultsDestinationKnown() {
           if (textData.destination) {
             setApiResponse(textData);
             setHasResponse(true);
+            postPlanAndFormData(textData);
           } else {
             console.log("Invalid response structure", textData);
             throw new Error("invalid recommendation data structure from API");
@@ -184,6 +191,48 @@ function ResultsDestinationKnown() {
     }
   };
 
+  const postPlanAndFormData = async (textData: apiResponse) => {
+    try {
+      const response = await fetch("/api/users/plan", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${storedToken}`,
+        },
+        body: JSON.stringify({
+          result_data: textData,
+          plan_type: "DESTINATION_KNOWN",
+          form_data: {
+            question1: questionPromptsKnown?.question1,
+            response1: userResponses.response1,
+            question2: questionPromptsKnown?.question2,
+            response2: userResponses.response2,
+            question3: questionPromptsKnown?.question3,
+            response3: userResponses.response3,
+            question4: questionPromptsKnown?.question4,
+            response4: userResponses.response4,
+            question5: questionPromptsKnown?.question5,
+            response5: userResponses.response5,
+            question6: questionPromptsKnown?.question6,
+            response6: userResponses.response6,
+            question7: questionPromptsKnown?.question7,
+            response7: userResponses.response7,
+            question8: questionPromptsKnown?.question8,
+            response8: userResponses.response8,
+            firstName: userInfo?.firstName,
+          },
+        }),
+      });
+
+      const data = await response.json();
+
+      setPlanId(parseInt(data.plan.id));
+      console.log("Here is data:", data);
+    } catch (error) {
+      console.error("Error posting the plan data:", error);
+    }
+  };
+
   return (
     <>
       <div className="resultPageContainer">
@@ -209,7 +258,6 @@ function ResultsDestinationKnown() {
           <>
             <Results_Pre_Known
               apiResponse={apiResponse}
-              setIsSecondDestinationOpen={setIsSecondDestinationOpen}
               setShowFullResults={setShowFullResults}
               hasResponse={hasResponse}
             />
@@ -221,7 +269,7 @@ function ResultsDestinationKnown() {
           <>
             <Results_Full_Known
               apiResponse={apiResponse}
-              setIsSecondDestinationOpen={setIsSecondDestinationOpen}
+              planID={planId ?? 0}
             />
           </>
         )}

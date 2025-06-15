@@ -1,5 +1,4 @@
 import destinationImage from "../../../assets/output.png";
-import secondDestinationImage from "../../../assets/output2.png";
 import { apiResponse } from "../../../types/types";
 import ShareIcon from "@mui/icons-material/Share";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";

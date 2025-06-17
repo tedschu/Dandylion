@@ -54,7 +54,7 @@ router.post("/image_second", async (req, res) => {
 
     const response = await api.images.generate({
       model: "gpt-image-1",
-      prompt: `Create a vibrant, photo-realistic image of ${location.location} in the style of travel photography. Include iconic landmarks and natural beauty. If there are multiple locations specified (for example: "Peru: machu picchu, lima"), create a collage of up to 4 scenes showing the destination's highlights. Use bright, inviting colors and a simple, postcard-style border around the top and sides of the image. Here is some additional context to include the image as well: ${overview}`,
+      prompt: `Create a vibrant, photo-realistic image of ${location.location} in the style of travel photography. Include iconic landmarks and natural beauty. If there are multiple locations specified (for example: "Peru: machu picchu, lima"), create a collage of up to 4 scenes showing the destination's highlights. Use bright, inviting colors and a simple, postcard-style border around the top and sides of the image. Here is some additional context to include the image as well: ${overview}. Make sure that any text such as the name of the location is fully visible.`,
       n: 1,
       size: "1024x1024",
       // response_format: "url",

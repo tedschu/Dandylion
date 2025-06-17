@@ -148,6 +148,7 @@ function Home() {
                 help with the details, Dandylion creates a curated plan built
                 around your travel style.
               </p>
+              <br />
               <p>It's just a few simple steps:</p>
             </div>
             <div className="homeBottomBoxContainer">

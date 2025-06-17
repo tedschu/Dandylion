@@ -71,7 +71,8 @@ function ResultsDestinationUnknown() {
     try {
       // Calls Anthropic API, passing questions and user responses (and user's first name)
       // Returns primary and secondary recommendation objects
-      const response = await fetch("/api/anthropicAPI/recommendation", {
+      // const response = await fetch("/api/anthropicAPI/recommendation", {
+      const response = await fetch("/api/anthropicAPI/recommendation-first", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

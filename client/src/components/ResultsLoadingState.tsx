@@ -60,7 +60,7 @@ function ResultsLoadingState({
 
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
-        const increment = 100 / 300;
+        const increment = 100 / 400;
 
         const newProgress = oldProgress + increment;
 

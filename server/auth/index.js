@@ -29,11 +29,11 @@ router.post("/register", async (req, res) => {
         .json({ error: "Make sure you've completed all fields." });
     }
 
-    const hashPassword = await bcrypt.hash(req.body.password, saltRounds);
+    const hashPassword = await bcrypt.hash(password, saltRounds);
     const newUser = await prisma.user.create({
       data: {
-        email: req.body.email,
-        first_name: req.body.firstName,
+        email: email,
+        first_name: firstName,
         password: hashPassword,
         login_count: 1,
         last_login: new Date().toISOString(),
@@ -71,8 +71,6 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log(email, password);
-
     const user = await prisma.user.findFirst({
       where: {
         email: {
@@ -81,8 +79,6 @@ router.post("/login", async (req, res) => {
         },
       },
     });
-
-    console.log("Here is user:", user);
 
     //checks if the user exists
     const userMatch = await prisma.user.findUnique({

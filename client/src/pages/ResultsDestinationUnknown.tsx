@@ -62,7 +62,8 @@ function ResultsDestinationUnknown() {
     }
   }, []);
 
-  // Gets trip recommendation for destination and second_destination, and image for first destination (second is in useEffect below, to save load time)
+  // Gets trip recommendation for first destination, and then call to server to complete
+  // image and second_destination calls (to save load time + ensure calls complete even if user navs away)
   const getTripResults = async () => {
     if (isAnthropicLoading) return;
 
@@ -72,35 +73,38 @@ function ResultsDestinationUnknown() {
       // Calls Anthropic API, passing questions and user responses (and user's first name)
       // Returns primary and secondary recommendation objects
       // const response = await fetch("/api/anthropicAPI/recommendation", {
-      const response = await fetch("/api/anthropicAPI/recommendation-first", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          question1: questionPromptsUnknown?.question1,
-          response1: userResponses.response1,
-          question2: questionPromptsUnknown?.question2,
-          response2: userResponses.response2,
-          question3: questionPromptsUnknown?.question3,
-          response3: userResponses.response3,
-          question4: questionPromptsUnknown?.question4,
-          response4: userResponses.response4,
-          question5: questionPromptsUnknown?.question5,
-          response5: userResponses.response5,
-          question6: questionPromptsUnknown?.question6,
-          response6: userResponses.response6,
-          question7: questionPromptsUnknown?.question7,
-          response7: userResponses.response7,
-          question8: questionPromptsUnknown?.question8,
-          response8: userResponses.response8,
-          question9: questionPromptsUnknown?.question9,
-          response9: userResponses.response9,
-          question10: questionPromptsUnknown?.question10,
-          response10: userResponses.response10,
-          firstName: userInfo?.firstName,
-        }),
-      });
+      const response = await fetch(
+        "/api/anthropicAPI/recommendation-unknown-first",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            question1: questionPromptsUnknown?.question1,
+            response1: userResponses.response1,
+            question2: questionPromptsUnknown?.question2,
+            response2: userResponses.response2,
+            question3: questionPromptsUnknown?.question3,
+            response3: userResponses.response3,
+            question4: questionPromptsUnknown?.question4,
+            response4: userResponses.response4,
+            question5: questionPromptsUnknown?.question5,
+            response5: userResponses.response5,
+            question6: questionPromptsUnknown?.question6,
+            response6: userResponses.response6,
+            question7: questionPromptsUnknown?.question7,
+            response7: userResponses.response7,
+            question8: questionPromptsUnknown?.question8,
+            response8: userResponses.response8,
+            question9: questionPromptsUnknown?.question9,
+            response9: userResponses.response9,
+            question10: questionPromptsUnknown?.question10,
+            response10: userResponses.response10,
+            firstName: userInfo?.firstName,
+          }),
+        }
+      );
 
       console.log("Here's the Anthropic response: ", response);
 
@@ -127,10 +131,28 @@ function ResultsDestinationUnknown() {
       // I'm doing this because waiting for all calls to load could take over a minute
       if (textData) {
         try {
-          if (textData.destination && textData.second_destination) {
+          if (textData.destination) {
             setApiResponse(textData);
             setHasResponse(true);
-            postPlanAndFormData(textData);
+            await postPlanAndFormData(textData);
+
+            console.log(
+              "Fetching server call to process remaining API calls..."
+            );
+            // fetch() TODO: CALL ROUTE TO COMPLETE SERVER-SIDE DESTINATION / IMAGE CALLS (POST)
+            fetch("/api/process-remaining-calls", {
+              method: "POST",
+              keepalive: true,
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify({
+                planId: planId,
+                userResponses: userResponses,
+                questionPromptsUnknown: questionPromptsUnknown,
+                firstDestination: textData.destination.location,
+              }),
+            });
           } else {
             console.log("Invalid response structure", textData);
             throw new Error("invalid recommendation data structure from API");

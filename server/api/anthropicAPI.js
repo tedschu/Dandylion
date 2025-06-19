@@ -213,7 +213,7 @@ JSON FORMATTING REQUIREMENTS:
 });
 
 // "Unknown" path (e.g. user needs a destination and itinerary / suggestions) call to get recommendations
-router.post("/recommendation-first", async (req, res) => {
+router.post("/recommendation-unknown-first", async (req, res) => {
   try {
     // get passed info from body, put it into message and system prompt arrays, call on caller function, return results
     const {

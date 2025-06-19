@@ -17,6 +17,7 @@ import gptRoutes from "./api/gptAPI.js";
 import authRoutes from "./auth/index.js";
 import userRoutes from "./api/users.js";
 import planRoutes from "./api/plans.js";
+import remainingCallRoutes from "./api/process-remaining-calls.js";
 
 import { PrismaClient } from "./generated/prisma/client.ts";
 const prisma = new PrismaClient();
@@ -49,6 +50,7 @@ app.use("/api/gptAPI", gptRoutes);
 app.use("/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/plans", planRoutes);
+app.use("/api/process-remaining-calls", remainingCallRoutes);
 
 app.use(express.static(path.join(__dirname, "/../client/dist")));
 

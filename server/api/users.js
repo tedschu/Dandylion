@@ -43,6 +43,32 @@ router.post("/plan", verifyToken, async (req, res) => {
   }
 });
 
+// PATCH update a plan with second_response object
+router.patch(
+  "/plan-update-second-destination",
+  verifyToken,
+  async (req, res) => {
+    try {
+      const { second_destination, plan_id } = req.body;
+
+      // update the plan to include second_destination data
+      const updatedPlan = await prisma.plan.update({
+        where: {
+          id: parseInt(plan_id),
+        },
+        data: {
+          second_destination: second_destination,
+        },
+      });
+
+      res.json(updatedPlan);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+);
+
 // TODO: PUT update the plan row for id (plan id) and user_id to add the image S3 URLs
 
 // GET to pull all trips for a given user (rendered on the "Me" page)

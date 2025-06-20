@@ -127,8 +127,6 @@ function ResultsDestinationUnknown() {
       const textData = await response.json();
       console.log("Here is textData from Antrhopic call:", textData);
 
-      // Progressive loading: first updates apiResponse and hasResponse with Anthropic (text) response, and then calls for image in background
-      // I'm doing this because waiting for all calls to load could take over a minute
       if (textData) {
         try {
           if (textData.destination) {
@@ -136,18 +134,20 @@ function ResultsDestinationUnknown() {
             setHasResponse(true);
             await postPlanAndFormData(textData);
 
-            // fetch() TODO: CALL ROUTE TO COMPLETE SERVER-SIDE DESTINATION / IMAGE CALLS (POST)
+            // CALL ROUTE TO COMPLETE SERVER-SIDE DESTINATION / IMAGE CALLS (POST)
             fetch("/api/process-remaining-calls", {
               method: "POST",
               keepalive: true,
               headers: {
                 "Content-type": "application/json",
+                Authorization: `Bearer ${storedToken}`,
               },
               body: JSON.stringify({
                 planId: planId,
                 userResponses: userResponses,
                 questionPromptsUnknown: questionPromptsUnknown,
                 firstDestination: textData.destination.location,
+                firstName: userInfo?.firstName,
               }),
             });
           } else {

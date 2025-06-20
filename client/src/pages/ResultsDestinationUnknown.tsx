@@ -136,9 +136,6 @@ function ResultsDestinationUnknown() {
             setHasResponse(true);
             await postPlanAndFormData(textData);
 
-            console.log(
-              "Fetching server call to process remaining API calls..."
-            );
             // fetch() TODO: CALL ROUTE TO COMPLETE SERVER-SIDE DESTINATION / IMAGE CALLS (POST)
             fetch("/api/process-remaining-calls", {
               method: "POST",

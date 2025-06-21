@@ -51,13 +51,27 @@ router.patch(
     try {
       const { second_destination, plan_id } = req.body;
 
+      const existingPlan = await prisma.plan.findUnique({
+        where: {
+          id: parseInt(plan_id),
+        },
+      });
+
+      if (!existingPlan)
+        return res.status(400).json({ error: "Plan not found." });
+
+      const updatedResultData = {
+        ...existingPlan.result_data,
+        second_destination: second_destination,
+      };
+
       // update the plan to include second_destination data
       const updatedPlan = await prisma.plan.update({
         where: {
           id: parseInt(plan_id),
         },
         data: {
-          second_destination: second_destination,
+          result_data: updatedResultData,
         },
       });
 

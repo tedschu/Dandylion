@@ -11,7 +11,7 @@ import ResultsDestinationUnknown from "./pages/ResultsDestinationUnknown";
 import PlanDetail from "./pages/PlanDetail";
 import Path from "./pages/Path";
 import DestinationKnown from "./pages/DestinationKnown";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { QuestionsResponsesProvider } from "./contexts/QuestionsResponsesContext";
 import { AppProvider } from "./contexts/AppContext";
 import Register from "./pages/Register";

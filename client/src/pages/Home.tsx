@@ -22,6 +22,8 @@ function Home() {
     getUserData();
   }, [isLoggedIn, token]);
 
+  console.log(isLoggedIn);
+
   const getUserData = async () => {
     try {
       const response = await fetch("/api/users/me", {
@@ -39,6 +41,10 @@ function Home() {
           firstName: data.firstName,
           email: data.email,
         });
+      }
+
+      if (!response.ok) {
+        console.log(data);
       }
     } catch (error) {
       console.error("error fetching user data:", error);

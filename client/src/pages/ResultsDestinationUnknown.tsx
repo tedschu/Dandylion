@@ -132,7 +132,8 @@ function ResultsDestinationUnknown() {
           if (textData.destination) {
             setApiResponse(textData);
             setHasResponse(true);
-            await postPlanAndFormData(textData);
+
+            const newPlanId = await postPlanAndFormData(textData);
 
             // CALL ROUTE TO COMPLETE SERVER-SIDE DESTINATION / IMAGE CALLS (POST)
             fetch("/api/process-remaining-calls", {
@@ -143,7 +144,7 @@ function ResultsDestinationUnknown() {
                 Authorization: `Bearer ${storedToken}`,
               },
               body: JSON.stringify({
-                planId: planId,
+                planId: newPlanId,
                 userResponses: userResponses,
                 questionPromptsUnknown: questionPromptsUnknown,
                 firstDestination: textData.destination.location,
@@ -294,8 +295,12 @@ function ResultsDestinationUnknown() {
 
       const data = await response.json();
 
-      setPlanId(parseInt(data.plan.id));
+      const newPlanId = parseInt(data.plan.id);
+
+      setPlanId(newPlanId);
       console.log("Here is data:", data);
+
+      return newPlanId;
     } catch (error) {
       console.error("Error posting the plan data:", error);
     }

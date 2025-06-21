@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
   console.log("Here is userResponses:", req.body.userResponses);
   console.log("Here is firstDestination deconstructed:", firstDestination);
   console.log("Here is storedToken: ", storedToken);
+  console.log("Here is planId", planId, "...and typeof:", typeof planId);
 
   // Counter for Anthropic API call retries (see retryAPIOnError())
   let apiRetries = 0;
@@ -65,7 +66,7 @@ router.post("/", async (req, res) => {
 
       console.log("Here's the Anthropic response: ", secondDestinationResponse);
 
-      if (!response.ok) {
+      if (!secondDestinationResponse.ok) {
         const textResponse = await secondDestinationResponse.text();
         console.error("server response:", textResponse);
 
@@ -80,7 +81,7 @@ router.post("/", async (req, res) => {
           return;
         }
       }
-      const textData = await response.json();
+      const textData = await secondDestinationResponse.json();
       console.log("Here is textData from Anthropic call: ", textData);
 
       // TODO: call postPlanAndFormData() to patch to DB
@@ -95,22 +96,25 @@ router.post("/", async (req, res) => {
         textData.overview
       );
 
-      const images = await fetch(`${process.env.BASE_URL}/api/gptAPI/image`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          location: textData.location,
-          overview: textData.overview,
-        }),
-      });
+      const images = await fetch(
+        `${process.env.BASE_URL}/api/gptAPI/image_second`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            location: textData.location,
+            overview: textData.overview,
+          }),
+        }
+      );
 
       console.log("Here is images (raw response):", images);
 
       const imgData = await images.json();
 
-      console.log("HEre is imgData:", imgData);
+      //console.log("HEre is imgData:", imgData);
     } catch (error) {
       // catch for getSecondTripResults()
       console.error(error);
@@ -145,17 +149,15 @@ const retryAnthropicAPIOnError = () => {
 
 const postPlanData = async (textData, storedToken, planId) => {
   try {
-    console.log(
-      "Here is textData (for second_dest) inside postPlanData:",
-      textData
-    );
+    console.log("here is storedToken:", storedToken);
+    console.log("here is planId:", planId);
     const response = await fetch(
       `${process.env.BASE_URL}/api/users/plan-update-second-destination`,
       {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
-          Authorization: `Bearer ${storedToken}`,
+          Authorization: storedToken,
         },
         body: JSON.stringify({
           second_destination: textData,
@@ -163,6 +165,8 @@ const postPlanData = async (textData, storedToken, planId) => {
         }),
       }
     );
+
+    console.log("DEBUG - response status:", response.status); // ← Add this
 
     const data = await response.json();
 

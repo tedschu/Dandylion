@@ -92,3 +92,35 @@ export type PlanShareData = {
   planID: number | null;
   destination: string;
 };
+
+// For Known data structures:
+export type apiResponseKnown = {
+  destination: DestinationKnown;
+};
+
+export type DestinationKnown = {
+  location: string;
+  overview: string;
+  places_to_stay: PlaceToStay[];
+  things_to_do: Attraction[];
+  photos: String[];
+  time_to_go: string;
+  estimated_cost: string;
+  helpful_tips: string;
+  itinerary: ItineraryKnown[];
+  restaurants: Restaurants[];
+};
+
+export type ItineraryKnown = {
+  day_num: number;
+  summary: string;
+  morning: ItineraryKnownDays;
+  afternoon: ItineraryKnownDays;
+  evening: ItineraryKnownDays;
+};
+
+export type ItineraryKnownDays = {
+  activities: string;
+  dining: string;
+  time: string;
+};

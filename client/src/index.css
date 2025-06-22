@@ -391,6 +391,10 @@ button {
   padding-left: 15px;
 }
 
+.resultsItineraryH4 {
+  margin: 5px;
+}
+
 .resultPreviewText {
   display: flex;
   flex-direction: column;

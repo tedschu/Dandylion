@@ -1,12 +1,12 @@
 import destinationImage from "../../../assets/output.png";
-import { apiResponse } from "../../../types/types";
+import { apiResponseKnown } from "../../../types/types";
 import ShareIcon from "@mui/icons-material/Share";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { useAppContext } from "../../../contexts/AppContext";
 import SharePlan from "../../SharePlan";
 
 type ResultsProps = {
-  apiResponse: apiResponse;
+  apiResponse: apiResponseKnown;
   planID: number;
 };
 
@@ -29,6 +29,8 @@ function Results_Full_Known({ apiResponse, planID }: ResultsProps) {
     }));
     setIsShareModalOpen(true);
   };
+
+  console.log(apiResponse);
 
   return (
     <>
@@ -109,15 +111,21 @@ function Results_Full_Known({ apiResponse, planID }: ResultsProps) {
                       color: "var(--teal)",
                     }}
                   >{`Day ${day.day_num}: ${day.summary}`}</h3>
-                  <li key={`${day.day_num} - morning - ${index}`}>
-                    {day.morning}
-                  </li>
-                  <li key={`${day.day_num} - afternoon - ${index}`}>
-                    {day.afternoon}
-                  </li>
-                  <li key={`${day.day_num} - evening - ${index}`}>
-                    {day.evening}
-                  </li>
+                  <h4 className="resultsItineraryH4">
+                    Morning ({day.morning.time})
+                  </h4>
+                  <li>Activities: {day.morning.activities}</li>
+                  <li>Dining: {day.morning.dining}</li>
+                  <h4 className="resultsItineraryH4">
+                    Afternoon ({day.afternoon.time})
+                  </h4>
+                  <li>Activities: {day.afternoon.activities}</li>
+                  <li>Dining: {day.afternoon.dining}</li>
+                  <h4 className="resultsItineraryH4">
+                    Evening ({day.evening.time})
+                  </h4>
+                  <li>Activities: {day.evening.activities}</li>
+                  <li>Dining: {day.evening.dining}</li>
                 </>
               );
             })}

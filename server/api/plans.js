@@ -31,4 +31,26 @@ router.get("/:plan_id", verifyToken, async (req, res) => {
   }
 });
 
+// FINISH THIS, just need to add image url to Photos array
+router.put("/plans/update-first-image", verifyToken, async (req, res) => {
+  try {
+    const { planId, imageUrl } = req.body;
+
+    // Function needs to update the entire plan, not just the
+    const updatedImage = await prisma.plan.update({
+      where: {
+        id: planId,
+      },
+      data: {
+        photos: { push: imageUrl },
+      },
+    });
+
+    res.json({ success: true, updatedImage });
+  } catch (error) {
+    console.error("Error saving first image to DB", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export default router;

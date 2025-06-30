@@ -130,7 +130,6 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
              // If you have additional recommendations, keep this format.
        ]
 ",
-    "photos": "leave this as an empty array: []",
     "things_to_do": [
       {
         "destination_name": "Attraction/activity name. These recommendations should be specific places, destinations, or things to do that fit with the user's preferences. For instance, if the user has specified wanting to see cultural experiences, make sure that you are focusing on things like historical sites, cultural events (e.g. Mardis Gras). Don't just focus on the most popular destinations or things to do, but reference reviews on the internet and recommendations that would be a best fit to the user's preferences.",
@@ -299,7 +298,6 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
              // If you have additional recommendations, keep this format.
        ]
 ",
-    "photos": "leave this as an empty array: []",
     "things_to_do": [
       {
         "destination_name": "Attraction/activity name. These recommendations should be specific places, destinations, or things to do that fit with the user's preferences. For instance, if the user has specified wanting to see cultural experiences, make sure that you are focusing on things like historical sites, cultural events (e.g. Mardis Gras). Don't just focus on the most popular destinations or things to do, but reference reviews on the internet and recommendations that would be a best fit to the user's preferences.",
@@ -470,7 +468,6 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
           },
           // If you have additional recommendations, keep this format.
        ],
-    "photos": "leave this as an empty array: []",
     "things_to_do": 
       [
         {
@@ -574,7 +571,6 @@ JSON FORMATTING REQUIREMENTS:
 //         "place_to_stay": "Loews Hôtel Vogue: This upscale hotel in downtown Montreal features comfortable rooms, a fitness center, and an on-site restaurant. They offer family-friendly amenities and are close to shopping and dining options."
 //       }
 //     ],
-//     "photos": [],
 //     "things_to_do": [
 //       {
 //         "destination_name": "Old Montreal Walking Tour",
@@ -759,7 +755,6 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
              // If you have additional recommendations, keep this format.
        ]
 ",
-    "photos": "leave this as an empty array: []",
     "things_to_do": [
       {
         "destination_name": "Attraction/activity name. These recommendations should be specific places, destinations, or things to do that fit with the user's preferences. For instance, if the user has specified wanting to see cultural experiences, make sure that you are focusing on things like historical sites, cultural events (e.g. Mardis Gras). Don't just focus on the most popular destinations or things to do, but reference reviews on the internet and recommendations that would be a best fit to the user's preferences.",

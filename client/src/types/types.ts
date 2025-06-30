@@ -67,7 +67,6 @@ export type Destination = {
   overview: string;
   places_to_stay: PlaceToStay[];
   things_to_do: Attraction[];
-  photos: String[];
   time_to_go: string;
   estimated_cost: string;
   helpful_tips: string;
@@ -78,6 +77,8 @@ export type Destination = {
 export type apiResponse = {
   destination: Destination;
   second_destination: Destination;
+  destination_photos: string[];
+  second_destination_photos: string[];
 };
 
 export type Itinerary = {

@@ -16,9 +16,6 @@ router.post("/", async (req, res) => {
   console.log("Here is storedToken: ", storedToken);
   console.log("Here is planId", planId, "...and typeof:", typeof planId);
 
-  // Counter for Anthropic API call retries (see retryAPIOnError())
-  let apiRetries = 0;
-
   // status: first_destination has been called, returned, and stored in DB
   // todo:
   // call second_destination, passing firstDestination value
@@ -114,6 +111,8 @@ router.post("/", async (req, res) => {
 
       const imgData = await images.json();
 
+      // TODO: Call function to upload to S3, returning image key to store into DB
+
       //console.log("HEre is imgData:", imgData);
     } catch (error) {
       // catch for getSecondTripResults()
@@ -133,6 +132,9 @@ router.post("/", async (req, res) => {
     console.error("Error in processing background API calls: ", error);
   }
 });
+
+// Counter for Anthropic API call retries (see retryAPIOnError())
+let apiRetries = 0;
 
 // Calls Anthropic API up to 3 times via getTripResults() if there is a 529 error
 // from Anthropic response.

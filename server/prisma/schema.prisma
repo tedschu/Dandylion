@@ -51,6 +51,7 @@ model Plan {
   plan_type PlanType
   status PlanStatus @default(DRAFT)
   result_data Json?
+  photos String[]
   is_paid Boolean @default(false)
   order_id String?
   created_at DateTime @default(now())

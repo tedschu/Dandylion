@@ -6,6 +6,7 @@ import OpenAI from "openai";
 import { writeFile } from "fs/promises";
 import { write } from "fs";
 import { fileURLToPath } from "url";
+import { Storage } from "@google-cloud/storage";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,11 +17,24 @@ const api = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const credentials = JSON.parse(process.env.GOOGLE_CLOUD_CREDENTIALS);
+const storage = new Storage({
+  credentials,
+  projectId: credentials.projectId,
+});
+const bucket = storage.bucket("dandylion-images");
+
 router.post("/image", async (req, res) => {
   try {
-    const { location, overview } = req.body;
+    const { location, overview, userId, planId } = req.body;
 
-    console.log(location, overview);
+    console.log(
+      "Here is what was passed to the /image route:",
+      location,
+      overview,
+      userId,
+      planId
+    );
 
     const response = await api.images.generate({
       model: "gpt-image-1",
@@ -30,15 +44,32 @@ router.post("/image", async (req, res) => {
       // response_format: "url",
     });
 
-    if (response && response.data && response.data.length > 0) {
-      res.json(response.data[0]);
-    } else {
+    if (!response?.data?.[0]) {
       throw new Error("No image data returned from OpenAI");
     }
 
-    // TODO: push file to s3 bucket and return URL
     const imageBuffer = Buffer.from(response.data[0].b64_json, "base64");
-    await writeFile("../client/src/assets/output.png", imageBuffer);
+
+    // ***** Upload to Google Cloud storage ******
+    const fileName = `users/${userId}/trips/${planId}/image_${Date.now()}.png`;
+    const file = bucket.file(fileName);
+
+    await file.save(imageBuffer, {
+      metadata: {
+        contentType: "image/png",
+      },
+    });
+
+    // Gets public URL of the image
+    const imageURL = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
+
+    res.json({
+      success: true,
+      imageUrl: imageURL,
+      fileName: fileName,
+    });
+
+    //await writeFile("../client/src/assets/output.png", imageBuffer);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });

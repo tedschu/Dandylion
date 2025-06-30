@@ -133,7 +133,11 @@ function ResultsDestinationUnknown() {
             setApiResponse(textData);
             setHasResponse(true);
 
-            const newPlanId = await postPlanAndFormData(textData);
+            const planData = await postPlanAndFormData(textData);
+
+            if (planData) {
+              getFirstImage(planData?.planId, planData?.userId, textData);
+            }
 
             // CALL ROUTE TO COMPLETE SERVER-SIDE DESTINATION / IMAGE CALLS (POST)
             fetch("/api/process-remaining-calls", {
@@ -144,7 +148,7 @@ function ResultsDestinationUnknown() {
                 Authorization: `Bearer ${storedToken}`,
               },
               body: JSON.stringify({
-                planId: newPlanId,
+                planId: planData?.planId,
                 userResponses: userResponses,
                 questionPromptsUnknown: questionPromptsUnknown,
                 firstDestination: textData.destination.location,
@@ -165,17 +169,29 @@ function ResultsDestinationUnknown() {
         setIsAnthropicLoading(false);
         throw new Error("Empty response from API");
       }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      // Calls OpenAI API, passing location and overview info from Anthropic response, and user's first name
-      // Returns a postcard-style image for the location
+  // Calls OpenAI API, passing location and overview info from Anthropic response, userId, planId
+  // Returns a postcard-style image for the location
+  const getFirstImage = async (
+    planId: number,
+    userId: number,
+    destinationData: apiResponse
+  ) => {
+    try {
       const images = await fetch("/api/gptAPI/image", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          location: textData.destination.location,
-          overview: textData.destination.overview,
+          location: destinationData.destination.location,
+          overview: destinationData.destination.overview,
+          userId: userId,
+          planId: planId,
         }),
       });
 
@@ -185,20 +201,41 @@ function ResultsDestinationUnknown() {
 
       console.log("HEre is imgData:", imgData);
 
-      // TODO: Update state with S3 URL once the GPT response comes in *********************
+      // PUT the image G cloud image URL into the plan object in DB
+      if (imgData.success && imgData.imageUrl) {
+        const postImage = await fetch("/api/plans/update-first-image", {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${storedToken}`,
+          },
+          body: JSON.stringify({
+            planId: planId,
+            imageUrl: imgData.imageUrl,
+          }),
+        });
 
-      // if (imgData) {
-      //   const copy = { ...textData };
-      //   if (copy.destination && copy.destination.photos) {
-      //     copy.destination.photos.push("eventual_s3_URL");
-      //   }
-      //   if (setApiResponse) {
-      //     setApiResponse(copy as apiResponse);
+        if (!postImage.ok) {
+          throw new Error(`HTTP error status: ${postImage.status}`);
+        }
 
-      //   }
-      // }
+        const postImageData = await postImage.json();
+
+        console.log(
+          "Here is the data for image 1 from the put route:",
+          postImageData
+        );
+
+        setApiResponse((prev) => ({
+          ...prev,
+          destination_photos: [
+            ...(prev.destination_photos || []),
+            imgData.imageUrl,
+          ],
+        }));
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error getting the first image:", error);
     }
   };
 
@@ -218,42 +255,42 @@ function ResultsDestinationUnknown() {
     }
   };
 
-  // Calls for second_destination's image once the first image and content has loaded
-  useEffect(() => {
-    if (hasResponse && apiResponse) {
-      getSecondImage();
-    }
-  }, [hasResponse]);
+  // // Calls for second_destination's image once the first image and content has loaded
+  // useEffect(() => {
+  //   if (hasResponse && apiResponse) {
+  //     getSecondImage();
+  //   }
+  // }, [hasResponse]);
 
-  // Function to call OpenAI API to get second_Destination image
-  const getSecondImage = async () => {
-    try {
-      console.log("Getting the second image...");
-      const images = await fetch("/api/gptAPI/image_second", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          location: apiResponse?.second_destination.location,
-          overview: apiResponse?.second_destination.overview,
-        }),
-      });
+  // // Function to call OpenAI API to get second_Destination image
+  // const getSecondImage = async () => {
+  //   try {
+  //     console.log("Getting the second image...");
+  //     const images = await fetch("/api/gptAPI/image_second", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         location: apiResponse?.second_destination.location,
+  //         overview: apiResponse?.second_destination.overview,
+  //       }),
+  //     });
 
-      const imgData = await images.json();
-      // TODO: Update state with S3 URL once the GPT response comes in *********************
+  //     const imgData = await images.json();
+  //     // TODO: Update state with S3 URL once the GPT response comes in *********************
 
-      if (imgData) {
-        const copy = { ...apiResponse };
-        if (copy.second_destination && copy.second_destination.photos) {
-          copy.second_destination.photos.push("eventual_s3_URL");
-        }
-        if (setApiResponse) {
-          setApiResponse(copy as apiResponse);
-        }
-      }
-    } catch (error) {}
-  };
+  //     if (imgData) {
+  //       const copy = { ...apiResponse };
+  //       if (copy.second_destination && copy.second_destination.photos) {
+  //         copy.second_destination.photos.push("eventual_s3_URL");
+  //       }
+  //       if (setApiResponse) {
+  //         setApiResponse(copy as apiResponse);
+  //       }
+  //     }
+  //   } catch (error) {}
+  // };
 
   console.log(apiResponse);
   const postPlanAndFormData = async (textData: apiResponse) => {
@@ -295,12 +332,15 @@ function ResultsDestinationUnknown() {
 
       const data = await response.json();
 
-      const newPlanId = parseInt(data.plan.id);
+      const planData = {
+        planId: parseInt(data.plan.id),
+        userId: parseInt(data.plan.user_id),
+      };
 
-      setPlanId(newPlanId);
+      setPlanId(planData.planId);
       console.log("Here is data:", data);
 
-      return newPlanId;
+      return planData;
     } catch (error) {
       console.error("Error posting the plan data:", error);
     }

@@ -44,7 +44,7 @@ router.put("/update-first-image", verifyToken, async (req, res) => {
         id: planId,
       },
       data: {
-        photos: { push: imageUrl },
+        photos_first_destination: { push: imageUrl },
       },
     });
 

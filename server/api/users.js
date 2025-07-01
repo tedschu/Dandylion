@@ -100,6 +100,8 @@ router.get("/my-plans", verifyToken, async (req, res) => {
         plan_data: true,
         created_at: true,
         id: true,
+        photos_first_destination: true,
+        photos_second_destination: true,
         planShares: {
           select: {
             email: true,
@@ -111,6 +113,8 @@ router.get("/my-plans", verifyToken, async (req, res) => {
     const plansFormattedDates = allPlans.map((plan) => ({
       plan_type: plan.plan_type,
       plan_data: plan.plan_data,
+      photos_first_destination: plan.photos_first_destination,
+      photos_second_destination: plan.photos_second_destination,
       created_at: plan.created_at.toLocaleString(),
       id: plan.id,
       shared_with: plan.planShares.map((share) => share.email),
@@ -194,6 +198,8 @@ router.get("/plans-shared-with-me", verifyToken, async (req, res) => {
           select: {
             plan_type: true,
             plan_data: true,
+            photos_first_destination: true,
+            photos_second_destination: true,
             created_at: true,
             id: true,
           },
@@ -210,6 +216,8 @@ router.get("/plans-shared-with-me", verifyToken, async (req, res) => {
     const plansFormattedDates = allPlanShares.map((plan) => ({
       plan_type: plan.plan.plan_type,
       plan_data: plan.plan.plan_data,
+      photos_first_destination: plan.photos_first_destination,
+      photos_second_destination: plan.photos_second_destination,
       created_at: plan.plan.created_at.toLocaleString(),
       id: plan.plan.id,
       invited_by_name: plan.user.first_name,

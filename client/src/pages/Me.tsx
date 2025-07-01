@@ -17,6 +17,8 @@ type Plan = {
     };
   };
   plan_type: string;
+  photos_first_destination: string[];
+  photos_second_destination: string[];
   created_at: string;
   id: number;
   shared_with: [];
@@ -138,8 +140,9 @@ function Me() {
                 return (
                   <div className="myAccountPlanContainer" key={index}>
                     <div style={{ display: "flex", gap: "10px" }}>
+                      {/* TODO: CAN MODIFY TO SHOW TWO IMAGES IF AVAIALBLE, OR JUST DEFAULT TO FIRST */}
                       <img
-                        src={testIMage}
+                        src={plan.photos_first_destination[0]}
                         alt=""
                         style={{
                           maxWidth: "100px",

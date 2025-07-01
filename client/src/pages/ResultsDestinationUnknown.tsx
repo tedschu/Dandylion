@@ -319,8 +319,6 @@ function ResultsDestinationUnknown() {
     }
   };
 
-  console.log(plan);
-
   return (
     <>
       <div className="resultPageContainer">

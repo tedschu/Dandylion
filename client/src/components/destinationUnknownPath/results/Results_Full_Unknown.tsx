@@ -54,7 +54,11 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
           <p className="resultsFullDescription">
             {plan?.plan_data.destination.overview}
           </p>
-          <img src={destinationImage} alt="" className="locationImage" />
+          <img
+            src={plan.photos_first_destination[0]}
+            alt=""
+            className="locationImage"
+          />
           <h2>Where to stay:</h2>
 
           {plan?.plan_data.destination.places_to_stay.map((place, index) => {

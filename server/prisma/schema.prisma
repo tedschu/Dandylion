@@ -50,8 +50,9 @@ model Plan {
   user_id Int
   plan_type PlanType
   status PlanStatus @default(DRAFT)
-  result_data Json?
-  photos String[]
+  plan_data Json?
+  photos_first_destination String[] @default([])
+  photos_second_destination String[] @default([])
   is_paid Boolean @default(false)
   order_id String?
   created_at DateTime @default(now())

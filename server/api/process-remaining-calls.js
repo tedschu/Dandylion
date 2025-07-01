@@ -82,7 +82,7 @@ router.post("/", async (req, res) => {
       console.log("Here is textData from Anthropic call: ", textData);
 
       // TODO: call postPlanAndFormData() to patch to DB
-      await postPlanData(textData, storedToken, planId);
+      await postPlan(textData, storedToken, planId);
 
       // Calls OpenAI API, passing location and overview info from Anthropic response, and user's first name
       // Returns a postcard-style image for the location
@@ -149,7 +149,7 @@ const retryAnthropicAPIOnError = () => {
   }
 };
 
-const postPlanData = async (textData, storedToken, planId) => {
+const postPlan = async (textData, storedToken, planId) => {
   try {
     console.log("here is storedToken:", storedToken);
     console.log("here is planId:", planId);
@@ -172,7 +172,7 @@ const postPlanData = async (textData, storedToken, planId) => {
 
     const data = await response.json();
 
-    console.log("Here is data from the postPlanData response", data);
+    console.log("Here is data from the postPlan response", data);
   } catch (error) {
     console.error("Error posting the plan data:", error);
   }

@@ -16,12 +16,8 @@ function Step1() {
     questionPromptsKnown,
     setQuestionPromptsKnown,
   } = useQuestionsResponses();
-  const {
-    apiResponse,
-    setApiResponse,
-    showBadWordsAlert,
-    setShowBadWordsAlert,
-  } = useAppContext();
+  const { plan, setPlan, showBadWordsAlert, setShowBadWordsAlert } =
+    useAppContext();
 
   const [showTipBox, setShowTipBox] = useState(true);
 

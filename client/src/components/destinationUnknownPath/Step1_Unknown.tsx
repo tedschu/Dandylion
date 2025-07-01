@@ -16,12 +16,8 @@ function Step1() {
     questionPromptsUnknown,
     setQuestionPromptsUnknown,
   } = useQuestionsResponses();
-  const {
-    apiResponse,
-    setApiResponse,
-    showBadWordsAlert,
-    setShowBadWordsAlert,
-  } = useAppContext();
+  const { plan, setPlan, showBadWordsAlert, setShowBadWordsAlert } =
+    useAppContext();
 
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };

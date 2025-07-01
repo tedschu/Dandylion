@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { apiResponse, PlanShareData } from "../types/types";
+import { Plan, PlanShareData } from "../types/types";
 
 type AppContextType = {
-  apiResponse: apiResponse;
-  setApiResponse: React.Dispatch<React.SetStateAction<apiResponse>>;
+  plan: Plan | null;
+  setPlan: React.Dispatch<React.SetStateAction<Plan | null>>;
   showBadWordsAlert: boolean;
   setShowBadWordsAlert: React.Dispatch<React.SetStateAction<boolean>>;
   showAPIErrorMessage: boolean;
@@ -23,7 +23,7 @@ type AppProviderProps = {
 };
 
 export function AppProvider({ children }: AppProviderProps) {
-  const [apiResponse, setApiResponse] = useState<apiResponse>({});
+  const [plan, setPlan] = useState<Plan | null>(null);
   // Shows BadWordsAlert component in question paths if a user types a "bad word"
   const [showBadWordsAlert, setShowBadWordsAlert] = useState(false);
   const [showAPIErrorMessage, setShowAPIErrorMessage] = useState(false);
@@ -39,8 +39,8 @@ export function AppProvider({ children }: AppProviderProps) {
   const [shouldRefreshPlans, setShouldRefreshPlans] = useState(false);
 
   const value = {
-    apiResponse,
-    setApiResponse,
+    plan,
+    setPlan,
     showBadWordsAlert,
     setShowBadWordsAlert,
     showAPIErrorMessage,
@@ -52,6 +52,8 @@ export function AppProvider({ children }: AppProviderProps) {
     shouldRefreshPlans,
     setShouldRefreshPlans,
   };
+
+  console.log(plan);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

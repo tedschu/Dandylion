@@ -14,17 +14,19 @@ router.get("/:plan_id", verifyToken, async (req, res) => {
     const user_id = parseInt(req.user);
     const plan_id = parseInt(req.params.plan_id);
 
-    const planData = await prisma.plan.findFirst({
+    const plan = await prisma.plan.findFirst({
       where: {
         id: plan_id,
       },
       select: {
         plan_type: true,
-        result_data: true,
+        plan_data: true,
+        photos_first_destination: true,
+        photos_second_destination: true,
       },
     });
 
-    res.status(200).send({ planData });
+    res.status(200).send({ plan });
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -32,7 +34,7 @@ router.get("/:plan_id", verifyToken, async (req, res) => {
 });
 
 // FINISH THIS, just need to add image url to Photos array
-router.put("/plans/update-first-image", verifyToken, async (req, res) => {
+router.put("/update-first-image", verifyToken, async (req, res) => {
   try {
     const { planId, imageUrl } = req.body;
 

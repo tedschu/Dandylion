@@ -1,18 +1,15 @@
 import { useParams } from "react-router-dom";
-import { apiResponse } from "../types/types";
+import { Plan, PlanKnown } from "../types/types";
 import { useEffect, useState } from "react";
 import Results_Full_Unknown from "../components/destinationUnknownPath/results/Results_Full_Unknown";
 import Results_Full_Known from "../components/destinationKnownPath/results/Results_Full_Known";
 import Header from "../components/Header";
-
-type PlanDetailType = {
-  plan_type: string;
-  result_data: apiResponse;
-};
+import { useAppContext } from "../contexts/AppContext";
 
 function PlanDetail() {
   const { plan_id } = useParams();
-  const [planData, setPlanData] = useState<PlanDetailType>();
+  const { plan, setPlan } = useAppContext();
+
   const storedToken = localStorage.getItem("token");
 
   const planId = parseInt(plan_id || "0");
@@ -34,26 +31,22 @@ function PlanDetail() {
       const data = await response.json();
 
       if (data) {
-        setPlanData(data.planData);
+        setPlan(data.plan);
       }
     } catch (error) {}
   };
+
+  console.log(plan);
 
   return (
     <>
       <div className="resultPageContainer">
         <Header />
-        {planData && planData.plan_type === "DESTINATION_UNKNOWN" && (
-          <Results_Full_Unknown
-            apiResponse={planData.result_data}
-            planID={planId}
-          />
+        {plan && plan.plan_type === "DESTINATION_UNKNOWN" && (
+          <Results_Full_Unknown plan={plan} planID={planId} />
         )}
-        {planData && planData.plan_type === "DESTINATION_KNOWN" && (
-          <Results_Full_Known
-            apiResponse={planData.result_data}
-            planID={planId}
-          />
+        {plan && plan.plan_type === "DESTINATION_KNOWN" && (
+          <Results_Full_Known plan={plan as any} planID={planId} />
         )}
       </div>
     </>

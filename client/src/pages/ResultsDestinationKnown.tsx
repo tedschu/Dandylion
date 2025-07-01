@@ -8,7 +8,7 @@ import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
 import { useAuth } from "../contexts/AuthContext";
 import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
 import { useAppContext } from "../contexts/AppContext";
-import { apiResponse } from "../types/types";
+import { Plan, PlanKnown, PlanResponse } from "../types/types";
 
 function ResultsDestinationKnown() {
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -19,12 +19,8 @@ function ResultsDestinationKnown() {
     setUserResponses,
     questionPromptsKnown,
   } = useQuestionsResponses();
-  const {
-    apiResponse,
-    setApiResponse,
-    showAPIErrorMessage,
-    setShowAPIErrorMessage,
-  } = useAppContext();
+  const { plan, setPlan, showAPIErrorMessage, setShowAPIErrorMessage } =
+    useAppContext();
 
   const storedToken = localStorage.getItem("token");
 
@@ -115,12 +111,12 @@ function ResultsDestinationKnown() {
       const textData = await response.json();
       console.log("Here is textData from Antrhopic call:", textData);
 
-      // Progressive loading: first updates apiResponse and hasResponse with Anthropic (text) response, and then calls for image in background
+      // Progressive loading: first updates plan and hasResponse with Anthropic (text) response, and then calls for image in background
       // I'm doing this because waiting for all calls to load could take over a minute
       if (textData) {
         try {
           if (textData.destination) {
-            setApiResponse(textData);
+            setPlan(textData);
             setHasResponse(true);
             postPlanAndFormData(textData);
           } else {
@@ -164,8 +160,8 @@ function ResultsDestinationKnown() {
       //   if (copy.destination && copy.destination.photos) {
       //     copy.destination.photos.push("eventual_s3_URL");
       //   }
-      //   if (setApiResponse) {
-      //     setApiResponse(copy as apiResponse);
+      //   if (setplan) {
+      //     setplan(copy as plan);
       //     setHasResponse(true);
       //     setIsAnthropicLoading(false);
       //   }
@@ -191,7 +187,7 @@ function ResultsDestinationKnown() {
     }
   };
 
-  const postPlanAndFormData = async (textData: apiResponse) => {
+  const postPlanAndFormData = async (textData: PlanKnown) => {
     try {
       const response = await fetch("/api/users/plan", {
         method: "POST",
@@ -254,10 +250,10 @@ function ResultsDestinationKnown() {
         )}
 
         {/* Partial (unpaid) results content */}
-        {hasResponse && apiResponse && !showFullResults && (
+        {hasResponse && plan && !showFullResults && (
           <>
             <Results_Pre_Known
-              apiResponse={apiResponse}
+              plan={plan as any}
               setShowFullResults={setShowFullResults}
               hasResponse={hasResponse}
             />
@@ -265,12 +261,9 @@ function ResultsDestinationKnown() {
         )}
 
         {/* Full (paid) results content */}
-        {hasResponse && apiResponse && showFullResults && (
+        {hasResponse && plan && showFullResults && (
           <>
-            <Results_Full_Known
-              apiResponse={apiResponse}
-              planID={planId ?? 0}
-            />
+            <Results_Full_Known plan={plan as any} planID={planId ?? 0} />
           </>
         )}
       </div>

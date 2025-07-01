@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./index.css";
 import DestinationUnknown from "./pages/DestinationUnknown";
-import { apiResponse } from "./types/types";
+import { Plan } from "./types/types";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";

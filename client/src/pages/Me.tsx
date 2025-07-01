@@ -5,11 +5,10 @@ import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 import { h2, span } from "motion/react-client";
 import testIMage from "../assets/images/destinations/italy.png";
-import { apiResponse } from "../types/types";
 import SharePlan from "../components/SharePlan";
 
 type Plan = {
-  result_data: {
+  plan_data: {
     destination: {
       location: string;
     };
@@ -24,7 +23,7 @@ type Plan = {
 };
 
 type SharedPlan = {
-  result_data: {
+  plan_data: {
     destination: {
       location: string;
     };
@@ -37,11 +36,6 @@ type SharedPlan = {
   id: number;
   invited_by_email: string;
   invited_by_name: string;
-};
-
-type PlanResultsProps = {
-  result_data: apiResponse;
-  plan_type: string;
 };
 
 function Me() {
@@ -126,6 +120,8 @@ function Me() {
     setIsShareModalOpen(true);
   };
 
+  console.log(userPlans);
+
   return (
     <>
       <div className="myAccountContainer">
@@ -152,11 +148,9 @@ function Me() {
                         }}
                       />
                       <div className="myAccountPlanText">
-                        <h2>{plan.result_data.destination.location}</h2>
-                        {plan.result_data.second_destination && (
-                          <h2>
-                            {plan.result_data.second_destination.location}
-                          </h2>
+                        <h2>{plan.plan_data.destination.location}</h2>
+                        {plan.plan_data.second_destination && (
+                          <h2>{plan.plan_data.second_destination.location}</h2>
                         )}
 
                         <p>Created on: {plan.created_at.split(",")[0]}</p>
@@ -189,7 +183,7 @@ function Me() {
                         onClick={() =>
                           openSharePlan(
                             plan.id,
-                            plan.result_data.destination.location
+                            plan.plan_data.destination.location
                           )
                         }
                       >
@@ -242,12 +236,9 @@ function Me() {
                         }}
                       />
                       <div className="myAccountPlanText">
-                        <h2>{plan.result_data.destination.location}</h2>
-                        {plan.result_data.second_destination && (
-                          <h2>
-                            {" "}
-                            {plan.result_data.second_destination.location}
-                          </h2>
+                        <h2>{plan.plan_data.destination.location}</h2>
+                        {plan.plan_data.second_destination && (
+                          <h2> {plan.plan_data.second_destination.location}</h2>
                         )}
                         <p>Created on: {plan.created_at.split(",")[0]}</p>
                         <p>

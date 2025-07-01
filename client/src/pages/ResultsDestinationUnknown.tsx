@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { apiResponse } from "../types/types";
+import { Plan } from "../types/types";
 import destinationImage from "../assets/output.png";
 import secondDestinationImage from "../assets/output2.png";
 import Header from "../components/Header";
@@ -23,12 +23,8 @@ function ResultsDestinationUnknown() {
     setUserResponses,
     questionPromptsUnknown,
   } = useQuestionsResponses();
-  const {
-    apiResponse,
-    setApiResponse,
-    showAPIErrorMessage,
-    setShowAPIErrorMessage,
-  } = useAppContext();
+  const { plan, setPlan, showAPIErrorMessage, setShowAPIErrorMessage } =
+    useAppContext();
 
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
@@ -130,13 +126,25 @@ function ResultsDestinationUnknown() {
       if (textData) {
         try {
           if (textData.destination) {
-            setApiResponse(textData);
+            setPlan({
+              plan_data: textData,
+              plan_type: "DESTINATION_UNKNOWN",
+              photos_first_destination: [],
+              photos_second_destination: [],
+            });
             setHasResponse(true);
 
-            const planData = await postPlanAndFormData(textData);
+            const plan = await postPlanAndFormData(textData);
 
-            if (planData) {
-              getFirstImage(planData?.planId, planData?.userId, textData);
+            if (plan) {
+              getFirstImage(plan?.planId, plan?.userId, textData);
+              console.log(
+                "here is what's being passed to getFirstImage: ",
+                plan.planId,
+                plan.userId,
+                textData,
+                textData.destination
+              );
             }
 
             // CALL ROUTE TO COMPLETE SERVER-SIDE DESTINATION / IMAGE CALLS (POST)
@@ -148,7 +156,7 @@ function ResultsDestinationUnknown() {
                 Authorization: `Bearer ${storedToken}`,
               },
               body: JSON.stringify({
-                planId: planData?.planId,
+                planId: plan?.planId,
                 userResponses: userResponses,
                 questionPromptsUnknown: questionPromptsUnknown,
                 firstDestination: textData.destination.location,
@@ -179,7 +187,7 @@ function ResultsDestinationUnknown() {
   const getFirstImage = async (
     planId: number,
     userId: number,
-    destinationData: apiResponse
+    destinationData: any
   ) => {
     try {
       const images = await fetch("/api/gptAPI/image", {
@@ -226,13 +234,16 @@ function ResultsDestinationUnknown() {
           postImageData
         );
 
-        setApiResponse((prev) => ({
-          ...prev,
-          destination_photos: [
-            ...(prev.destination_photos || []),
-            imgData.imageUrl,
-          ],
-        }));
+        setPlan((prev) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            photos_first_destination: [
+              ...(prev.photos_first_destination || []),
+              imgData.imageUrl,
+            ],
+          };
+        });
       }
     } catch (error) {
       console.error("Error getting the first image:", error);
@@ -255,45 +266,7 @@ function ResultsDestinationUnknown() {
     }
   };
 
-  // // Calls for second_destination's image once the first image and content has loaded
-  // useEffect(() => {
-  //   if (hasResponse && apiResponse) {
-  //     getSecondImage();
-  //   }
-  // }, [hasResponse]);
-
-  // // Function to call OpenAI API to get second_Destination image
-  // const getSecondImage = async () => {
-  //   try {
-  //     console.log("Getting the second image...");
-  //     const images = await fetch("/api/gptAPI/image_second", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         location: apiResponse?.second_destination.location,
-  //         overview: apiResponse?.second_destination.overview,
-  //       }),
-  //     });
-
-  //     const imgData = await images.json();
-  //     // TODO: Update state with S3 URL once the GPT response comes in *********************
-
-  //     if (imgData) {
-  //       const copy = { ...apiResponse };
-  //       if (copy.second_destination && copy.second_destination.photos) {
-  //         copy.second_destination.photos.push("eventual_s3_URL");
-  //       }
-  //       if (setApiResponse) {
-  //         setApiResponse(copy as apiResponse);
-  //       }
-  //     }
-  //   } catch (error) {}
-  // };
-
-  console.log(apiResponse);
-  const postPlanAndFormData = async (textData: apiResponse) => {
+  const postPlanAndFormData = async (textData: Plan) => {
     try {
       const response = await fetch("/api/users/plan", {
         method: "POST",
@@ -302,7 +275,7 @@ function ResultsDestinationUnknown() {
           Authorization: `Bearer ${storedToken}`,
         },
         body: JSON.stringify({
-          result_data: textData,
+          plan_data: textData,
           plan_type: "DESTINATION_UNKNOWN",
           form_data: {
             question1: questionPromptsUnknown?.question1,
@@ -332,19 +305,21 @@ function ResultsDestinationUnknown() {
 
       const data = await response.json();
 
-      const planData = {
+      const plan = {
         planId: parseInt(data.plan.id),
         userId: parseInt(data.plan.user_id),
       };
 
-      setPlanId(planData.planId);
+      setPlanId(plan.planId);
       console.log("Here is data:", data);
 
-      return planData;
+      return plan;
     } catch (error) {
       console.error("Error posting the plan data:", error);
     }
   };
+
+  console.log(plan);
 
   return (
     <>
@@ -363,10 +338,10 @@ function ResultsDestinationUnknown() {
         )}
 
         {/* Partial (unpaid) results content */}
-        {hasResponse && apiResponse && !showFullResults && (
+        {hasResponse && plan && !showFullResults && (
           <>
             <Results_Pre_Unknown
-              apiResponse={apiResponse}
+              plan={plan}
               setShowFullResults={setShowFullResults}
               hasResponse={hasResponse}
             />
@@ -374,12 +349,9 @@ function ResultsDestinationUnknown() {
         )}
 
         {/* Full (paid) results content */}
-        {hasResponse && apiResponse && showFullResults && (
+        {hasResponse && plan && showFullResults && (
           <>
-            <Results_Full_Unknown
-              apiResponse={apiResponse}
-              planID={planId ?? 0}
-            />
+            <Results_Full_Unknown plan={plan} planID={planId ?? 0} />
           </>
         )}
       </div>

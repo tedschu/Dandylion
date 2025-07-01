@@ -1,16 +1,16 @@
 import destinationImage from "../../../assets/output.png";
-import { apiResponseKnown } from "../../../types/types";
+import { PlanKnown } from "../../../types/types";
 import ShareIcon from "@mui/icons-material/Share";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { useAppContext } from "../../../contexts/AppContext";
 import SharePlan from "../../SharePlan";
 
 type ResultsProps = {
-  apiResponse: apiResponseKnown;
+  plan: PlanKnown;
   planID: number;
 };
 
-function Results_Full_Known({ apiResponse, planID }: ResultsProps) {
+function Results_Full_Known({ plan, planID }: ResultsProps) {
   const {
     isShareModalOpen,
     setIsShareModalOpen,
@@ -30,8 +30,6 @@ function Results_Full_Known({ apiResponse, planID }: ResultsProps) {
     setIsShareModalOpen(true);
   };
 
-  console.log(apiResponse);
-
   return (
     <>
       <div className="resultContentContainer">
@@ -40,7 +38,7 @@ function Results_Full_Known({ apiResponse, planID }: ResultsProps) {
           type="button"
           className="shareTest"
           onClick={() =>
-            openSharePlan(planID, apiResponse.destination.location)
+            openSharePlan(planID, plan.plan_data.destination.location)
           }
         >
           <ShareIcon sx={{ fontSize: "medium" }} />
@@ -49,14 +47,14 @@ function Results_Full_Known({ apiResponse, planID }: ResultsProps) {
           <ModeEditIcon sx={{ fontSize: "medium" }} />
         </button>
         <div className="resultsFullContentContainer">
-          <h1>{apiResponse?.destination.location}</h1>
+          <h1>{plan?.plan_data.destination.location}</h1>
           <p className="resultsFullDescription">
-            {apiResponse?.destination.overview}
+            {plan?.plan_data.destination.overview}
           </p>
           <img src={destinationImage} alt="" className="locationImage" />
           <h2>Where to stay:</h2>
 
-          {apiResponse?.destination.places_to_stay.map((place, index) => {
+          {plan?.plan_data.destination.places_to_stay.map((place, index) => {
             return (
               <>
                 <li key={`${place.name} - ${index}`}>
@@ -69,18 +67,20 @@ function Results_Full_Known({ apiResponse, planID }: ResultsProps) {
           })}
 
           <h2>Here are some things to do while you're there:</h2>
-          {apiResponse?.destination.things_to_do.map((destination, index) => {
-            return (
-              <>
-                <li key={`${destination.destination_name} - ${index}`}>
-                  <span style={{ fontWeight: "bold" }}>
-                    {destination.destination_name}
-                  </span>
-                  : {destination.description}
-                </li>
-              </>
-            );
-          })}
+          {plan?.plan_data.destination.things_to_do.map(
+            (destination, index) => {
+              return (
+                <>
+                  <li key={`${destination.destination_name} - ${index}`}>
+                    <span style={{ fontWeight: "bold" }}>
+                      {destination.destination_name}
+                    </span>
+                    : {destination.description}
+                  </li>
+                </>
+              );
+            }
+          )}
           <div className="resultsInfoBox">
             <h2 style={{ textAlign: "center" }}>
               Some important things to plan for:
@@ -88,20 +88,20 @@ function Results_Full_Known({ apiResponse, planID }: ResultsProps) {
 
             <li>
               <span style={{ fontWeight: "bold" }}>Best time to go:</span>{" "}
-              {apiResponse?.destination.time_to_go}
+              {plan?.plan_data.destination.time_to_go}
             </li>
             <li>
               <span style={{ fontWeight: "bold" }}>Estimated cost:</span>{" "}
-              {apiResponse?.destination.estimated_cost}
+              {plan?.plan_data.destination.estimated_cost}
             </li>
             <li>
               <span style={{ fontWeight: "bold" }}>Other tips:</span>{" "}
-              {apiResponse?.destination.helpful_tips}
+              {plan?.plan_data.destination.helpful_tips}
             </li>
           </div>
           <div className="resultsItineraryContainer">
             <h2>Here's an itinerary made for you:</h2>
-            {apiResponse.destination.itinerary.map((day, index) => {
+            {plan.plan_data.destination.itinerary.map((day, index) => {
               return (
                 <>
                   <h3

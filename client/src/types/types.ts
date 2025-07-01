@@ -74,11 +74,14 @@ export type Destination = {
   restaurants: Restaurants[];
 };
 
-export type apiResponse = {
-  destination: Destination;
-  second_destination: Destination;
-  destination_photos: string[];
-  second_destination_photos: string[];
+export type Plan = {
+  plan_data: {
+    destination: Destination;
+    second_destination: Destination;
+  };
+  plan_type: PlanType;
+  photos_first_destination: string[];
+  photos_second_destination: string[];
 };
 
 export type Itinerary = {
@@ -89,14 +92,22 @@ export type Itinerary = {
   evening: string;
 };
 
+export type PlanType = "DESTINATION_KNOWN" | "DESTINATION_UNKNOWN";
+
 export type PlanShareData = {
   planID: number | null;
   destination: string;
 };
 
 // For Known data structures:
-export type apiResponseKnown = {
-  destination: DestinationKnown;
+export type PlanKnown = {
+  plan_data: {
+    destination: DestinationKnown;
+    second_destination?: null;
+  };
+  plan_type: PlanType;
+  photos_first_destination: string[];
+  photos_second_destination: string[];
 };
 
 export type DestinationKnown = {
@@ -104,7 +115,6 @@ export type DestinationKnown = {
   overview: string;
   places_to_stay: PlaceToStay[];
   things_to_do: Attraction[];
-  photos: String[];
   time_to_go: string;
   estimated_cost: string;
   helpful_tips: string;
@@ -125,3 +135,6 @@ export type ItineraryKnownDays = {
   dining: string;
   time: string;
 };
+
+// Union type for API responses that could be either "known" or "unknown"
+export type PlanResponse = PlanKnown | Plan;

@@ -87,7 +87,7 @@ function SharePlan() {
           >
             X
           </div>
-          <h1 style={{ fontSize: "20px" }}>
+          <h1 style={{ fontSize: "20px", textAlign: "center" }}>
             Share your plan for <span>{planShareData.destination}</span>
           </h1>
           <p>Invite others to see your plan:</p>

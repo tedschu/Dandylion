@@ -1,5 +1,5 @@
 import { body, text } from "motion/react-client";
-import { apiResponse } from "../../types/types";
+import { Plan } from "../../types/types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import pyramid from "../../assets/images/pyramids.png";
@@ -20,12 +20,8 @@ function Step10() {
     questionPromptsUnknown,
     setQuestionPromptsUnknown,
   } = useQuestionsResponses();
-  const {
-    apiResponse,
-    setApiResponse,
-    showBadWordsAlert,
-    setShowBadWordsAlert,
-  } = useAppContext();
+  const { plan, setPlan, showBadWordsAlert, setShowBadWordsAlert } =
+    useAppContext();
 
   // TODO: UPDATE ALL STEP PAGES TO HAVE CONTEXT RATHER THAN PROP VALUES ****************************
 

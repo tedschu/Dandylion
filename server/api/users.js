@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 // POST a new plan (Plan) and responses / questions (UserResponse) when the Anthropic API returns data
 router.post("/plan", verifyToken, async (req, res) => {
   try {
-    const result_data = req.body.result_data;
+    const plan_data = req.body.plan_data;
     const plan_type = req.body.plan_type;
     const form_data = req.body.form_data;
     const user_id = parseInt(req.user);
@@ -21,7 +21,7 @@ router.post("/plan", verifyToken, async (req, res) => {
         user_id: user_id,
         plan_type: plan_type,
         status: "DRAFT",
-        result_data: result_data,
+        plan_data: plan_data,
       },
     });
 
@@ -61,7 +61,7 @@ router.patch(
         return res.status(400).json({ error: "Plan not found." });
 
       const updatedResultData = {
-        ...existingPlan.result_data,
+        ...existingPlan.plan_data,
         second_destination: second_destination,
       };
 
@@ -71,7 +71,7 @@ router.patch(
           id: parseInt(plan_id),
         },
         data: {
-          result_data: updatedResultData,
+          plan_data: updatedResultData,
         },
       });
 
@@ -97,7 +97,7 @@ router.get("/my-plans", verifyToken, async (req, res) => {
       },
       select: {
         plan_type: true,
-        result_data: true,
+        plan_data: true,
         created_at: true,
         id: true,
         planShares: {
@@ -110,7 +110,7 @@ router.get("/my-plans", verifyToken, async (req, res) => {
 
     const plansFormattedDates = allPlans.map((plan) => ({
       plan_type: plan.plan_type,
-      result_data: plan.result_data,
+      plan_data: plan.plan_data,
       created_at: plan.created_at.toLocaleString(),
       id: plan.id,
       shared_with: plan.planShares.map((share) => share.email),
@@ -193,7 +193,7 @@ router.get("/plans-shared-with-me", verifyToken, async (req, res) => {
         plan: {
           select: {
             plan_type: true,
-            result_data: true,
+            plan_data: true,
             created_at: true,
             id: true,
           },
@@ -209,7 +209,7 @@ router.get("/plans-shared-with-me", verifyToken, async (req, res) => {
 
     const plansFormattedDates = allPlanShares.map((plan) => ({
       plan_type: plan.plan.plan_type,
-      result_data: plan.plan.result_data,
+      plan_data: plan.plan.plan_data,
       created_at: plan.plan.created_at.toLocaleString(),
       id: plan.plan.id,
       invited_by_name: plan.user.first_name,

@@ -1,15 +1,15 @@
 import destinationImage from "../../../assets/output.png";
 import secondDestinationImage from "../../../assets/output2.png";
-import { apiResponse } from "../../../types/types";
+import { Plan } from "../../../types/types";
 
 type ResultsProps = {
-  apiResponse: apiResponse;
+  plan: Plan;
   hasResponse: boolean;
   setShowFullResults: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function Results_Pre_Unknown({
-  apiResponse,
+  plan,
   hasResponse,
   setShowFullResults,
 }: ResultsProps) {
@@ -21,9 +21,9 @@ function Results_Pre_Unknown({
     <>
       <div className="resultContentContainer">
         <div className="resultPreviewText">
-          <h1>{apiResponse?.destination.location}</h1>
+          <h1>{plan?.plan_data.destination.location}</h1>
           <p style={{ fontWeight: "bold" }}>
-            {apiResponse?.destination.overview}
+            {plan?.plan_data.destination.overview}
           </p>
           {/* Removed image load for pre results to reduce time-to-load */}
           {/* <img src={destinationImage} alt="" className="locationImage" /> */}
@@ -31,32 +31,32 @@ function Results_Pre_Unknown({
           <h2>Things to do:</h2>
           <li>
             <span style={{ fontWeight: "bold" }}>
-              {apiResponse?.destination.things_to_do[0].destination_name}
+              {plan?.plan_data.destination.things_to_do[0].destination_name}
             </span>
-            : {apiResponse.destination.things_to_do[0].description}
+            : {plan.plan_data.destination.things_to_do[0].description}
           </li>
           <li>
             <span style={{ fontWeight: "bold" }}>
-              {apiResponse?.destination.things_to_do[1].destination_name}
+              {plan?.plan_data.destination.things_to_do[1].destination_name}
             </span>
-            : {apiResponse.destination.things_to_do[1].description}
+            : {plan.plan_data.destination.things_to_do[1].description}
           </li>
 
           <h2>Here's a place to stay that may be good for you:</h2>
           <li>
             <span style={{ fontWeight: "bold" }}>
-              {apiResponse.destination.places_to_stay[0].name}
+              {plan.plan_data.destination.places_to_stay[0].name}
             </span>{" "}
-            in {apiResponse.destination.places_to_stay[0].location}:{" "}
-            {apiResponse.destination.places_to_stay[0].why_recommended}
+            in {plan.plan_data.destination.places_to_stay[0].location}:{" "}
+            {plan.plan_data.destination.places_to_stay[0].why_recommended}
           </li>
 
           <h2>Here's a restaurant you might enjoy:</h2>
           <li>
             <span style={{ fontWeight: "bold" }}>
-              {apiResponse.destination.restaurants[0].restaurant_name}:{" "}
+              {plan.plan_data.destination.restaurants[0].restaurant_name}:{" "}
             </span>
-            {apiResponse.destination.restaurants[0].description}
+            {plan.plan_data.destination.restaurants[0].description}
           </li>
         </div>
 

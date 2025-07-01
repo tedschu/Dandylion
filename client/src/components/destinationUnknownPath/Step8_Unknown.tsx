@@ -1,4 +1,3 @@
-import { StepProps } from "../../types/types";
 import acropolis from "../../assets/images/acropolis.png";
 import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
@@ -14,12 +13,8 @@ function Step8() {
     questionPromptsUnknown,
     setQuestionPromptsUnknown,
   } = useQuestionsResponses();
-  const {
-    apiResponse,
-    setApiResponse,
-    showBadWordsAlert,
-    setShowBadWordsAlert,
-  } = useAppContext();
+  const { plan, setPlan, showBadWordsAlert, setShowBadWordsAlert } =
+    useAppContext();
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =

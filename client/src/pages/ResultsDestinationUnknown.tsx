@@ -157,6 +157,7 @@ function ResultsDestinationUnknown() {
               },
               body: JSON.stringify({
                 planId: plan?.planId,
+                userId: plan?.userId,
                 userResponses: userResponses,
                 questionPromptsUnknown: questionPromptsUnknown,
                 firstDestination: textData.destination.location,

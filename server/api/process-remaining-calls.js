@@ -1,29 +1,53 @@
 import express from "express";
 const router = express.Router();
 
+// Counter for Anthropic API call retries
+let apiRetries = 0;
+
+const postPlan = async (textData, storedToken, planId) => {
+  try {
+    console.log("here is storedToken:", storedToken);
+    console.log("here is planId:", planId);
+    const response = await fetch(
+      `${process.env.BASE_URL}/api/users/plan-update-second-destination`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: storedToken,
+        },
+        body: JSON.stringify({
+          second_destination: textData,
+          plan_id: planId,
+        }),
+      }
+    );
+
+    console.log("DEBUG - response status:", response.status);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Here is data from the postPlan response", data);
+    return data;
+  } catch (error) {
+    console.error("Error posting the plan data:", error);
+    throw error;
+  }
+};
+
 router.post("/", async (req, res) => {
   const {
     userResponses,
     planId,
+    userId,
     questionPromptsUnknown,
     firstDestination,
     firstName,
   } = req.body;
   const storedToken = req.headers.authorization;
-  console.log("Here is req.body:", req.body);
-  console.log("Here is userResponses:", req.body.userResponses);
-  console.log("Here is firstDestination deconstructed:", firstDestination);
-  console.log("Here is storedToken: ", storedToken);
-  console.log("Here is planId", planId, "...and typeof:", typeof planId);
-
-  // status: first_destination has been called, returned, and stored in DB
-  // todo:
-  // call second_destination, passing firstDestination value
-  // on return store to DB in existing (empty) object
-  // call for first_image from GPT API
-  // on return, pass to S3 to store, on return, store S3 URL in DB
-  // call for second_image from GPT API
-  // on return, pass to S3 to store, on return, store S3 URL in DB
 
   const getSecondTripResults = async () => {
     try {
@@ -61,37 +85,45 @@ router.post("/", async (req, res) => {
         }
       );
 
-      console.log("Here's the Anthropic response: ", secondDestinationResponse);
-
       if (!secondDestinationResponse.ok) {
         const textResponse = await secondDestinationResponse.text();
-        console.error("server response:", textResponse);
+        console.error("Anthropic API error response:", textResponse);
 
-        // Retries the Anthropic API every 3 seconds (for 3 tries) if there's a
-        // 529 error, meaning the API is currently overloaded
+        // Handle retry for overloaded API
         if (
-          secondDestinationResponse.status == 529 ||
-          secondDestinationResponse.status == 500
+          secondDestinationResponse.status === 529 ||
+          secondDestinationResponse.status === 500
         ) {
           console.log("Error: Anthropic API is overloaded");
-          setTimeout(retryAnthropicAPIOnError, 5000);
-          return;
+
+          // Implement retry logic properly
+          if (apiRetries < 3) {
+            apiRetries += 1;
+            console.log(`Retrying... attempt ${apiRetries}/3`);
+
+            // Wait 5 seconds then retry
+            await new Promise((resolve) => setTimeout(resolve, 5000));
+            return await getSecondTripResults(); // Recursive retry
+          } else {
+            apiRetries = 0; // Reset counter
+            throw new Error(
+              `Anthropic API failed after 3 retries. Status: ${secondDestinationResponse.status}`
+            );
+          }
         }
+
+        throw new Error(
+          `Anthropic API error: ${secondDestinationResponse.status} - ${textResponse}`
+        );
       }
+
       const textData = await secondDestinationResponse.json();
       console.log("Here is textData from Anthropic call: ", textData);
 
-      // TODO: call postPlanAndFormData() to patch to DB
-      await postPlan(textData, storedToken, planId);
+      // Reset retry counter on success
+      apiRetries = 0;
 
-      // Calls OpenAI API, passing location and overview info from Anthropic response, and user's first name
-      // Returns a postcard-style image for the location
-      console.log(
-        "HEre is data being sent to GPT...location:",
-        textData.location,
-        "..and overview:",
-        textData.overview
-      );
+      await postPlan(textData, storedToken, planId);
 
       const images = await fetch(
         `${process.env.BASE_URL}/api/gptAPI/image_second`,
@@ -103,79 +135,76 @@ router.post("/", async (req, res) => {
           body: JSON.stringify({
             location: textData.location,
             overview: textData.overview,
+            userId: userId,
+            planId: planId,
           }),
         }
       );
 
-      console.log("Here is images (raw response):", images);
+      if (!images.ok) {
+        throw new Error(`Image generation failed: ${images.status}`);
+      }
 
       const imgData = await images.json();
+      console.log("Here is imgData for second image:", imgData);
 
-      // TODO: Call function to upload to S3, returning image key to store into DB
+      if (imgData.success && imgData.imageUrl) {
+        const postImage = await fetch(
+          `${process.env.BASE_URL}/api/plans/update-second-image`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-type": "application/json",
+              Authorization: storedToken,
+            },
+            body: JSON.stringify({
+              planId: planId,
+              imageUrl: imgData.imageUrl,
+            }),
+          }
+        );
 
-      //console.log("HEre is imgData:", imgData);
+        if (!postImage.ok) {
+          throw new Error(`Failed to update image in DB: ${postImage.status}`);
+        }
+
+        const postImageData = await postImage.json();
+        console.log(
+          "Here is the data for image 2 from the put route:",
+          postImageData
+        );
+
+        return postImageData;
+      } else {
+        throw new Error(
+          "Image generation was not successful or no imageUrl returned"
+        );
+      }
     } catch (error) {
-      // catch for getSecondTripResults()
-      console.error(error);
+      console.error("Error in getSecondTripResults:", error);
+      throw error;
     }
   };
 
-  // Route handler to call getSecondTripResults()
+  // Main execution
   try {
-    res.json({
-      status:
-        "Processing started for remaining API calls...calling getSecondTripResults()",
-    });
+    await getSecondTripResults();
 
-    getSecondTripResults();
+    res.json({
+      status: "All API calls completed successfully",
+      success: true,
+    });
   } catch (error) {
     console.error("Error in processing background API calls: ", error);
+
+    // Reset retry counter on final failure
+    apiRetries = 0;
+
+    res.status(500).json({
+      error: "Failed to process remaining API calls",
+      details: error.message,
+    });
   }
 });
-
-// Counter for Anthropic API call retries (see retryAPIOnError())
-let apiRetries = 0;
-
-// Calls Anthropic API up to 3 times via getTripResults() if there is a 529 error
-// from Anthropic response.
-const retryAnthropicAPIOnError = () => {
-  let maxRetries = 3;
-
-  console.log("Anthropic API error...retrying...");
-
-  if (apiRetriesRef.current < maxRetries) {
-    getSecondTripResults();
-    apiRetries += 1;
-  }
-};
-
-const postPlan = async (textData, storedToken, planId) => {
-  try {
-    console.log("here is storedToken:", storedToken);
-    console.log("here is planId:", planId);
-    const response = await fetch(
-      `${process.env.BASE_URL}/api/users/plan-update-second-destination`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: storedToken,
-        },
-        body: JSON.stringify({
-          second_destination: textData,
-          plan_id: planId,
-        }),
-      }
-    );
-
-    console.log("DEBUG - response status:", response.status); // ← Add this
-
-    const data = await response.json();
-
-    console.log("Here is data from the postPlan response", data);
-  } catch (error) {
-    console.error("Error posting the plan data:", error);
-  }
-};
 
 export default router;

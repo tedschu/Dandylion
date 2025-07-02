@@ -147,7 +147,7 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
                 {plan?.plan_data.second_destination.overview}
               </p>
               <img
-                src={secondDestinationImage}
+                src={plan.photos_second_destination[0]}
                 alt=""
                 className="locationImage"
               />

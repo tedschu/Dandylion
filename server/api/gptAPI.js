@@ -76,12 +76,11 @@ router.post("/image", async (req, res) => {
   }
 });
 
-// NOTE THAT THIS IS TEMPORARY AND SHOULD BE REMOVED WHEN S3 IS SET UP
 router.post("/image_second", async (req, res) => {
   try {
-    const { location, overview } = req.body;
+    const { location, overview, userId, planId } = req.body;
 
-    console.log(location, overview);
+    console.log(location, overview, userId, planId);
 
     const response = await api.images.generate({
       model: "gpt-image-1",
@@ -92,13 +91,31 @@ router.post("/image_second", async (req, res) => {
     });
 
     if (response && response.data && response.data.length > 0) {
-      res.json(response.data[0]);
-    } else {
-      throw new Error("No image data returned from OpenAI");
-    }
+      const imageBuffer = Buffer.from(response.data[0].b64_json, "base64");
 
-    const imageBuffer = Buffer.from(response.data[0].b64_json, "base64");
-    await writeFile("../client/src/assets/output2.png", imageBuffer);
+      // ***** Upload to Google Cloud storage ******
+      const fileName = `users/${userId}/trips/${planId}/image_${Date.now()}.png`;
+      const file = bucket.file(fileName);
+
+      await file.save(imageBuffer, {
+        metadata: {
+          contentType: "image/png",
+        },
+      });
+
+      // Gets public URL of the image
+      const imageURL = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
+
+      return res.json({
+        success: true,
+        imageUrl: imageURL,
+        fileName: fileName,
+      });
+    } else {
+      return res
+        .status(500)
+        .json({ error: "No image data returned from OpenAi API" });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });

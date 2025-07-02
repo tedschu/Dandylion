@@ -148,7 +148,9 @@ function Me() {
                           maxWidth: "100px",
                           height: "auto",
                           objectFit: "contain",
+                          cursor: "pointer",
                         }}
+                        onClick={() => navigate(`/plans/${plan.id}`)}
                       />
                       <div className="myAccountPlanText">
                         <h2>{plan.plan_data.destination.location}</h2>
@@ -179,7 +181,7 @@ function Me() {
                         className="register"
                         onClick={() => navigate(`/plans/${plan.id}`)}
                       >
-                        View plan
+                        View
                       </button>
                       <button
                         type="button"

@@ -110,7 +110,7 @@ function Me() {
     }
   };
 
-  const openSharePlan = (id: number, destination: string) => {
+  const openSharePlan = (id: number, destination: string, imageUrl: string) => {
     // Update planID state value
     // Open modal with SharePlan component
 
@@ -118,6 +118,7 @@ function Me() {
       ...prevState,
       planID: id,
       destination: destination,
+      imageUrl: imageUrl,
     }));
     setIsShareModalOpen(true);
   };
@@ -149,6 +150,7 @@ function Me() {
                           height: "auto",
                           objectFit: "contain",
                           cursor: "pointer",
+                          borderRadius: "12px",
                         }}
                         onClick={() => navigate(`/plans/${plan.id}`)}
                       />
@@ -188,7 +190,8 @@ function Me() {
                         onClick={() =>
                           openSharePlan(
                             plan.id,
-                            plan.plan_data.destination.location
+                            plan.plan_data.destination.location,
+                            plan.photos_first_destination[0]
                           )
                         }
                       >

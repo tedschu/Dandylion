@@ -54,7 +54,6 @@ function SharePlan() {
           Authorization: `Bearer ${storedToken}`,
         },
         body: JSON.stringify({
-          // UPDATE PLAN_ID TO BE DYNAMIC WHEN THIS COMPONENT IS RENDERED INSIDE OF INDIVIDUAL PLAN COMPONENTS *********
           plan_id: planShareData.planID,
           emails: sharedEmails,
         }),
@@ -62,10 +61,36 @@ function SharePlan() {
 
       const data = await response.json();
 
+      // Then send the email invites
+      const emailResponse = await fetch("/api/emails/send-plan-invites", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${storedToken}`,
+        },
+        body: JSON.stringify({
+          emails: sharedEmails,
+          planData: {
+            planID: planShareData.planID,
+            destination: planShareData.destination,
+          },
+          senderName: userInfo.firstName,
+          senderEmail: userInfo.email,
+          imageUrl: planShareData.imageUrl,
+        }),
+      });
+
+      const emailData = await emailResponse.json();
+
+      if (emailData.success) {
+        console.log("Invites sent successfully!", emailData.message);
+        // You could show a success message to the user here
+      } else {
+        console.error("Failed to send invites:", emailData.message);
+      }
+
       setShouldRefreshPlans(true);
       setIsShareModalOpen(false);
-
-      //  TODO: ADD EMAIL SENDING FUNCTIONALITY **************
     } catch (error) {
       console.error("Error sharing emails", error);
     }

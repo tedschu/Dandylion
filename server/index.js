@@ -18,6 +18,7 @@ import authRoutes from "./auth/index.js";
 import userRoutes from "./api/users.js";
 import planRoutes from "./api/plans.js";
 import remainingCallRoutes from "./api/process-remaining-calls.js";
+import emailRoutes from "./api/emails.js";
 
 import { PrismaClient } from "./generated/prisma/client.ts";
 const prisma = new PrismaClient();
@@ -51,11 +52,11 @@ app.use("/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/plans", planRoutes);
 app.use("/api/process-remaining-calls", remainingCallRoutes);
+app.use("/api/emails", emailRoutes);
 
 app.use(express.static(path.join(__dirname, "/../client/dist")));
 
 if (process.env.NODE_ENV === "production") {
-  // After your API routes, add this for client-side routing
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "/../client/dist/index.html"));
   });

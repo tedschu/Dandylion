@@ -3,6 +3,7 @@
     "@anthropic-ai/sdk": "^0.39.0",
     "@google-cloud/storage": "^7.16.0",
     "@prisma/client": "^6.8.2",
+    "@sendgrid/mail": "^8.1.5",
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
     "concurrently": "^9.1.2",

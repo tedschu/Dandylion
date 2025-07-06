@@ -86,13 +86,13 @@ function ResultsLoadingState({
             {/* @ts-ignore */}
             {/* <CircularProgress color="#f7bc21" /> */}
 
-            <h2 style={{ textAlign: "center" }}>
-              It takes a moment to cover the entire world.
+            <h2 style={{ textAlign: "center", fontSize: "18px" }}>
+              Creating your personalized travel plan...
             </h2>
             <Box
               sx={{
                 width: "80%",
-                margin: "10px 0 15px 0",
+                margin: "10px 0 25px 0",
                 backgroundColor: "#e0e0e0",
                 "& .MuiLinearProgress-bar": {
                   backgroundColor: "var(--brand-blue)",
@@ -107,9 +107,11 @@ function ResultsLoadingState({
                 color: "var(--action-coral)",
                 margin: "0",
                 textAlign: "center",
+                fontSize: "18px",
               }}
             >
-              Here are some of the places you could go:
+              While you wait, here are some destinations other travelers have
+              explored:
             </h1>
 
             {/* Image carousel container */}

@@ -5,6 +5,8 @@ import ShareIcon from "@mui/icons-material/Share";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { useAppContext } from "../../../contexts/AppContext";
 import SharePlan from "../../SharePlan";
+import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
 
 type ResultsProps = {
   plan: Plan;
@@ -17,9 +19,14 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
     setIsShareModalOpen,
     planShareData,
     setPlanShareData,
+    setPlan,
   } = useAppContext();
 
-  const openSharePlan = (id: number, destination: string) => {
+  const storedToken = localStorage.getItem("token");
+
+  const [isSecondPlanLoading, setIsSecondPlanLoading] = useState(true);
+
+  const openSharePlan = (id: number, destination: string, imageUrl: string) => {
     // Update planID state value
     // Open modal with SharePlan component
 
@@ -27,11 +34,49 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
       ...prevState,
       planID: id,
       destination: destination,
+      imageUrl: imageUrl,
     }));
     setIsShareModalOpen(true);
   };
 
   console.log(plan);
+
+  // useEffect to trigger re-render when second_destination data is updated in Plan state
+  useEffect(() => {
+    // if second_destination already is populated, return (do nothing else)
+    if (plan?.plan_data.second_destination?.location) {
+      setIsSecondPlanLoading(false);
+      return;
+    }
+
+    const interval = setInterval(async () => {
+      try {
+        const response = await fetch(`/api/plans/${planID}`, {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${storedToken}`,
+          },
+        });
+
+        const data = await response.json();
+
+        if (data) {
+          setPlan(data.plan);
+          setIsSecondPlanLoading(false);
+        }
+      } catch (error) {}
+    }, 20000);
+
+    const timeout = setTimeout(() => {
+      clearInterval(interval);
+    }, 120000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, []);
 
   return (
     <>
@@ -41,7 +86,11 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
           type="button"
           className="shareTest"
           onClick={() =>
-            openSharePlan(planID, plan.plan_data.destination.location)
+            openSharePlan(
+              planID,
+              plan.plan_data.destination.location,
+              plan.photos_first_destination[0]
+            )
           }
         >
           <ShareIcon sx={{ fontSize: "medium" }} />
@@ -134,6 +183,16 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
         </div>
       </div>
       {/* Second destination */}
+
+      {isSecondPlanLoading && (
+        <>
+          <div className="secondDestinationLoading">
+            <p>Loading a second destination...</p>
+            <CircularProgress />
+          </div>
+        </>
+      )}
+
       {/* Only renders if second_destination has data in object (error handling) */}
       {plan?.plan_data.second_destination?.location && (
         <>

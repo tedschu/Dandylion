@@ -38,7 +38,7 @@ router.post("/send-plan-invites", verifyToken, async (req, res) => {
             <body style="margin: 0; padding: 0; font-family: 'Parkinsans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
               <div style="font-family: 'Parkinsans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
                 <div style="text-align: center; margin-bottom: 30px;">
-                  <h1 style="color: #113a67; margin: 0; font-family: 'Parkinsans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700;">Dandylion</h1>
+                  <h1 style="color: #113a67; margin: 0; font-family: 'Parkinsans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700;">dandylion.ai</h1>
                 </div>
                 
                 <h2 style="color: #333; font-family: 'Parkinsans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 600;">You've been invited to view a travel plan! ✈️</h2>

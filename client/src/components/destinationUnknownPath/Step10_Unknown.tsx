@@ -50,6 +50,7 @@ function Step10() {
         setShowBadWordsAlert(false);
       }, 3000);
     } else if (!isLoggedIn) {
+      // IF NOT LOGGED IN, OPEN LOGIN / REGISTER MODAL
       openModal();
     } else if (isLoggedIn) {
       navigate("/your-destination-plan");

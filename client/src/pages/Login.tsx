@@ -77,20 +77,21 @@ function Login() {
         <div className="loginContentContainer">
           <p>[Continue with Google]</p>
           <p>OR</p>
-          <form action="" className="registerForm" onSubmit={submit}>
-            <label htmlFor="email">Email:</label>
+          <form action="" className="loginForm" onSubmit={submit}>
             <input
+              className="loginInput"
               type="text"
-              placeholder="name@example.com"
+              placeholder="Email"
               name="email"
               value={userInfo.email}
               onChange={setFormValues}
             />
-            <label htmlFor="password">Password:</label>
             <input
+              className="loginInput"
               type="password"
               //   placeholder="example: Count Woofula"
               name="password"
+              placeholder="Password"
               value={userInfo.password}
               onChange={setFormValues}
             />

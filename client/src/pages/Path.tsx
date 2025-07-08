@@ -3,10 +3,12 @@ import Header from "../components/Header";
 import arrow from "../assets/icons/arrow_forward.png";
 import bee from "../assets/bee.png";
 import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
+import { useAuth } from "../contexts/AuthContext";
 
 function Path() {
   const { currentStep, setCurrentStep, setUserResponses } =
     useQuestionsResponses();
+  const { isLoggedIn } = useAuth();
 
   const navigate = useNavigate();
 
@@ -39,7 +41,7 @@ function Path() {
 
   return (
     <>
-      <Header />
+      {isLoggedIn && <Header />}
       <div className="pathContainer">
         <div className="pathContentContainer">
           <h2>How can we help plan your trip?</h2>

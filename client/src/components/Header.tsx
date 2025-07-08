@@ -60,13 +60,33 @@ function Header() {
               },
             }}
           >
-            <MenuItem style={{ fontWeight: "bold" }}>
+            <MenuItem
+              style={{
+                fontWeight: "bold",
+                fontFamily: "Parkinsans, sans-serif",
+              }}
+            >
               Hey, {userInfo.email}
             </MenuItem>
-            <MenuItem onClick={() => navigate("/me")}>My plans</MenuItem>
-            <MenuItem onClick={() => navigate("/path")}>Start a plan</MenuItem>
+            <MenuItem
+              style={{ fontFamily: "Parkinsans, sans-serif" }}
+              onClick={() => navigate("/me")}
+            >
+              My plans
+            </MenuItem>
+            <MenuItem
+              style={{ fontFamily: "Parkinsans, sans-serif" }}
+              onClick={() => navigate("/path")}
+            >
+              Start a plan
+            </MenuItem>
 
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem
+              style={{ fontFamily: "Parkinsans, sans-serif" }}
+              onClick={handleLogout}
+            >
+              Logout
+            </MenuItem>
           </Menu>
         </div>
       </div>

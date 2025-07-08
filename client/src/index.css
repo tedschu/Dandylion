@@ -928,17 +928,49 @@ p {
 /* ***** LOGIN SCREEN ***** */
 
 .loginContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.loginContentContainer {
+  width: 100%;
+  height: 100vh;
+  background-image: url("./assets/images/background.jpg");
+  background-size: cover;
+  background-position: top;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.loginContentContainer {
+  width: 90%;
+  max-width: 350px;
+  background-color: rgb(255, 255, 255, 0.9);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 60vh;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.loginInput {
+  background: transparent;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 220px;
+  padding: 10px;
+  font-size: 17px;
 }
 
 /* other classes */

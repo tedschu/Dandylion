@@ -2,6 +2,7 @@ import { useState, useSyncExternalStore } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserInfo } from "../types/types";
 import { useAuth } from "../contexts/AuthContext";
+import { h3 } from "motion/react-client";
 
 type RegisterWithPlanProps = {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +14,7 @@ function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
     useAuth();
 
   const [registerError, setRegisterError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [loginFailed, setLoginFailed] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
@@ -59,7 +61,7 @@ function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
 
       const data = await response.json();
 
-      console.log(data);
+      console.log("Here is data:", data);
 
       if (!response.ok) {
         throw new Error(data.error || "Registration failed.");
@@ -73,6 +75,14 @@ function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
     } catch (error) {
       console.error("Error during registration:", error);
       setRegisterError(true);
+
+      let errorMsg = "Something went wrong";
+      if (error instanceof Error) {
+        errorMsg = error.message;
+      } else if (typeof error === "string") {
+        errorMsg = error;
+      }
+      setErrorMessage("Oops. " + errorMsg);
     }
   };
 
@@ -94,12 +104,9 @@ function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
 
       const data = await response.json();
 
-      console.log("Here is userInfo: ", userInfo);
-      console.log("HEre is data from response:", data);
-
       if (!response.ok) {
-        throw new Error("Login failed");
         setLoginFailed(true);
+        throw new Error("Login failed");
       } else {
         localStorage.setItem("token", data.token); // SETS TOKEN TO LOCALSTORAGE IN BROWSER
         localStorage.setItem("userId", data.id); // SETS USER ID INTO LOCALSTORAGE TO HELP WITH RENDERING USER DATA ON GAME AND ACCOUNT PAGES
@@ -146,6 +153,7 @@ function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
               >
                 <label htmlFor="firstName">First name:</label>
                 <input
+                  className="loginInput"
                   type="text"
                   placeholder="Alice"
                   name="firstName"
@@ -154,6 +162,7 @@ function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
                 />
                 <label htmlFor="email">Email:</label>
                 <input
+                  className="loginInput"
                   type="text"
                   placeholder="name@example.com"
                   name="email"
@@ -162,6 +171,7 @@ function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
                 />
                 <label htmlFor="password">Password:</label>
                 <input
+                  className="loginInput"
                   type="password"
                   //   placeholder="example: Count Woofula"
                   name="password"
@@ -209,6 +219,9 @@ function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
                 </div>
               </form>
             </>
+          )}
+          {registerError && (
+            <h3 style={{ margin: "2px", color: "red" }}>{errorMessage}</h3>
           )}
         </div>
       </div>

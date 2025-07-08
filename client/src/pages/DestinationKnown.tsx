@@ -19,20 +19,20 @@ import { useAppContext } from "../contexts/AppContext";
 function DestinationKnown() {
   const {
     currentStep,
-    setCurrentStep,
-    userResponses,
-    setUserResponses,
-    questionPromptsKnown,
-    setQuestionPromptsKnown,
+    // setCurrentStep,
+    // userResponses,
+    // setUserResponses,
+    // questionPromptsKnown,
+    // setQuestionPromptsKnown,
   } = useQuestionsResponses();
 
-  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
-  const {
-    apiResponse,
-    setApiResponse,
-    showBadWordsAlert,
-    setShowBadWordsAlert,
-  } = useAppContext();
+  // const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
+  // const {
+  //   apiResponse,
+  //   setApiResponse,
+  //   showBadWordsAlert,
+  //   setShowBadWordsAlert,
+  // } = useAppContext();
 
   const steps = [Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8];
 
@@ -60,18 +60,16 @@ function DestinationKnown() {
 
   const moonShift = moonPosition[currentStep as keyof typeof moonPosition];
 
-  console.log(currentStep);
-
   return (
     <>
       <div className={"pageContainer"} data-question={currentStep}>
         <Header />
-        <img
+        {/* <img
           className="moon"
           src={moon}
           alt=""
           style={{ top: "60px", right: `${moonShift}` }}
-        />
+        /> */}
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS />
@@ -95,22 +93,22 @@ function DestinationKnown() {
                 >
                   <ComponentStep
                     key={stepNumber}
-                    currentStep={currentStep}
-                    setCurrentStep={setCurrentStep}
-                    userResponses={userResponses}
-                    setUserResponses={setUserResponses}
-                    questionPromptsKnown={questionPromptsKnown}
-                    setQuestionPromptsKnown={setQuestionPromptsKnown}
-                    apiResponse={apiResponse}
-                    setApiResponse={setApiResponse}
-                    userInfo={
-                      stepNumber === 0 || stepNumber === 8
-                        ? userInfo
-                        : undefined
-                    }
-                    setUserInfo={setUserInfo}
-                    showBadWordsAlert={showBadWordsAlert}
-                    setShowBadWordsAlert={setShowBadWordsAlert}
+                    // currentStep={currentStep}
+                    // setCurrentStep={setCurrentStep}
+                    // userResponses={userResponses}
+                    // setUserResponses={setUserResponses}
+                    // questionPromptsKnown={questionPromptsKnown}
+                    // setQuestionPromptsKnown={setQuestionPromptsKnown}
+                    // apiResponse={apiResponse}
+                    // setApiResponse={setApiResponse}
+                    // userInfo={
+                    //   stepNumber === 0 || stepNumber === 8
+                    //     ? userInfo
+                    //     : undefined
+                    // }
+                    // setUserInfo={setUserInfo}
+                    // showBadWordsAlert={showBadWordsAlert}
+                    // setShowBadWordsAlert={setShowBadWordsAlert}
                   />
                 </motion.div>
               </AnimatePresence>

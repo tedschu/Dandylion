@@ -5,18 +5,35 @@ import bee from "../assets/bee.png";
 import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
 
 function Path() {
-  const { currentStep, setCurrentStep } = useQuestionsResponses();
+  const { currentStep, setCurrentStep, setUserResponses } =
+    useQuestionsResponses();
 
   const navigate = useNavigate();
+
+  const defaultUserResponses = {
+    response1: "",
+    response2: "",
+    response3: "",
+    response4: "",
+    response5: "",
+    response6: "",
+    response7: "",
+    response8: "",
+    response9: "",
+    response10: "",
+  };
 
   // Uses setCurrentStep(1) to reset in case the user is creating multiple plans (e.g. will end on 10 for the previous)
   const handleKnownDestinationClick = () => {
     setCurrentStep(1);
+    setUserResponses(defaultUserResponses);
     navigate("/build-plan");
   };
 
   const handleUnknownDestinationClick = () => {
     setCurrentStep(1);
+    setUserResponses(defaultUserResponses);
+
     navigate("/find-destination");
   };
 

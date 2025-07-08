@@ -1,5 +1,3 @@
-import destinationImage from "../../../assets/output.png";
-import secondDestinationImage from "../../../assets/output2.png";
 import { PlanKnown } from "../../../types/types";
 
 type ResultsProps = {
@@ -16,6 +14,7 @@ function Results_Pre_Known({
   const tempFullResults = () => {
     setShowFullResults(true);
   };
+
   return (
     <>
       <div className="resultContentContainer">
@@ -24,8 +23,6 @@ function Results_Pre_Known({
           <p style={{ fontWeight: "bold" }}>
             {plan?.plan_data.destination.overview}
           </p>
-          {/* Removed image load for pre results to reduce time-to-load */}
-          {/* <img src={destinationImage} alt="" className="locationImage" /> */}
 
           <h2>Things to do:</h2>
           <li>

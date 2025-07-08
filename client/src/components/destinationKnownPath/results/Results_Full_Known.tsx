@@ -1,9 +1,9 @@
-import destinationImage from "../../../assets/output.png";
 import { PlanKnown } from "../../../types/types";
 import ShareIcon from "@mui/icons-material/Share";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { useAppContext } from "../../../contexts/AppContext";
 import SharePlan from "../../SharePlan";
+import { useEffect, useState } from "react";
 
 type ResultsProps = {
   plan: PlanKnown;
@@ -17,8 +17,12 @@ function Results_Full_Known({ plan, planID }: ResultsProps) {
     planShareData,
     setPlanShareData,
   } = useAppContext();
+  const [showShareButton, setShowShareButton] = useState(true);
 
-  const openSharePlan = (id: number, destination: string) => {
+  const storedToken = localStorage.getItem("token");
+  const user_id = localStorage.getItem("userId");
+
+  const openSharePlan = (id: number, destination: string, imageUrl: string) => {
     // Update planID state value
     // Open modal with SharePlan component
 
@@ -26,32 +30,53 @@ function Results_Full_Known({ plan, planID }: ResultsProps) {
       ...prevState,
       planID: id,
       destination: destination,
+      imageUrl: imageUrl,
     }));
     setIsShareModalOpen(true);
   };
+
+  // If the user did not create the plan, do not show the share button
+  useEffect(() => {
+    if (user_id !== null && parseInt(user_id) !== plan.user_id) {
+      setShowShareButton(false);
+    }
+  }, []);
 
   return (
     <>
       <div className="resultContentContainer">
         {isShareModalOpen && <SharePlan />}
-        <button
-          type="button"
-          className="shareTest"
-          onClick={() =>
-            openSharePlan(planID, plan.plan_data.destination.location)
-          }
-        >
-          <ShareIcon sx={{ fontSize: "medium" }} />
-        </button>
-        <button type="button" className="shareTest2">
-          <ModeEditIcon sx={{ fontSize: "medium" }} />
-        </button>
+
+        {showShareButton && (
+          <>
+            <button
+              type="button"
+              className="shareTest"
+              onClick={() =>
+                openSharePlan(
+                  planID,
+                  plan.plan_data.destination.location,
+                  plan.photos_first_destination[0]
+                )
+              }
+            >
+              <ShareIcon sx={{ fontSize: "medium" }} />
+            </button>
+            <button type="button" className="shareTest2">
+              <ModeEditIcon sx={{ fontSize: "medium" }} />
+            </button>
+          </>
+        )}
         <div className="resultsFullContentContainer">
           <h1>{plan?.plan_data.destination.location}</h1>
           <p className="resultsFullDescription">
             {plan?.plan_data.destination.overview}
           </p>
-          <img src={destinationImage} alt="" className="locationImage" />
+          <img
+            src={plan.photos_first_destination[0]}
+            alt=""
+            className="locationImage"
+          />
           <h2>Where to stay:</h2>
 
           {plan?.plan_data.destination.places_to_stay.map((place, index) => {

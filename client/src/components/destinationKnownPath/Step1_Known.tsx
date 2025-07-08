@@ -39,6 +39,14 @@ function Step1() {
     }
   }
 
+  // Handle Enter key to trigger Next step
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault(); // Prevents new line
+      handleClick(); // Calls the same function as the Next step button
+    }
+  };
+
   return (
     <>
       <div className="stepContainer">
@@ -49,11 +57,13 @@ function Step1() {
         </div>
         <form className="userForm" action="">
           <textarea
+            autoFocus
             placeholder="We're flying into San Francisco on June 17, and the plan is to stay there a few nights and then go to Napa for a few nights. We have a wine tour booked on 6/20."
             rows={3}
             value={userResponses.response1}
             name="response1"
             onChange={setFormValues}
+            onKeyDown={handleKeyDown}
           />
           <div className="buttonContainer">
             {!showBadWordsAlert && (

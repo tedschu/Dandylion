@@ -23,6 +23,7 @@ router.get("/:plan_id", verifyToken, async (req, res) => {
         plan_data: true,
         photos_first_destination: true,
         photos_second_destination: true,
+        user_id: true,
       },
     });
 

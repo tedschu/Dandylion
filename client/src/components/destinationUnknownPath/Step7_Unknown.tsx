@@ -1,4 +1,3 @@
-import { StepProps } from "../../types/types";
 import redwoods from "../../assets/images/redwoods.png";
 import { containsBadWords } from "../../utils/containsBadWords";
 import BadWordsAlert from "../BadWordsAlert";
@@ -34,6 +33,14 @@ function Step7() {
     }
   }
 
+  // Handle Enter key to trigger Next step
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault(); // Prevents new line
+      handleClick(); // Calls the same function as the Next step button
+    }
+  };
+
   return (
     <>
       <div className="stepContainer">
@@ -44,11 +51,13 @@ function Step7() {
         </div>{" "}
         <form className="userForm" action="">
           <textarea
+            autoFocus
             placeholder="Ideally late summer or early fall, and I'd like to go for maybe 6-8 days."
             rows={3}
             value={userResponses.response7}
             name="response7"
             onChange={setFormValues}
+            onKeyDown={handleKeyDown}
           />
           <div className="buttonContainer">
             <button

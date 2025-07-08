@@ -29,12 +29,12 @@ function DestinationUnknown() {
     questionPromptsUnknown,
     setQuestionPromptsUnknown,
   } = useQuestionsResponses();
-  const {
-    apiResponse,
-    setApiResponse,
-    showBadWordsAlert,
-    setShowBadWordsAlert,
-  } = useAppContext();
+  // const {
+  //   plan,
+  //   setPlan,
+  //   showBadWordsAlert,
+  //   setShowBadWordsAlert,
+  // } = useAppContext();
 
   const steps = [
     Step1,
@@ -73,18 +73,18 @@ function DestinationUnknown() {
     10: "-55px",
   };
 
-  const moonShift = moonPosition[currentStep as keyof typeof moonPosition];
+  // const moonShift = moonPosition[currentStep as keyof typeof moonPosition];
 
   return (
     <>
       <div className={"pageContainer"} data-question={currentStep}>
         <Header />
-        <img
+        {/* <img
           className="moon"
           src={moon}
           alt=""
           style={{ top: "60px", right: `${moonShift}` }}
-        />
+        /> */}
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS />
@@ -108,16 +108,16 @@ function DestinationUnknown() {
                 >
                   <ComponentStep
                     key={stepNumber}
-                    currentStep={currentStep}
-                    setCurrentStep={setCurrentStep}
-                    userResponses={userResponses}
-                    setUserResponses={setUserResponses}
-                    questionPromptsUnknown={questionPromptsUnknown}
-                    setQuestionPromptsUnknown={setQuestionPromptsUnknown}
-                    apiResponse={apiResponse}
-                    setApiResponse={setApiResponse}
-                    showBadWordsAlert={showBadWordsAlert}
-                    setShowBadWordsAlert={setShowBadWordsAlert}
+                    // currentStep={currentStep}
+                    // setCurrentStep={setCurrentStep}
+                    // userResponses={userResponses}
+                    // setUserResponses={setUserResponses}
+                    // questionPromptsUnknown={questionPromptsUnknown}
+                    // setQuestionPromptsUnknown={setQuestionPromptsUnknown}
+                    // plan={plan}
+                    // setPlan={setPlan}
+                    // showBadWordsAlert={showBadWordsAlert}
+                    // setShowBadWordsAlert={setShowBadWordsAlert}
                   />
                 </motion.div>
               </AnimatePresence>

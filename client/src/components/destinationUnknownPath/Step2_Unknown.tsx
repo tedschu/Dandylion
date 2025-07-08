@@ -35,6 +35,14 @@ function Step2() {
     }
   }
 
+  // Handle Enter key to trigger Next step
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault(); // Prevents new line
+      handleClick(); // Calls the same function as the Next step button
+    }
+  };
+
   return (
     <>
       <div className="stepContainer">
@@ -45,11 +53,13 @@ function Step2() {
         </div>
         <form className="userForm" action="">
           <textarea
+            autoFocus
             placeholder="I'm thinking between $3000 - $5000 in total, but I'm flexible."
             rows={3}
             value={userResponses.response2}
             name="response2"
             onChange={setFormValues}
+            onKeyDown={handleKeyDown}
           />
           <div className="buttonContainer">
             <button

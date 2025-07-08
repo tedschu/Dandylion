@@ -23,6 +23,9 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
   } = useAppContext();
 
   const storedToken = localStorage.getItem("token");
+  const [showShareButton, setShowShareButton] = useState(true);
+
+  const user_id = localStorage.getItem("userId");
 
   const [isSecondPlanLoading, setIsSecondPlanLoading] = useState(true);
 
@@ -39,7 +42,12 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
     setIsShareModalOpen(true);
   };
 
-  console.log(plan);
+  // If the user did not create the plan, do not show the share button
+  useEffect(() => {
+    if (user_id !== null && parseInt(user_id) !== plan.user_id) {
+      setShowShareButton(false);
+    }
+  }, []);
 
   // useEffect to trigger re-render when second_destination data is updated in Plan state
   useEffect(() => {
@@ -82,22 +90,27 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
     <>
       <div className="resultContentContainer">
         {isShareModalOpen && <SharePlan />}
-        <button
-          type="button"
-          className="shareTest"
-          onClick={() =>
-            openSharePlan(
-              planID,
-              plan.plan_data.destination.location,
-              plan.photos_first_destination[0]
-            )
-          }
-        >
-          <ShareIcon sx={{ fontSize: "medium" }} />
-        </button>
-        <button type="button" className="shareTest2">
-          <ModeEditIcon sx={{ fontSize: "medium" }} />
-        </button>
+
+        {showShareButton && (
+          <>
+            <button
+              type="button"
+              className="shareTest"
+              onClick={() =>
+                openSharePlan(
+                  planID,
+                  plan.plan_data.destination.location,
+                  plan.photos_first_destination[0]
+                )
+              }
+            >
+              <ShareIcon sx={{ fontSize: "medium" }} />
+            </button>
+            <button type="button" className="shareTest2">
+              <ModeEditIcon sx={{ fontSize: "medium" }} />
+            </button>
+          </>
+        )}
         <div className="resultsFullContentContainer">
           <h1>{plan?.plan_data.destination.location}</h1>
           <p className="resultsFullDescription">

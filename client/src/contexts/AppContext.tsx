@@ -54,8 +54,6 @@ export function AppProvider({ children }: AppProviderProps) {
     setShouldRefreshPlans,
   };
 
-  console.log(plan);
-
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 

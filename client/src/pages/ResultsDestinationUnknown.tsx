@@ -134,14 +134,14 @@ function ResultsDestinationUnknown() {
             });
             setHasResponse(true);
 
-            const plan = await postPlanAndFormData(textData);
+            const planData = await postPlanAndFormData(textData);
 
-            if (plan) {
-              getFirstImage(plan?.planId, plan?.userId, textData);
+            if (planData) {
+              getFirstImage(planData?.planId, planData?.userId, textData);
               console.log(
                 "here is what's being passed to getFirstImage: ",
-                plan.planId,
-                plan.userId,
+                planData.planId,
+                planData.userId,
                 textData,
                 textData.destination
               );
@@ -156,8 +156,8 @@ function ResultsDestinationUnknown() {
                 Authorization: `Bearer ${storedToken}`,
               },
               body: JSON.stringify({
-                planId: plan?.planId,
-                userId: plan?.userId,
+                planId: planData?.planId,
+                userId: planData?.userId,
                 userResponses: userResponses,
                 questionPromptsUnknown: questionPromptsUnknown,
                 firstDestination: textData.destination.location,

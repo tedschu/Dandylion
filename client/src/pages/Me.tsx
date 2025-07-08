@@ -25,6 +25,7 @@ type Plan = {
 };
 
 type SharedPlan = {
+  plan_type: string;
   plan_data: {
     destination: {
       location: string;
@@ -33,7 +34,8 @@ type SharedPlan = {
       location: string;
     };
   };
-  plan_type: string;
+  photos_first_destination: string[];
+  photos_second_destination: string[];
   created_at: string;
   id: number;
   invited_by_email: string;
@@ -102,6 +104,8 @@ function Me() {
 
       const data = await response.json();
 
+      console.log("here is data within getUserSharedPlans:", data);
+
       if (data) {
         setUserSharedPlans(data.plansFormattedDates);
       }
@@ -123,7 +127,7 @@ function Me() {
     setIsShareModalOpen(true);
   };
 
-  console.log(userPlans);
+  console.log(userSharedPlans);
 
   return (
     <>
@@ -134,7 +138,7 @@ function Me() {
           {userPlans.length > 0 && (
             <>
               <h1 style={{ color: "white", textAlign: "center" }}>
-                Hey there! Here are the plans you've purchased:
+                Here are the plans you've purchased:
               </h1>
 
               {userPlans.map((plan, index) => {
@@ -155,7 +159,12 @@ function Me() {
                         onClick={() => navigate(`/plans/${plan.id}`)}
                       />
                       <div className="myAccountPlanText">
-                        <h2>{plan.plan_data.destination.location}</h2>
+                        <h2
+                          style={{ cursor: "pointer" }}
+                          onClick={() => navigate(`/plans/${plan.id}`)}
+                        >
+                          {plan.plan_data.destination.location}
+                        </h2>
                         {plan.plan_data.second_destination && (
                           <h2>{plan.plan_data.second_destination.location}</h2>
                         )}
@@ -235,16 +244,23 @@ function Me() {
                   <div className="myAccountPlanContainer" key={index}>
                     <div style={{ display: "flex", gap: "10px" }}>
                       <img
-                        src={testIMage}
+                        src={plan.photos_first_destination[0]}
                         alt=""
                         style={{
                           maxWidth: "100px",
                           height: "auto",
                           objectFit: "contain",
+                          cursor: "pointer",
                         }}
+                        onClick={() => navigate(`/plans/${plan.id}`)}
                       />
                       <div className="myAccountPlanText">
-                        <h2>{plan.plan_data.destination.location}</h2>
+                        <h2
+                          style={{ cursor: "pointer" }}
+                          onClick={() => navigate(`/plans/${plan.id}`)}
+                        >
+                          {plan.plan_data.destination.location}
+                        </h2>
                         {plan.plan_data.second_destination && (
                           <h2> {plan.plan_data.second_destination.location}</h2>
                         )}
@@ -266,7 +282,7 @@ function Me() {
                         className="register"
                         onClick={() => navigate(`/plans/${plan.id}`)}
                       >
-                        View plan
+                        View
                       </button>
                     </div>
                   </div>

@@ -110,6 +110,8 @@ router.get("/my-plans", verifyToken, async (req, res) => {
       },
     });
 
+    console.log("Here is allPlans from 'me' route: ", allPlans);
+
     const plansFormattedDates = allPlans.map((plan) => ({
       plan_type: plan.plan_type,
       plan_data: plan.plan_data,
@@ -213,11 +215,13 @@ router.get("/plans-shared-with-me", verifyToken, async (req, res) => {
       },
     });
 
+    console.log("here is allPlanShares:", allPlanShares);
+
     const plansFormattedDates = allPlanShares.map((plan) => ({
       plan_type: plan.plan.plan_type,
       plan_data: plan.plan.plan_data,
-      photos_first_destination: plan.photos_first_destination,
-      photos_second_destination: plan.photos_second_destination,
+      photos_first_destination: plan.plan.photos_first_destination,
+      photos_second_destination: plan.plan.photos_second_destination,
       created_at: plan.plan.created_at.toLocaleString(),
       id: plan.plan.id,
       invited_by_name: plan.user.first_name,
@@ -254,6 +258,43 @@ router.post("/share-plan-users", verifyToken, async (req, res) => {
       shared_with: emails.length,
       plan_id: plan_id,
     });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+// gets all plans (planIds) that a user has access to (created and shared)
+// Verifies that the user can see a plan in PlanDetail component
+router.get("/my-accessible-plans", verifyToken, async (req, res) => {
+  try {
+    // Gets all plan_ids from plans that the user created
+    const userCreatedPlanIds = await prisma.plan.findMany({
+      where: {
+        user_id: req.user,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    // Gets all plan_ids from plans that were shared with the user
+    const sharedPlanIds = await prisma.planShares.findMany({
+      where: {
+        email: req.email,
+      },
+      select: {
+        plan_id: true,
+      },
+    });
+
+    // Combines created and shared ids in a new array, listing out all ids
+    const allIds = [
+      ...userCreatedPlanIds.map((plan) => plan.id),
+      ...sharedPlanIds.map((share) => share.plan_id),
+    ];
+
+    res.json(allIds);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

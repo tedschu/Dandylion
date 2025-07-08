@@ -1,14 +1,18 @@
 import { useEffect, useRef, useState } from "react";
+import { Plan, PlanKnown } from "../types/types";
+import destinationImage from "../assets/output.png";
+import secondDestinationImage from "../assets/output2.png";
+import Header from "../components/Header";
 import ResultsLoadingState from "../components/ResultsLoadingState";
 import Results_Pre_Known from "../components/destinationKnownPath/results/Results_Pre_Known";
 import Results_Full_Known from "../components/destinationKnownPath/results/Results_Full_Known";
 import moon from "../assets/moon.png";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 import dandelion_corner_2 from "../assets/dandelion_corner_2.png";
+import { text } from "motion/react-client";
 import { useAuth } from "../contexts/AuthContext";
 import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
 import { useAppContext } from "../contexts/AppContext";
-import { Plan, PlanKnown, PlanResponse } from "../types/types";
 
 function ResultsDestinationKnown() {
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -17,12 +21,10 @@ function ResultsDestinationKnown() {
     setCurrentStep,
     userResponses,
     setUserResponses,
-    questionPromptsKnown,
+    questionPromptsUnknown,
   } = useQuestionsResponses();
   const { plan, setPlan, showAPIErrorMessage, setShowAPIErrorMessage } =
     useAppContext();
-
-  const storedToken = localStorage.getItem("token");
 
   // State tracking whether first API call is complete
   const [hasResponse, setHasResponse] = useState(false);
@@ -37,6 +39,8 @@ function ResultsDestinationKnown() {
   // useRef is appropriate for this since it doesn't require a re-render
   // and is just counting api calls.
   const apiRetriesRef = useRef(0);
+
+  const storedToken = localStorage.getItem("token");
 
   // On page load, calls getTripResults() IF all userResponse fields are populated
   useEffect(() => {
@@ -54,37 +58,38 @@ function ResultsDestinationKnown() {
     }
   }, []);
 
-  // Gets trip recommendation for destination and second_destination, and image for first destination (second is in useEffect below, to save load time)
+  // Gets trip recommendation for first destination, and then call to server to complete
+  // image and second_destination calls (to save load time + ensure calls complete even if user navs away)
   const getTripResults = async () => {
     if (isAnthropicLoading) return;
-    console.log("Calling Antrhopic API...");
 
     setIsAnthropicLoading(true);
 
     try {
       // Calls Anthropic API, passing questions and user responses (and user's first name)
       // Returns primary and secondary recommendation objects
+      // const response = await fetch("/api/anthropicAPI/recommendation", {
       const response = await fetch("/api/anthropicAPI/recommendation-known", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          question1: questionPromptsKnown?.question1,
+          question1: questionPromptsUnknown?.question1,
           response1: userResponses.response1,
-          question2: questionPromptsKnown?.question2,
+          question2: questionPromptsUnknown?.question2,
           response2: userResponses.response2,
-          question3: questionPromptsKnown?.question3,
+          question3: questionPromptsUnknown?.question3,
           response3: userResponses.response3,
-          question4: questionPromptsKnown?.question4,
+          question4: questionPromptsUnknown?.question4,
           response4: userResponses.response4,
-          question5: questionPromptsKnown?.question5,
+          question5: questionPromptsUnknown?.question5,
           response5: userResponses.response5,
-          question6: questionPromptsKnown?.question6,
+          question6: questionPromptsUnknown?.question6,
           response6: userResponses.response6,
-          question7: questionPromptsKnown?.question7,
+          question7: questionPromptsUnknown?.question7,
           response7: userResponses.response7,
-          question8: questionPromptsKnown?.question8,
+          question8: questionPromptsUnknown?.question8,
           response8: userResponses.response8,
           firstName: userInfo?.firstName,
         }),
@@ -98,9 +103,9 @@ function ResultsDestinationKnown() {
 
         // Retries the Anthropic API every 3 seconds (for 3 tries) if there's a
         // 529 error, meaning the API is currently overloaded
-        if (response.status == 529) {
+        if (response.status == 529 || response.status == 500) {
           console.log("Error: Anthropic API is overloaded");
-          setTimeout(retryAnthropicAPIOnError, 3000);
+          setTimeout(retryAnthropicAPIOnError, 4000);
           return;
         } else {
           setIsAnthropicLoading(false);
@@ -111,14 +116,47 @@ function ResultsDestinationKnown() {
       const textData = await response.json();
       console.log("Here is textData from Antrhopic call:", textData);
 
-      // Progressive loading: first updates plan and hasResponse with Anthropic (text) response, and then calls for image in background
-      // I'm doing this because waiting for all calls to load could take over a minute
       if (textData) {
         try {
           if (textData.destination) {
-            setPlan(textData);
+            setPlan({
+              plan_data: textData,
+              plan_type: "DESTINATION_KNOWN",
+              photos_first_destination: [],
+              photos_second_destination: [],
+            });
             setHasResponse(true);
-            postPlanAndFormData(textData);
+
+            const planData = await postPlanAndFormData(textData);
+
+            if (planData) {
+              getFirstImage(planData?.planId, planData?.userId, textData);
+              console.log(
+                "here is what's being passed to getFirstImage: ",
+                planData.planId,
+                planData.userId,
+                textData,
+                textData.destination
+              );
+            }
+
+            // // CALL ROUTE TO COMPLETE SERVER-SIDE DESTINATION / IMAGE CALLS (POST)
+            // fetch("/api/process-remaining-calls", {
+            //   method: "POST",
+            //   keepalive: true,
+            //   headers: {
+            //     "Content-type": "application/json",
+            //     Authorization: `Bearer ${storedToken}`,
+            //   },
+            //   body: JSON.stringify({
+            //     planId: planData?.planId,
+            //     userId: planData?.userId,
+            //     userResponses: userResponses,
+            //     questionPromptsUnknown: questionPromptsUnknown,
+            //     firstDestination: textData.destination.location,
+            //     firstName: userInfo?.firstName,
+            //   }),
+            // });
           } else {
             console.log("Invalid response structure", textData);
             throw new Error("invalid recommendation data structure from API");
@@ -133,17 +171,29 @@ function ResultsDestinationKnown() {
         setIsAnthropicLoading(false);
         throw new Error("Empty response from API");
       }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      // Calls OpenAI API, passing location and overview info from Anthropic response, and user's first name
-      // Returns a postcard-style image for the location
+  // Calls OpenAI API, passing location and overview info from Anthropic response, userId, planId
+  // Returns a postcard-style image for the location
+  const getFirstImage = async (
+    planId: number,
+    userId: number,
+    destinationData: any
+  ) => {
+    try {
       const images = await fetch("/api/gptAPI/image", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          location: textData.destination.location,
-          overview: textData.destination.overview,
+          location: destinationData.destination.location,
+          overview: destinationData.destination.overview,
+          userId: userId,
+          planId: planId,
         }),
       });
 
@@ -153,21 +203,44 @@ function ResultsDestinationKnown() {
 
       console.log("HEre is imgData:", imgData);
 
-      // TODO: Update state with S3 URL once the GPT response comes in *******************
+      // PUT the image G cloud image URL into the plan object in DB
+      if (imgData.success && imgData.imageUrl) {
+        const postImage = await fetch("/api/plans/update-first-image", {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${storedToken}`,
+          },
+          body: JSON.stringify({
+            planId: planId,
+            imageUrl: imgData.imageUrl,
+          }),
+        });
 
-      // if (imgData) {
-      //   const copy = { ...textData };
-      //   if (copy.destination && copy.destination.photos) {
-      //     copy.destination.photos.push("eventual_s3_URL");
-      //   }
-      //   if (setplan) {
-      //     setplan(copy as plan);
-      //     setHasResponse(true);
-      //     setIsAnthropicLoading(false);
-      //   }
-      // }
+        if (!postImage.ok) {
+          throw new Error(`HTTP error status: ${postImage.status}`);
+        }
+
+        const postImageData = await postImage.json();
+
+        console.log(
+          "Here is the data for image 1 from the put route:",
+          postImageData
+        );
+
+        setPlan((prev) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            photos_first_destination: [
+              ...(prev.photos_first_destination || []),
+              imgData.imageUrl,
+            ],
+          };
+        });
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error getting the first image:", error);
     }
   };
 
@@ -187,7 +260,7 @@ function ResultsDestinationKnown() {
     }
   };
 
-  const postPlanAndFormData = async (textData: PlanKnown) => {
+  const postPlanAndFormData = async (textData: Plan) => {
     try {
       const response = await fetch("/api/users/plan", {
         method: "POST",
@@ -196,24 +269,24 @@ function ResultsDestinationKnown() {
           Authorization: `Bearer ${storedToken}`,
         },
         body: JSON.stringify({
-          result_data: textData,
+          plan_data: textData,
           plan_type: "DESTINATION_KNOWN",
           form_data: {
-            question1: questionPromptsKnown?.question1,
+            question1: questionPromptsUnknown?.question1,
             response1: userResponses.response1,
-            question2: questionPromptsKnown?.question2,
+            question2: questionPromptsUnknown?.question2,
             response2: userResponses.response2,
-            question3: questionPromptsKnown?.question3,
+            question3: questionPromptsUnknown?.question3,
             response3: userResponses.response3,
-            question4: questionPromptsKnown?.question4,
+            question4: questionPromptsUnknown?.question4,
             response4: userResponses.response4,
-            question5: questionPromptsKnown?.question5,
+            question5: questionPromptsUnknown?.question5,
             response5: userResponses.response5,
-            question6: questionPromptsKnown?.question6,
+            question6: questionPromptsUnknown?.question6,
             response6: userResponses.response6,
-            question7: questionPromptsKnown?.question7,
+            question7: questionPromptsUnknown?.question7,
             response7: userResponses.response7,
-            question8: questionPromptsKnown?.question8,
+            question8: questionPromptsUnknown?.question8,
             response8: userResponses.response8,
             firstName: userInfo?.firstName,
           },
@@ -222,8 +295,15 @@ function ResultsDestinationKnown() {
 
       const data = await response.json();
 
-      setPlanId(parseInt(data.plan.id));
+      const plan = {
+        planId: parseInt(data.plan.id),
+        userId: parseInt(data.plan.user_id),
+      };
+
+      setPlanId(plan.planId);
       console.log("Here is data:", data);
+
+      return plan;
     } catch (error) {
       console.error("Error posting the plan data:", error);
     }
@@ -232,12 +312,8 @@ function ResultsDestinationKnown() {
   return (
     <>
       <div className="resultPageContainer">
-        <img
-          className="moon"
-          src={moon}
-          alt=""
-          style={{ top: "60px", right: "-40px" }}
-        />
+        <Header />
+        <img className="moon scrollout" src={moon} alt="" />
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS />

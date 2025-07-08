@@ -82,6 +82,7 @@ export type Plan = {
   plan_type: PlanType;
   photos_first_destination: string[];
   photos_second_destination: string[];
+  user_id?: number;
 };
 
 export type Itinerary = {
@@ -109,6 +110,7 @@ export type PlanKnown = {
   plan_type: PlanType;
   photos_first_destination: string[];
   photos_second_destination: string[];
+  user_id?: number;
 };
 
 export type DestinationKnown = {

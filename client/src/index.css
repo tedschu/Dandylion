@@ -327,7 +327,7 @@ button {
   border-radius: 10px;
   z-index: 2;
   border: 5px solid var(--brand-yellow);
-  margin: 80px 0 20px 0;
+  margin: 20px 0 20px 0;
   box-sizing: border-box;
   /* padding: 0 0 10px 0; */
   position: relative;
@@ -410,7 +410,7 @@ button {
 
 .itineraryDayHeader {
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 
 .itineraryDayListContainer {
@@ -423,10 +423,12 @@ button {
 /* Make this column-oriented on mobile */
 .itineraryDayListItemContainer {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 0px;
 }
 
 .itineraryListItemContent {
+  margin-bottom: 15px;
 }
 
 .itineraryListItemTime {
@@ -437,6 +439,11 @@ button {
   min-width: 95px;
 }
 
+.itinerary-unknown-p-mod {
+  padding-left: 5px;
+}
+
+/* 
 .lineDivider {
   border-right: 1px solid var(--brand-blue);
   display: flex;
@@ -444,16 +451,7 @@ button {
   align-items: center;
   font-size: 40px;
   position: relative;
-}
-
-.lineDivider::after {
-  content: "●";
-  position: absolute;
-  right: -9px;
-  color: var(--brand-blue);
-  font-size: 25px;
-  padding: 1px;
-}
+} */
 
 .resultPreviewText {
   display: flex;
@@ -492,8 +490,8 @@ button {
 }
 
 .header {
-  position: fixed;
-  top: 0;
+  /* position: fixed;
+  top: 0; */
   width: 100%;
   text-align: center;
   display: grid;
@@ -502,6 +500,7 @@ button {
   overflow: visible;
   /* box-shadow: 3px 3px 3px #1a73e8; */
   z-index: 2;
+  /* transition: transform 0.3s ease-in-out; */
 }
 
 .navMenu {
@@ -922,7 +921,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 70px 0 0 0;
+  margin: 30px 0 0 0;
 }
 
 .myAccountPlanContainer {
@@ -1264,5 +1263,38 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .itineraryDayListItemContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .lineDivider {
+    border-right: 1px solid var(--brand-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    position: relative;
+  }
+
+  .lineDivider::after {
+    content: "●";
+    position: absolute;
+    right: -9px;
+    color: var(--brand-blue);
+    font-size: 25px;
+    padding: 1px;
+  }
+
+  .itineraryListItemContent {
+    margin-bottom: 0px;
+  }
+
+  .itineraryDayHeader {
+    width: 100%;
+    text-align: left;
   }
 }

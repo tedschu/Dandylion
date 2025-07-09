@@ -173,22 +173,52 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
             {plan.plan_data.destination.itinerary.map((day, index) => {
               return (
                 <>
-                  <h3
-                    style={{
-                      alignSelf: "flex-start",
-                      margin: "10px 0 5px 0",
-                      color: "var(--teal)",
-                    }}
-                  >{`Day ${day.day_num}: ${day.summary}`}</h3>
-                  <li key={`${day.day_num} - morning - ${index}`}>
-                    {day.morning}
-                  </li>
-                  <li key={`${day.day_num} - afternoon - ${index}`}>
-                    {day.afternoon}
-                  </li>
-                  <li key={`${day.day_num} - evening - ${index}`}>
-                    {day.evening}
-                  </li>
+                  <div className="itineraryDayContainer" key={index}>
+                    <div className="itineraryDayHeader">
+                      <h3
+                        style={{
+                          margin: "10px 0 5px 0",
+                          color: "var(--teal)",
+                          fontSize: "22px",
+                        }}
+                      >{`Day ${day.day_num}: ${day.summary}`}</h3>
+                    </div>
+                    <div className="itineraryDayListContainer">
+                      <div className="itineraryDayListItemContainer">
+                        <div className="itineraryListItemTime">
+                          <h4 className="resultsItineraryH4">Morning</h4>
+                        </div>
+                        <div className="lineDivider"></div>
+                        <div className="itineraryListItemContent">
+                          <p className="itinerary-unknown-p-mod">
+                            {day.morning}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="itineraryDayListItemContainer">
+                        <div className="itineraryListItemTime">
+                          <h4 className="resultsItineraryH4">Afternoon</h4>
+                        </div>
+                        <div className="lineDivider"></div>
+                        <div className="itineraryListItemContent">
+                          <p className="itinerary-unknown-p-mod">
+                            {day.afternoon}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="itineraryDayListItemContainer">
+                        <div className="itineraryListItemTime">
+                          <h4 className="resultsItineraryH4">Evening</h4>
+                        </div>
+                        <div className="lineDivider"></div>
+                        <div className="itineraryListItemContent">
+                          <p className="itinerary-unknown-p-mod">
+                            {day.evening}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </>
               );
             })}
@@ -278,22 +308,54 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
                   (day, index) => {
                     return (
                       <>
-                        <h3
-                          style={{
-                            alignSelf: "flex-start",
-                            margin: "10px 0 5px 0",
-                            color: "var(--teal)",
-                          }}
-                        >{`Day ${day.day_num}: ${day.summary}`}</h3>
-                        <li key={`${day.day_num} - morning - ${index}`}>
-                          {day.morning}
-                        </li>
-                        <li key={`${day.day_num} - afternoon - ${index}`}>
-                          {day.afternoon}
-                        </li>
-                        <li key={`${day.day_num} - evening - ${index}`}>
-                          {day.evening}
-                        </li>
+                        <div className="itineraryDayContainer" key={index}>
+                          <div className="itineraryDayHeader">
+                            <h3
+                              style={{
+                                margin: "10px 0 5px 0",
+                                color: "var(--teal)",
+                                fontSize: "22px",
+                              }}
+                            >{`Day ${day.day_num}: ${day.summary}`}</h3>
+                          </div>
+                          <div className="itineraryDayListContainer">
+                            <div className="itineraryDayListItemContainer">
+                              <div className="itineraryListItemTime">
+                                <h4 className="resultsItineraryH4">Morning</h4>
+                              </div>
+                              <div className="lineDivider"></div>
+                              <div className="itineraryListItemContent">
+                                <p className="itinerary-unknown-p-mod">
+                                  {day.morning}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="itineraryDayListItemContainer">
+                              <div className="itineraryListItemTime">
+                                <h4 className="resultsItineraryH4">
+                                  Afternoon
+                                </h4>
+                              </div>
+                              <div className="lineDivider"></div>
+                              <div className="itineraryListItemContent">
+                                <p className="itinerary-unknown-p-mod">
+                                  {day.afternoon}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="itineraryDayListItemContainer">
+                              <div className="itineraryListItemTime">
+                                <h4 className="resultsItineraryH4">Evening</h4>
+                              </div>
+                              <div className="lineDivider"></div>
+                              <div className="itineraryListItemContent">
+                                <p className="itinerary-unknown-p-mod">
+                                  {day.evening}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </>
                     );
                   }

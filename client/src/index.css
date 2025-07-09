@@ -118,17 +118,18 @@ p {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 6px;
   border: none;
   padding: 5px;
   cursor: pointer;
 }
 
 .login {
-  width: 75px;
-  height: 32px;
   background-color: var(--action-coral);
   color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .login:hover {
@@ -148,8 +149,9 @@ button {
 .next {
   background-color: var(--action-coral);
   color: white;
-  padding: 10px;
-  font-size: 16px;
+  padding: 10px 20px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
 }
 
 .next:hover {
@@ -542,16 +544,30 @@ button {
 
 .homeHeroContainer {
   width: 100%;
-  /* height: 600px; */
-  background-image: url("./assets/images/background.jpg");
-  background-size: cover;
-  background-position: top;
+  height: 600px;
+  overflow: hidden;
+  /* background-image: url("./assets/images/background.jpg"); */
+  /* background-size: cover;
+  background-position: top; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   position: relative;
+}
+
+.heroImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  z-index: -1;
+  transform: scale(1);
+  transition: transform 0.5s ease-out;
 }
 
 .homeHeroHeaderContainer {
@@ -560,6 +576,7 @@ button {
   width: 100%;
   position: absolute;
   top: 0;
+  padding: 5px;
 }
 
 .homeHeroHeaderContainer img {

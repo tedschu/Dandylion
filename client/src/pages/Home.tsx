@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { QuestionsResponsesProvider } from "../contexts/QuestionsResponsesContext";
 import { useAuth } from "../contexts/AuthContext";
 import { div } from "motion/react-client";
+import background from "../assets/images/background.jpg";
 
 function Home() {
   const storedToken = localStorage.getItem("token");
@@ -22,7 +23,7 @@ function Home() {
     getUserData();
   }, [isLoggedIn, token]);
 
-  console.log(isLoggedIn);
+  console.log(background);
 
   const getUserData = async () => {
     try {
@@ -51,25 +52,37 @@ function Home() {
     }
   };
 
+  const heroImage = document.querySelector(".heroImage");
+  window.addEventListener("scroll", () => {
+    const scrolled = window.pageYOffset;
+    const zoomFactor = 1 + scrolled * 0.0002;
+    if (heroImage && heroImage instanceof HTMLElement) {
+      heroImage.style.transform = `scale(${zoomFactor})`;
+    }
+  });
+
   return (
     <>
       <div className="homeContainer">
         {/* TOP HALF / HERO SECTION */}
         <div className="homeHeroContainer">
+          <img src={background} alt="hero" className="heroImage" />
           <div className="homeHeroHeaderContainer">
-            <img src={beeLogo} alt="dandylion bee logo" />
-            <h1>dandylion.ai</h1>
+            <div></div>
+            <h1 style={{ fontWeight: "normal", fontSize: "25px" }}>
+              dandylion.ai
+            </h1>
             {isLoggedIn ? (
               <button
                 className="login"
                 style={{
                   alignSelf: "center",
                   justifySelf: "flex-end",
-                  margin: "0 12px 0 0",
+                  margin: "0 20px 0 0",
                 }}
                 onClick={() => navigate("/me")}
               >
-                My trips
+                My plans
               </button>
             ) : (
               <button
@@ -77,7 +90,7 @@ function Home() {
                 style={{
                   alignSelf: "center",
                   justifySelf: "flex-end",
-                  margin: "0 12px 0 0",
+                  margin: "0 20px 0 0",
                 }}
                 onClick={() => navigate("/login")}
               >
@@ -91,7 +104,7 @@ function Home() {
               Travel planning
               <br />
               that is
-              <span className="heroBold"> so you</span>
+              <span className="heroBold"> so you</span>.
             </h2>
 
             <div className="buttonContainer">

@@ -857,17 +857,17 @@ Return ONLY a valid, properly escaped JSON object with the following structure:
      "day_num": 1,
      "summary": "Provide a brief summary of the day's destinations",
   "morning": {
-    "time": "9:00 AM - 12:00 PM",
+    "time": "9AM - 12PM",
     "activities": "Start your day exploring Chinatown, beginning at the iconic Dragon Gate on Grant Avenue. Spend time browsing the traditional herb shops, tea stores, and souvenir markets along Grant Avenue and Stockton Street. Don't miss the beautiful murals in Portsmouth Square and the historic temples like Tin How Temple. The narrow alleyways like Waverly Place offer authentic glimpses of daily life. Allow 2-3 hours to properly explore this vibrant neighborhood, and consider timing your visit to catch the morning dim sum crowds for an authentic cultural experience.",
     "dining": "For breakfast, head to Golden Boy Pizza on Green Street for their famous focaccia squares - they offer excellent vegetarian options including their margherita and veggie combinations. The casual atmosphere and local favorite status make it perfect for starting your San Francisco adventure."
   },
     "afternoon": {
-      "time": "12:00 PM - 5:00 PM", 
+      "time": "12PM - 5PM", 
       "activities": "Detailed afternoon activities",
       "dining": "Lunch recommendations"
     },
     "evening": {
-      "time": "5:00 PM - 9:00 PM",
+      "time": "5PM - 9PM",
       "activities": "Evening plans",
       "dining": "Dinner suggestions"
     }

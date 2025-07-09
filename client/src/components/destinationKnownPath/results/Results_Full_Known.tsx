@@ -129,28 +129,52 @@ function Results_Full_Known({ plan, planID }: ResultsProps) {
             {plan.plan_data.destination.itinerary.map((day, index) => {
               return (
                 <>
-                  <h3
-                    style={{
-                      alignSelf: "flex-start",
-                      margin: "10px 0 5px 0",
-                      color: "var(--teal)",
-                    }}
-                  >{`Day ${day.day_num}: ${day.summary}`}</h3>
-                  <h4 className="resultsItineraryH4">
-                    Morning ({day.morning.time})
-                  </h4>
-                  <li>Activities: {day.morning.activities}</li>
-                  <li>Dining: {day.morning.dining}</li>
-                  <h4 className="resultsItineraryH4">
-                    Afternoon ({day.afternoon.time})
-                  </h4>
-                  <li>Activities: {day.afternoon.activities}</li>
-                  <li>Dining: {day.afternoon.dining}</li>
-                  <h4 className="resultsItineraryH4">
-                    Evening ({day.evening.time})
-                  </h4>
-                  <li>Activities: {day.evening.activities}</li>
-                  <li>Dining: {day.evening.dining}</li>
+                  <div className="itineraryDayContainer" key={index}>
+                    <div className="itineraryDayHeader">
+                      <h3
+                        style={{
+                          margin: "10px 0 5px 0",
+                          color: "var(--teal)",
+                          fontSize: "22px",
+                        }}
+                      >{`Day ${day.day_num}: ${day.summary}`}</h3>
+                    </div>
+                    <div className="itineraryDayListContainer">
+                      <div className="itineraryDayListItemContainer">
+                        <div className="itineraryListItemTime">
+                          <h4 className="resultsItineraryH4">Morning</h4>
+                          <p>{day.morning.time}</p>
+                        </div>
+                        <div className="lineDivider"></div>
+                        <div className="itineraryListItemContent">
+                          <li> Activities: {day.morning.activities}</li>
+                          <li>Dining: {day.morning.dining}</li>
+                        </div>
+                      </div>
+                      <div className="itineraryDayListItemContainer">
+                        <div className="itineraryListItemTime">
+                          <h4 className="resultsItineraryH4">Afternoon</h4>
+                          <p>{day.afternoon.time}</p>
+                        </div>
+                        <div className="lineDivider"></div>
+                        <div className="itineraryListItemContent">
+                          <li>Activities: {day.afternoon.activities}</li>
+                          <li>Dining: {day.afternoon.dining}</li>
+                        </div>
+                      </div>
+                      <div className="itineraryDayListItemContainer">
+                        <div className="itineraryListItemTime">
+                          <h4 className="resultsItineraryH4">Evening</h4>
+                          <p>{day.evening.time}</p>
+                        </div>
+                        <div className="lineDivider"></div>
+                        <div className="itineraryListItemContent">
+                          <li>Activities: {day.evening.activities}</li>
+                          <li>Dining: {day.evening.dining}</li>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </>
               );
             })}

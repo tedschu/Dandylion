@@ -62,7 +62,7 @@
 
   /* Neutral colors for backgrounds */
   --back-sky-blue: #b8d5ed;
-  --back-cream: rgb(249, 245, 231);
+  --back-cream: #f6f1ee;
   --back-light-sage: #d2dbbc;
 
   /* States */
@@ -147,7 +147,7 @@ button {
 }
 
 .next {
-  background-color: var(--action-coral);
+  background-color: var(--forest-green);
   color: white;
   padding: 10px 20px;
   font-size: 18px;
@@ -390,11 +390,69 @@ button {
 }
 
 .resultsItineraryContainer li {
-  padding-left: 15px;
+  padding-left: 5px;
+  align-self: flex-start;
+  font-size: 14px;
 }
 
 .resultsItineraryH4 {
-  margin: 5px;
+  margin: 0px;
+  font-size: 15px;
+}
+
+.itineraryDayContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.itineraryDayHeader {
+  width: 100%;
+  text-align: left;
+}
+
+.itineraryDayListContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make this column-oriented on mobile */
+.itineraryDayListItemContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.itineraryListItemContent {
+}
+
+.itineraryListItemTime {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 95px;
+}
+
+.lineDivider {
+  border-right: 1px solid var(--brand-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  position: relative;
+}
+
+.lineDivider::after {
+  content: "●";
+  position: absolute;
+  right: -9px;
+  color: var(--brand-blue);
+  font-size: 25px;
+  padding: 1px;
 }
 
 .resultPreviewText {
@@ -544,7 +602,7 @@ button {
 
 .homeHeroContainer {
   width: 100%;
-  height: 600px;
+  height: 650px;
   overflow: hidden;
   /* background-image: url("./assets/images/background.jpg"); */
   /* background-size: cover;
@@ -615,6 +673,8 @@ button {
   justify-content: center;
   align-items: center;
   width: 99%;
+  /* background-color: var(--back-light-sage); */
+
   /* background: linear-gradient(
     to bottom,
     #0e1f46,
@@ -629,6 +689,7 @@ button {
     #dece14
   ); */
   box-sizing: border-box;
+  background-color: var(--back-cream);
 }
 .homeBottomContentContainer {
   width: 90%;
@@ -636,6 +697,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 40px 0 0 0;
   /* background-color: var(--back-cream); */
 }
 
@@ -646,14 +708,25 @@ button {
   text-align: center;
 }
 
-.homeBottomTextContainer > h2 {
+.homeBottomTextContainer * {
+  font-weight: normal;
+}
+
+.homeBottomTextContainer > h1 {
   margin: 15px 0 10px 0;
   font-size: 35px;
+  color: var(--action-coral);
+  /* font-family: "Pacifico"; */
+}
+
+.homeBottomTextContainer > h2 {
+  margin: 15px 0 10px 0;
+  font-size: 25px;
   /* font-family: "Pacifico"; */
 }
 
 .homeBottomTextContainer > p {
-  font-size: 22px;
+  font-size: 20px;
   text-align: center;
 }
 

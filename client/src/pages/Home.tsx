@@ -23,8 +23,6 @@ function Home() {
     getUserData();
   }, [isLoggedIn, token]);
 
-  console.log(background);
-
   const getUserData = async () => {
     try {
       const response = await fetch("/api/users/me", {
@@ -133,22 +131,6 @@ function Home() {
                 <h3>Make sure you've added your name and email.</h3>
               </div>
             )}
-            {/* <div className="homeHeroDestinationBox">
-              <div
-                style={{
-                  backgroundColor: "rgb(249, 245, 231, 0.4)",
-                  // border: "6px solid var(--brand-yellow)",
-                  borderRadius: "30px",
-                  padding: "10px",
-                }}
-                className="testing"
-              >
-                <h2 style={{ fontSize: "30px" }}>
-                  Skip the endless research. Get a personalized day-by-day
-                  itinerary in minutes.
-                </h2>
-              </div>
-            </div> */}
           </div>
         </div>
         {/* <div className="divider"> t</div>
@@ -157,15 +139,14 @@ function Home() {
         <div className="homeBottomContainer">
           <div className="homeBottomContentContainer">
             <div className="homeBottomTextContainer">
-              <h2>
-                Skip the endless research. Get a personalized day-by-day
-                itinerary in minutes.
-              </h2>
+              <h1>Skip the endless research.</h1>
+              <h2>Get a personalized day-by-day itinerary in minutes.</h2>
               <p>
-                Travel planning shouldn't feel overwhelming. Whether you're
-                stuck choosing a destination or know where you're going but need
-                help with the details, Dandylion creates a curated plan built
-                around your travel style.
+                Most travelers spend 20+ hours planning a single trip. Kinda
+                takes the fun out of it, right? Whether you're stuck choosing a
+                destination or know where you're going but need help with the
+                details, we create a curated plan built around your travel
+                style.
               </p>
               <br />
               <p>It's just a few simple steps:</p>

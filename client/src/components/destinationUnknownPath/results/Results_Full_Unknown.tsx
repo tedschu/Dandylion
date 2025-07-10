@@ -121,35 +121,57 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
             alt=""
             className="locationImage"
           />
-          <h2>Where to stay:</h2>
 
-          {plan?.plan_data.destination.places_to_stay.map((place, index) => {
-            return (
-              <>
-                <li key={`${place.name} - ${index}`}>
-                  <span style={{ fontWeight: "bold" }}>{place.name}</span> in{" "}
-                  {place.location}: {place.why_recommended}. {place.price_range}
-                  .
-                </li>
-              </>
-            );
-          })}
+          <div className="planContentBlock">
+            <h2>Where to stay:</h2>
 
-          <h2>Here are some things to do while you're there:</h2>
-          {plan?.plan_data.destination.things_to_do.map(
-            (destination, index) => {
+            {plan?.plan_data.destination.places_to_stay.map((place, index) => {
               return (
                 <>
-                  <li key={`${destination.destination_name} - ${index}`}>
-                    <span style={{ fontWeight: "bold" }}>
-                      {destination.destination_name}
-                    </span>
-                    : {destination.description}
+                  <li key={`${place.name} - ${index}`}>
+                    <span style={{ fontWeight: "bold" }}>{place.name}</span> in{" "}
+                    {place.location}: {place.why_recommended}.{" "}
+                    {place.price_range}.
                   </li>
                 </>
               );
-            }
-          )}
+            })}
+          </div>
+
+          <div className="planContentBlock">
+            <h2>Places to eat:</h2>
+            {plan?.plan_data.destination.restaurants.map((place, index) => {
+              return (
+                <>
+                  <li key={`${place.restaurant_name} - ${index}`}>
+                    <span style={{ fontWeight: "bold" }}>
+                      {place.restaurant_name}
+                    </span>{" "}
+                    ({place.restaurant_type}): {place.description}.
+                  </li>
+                </>
+              );
+            })}
+          </div>
+
+          <div className="planContentBlock">
+            <h2>Here are some things to do while you're there:</h2>
+            {plan?.plan_data.destination.things_to_do.map(
+              (destination, index) => {
+                return (
+                  <>
+                    <li key={`${destination.destination_name} - ${index}`}>
+                      <span style={{ fontWeight: "bold" }}>
+                        {destination.destination_name}
+                      </span>
+                      : {destination.description}
+                    </li>
+                  </>
+                );
+              }
+            )}
+          </div>
+
           <div className="resultsInfoBox">
             <h2 style={{ textAlign: "center" }}>
               Some important things to plan for:

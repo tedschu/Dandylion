@@ -147,7 +147,7 @@ button {
 }
 
 .next {
-  background-color: var(--forest-green);
+  background-color: var(--action-coral);
   color: white;
   padding: 10px 20px;
   font-size: 18px;
@@ -373,6 +373,14 @@ button {
   margin: 0;
 }
 
+.planContentBlock {
+  margin-bottom: 10px;
+}
+
+.planContentBlock > h2 {
+  text-align: center;
+}
+
 .resultsInfoBox {
   background-color: var(--back-light-sage);
   border-radius: 10px;
@@ -490,8 +498,8 @@ button {
 }
 
 .header {
-  /* position: fixed;
-  top: 0; */
+  position: relative;
+  top: 0;
   width: 100%;
   text-align: center;
   display: grid;
@@ -714,7 +722,7 @@ button {
 .homeBottomTextContainer > h1 {
   margin: 15px 0 10px 0;
   font-size: 35px;
-  color: var(--action-coral);
+  color: var(--brand-blue);
   /* font-family: "Pacifico"; */
 }
 
@@ -725,7 +733,7 @@ button {
 }
 
 .homeBottomTextContainer > p {
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
 }
 
@@ -823,13 +831,12 @@ button {
 
 .pathContainer {
   width: 100%;
-  height: 100vh;
-  background-image: url("./assets/images/background.jpg");
-  background-size: cover;
-  background-position: top;
+  min-height: 100vh;
+
+  background-color: var(--brand-blue);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -841,15 +848,16 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 1000px;
+  max-width: 700px;
   padding: 5px;
   box-sizing: border-box;
   position: relative;
   min-height: 60vh;
+  margin-top: 60px;
 }
 
 .pathContentContainer > h2 {
-  font-size: 35px;
+  font-size: 25px;
   color: var(--action-coral);
   text-align: center;
   padding: 0 0 10px 0;
@@ -1296,5 +1304,21 @@ p {
   .itineraryDayHeader {
     width: 100%;
     text-align: left;
+  }
+
+  .header {
+    position: fixed;
+  }
+
+  .resultContentContainer {
+    margin: 80px 0 20px 0;
+  }
+
+  .pathContainer {
+    justify-content: center;
+  }
+
+  .resultLoadingContainer {
+    margin-top: 40px;
   }
 }

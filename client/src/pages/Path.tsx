@@ -41,8 +41,8 @@ function Path() {
 
   return (
     <>
-      {isLoggedIn && <Header />}
       <div className="pathContainer">
+        {isLoggedIn && <Header />}
         <div className="pathContentContainer">
           <h2>How can we help plan your trip?</h2>
           <div className="pathSelectorBox">

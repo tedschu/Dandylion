@@ -139,8 +139,10 @@ function Home() {
         <div className="homeBottomContainer">
           <div className="homeBottomContentContainer">
             <div className="homeBottomTextContainer">
-              <h1>Skip the endless research.</h1>
-              <h2>Get a personalized day-by-day itinerary in minutes.</h2>
+              <h1>
+                Skip the endless research. Get a personalized day-by-day
+                itinerary in minutes.
+              </h1>
               <p>
                 Most travelers spend 20+ hours planning a single trip. Kinda
                 takes the fun out of it, right? Whether you're stuck choosing a

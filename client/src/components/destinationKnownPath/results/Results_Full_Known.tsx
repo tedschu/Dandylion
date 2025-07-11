@@ -4,6 +4,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { useAppContext } from "../../../contexts/AppContext";
 import SharePlan from "../../SharePlan";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 type ResultsProps = {
   plan: PlanKnown;
@@ -44,9 +45,32 @@ function Results_Full_Known({ plan, planID }: ResultsProps) {
 
   return (
     <>
+      {/* **** EARLY TESTER SURVEY LINK - DELETE PRIOR TO FULL DEPLOY */}
+      <Link
+        to={
+          "https://docs.google.com/forms/d/e/1FAIpQLSe1BkGol0V4q5MdvmR_iSt1dHKmLi-BRJYgNuEuyjSaduwFAQ/viewform?usp=header"
+        }
+      >
+        <div
+          className="betaFeedbackBanner"
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            color: "black",
+            fontSize: "12px",
+            backgroundColor: "yellow",
+            width: "140px",
+            padding: "2px",
+            zIndex: "1001",
+            cursor: "pointer",
+          }}
+        >
+          Hey, early testers! Click here to share your feedback.
+        </div>
+      </Link>
       <div className="resultContentContainer">
         {isShareModalOpen && <SharePlan />}
-
         {showShareButton && (
           <>
             <button

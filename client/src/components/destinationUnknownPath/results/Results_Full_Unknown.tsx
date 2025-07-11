@@ -7,6 +7,7 @@ import { useAppContext } from "../../../contexts/AppContext";
 import SharePlan from "../../SharePlan";
 import { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
+import { Link } from "react-router-dom";
 
 type ResultsProps = {
   plan: Plan;
@@ -86,8 +87,36 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
     };
   }, []);
 
+  console.log(plan.plan_data.destination);
+
   return (
     <>
+      {/* **** EARLY TESTER SURVEY LINK - DELETE PRIOR TO FULL DEPLOY */}
+
+      <Link
+        to={
+          "https://docs.google.com/forms/d/e/1FAIpQLSe1BkGol0V4q5MdvmR_iSt1dHKmLi-BRJYgNuEuyjSaduwFAQ/viewform?usp=header"
+        }
+      >
+        <div
+          className="betaFeedbackBanner"
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            color: "black",
+            fontSize: "12px",
+            backgroundColor: "yellow",
+            width: "140px",
+            padding: "2px",
+            zIndex: "1001",
+            cursor: "pointer",
+          }}
+        >
+          Hey, early testers! Click here to share your feedback.
+        </div>
+      </Link>
+
       <div className="resultContentContainer">
         {isShareModalOpen && <SharePlan />}
 
@@ -275,37 +304,59 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
                 alt=""
                 className="locationImage"
               />
-              <h2>Where to stay:</h2>
 
-              {plan?.plan_data.second_destination.places_to_stay.map(
-                (place, index) => {
+              <div className="planContentBlock">
+                <h2>Where to stay:</h2>
+                {plan?.plan_data.second_destination.places_to_stay.map(
+                  (place, index) => {
+                    return (
+                      <>
+                        <li key={`${place.name} - ${index}`}>
+                          <span style={{ fontWeight: "bold" }}>
+                            {place.name}
+                          </span>{" "}
+                          in {place.location}: {place.why_recommended}.{" "}
+                          {place.price_range}.
+                        </li>
+                      </>
+                    );
+                  }
+                )}
+              </div>
+              <div className="planContentBlock">
+                <h2>Places to eat:</h2>
+                {plan?.plan_data.destination.restaurants.map((place, index) => {
                   return (
                     <>
-                      <li key={`${place.name} - ${index}`}>
-                        <span style={{ fontWeight: "bold" }}>{place.name}</span>{" "}
-                        in {place.location}: {place.why_recommended}.{" "}
-                        {place.price_range}.
-                      </li>
-                    </>
-                  );
-                }
-              )}
-
-              <h2>Here are some things to do while you're there:</h2>
-              {plan?.plan_data.second_destination.things_to_do.map(
-                (destination, index) => {
-                  return (
-                    <>
-                      <li key={`${destination.destination_name} - ${index}`}>
+                      <li key={`${place.restaurant_name} - ${index}`}>
                         <span style={{ fontWeight: "bold" }}>
-                          {destination.destination_name}
-                        </span>
-                        : {destination.description}
+                          {place.restaurant_name}
+                        </span>{" "}
+                        ({place.restaurant_type}): {place.description}.
                       </li>
                     </>
                   );
-                }
-              )}
+                })}
+              </div>
+
+              <div className="planContentBlock">
+                <h2>Here are some things to do while you're there:</h2>
+                {plan?.plan_data.second_destination.things_to_do.map(
+                  (destination, index) => {
+                    return (
+                      <>
+                        <li key={`${destination.destination_name} - ${index}`}>
+                          <span style={{ fontWeight: "bold" }}>
+                            {destination.destination_name}
+                          </span>
+                          : {destination.description}
+                        </li>
+                      </>
+                    );
+                  }
+                )}
+              </div>
+
               <div className="resultsInfoBox">
                 <h2 style={{ textAlign: "center" }}>
                   Some important things to plan for:

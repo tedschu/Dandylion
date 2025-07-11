@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { h2, span } from "motion/react-client";
 import testIMage from "../assets/images/destinations/italy.png";
 import SharePlan from "../components/SharePlan";
+import ShareIcon from "@mui/icons-material/Share";
 
 type Plan = {
   plan_data: {
@@ -144,69 +145,47 @@ function Me() {
               {userPlans.map((plan, index) => {
                 return (
                   <div className="myAccountPlanContainer" key={index}>
-                    <div style={{ display: "flex", gap: "10px" }}>
-                      {/* TODO: CAN MODIFY TO SHOW TWO IMAGES IF AVAIALBLE, OR JUST DEFAULT TO FIRST */}
-                      <img
-                        src={plan.photos_first_destination[0]}
-                        alt=""
-                        style={{
-                          maxWidth: "100px",
-                          height: "auto",
-                          objectFit: "contain",
-                          cursor: "pointer",
-                          borderRadius: "12px",
-                        }}
+                    <img
+                      src={plan.photos_first_destination[0]}
+                      alt=""
+                      onClick={() => navigate(`/plans/${plan.id}`)}
+                    />
+                    <div className="myAccountPlanText">
+                      <h2
+                        style={{ cursor: "pointer" }}
                         onClick={() => navigate(`/plans/${plan.id}`)}
-                      />
-                      <div className="myAccountPlanText">
-                        <h2
-                          style={{ cursor: "pointer" }}
-                          onClick={() => navigate(`/plans/${plan.id}`)}
-                        >
-                          {plan.plan_data.destination.location}
-                        </h2>
-                        {plan.plan_data.second_destination && (
-                          <h2>{plan.plan_data.second_destination.location}</h2>
-                        )}
+                      >
+                        {plan.plan_data.destination.location}
+                      </h2>
+                      {plan.plan_data.second_destination && (
+                        <h2>{plan.plan_data.second_destination.location}</h2>
+                      )}
 
-                        <p>Created on: {plan.created_at.split(",")[0]}</p>
-                        {plan.shared_with.length > 0 && (
-                          <p>
-                            Shared with:{" "}
-                            {plan.shared_with.map((email, index) => {
-                              return <span key={index}>{email} </span>;
-                            })}{" "}
-                            {/* {plan.shared_with.length} others */}
-                          </p>
-                        )}
-                      </div>
+                      <p>Created on: {plan.created_at.split(",")[0]}</p>
+                      {plan.shared_with.length > 0 && (
+                        <p>
+                          Shared with:{" "}
+                          {plan.shared_with.map((email, index) => {
+                            return <span key={index}>{email} </span>;
+                          })}{" "}
+                          {/* {plan.shared_with.length} others */}
+                        </p>
+                      )}
                     </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "10px",
-                      }}
+
+                    <button
+                      type="button"
+                      className="shareIconMePage"
+                      onClick={() =>
+                        openSharePlan(
+                          plan.id,
+                          plan.plan_data.destination.location,
+                          plan.photos_first_destination[0]
+                        )
+                      }
                     >
-                      <button
-                        className="register"
-                        onClick={() => navigate(`/plans/${plan.id}`)}
-                      >
-                        View
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          openSharePlan(
-                            plan.id,
-                            plan.plan_data.destination.location,
-                            plan.photos_first_destination[0]
-                          )
-                        }
-                      >
-                        Share plan
-                      </button>
-                    </div>
+                      <ShareIcon sx={{ fontSize: "medium" }} />
+                    </button>
                   </div>
                 );
               })}
@@ -230,6 +209,10 @@ function Me() {
               >
                 Create a plan
               </button>
+
+              <button className="register" onClick={() => navigate("/")}>
+                Go home
+              </button>
             </>
           )}
 
@@ -242,58 +225,42 @@ function Me() {
               {userSharedPlans.map((plan, index) => {
                 return (
                   <div className="myAccountPlanContainer" key={index}>
-                    <div style={{ display: "flex", gap: "10px" }}>
-                      <img
-                        src={plan.photos_first_destination[0]}
-                        alt=""
-                        style={{
-                          maxWidth: "100px",
-                          height: "auto",
-                          objectFit: "contain",
-                          cursor: "pointer",
-                        }}
+                    <img
+                      src={plan.photos_first_destination[0]}
+                      alt=""
+                      className="myAccountPlanImage"
+                      onClick={() => navigate(`/plans/${plan.id}`)}
+                    />
+                    <div className="myAccountPlanText">
+                      <h2
+                        style={{ cursor: "pointer" }}
                         onClick={() => navigate(`/plans/${plan.id}`)}
-                      />
-                      <div className="myAccountPlanText">
-                        <h2
-                          style={{ cursor: "pointer" }}
-                          onClick={() => navigate(`/plans/${plan.id}`)}
-                        >
-                          {plan.plan_data.destination.location}
-                        </h2>
-                        {plan.plan_data.second_destination && (
-                          <h2> {plan.plan_data.second_destination.location}</h2>
-                        )}
-                        <p>Created on: {plan.created_at.split(",")[0]}</p>
-                        <p>
-                          Shared by: {plan.invited_by_name} (
-                          {plan.invited_by_email})
-                        </p>
-                      </div>
+                      >
+                        {plan.plan_data.destination.location}
+                      </h2>
+                      {plan.plan_data.second_destination && (
+                        <h2> {plan.plan_data.second_destination.location}</h2>
+                      )}
+                      <p>Created on: {plan.created_at.split(",")[0]}</p>
+                      <p>
+                        Shared by: {plan.invited_by_name} (
+                        {plan.invited_by_email})
+                      </p>
                     </div>
+
                     <div
                       style={{
                         display: "flex",
                         flexDirection: "column",
                         gap: "10px",
                       }}
-                    >
-                      <button
-                        className="register"
-                        onClick={() => navigate(`/plans/${plan.id}`)}
-                      >
-                        View
-                      </button>
-                    </div>
+                    ></div>
                   </div>
                 );
               })}
             </>
           )}
 
-          <button className="login" onClick={() => navigate("/")}>
-            Go home
-          </button>
           {isShareModalOpen && <SharePlan />}
         </div>
       </div>

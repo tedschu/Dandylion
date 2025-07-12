@@ -42,7 +42,7 @@ function Path() {
   return (
     <>
       <div className="pathContainer">
-        {isLoggedIn && <Header />}
+        {isLoggedIn && <Header variant="header-fixed" />}
         <div className="pathContentContainer">
           <h2>How can we help plan your trip?</h2>
           <div className="pathSelectorBox">
@@ -65,11 +65,6 @@ function Path() {
             </div>
             <img src={arrow} alt="" />
           </div>
-          <img
-            style={{ width: "45px", paddingBottom: "10px" }}
-            src={bee}
-            alt=""
-          />
         </div>
       </div>
     </>

@@ -499,19 +499,39 @@ button {
   margin: 15px 0;
 }
 
-.header {
+/* .header {
   position: relative;
   top: 0;
   width: 100%;
   text-align: center;
   display: grid;
   grid-template-columns: 20% 60% 20%;
-  /* background-color: #1a73e8; */
   overflow: visible;
-  /* box-shadow: 3px 3px 3px #1a73e8; */
   z-index: 2;
-  /* transition: transform 0.3s ease-in-out; */
   transition: all 0.3s ease;
+} */
+
+/* Base header styles */
+.header {
+  width: 100%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  z-index: 2;
+  overflow: visible;
+  transition: all 0.3s ease;
+}
+
+/* Relative positioning (for minimal content pages) */
+.header-relative {
+  position: relative;
+  /* No special positioning - flows normally in document */
+}
+
+/* Fixed positioning (for content-heavy pages) */
+.header-fixed {
+  position: fixed;
+  top: 0;
 }
 
 .navMenu {
@@ -827,7 +847,7 @@ button {
   background-color: var(--brand-blue);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -1356,9 +1376,9 @@ p {
     margin: 30px 0 20px 0;
   }
 
-  .pathContainer {
+  /* .pathContainer {
     justify-content: center;
-  }
+  } */
 
   .resultLoadingContainer {
     margin-top: 40px;

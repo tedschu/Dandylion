@@ -139,7 +139,7 @@ function Me() {
   return (
     <>
       <div className="myAccountContainer">
-        <Header />
+        <Header variant="header-relative" />
 
         <div className="myAccountContentContainer">
           {userPlans.length > 0 && (

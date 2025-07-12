@@ -323,7 +323,7 @@ function ResultsDestinationUnknown() {
   return (
     <>
       <div className="resultPageContainer">
-        <Header />
+        <Header variant="header-relative" />
         <img className="moon scrollout" src={moon} alt="" />
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />

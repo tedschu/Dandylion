@@ -9,7 +9,11 @@ import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
-function Header() {
+interface HeaderProps {
+  variant: string;
+}
+
+function Header({ variant }: HeaderProps) {
   const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -31,7 +35,7 @@ function Header() {
 
   return (
     <>
-      <div className="header">
+      <div className={`header ${variant}`}>
         <div></div>
         <h1 onClick={() => navigate("/")} style={{ color: "white" }}>
           dandylion.ai

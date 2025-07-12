@@ -63,7 +63,7 @@ function DestinationKnown() {
   return (
     <>
       <div className={"pageContainer"} data-question={currentStep}>
-        <Header />
+        <Header variant="header-fixed" />
         {/* <img
           className="moon"
           src={moon}

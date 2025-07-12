@@ -115,7 +115,12 @@ function Me() {
     }
   };
 
-  const openSharePlan = (id: number, destination: string, imageUrl: string) => {
+  const openSharePlan = (
+    id: number,
+    destination: string,
+    second_destination: string,
+    imageUrl: string
+  ) => {
     // Update planID state value
     // Open modal with SharePlan component
 
@@ -123,6 +128,7 @@ function Me() {
       ...prevState,
       planID: id,
       destination: destination,
+      second_destination: second_destination,
       imageUrl: imageUrl,
     }));
     setIsShareModalOpen(true);
@@ -180,11 +186,14 @@ function Me() {
                         openSharePlan(
                           plan.id,
                           plan.plan_data.destination.location,
+                          plan.plan_data.second_destination
+                            ? plan.plan_data.second_destination.location
+                            : "",
                           plan.photos_first_destination[0]
                         )
                       }
                     >
-                      <ShareIcon sx={{ fontSize: "medium" }} />
+                      <ShareIcon sx={{ fontSize: "large" }} />
                     </button>
                   </div>
                 );
@@ -218,7 +227,13 @@ function Me() {
 
           {userSharedPlans.length > 0 && (
             <>
-              <h1 style={{ color: "white", textAlign: "center" }}>
+              <h1
+                style={{
+                  color: "white",
+                  textAlign: "center",
+                  marginTop: "35px",
+                }}
+              >
                 Here are the plans that have been shared with you:
               </h1>
 

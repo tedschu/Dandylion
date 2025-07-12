@@ -30,7 +30,12 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
 
   const [isSecondPlanLoading, setIsSecondPlanLoading] = useState(true);
 
-  const openSharePlan = (id: number, destination: string, imageUrl: string) => {
+  const openSharePlan = (
+    id: number,
+    destination: string,
+    second_destination: string,
+    imageUrl: string
+  ) => {
     // Update planID state value
     // Open modal with SharePlan component
 
@@ -38,6 +43,7 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
       ...prevState,
       planID: id,
       destination: destination,
+      second_destination: second_destination,
       imageUrl: imageUrl,
     }));
     setIsShareModalOpen(true);
@@ -122,22 +128,25 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
 
         {showShareButton && (
           <>
-            <button
-              type="button"
-              className="shareTest"
-              onClick={() =>
-                openSharePlan(
-                  planID,
-                  plan.plan_data.destination.location,
-                  plan.photos_first_destination[0]
-                )
-              }
-            >
-              <ShareIcon sx={{ fontSize: "medium" }} />
-            </button>
-            <button type="button" className="shareTest2">
-              <ModeEditIcon sx={{ fontSize: "medium" }} />
-            </button>
+            <div className="iconsContainer">
+              <button
+                type="button"
+                className="icons"
+                onClick={() =>
+                  openSharePlan(
+                    planID,
+                    plan.plan_data.destination.location,
+                    plan.plan_data.second_destination.location,
+                    plan.photos_first_destination[0]
+                  )
+                }
+              >
+                <ShareIcon sx={{ fontSize: "large" }} />
+              </button>
+              <button type="button" className="icons">
+                <ModeEditIcon sx={{ fontSize: "large" }} />
+              </button>
+            </div>
           </>
         )}
         <div className="resultsFullContentContainer">
@@ -291,7 +300,32 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
       {plan?.plan_data.second_destination?.location && (
         <>
           <div className="resultContentContainer">
-            <h2 style={{ color: "var(--action-coral)" }}>
+            {isShareModalOpen && <SharePlan />}
+
+            {showShareButton && (
+              <>
+                <div className="iconsContainer">
+                  <button
+                    type="button"
+                    className="icons"
+                    onClick={() =>
+                      openSharePlan(
+                        planID,
+                        plan.plan_data.destination.location,
+                        plan.plan_data.second_destination.location,
+                        plan.photos_first_destination[0]
+                      )
+                    }
+                  >
+                    <ShareIcon sx={{ fontSize: "large" }} />
+                  </button>
+                  <button type="button" className="icons">
+                    <ModeEditIcon sx={{ fontSize: "large" }} />
+                  </button>
+                </div>
+              </>
+            )}
+            <h2 style={{ color: "var(--action-coral)", fontSize: "16px" }}>
               Here's another recommendation (it's good to have options, right?)
             </h2>
             <div className="resultsFullContentContainer">

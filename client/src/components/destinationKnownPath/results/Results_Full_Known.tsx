@@ -31,6 +31,7 @@ function Results_Full_Known({ plan, planID }: ResultsProps) {
       ...prevState,
       planID: id,
       destination: destination,
+      second_destination: "",
       imageUrl: imageUrl,
     }));
     setIsShareModalOpen(true);
@@ -73,22 +74,24 @@ function Results_Full_Known({ plan, planID }: ResultsProps) {
         {isShareModalOpen && <SharePlan />}
         {showShareButton && (
           <>
-            <button
-              type="button"
-              className="shareTest"
-              onClick={() =>
-                openSharePlan(
-                  planID,
-                  plan.plan_data.destination.location,
-                  plan.photos_first_destination[0]
-                )
-              }
-            >
-              <ShareIcon sx={{ fontSize: "medium" }} />
-            </button>
-            <button type="button" className="shareTest2">
-              <ModeEditIcon sx={{ fontSize: "medium" }} />
-            </button>
+            <div className="iconsContainer">
+              <button
+                type="button"
+                className="icons"
+                onClick={() =>
+                  openSharePlan(
+                    planID,
+                    plan.plan_data.destination.location,
+                    plan.photos_first_destination[0]
+                  )
+                }
+              >
+                <ShareIcon sx={{ fontSize: "large" }} />
+              </button>
+              <button type="button" className="icons">
+                <ModeEditIcon sx={{ fontSize: "large" }} />
+              </button>
+            </div>
           </>
         )}
         <div className="resultsFullContentContainer">

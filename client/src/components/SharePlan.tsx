@@ -108,14 +108,28 @@ function SharePlan() {
               top: "6px",
               left: "10px",
               cursor: "pointer",
+              fontSize: "18px",
             }}
           >
-            X
+            x
           </div>
-          <h1 style={{ fontSize: "20px", textAlign: "center" }}>
-            Share your plan for <span>{planShareData.destination}</span>
-          </h1>
-          <p>Invite others to see your plan:</p>
+          <h3
+            style={{
+              fontSize: "16px",
+              textAlign: "center",
+              margin: "5px",
+              fontWeight: "normal",
+            }}
+          >
+            Invite others to see your plan:
+          </h3>
+
+          <h2 style={{ margin: "0 0 15px 0", fontSize: "18px" }}>
+            {planShareData.destination}{" "}
+            {planShareData.second_destination !== "" &&
+              "and " + planShareData.second_destination}
+          </h2>
+
           <form className="shareFormContainer" action="" onSubmit={submit}>
             <div className="shareFormInputContainer">
               <input
@@ -124,7 +138,7 @@ function SharePlan() {
                 name="email"
                 style={{
                   border: "none",
-                  width: "200px",
+                  width: "180px",
                   borderRadius: "5px",
                   padding: "3px",
                 }}

@@ -31,6 +31,7 @@ export function AppProvider({ children }: AppProviderProps) {
   const [planShareData, setPlanShareData] = useState<PlanShareData>({
     planID: null,
     destination: "",
+    second_destination: "",
     imageUrl: "",
   });
   // Governs whether the SharePlan modal is open, for a user to share a plan with other users

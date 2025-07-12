@@ -98,6 +98,7 @@ export type PlanType = "DESTINATION_KNOWN" | "DESTINATION_UNKNOWN";
 export type PlanShareData = {
   planID: number | null;
   destination: string;
+  second_destination?: string;
   imageUrl: string;
 };
 

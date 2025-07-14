@@ -43,7 +43,7 @@ router.post("/plan", verifyToken, async (req, res) => {
   }
 });
 
-// PATCH update a plan with second_response object
+// PATCH update an "Unknown" plan with second_destination object
 router.patch(
   "/plan-update-second-destination",
   verifyToken,
@@ -83,7 +83,41 @@ router.patch(
   }
 );
 
-// TODO: PUT update the plan row for id (plan id) and user_id to add the image S3 URLs
+// PATCH update an "Unknown" or "Known" plan with destination object (e.g. first destination)
+router.patch("/plan-update-destination", verifyToken, async (req, res) => {
+  try {
+    const { destination, plan_id } = req.body;
+
+    const existingPlan = await prisma.plan.findUnique({
+      where: {
+        id: parseInt(plan_id),
+      },
+    });
+
+    if (!existingPlan)
+      return res.status(400).json({ error: "Plan not found." });
+
+    const updatedResultData = {
+      ...existingPlan.plan_data,
+      destination: destination,
+    };
+
+    // update the plan to include second_destination data
+    const updatedPlan = await prisma.plan.update({
+      where: {
+        id: parseInt(plan_id),
+      },
+      data: {
+        plan_data: updatedResultData,
+      },
+    });
+
+    res.json(updatedPlan);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 // GET to pull all trips for a given user (rendered on the "Me" page)
 router.get("/my-plans", verifyToken, async (req, res) => {
@@ -132,7 +166,6 @@ router.get("/my-plans", verifyToken, async (req, res) => {
   }
 });
 
-// ADD THIS TO ABOVE ROUTE AND THEN DELETE
 // GET to pull all users shared on a given trip, by the trip owner (rendered on the "Me" page)
 router.get("/plan-shared-users", verifyToken, async (req, res) => {
   try {

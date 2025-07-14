@@ -646,11 +646,13 @@ Your response must be parseable by JSON.parse() with no modifications.`,
 
 // **** BELOW ARE THE ROUTES FOR USER-REVISED PLANS (e.g. user wants to revise based on their preferences)
 
-// "Unknown" path for first recommendation: user revision
-router.post("/user-updated-recommendation-unknown-first", async (req, res) => {
+// User-revised plan_data for all "known" and "unknown" plans (the prompt specifies the format)
+router.post("/user-revised-recommendation", async (req, res) => {
   try {
     // get passed info from body, put it into message and system prompt arrays, call on caller function, return results
     const { plan_data, user_feedback } = req.body;
+
+    console.log(plan_data, user_feedback);
 
     const messages = [
       {
@@ -662,18 +664,20 @@ router.post("/user-updated-recommendation-unknown-first", async (req, res) => {
 
 Make sure that your recommendations follow the parameters of the user's responses and stay within any budget or other constraints mentioned.
 
-Return the travel plan object in the same format, but with revised fields based on the user feedback.
+Return the travel plan object in the EXACT same format and structure as the input, but with revised content based on the user feedback.
 
-Here is the travel plan: ${JSON.stringify(plan_data)}
+INPUT JSON STRUCTURE TO PRESERVE:
+${JSON.stringify(plan_data, null, 2)}
 
-Here is the user feedback: ${user_feedback}
+User feedback: ${user_feedback}
 
 CRITICAL INSTRUCTIONS:
 - Your ENTIRE response must be a single, valid JSON object
 - Do NOT include any text outside the JSON
 - Do NOT use markdown backticks like \`\`\`json
 - Your response must be parseable by JSON.parse() with no modifications
-- Maintain the same structure as the input JSON`,
+- Maintain the EXACT same structure as the input JSON above
+- Only change the content/values, never the keys or overall structure`,
           },
         ],
       },

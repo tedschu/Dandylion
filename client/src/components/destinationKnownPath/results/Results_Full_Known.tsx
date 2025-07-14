@@ -1,10 +1,12 @@
-import { PlanKnown } from "../../../types/types";
+import { PlanKnown, DestinationKnown } from "../../../types/types";
 import ShareIcon from "@mui/icons-material/Share";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { useAppContext } from "../../../contexts/AppContext";
 import SharePlan from "../../SharePlan";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import EditPlan from "../../EditPlan";
+import { pre } from "motion/react-client";
 
 type ResultsProps = {
   plan: PlanKnown;
@@ -17,6 +19,10 @@ function Results_Full_Known({ plan, planID }: ResultsProps) {
     setIsShareModalOpen,
     planShareData,
     setPlanShareData,
+    isEditModalOpen,
+    setIsEditModalOpen,
+    revisedPlan,
+    setRevisedPlan,
   } = useAppContext();
   const [showShareButton, setShowShareButton] = useState(true);
 
@@ -35,6 +41,19 @@ function Results_Full_Known({ plan, planID }: ResultsProps) {
       imageUrl: imageUrl,
     }));
     setIsShareModalOpen(true);
+  };
+
+  const openEditModal = (id: number, planData: DestinationKnown) => {
+    setRevisedPlan((prevState) => ({
+      ...prevState,
+      plan_id: id,
+      plan_data: planData,
+      plan_type: "DESTINATION_KNOWN",
+      plan_key: "destination",
+      user_feedback: "",
+    }));
+
+    setIsEditModalOpen(true);
   };
 
   // If the user did not create the plan, do not show the share button
@@ -72,6 +91,7 @@ function Results_Full_Known({ plan, planID }: ResultsProps) {
       </Link>
       <div className="resultContentContainer">
         {isShareModalOpen && <SharePlan />}
+        {isEditModalOpen && <EditPlan />}
         {showShareButton && (
           <>
             <div className="iconsContainer">
@@ -88,7 +108,13 @@ function Results_Full_Known({ plan, planID }: ResultsProps) {
               >
                 <ShareIcon sx={{ fontSize: "large" }} />
               </button>
-              <button type="button" className="icons">
+              <button
+                type="button"
+                className="icons"
+                onClick={() =>
+                  openEditModal(planID, plan.plan_data.destination)
+                }
+              >
                 <ModeEditIcon sx={{ fontSize: "large" }} />
               </button>
             </div>

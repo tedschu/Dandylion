@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { Plan, PlanShareData } from "../types/types";
+import { Plan, PlanShareData, RevisedPlan } from "../types/types";
 
 type AppContextType = {
   plan: Plan | null;
@@ -14,6 +14,10 @@ type AppContextType = {
   setIsShareModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   shouldRefreshPlans: boolean;
   setShouldRefreshPlans: React.Dispatch<React.SetStateAction<boolean>>;
+  isEditModalOpen: boolean;
+  setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  revisedPlan: RevisedPlan | null;
+  setRevisedPlan: React.Dispatch<React.SetStateAction<RevisedPlan | null>>;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -34,8 +38,13 @@ export function AppProvider({ children }: AppProviderProps) {
     second_destination: "",
     imageUrl: "",
   });
+
+  // Context for revised plan data post-purchase
+  const [revisedPlan, setRevisedPlan] = useState<RevisedPlan | null>(null);
   // Governs whether the SharePlan modal is open, for a user to share a plan with other users
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  // Governs whether the editPlan modal is open, allowing a user to revise a plan that they created (once)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   // Governs whether to re-render plans after a user shares plans
   // (e.g. will render the emails they just shared with)
   const [shouldRefreshPlans, setShouldRefreshPlans] = useState(false);
@@ -53,6 +62,10 @@ export function AppProvider({ children }: AppProviderProps) {
     setIsShareModalOpen,
     shouldRefreshPlans,
     setShouldRefreshPlans,
+    isEditModalOpen,
+    setIsEditModalOpen,
+    revisedPlan,
+    setRevisedPlan,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

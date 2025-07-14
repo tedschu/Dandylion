@@ -93,7 +93,7 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
     };
   }, []);
 
-  console.log(plan.plan_data.destination);
+  console.log(plan.plan_data);
 
   return (
     <>

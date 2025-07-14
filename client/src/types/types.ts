@@ -94,6 +94,7 @@ export type Itinerary = {
 };
 
 export type PlanType = "DESTINATION_KNOWN" | "DESTINATION_UNKNOWN";
+export type PlanKey = "destination" | "second_destination";
 
 export type PlanShareData = {
   planID: number | null;
@@ -138,6 +139,14 @@ export type ItineraryKnownDays = {
   activities: string;
   dining: string;
   time: string;
+};
+
+export type RevisedPlan = {
+  plan_id: number | null;
+  plan_data: Destination | DestinationKnown;
+  user_feedback: string;
+  plan_type: PlanType;
+  plan_key: PlanKey;
 };
 
 // Union type for API responses that could be either "known" or "unknown"

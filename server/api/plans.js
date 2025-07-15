@@ -11,8 +11,21 @@ const prisma = new PrismaClient();
 router.get("/:plan_id", verifyToken, async (req, res) => {
   try {
     console.log("hitting plan route");
+    console.log("req.user:", req.user);
+    console.log("req.params.plan_id:", req.params.plan_id);
+
     const user_id = parseInt(req.user);
     const plan_id = parseInt(req.params.plan_id);
+
+    console.log("Parsed user_id:", user_id);
+    console.log("Parsed plan_id:", plan_id);
+
+    if (isNaN(user_id) || isNaN(plan_id)) {
+      console.log("Invalid user_id or plan_id");
+      return res.status(400).json({ error: "Invalid user or plan ID" });
+    }
+
+    console.log("About to query database...");
 
     const plan = await prisma.plan.findFirst({
       where: {
@@ -27,10 +40,13 @@ router.get("/:plan_id", verifyToken, async (req, res) => {
       },
     });
 
+    console.log("Database query completed, plan found:", !!plan);
+
     res.status(200).send({ plan });
   } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
+    console.error("Error in plan route:", error);
+    console.error("Error stack:", error.stack);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 

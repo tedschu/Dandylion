@@ -306,7 +306,7 @@ router.post("/recommendation-unknown-second", async (req, res) => {
             type: "text",
             text: `Using the object below, review the questions and then the user's responses to those questions. You will then be returning recommendations on a vacation destination that you think would be the best fit for them based on their responses in the format specified below ("destination"). 
 
-            This destination recommendation needs to be distinct from another destination (${firstDestination}), as it will be presented as an alternative destination. 
+            This destination recommendation must be COMPLETELY SEPARATE AND UNRELATED to ${firstDestination}. Do not reference any attractions, restaurants, or accommodations from ${firstDestination}. This is an entirely different vacation option. 
 
             Make sure that your recommendations follow the parameters of the user's responses. For example, if they say they want to go to a beach destination during the fall, avoid recommending destinations where the fall is the primary hurricane season. For example, if they note that their budget is $5,000, don't recommend a vacation that will cost more than that.
 
@@ -322,10 +322,12 @@ CRITICAL INSTRUCTIONS:
 - Do NOT use markdown backticks like \`\`\`json
 - All string values must be properly escaped
 - All arrays must be valid JSON arrays, not strings containing array-like text
+- ALL recommendations (restaurants, hotels, attractions) must be located in or near the destination you choose ONLY
+- Do NOT include any recommendations from ${firstDestination} or any other location
 
 DETAILED REQUIREMENTS FOR EACH FIELD:
 
-DESTINATION LOCATION:
+LOCATION:
 - Must be a specific town/city or region, not the user's home city
 - Should match user's climate, activity, and cultural preferences
 

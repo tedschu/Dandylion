@@ -4,6 +4,13 @@ import jwt from "jsonwebtoken";
 // Middleware to verify token and allow for loading of user data
 function verifyToken(req, res, next) {
   const authHeader = req.headers["authorization"];
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res
+      .status(401)
+      .send({ error: "No valid authorization header was provided." });
+  }
+
   const token = authHeader.split(" ")[1];
 
   if (!token) {
@@ -11,8 +18,10 @@ function verifyToken(req, res, next) {
   }
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decodedUser) => {
-    if (err)
+    if (err) {
+      console.error("JWT verification error: ", err);
       return res.status(403).send({ error: "Failed to authenticate token." });
+    }
 
     req.user = decodedUser.data.id;
     req.email = decodedUser.data.email;

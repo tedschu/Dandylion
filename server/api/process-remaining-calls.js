@@ -88,6 +88,7 @@ router.post("/", async (req, res) => {
       if (!secondDestinationResponse.ok) {
         const textResponse = await secondDestinationResponse.text();
         console.error("Anthropic API error response:", textResponse);
+        console.log("Here is textResponse: ", textResponse);
 
         // Handle retry for overloaded API
         if (

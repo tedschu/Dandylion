@@ -44,6 +44,8 @@ function ResultsDestinationUnknown() {
 
   // On page load, calls getTripResults() IF all userResponse fields are populated
   useEffect(() => {
+    if (hasResponse) return;
+
     const hasValidResponses = () => {
       // Check first name, and then loop through userResponses object to ensure all keys have values (e.g. not "")
       for (let i = 1; i <= 10; i++) {
@@ -324,7 +326,7 @@ function ResultsDestinationUnknown() {
     <>
       <div className="resultPageContainer">
         <Header variant="header-relative" />
-        <img className="moon scrollout" src={moon} alt="" />
+        {/* <img className="moon scrollout" src={moon} alt="" /> */}
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS />

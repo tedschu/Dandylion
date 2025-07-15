@@ -199,6 +199,9 @@ Return ONLY this JSON structure:
       }
     ]
   },
+  second_destination: {
+    // leave this as an empty object
+  }
 }
 
 IMPORTANT FORMATTING RULES:
@@ -363,8 +366,7 @@ ITINERARY:
 
 Return ONLY this JSON structure:
 
-{
-  "destination": {
+  {
     "location": "string",
     "overview": "string", 
     "places_to_stay": [
@@ -402,8 +404,7 @@ Return ONLY this JSON structure:
         "evening": "Detailed recommendations for activities and dining"
       }
     ]
-  },
-}
+  }
 
 IMPORTANT FORMATTING RULES:
 1. Include 3-4 places_to_stay entries

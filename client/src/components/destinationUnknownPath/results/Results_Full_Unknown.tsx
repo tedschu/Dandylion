@@ -111,8 +111,6 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
     };
   }, []);
 
-  console.log(plan.plan_data);
-
   return (
     <>
       {/* **** EARLY TESTER SURVEY LINK - DELETE PRIOR TO FULL DEPLOY */}
@@ -350,9 +348,9 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
                 </div>
               </>
             )}
-            <h2 style={{ color: "var(--action-coral)", fontSize: "16px" }}>
+            {/* <h2 style={{ color: "var(--action-coral)", fontSize: "16px" }}>
               Here's another recommendation (it's good to have options, right?)
-            </h2>
+            </h2> */}
             <div className="resultsFullContentContainer">
               <h1>{plan?.plan_data.second_destination.location}</h1>
               <p className="resultsFullDescription">

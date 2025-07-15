@@ -134,7 +134,7 @@ function Me() {
     setIsShareModalOpen(true);
   };
 
-  console.log(userSharedPlans);
+  console.log(userSharedPlans, userPlans);
 
   return (
     <>

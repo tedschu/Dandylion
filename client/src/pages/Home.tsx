@@ -9,7 +9,10 @@ import { useState, useEffect } from "react";
 import { QuestionsResponsesProvider } from "../contexts/QuestionsResponsesContext";
 import { useAuth } from "../contexts/AuthContext";
 import { div } from "motion/react-client";
-import background from "../assets/images/background.jpg";
+import background from "../assets/images/background.png";
+import beach from "../assets/images/beach copy.png";
+import DestinationCards from "../components/FanOutImages";
+import FanOutImages from "../components/FanOutImages";
 
 function Home() {
   const storedToken = localStorage.getItem("token");
@@ -64,10 +67,10 @@ function Home() {
       <div className="homeContainer">
         {/* TOP HALF / HERO SECTION */}
         <div className="homeHeroContainer">
-          <img src={background} alt="hero" className="heroImage" />
+          <img src={beach} alt="hero" className="heroImage" />
           <div className="homeHeroHeaderContainer">
             <div></div>
-            <h1 style={{ fontWeight: "normal", fontSize: "25px" }}>
+            <h1 style={{ fontWeight: "bold", fontSize: "25px" }}>
               dandylion.ai
             </h1>
             {isLoggedIn ? (
@@ -107,20 +110,6 @@ function Home() {
 
             <div className="buttonContainer">
               <div className="formContainer">
-                {/* <input
-                  type="text"
-                  placeholder="First name"
-                  value={userInfo?.firstName}
-                  name="firstName"
-                  onChange={setFormValues}
-                />
-                <input
-                  type="text"
-                  placeholder="email"
-                  value={userInfo?.email}
-                  name="email"
-                  onChange={setFormValues}
-                /> */}
                 <button className="next" onClick={() => navigate("/path")}>
                   Get started
                 </button>
@@ -151,46 +140,16 @@ function Home() {
                 style.
               </p>
               <br />
-              <p>It's just a few simple steps:</p>
             </div>
             <div className="homeBottomBoxContainer">
-              <div className="homeBottomBox">
-                <div className="homeBottomBoxNumber">1</div>
-                <h3>Tell us about yourself</h3>
+              <div className="homeBottomBoxTextContainer">
+                <h3>No matter how you travel, we've got you covered.</h3>
                 <p>
-                  Help us design your ideal trip by thoughtfully answering a few
-                  quick questions.
+                  Whether you know where you’re going or are still deciding,
+                  Dandylion creates a detailed plan just for you.
                 </p>
               </div>
-              <div className="homeBottomBox">
-                <div className="homeBottomBoxNumber">2</div>
-
-                <h3>Explore your custom journey</h3>
-                <p>
-                  Get destinations, detailed daily plans, and much more that is
-                  tailored to the trip you want.
-                </p>
-              </div>
-              {/* SVG dotted line */}
-              {/* <svg
-                style={{
-                  position: "absolute",
-                  top: "150px", // Adjust based on your layout
-                  left: "70%",
-                  width: "300px",
-                  height: "250px",
-                  pointerEvents: "none",
-                  zIndex: 1,
-                }}
-              >
-                <path
-                  d="M 260 20 Q 270 60 250 90 Q 170 130 180 170 Q 150 210 120 230"
-                  stroke="var(--action-coral)"
-                  strokeWidth="5"
-                  strokeDasharray="8,6"
-                  fill="none"
-                />
-              </svg> */}
+              <FanOutImages />
             </div>
             <h3 style={{ color: "var(--action-coral)", fontSize: "26px" }}>
               Maybe you'll go to...

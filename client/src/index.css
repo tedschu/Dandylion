@@ -41,38 +41,43 @@
 
 /* **** COLOR PALETTE (CSS VARIABLES) **** */
 :root {
-  /* Primary brand colors (colors of the bee) */
-  --brand-blue: #113a67;
-  --brand-yellow: #f7bc21;
+  /* Primary brand colors */
+  --brand-slate: #2d4049;
+  --brand-gold: #d4b24f;
 
-  /* Action / "go" button colors */
-  --action-coral: #e87a5d;
-  --action-coral-hover: #d85a45;
-  --dark-teal: #2a5f8f;
-  --dark-teal-hover: #214b73;
+  /* Action colors */
+  --action-bronze: #c17c3a;
+  --action-bronze-hover: #a66829;
+  --dark-teal: #1e2b33;
+  --dark-teal-hover: #141d24;
 
-  /* Text / font colors */
-  --text-dark-navy: #0a2540;
-  --text-secondary-gray: #5a6b7f;
+  /* Brand slate variations */
+  --brand-slate-light: #4a5f6b;
+  --brand-slate-medium: #3a4f5c;
+  --brand-slate-hover: #364954;
 
-  /* Supporting / secondary colors */
-  --teal: #4a9b9b;
-  --forest-green: #3a6b35;
-  --moss-green: #7a9a3d;
+  /* Text colors */
+  --text-dark-navy: #1a252b;
+  --text-secondary-gray: #5a6b73;
 
-  /* Neutral colors for backgrounds */
-  --back-sky-blue: #b8d5ed;
-  --back-cream: #f6f1ee;
-  --back-light-sage: #d2dbbc;
+  /* Supporting colors */
+  --teal: #7ba05b;
+  --forest-green: #5a7c47;
+  --moss-green: #a8c686;
+
+  /* Backgrounds */
+  --back-sky-blue: #e8eef2;
+  --back-cream: #f7f4ef;
+  --back-light-sage: #f0f4f1;
 
   /* States */
   --error: #d64045;
-  --success: #3a9679;
-  --warning: #f9ae54;
+  --success: #7ba05b;
+  --warning: #e6a23c;
 
   /* Material design colors (for progress indiccator */
-  --md-sys-color-primary: #113a67;
-  --md-sys-color-on-primary: #f7bc21;
+  --md-sys-color-primary: #2d4049;
+  --md-sys-color-on-primary: #d4b24f;
   --md-sys-color-primary-container: #4a9b9b;
   --md-sys-color-on-primary-container: #2a5f8f;
 }
@@ -125,7 +130,7 @@ button {
 }
 
 .login {
-  background-color: var(--action-coral);
+  background-color: var(--action-bronze);
   color: white;
   padding: 10px 15px;
   font-size: 14px;
@@ -133,21 +138,21 @@ button {
 }
 
 .login:hover {
-  background-color: var(--action-coral-hover);
+  background-color: var(--action-bronze-hover);
 }
 
 .register {
   height: 32px;
-  background-color: var(--action-coral);
+  background-color: var(--action-bronze);
   color: white;
 }
 
 .register:hover {
-  background-color: var(--action-coral-hover);
+  background-color: var(--action-bronze-hover);
 }
 
 .next {
-  background-color: var(--action-coral);
+  background-color: var(--action-bronze);
   color: white;
   padding: 10px 20px;
   font-size: 18px;
@@ -155,7 +160,7 @@ button {
 }
 
 .next:hover {
-  background-color: var(--action-coral-hover);
+  background-color: var(--action-bronze-hover);
 }
 
 .back {
@@ -192,16 +197,16 @@ button {
   /* background: linear-gradient(to top, #ff9966, #ff5e62, #ffc44d, #6ec3e2); */
   background: linear-gradient(
     to bottom,
-    #0e1f46,
-    #1d305b,
-    #223667,
-    #2b4583,
-    #365396,
-    #336589,
-    #2d7a8d,
-    #44b1a0,
-    #54d1be,
-    #dece14
+    #4a5a6b,
+    #5d6d7e,
+    #708090,
+    #8394a5,
+    #96a7b8,
+    #a9b8c8,
+    #bcc9d5,
+    #d4c7a8,
+    #e6d4a0,
+    #f2e5a3
   );
 }
 
@@ -283,14 +288,14 @@ button {
   left: -7px;
   font-size: 15px;
   color: white;
-  background-color: var(--brand-yellow);
+  background-color: var(--brand-gold);
   border-radius: 100%;
   width: 20px;
   cursor: pointer;
 }
 
 .reminderBox-close:hover {
-  background-color: var(--action-coral-hover);
+  background-color: var(--action-bronze-hover);
 }
 
 /* **** RESULTS PAGE STYLING **** */
@@ -326,7 +331,7 @@ button {
   background-color: var(--back-cream);
   border-radius: 10px;
   z-index: 2;
-  border: 5px solid var(--brand-yellow);
+  border: 5px solid var(--brand-gold);
   margin: 30px 0 20px 0;
   box-sizing: border-box;
   /* padding: 0 0 10px 0; */
@@ -351,7 +356,7 @@ button {
 
 .resultContentContainer li:before {
   content: "•";
-  color: var(--action-coral);
+  color: var(--action-bronze);
   display: inline-block;
   margin: 0 10px 0 0;
 }
@@ -455,7 +460,7 @@ button {
 
 /* 
 .lineDivider {
-  border-right: 1px solid var(--brand-blue);
+  border-right: 1px solid var(--brand-slate);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -475,7 +480,7 @@ button {
 }
 
 .resultsUpgradeContentContainer {
-  background-color: var(--brand-yellow);
+  background-color: var(--brand-gold);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -486,7 +491,7 @@ button {
 }
 
 .resultsUpgradeContentContainer * {
-  color: var(--brand-blue);
+  color: var(--brand-slate);
 }
 
 .resultsUpgradeContentContainer > h2 {
@@ -558,7 +563,7 @@ button {
   border-radius: 10px;
   padding: 10px;
   z-index: 2;
-  border: 5px solid var(--brand-yellow);
+  border: 5px solid var(--brand-gold);
 }
 
 .iconsContainer {
@@ -582,7 +587,7 @@ button {
 }
 
 .icons * {
-  color: var(--action-coral) !important;
+  color: var(--action-bronze) !important;
 }
 
 /* ******* HOME PAGE STYLING ******* */
@@ -682,7 +687,7 @@ button {
 .divider {
   height: 3px;
   width: 100%;
-  background-color: var(--brand-yellow);
+  background-color: var(--brand-gold);
 }
 
 .homeBottomContainer {
@@ -710,7 +715,7 @@ button {
   background-color: var(--back-cream);
 }
 .homeBottomContentContainer {
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -724,6 +729,7 @@ button {
   width: 80%;
   max-width: 1200px;
   text-align: center;
+  margin: 0 0 20px 0;
 }
 
 .homeBottomTextContainer * {
@@ -733,7 +739,7 @@ button {
 .homeBottomTextContainer > h1 {
   margin: 15px 0 10px 0;
   font-size: 35px;
-  color: var(--brand-blue);
+  color: var(--brand-slate);
   /* font-family: "Pacifico"; */
 }
 
@@ -752,23 +758,34 @@ button {
 .homeBottomBoxContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin: 15px 0 15px 0;
+  width: 100%;
+  background-color: var(--brand-slate);
   position: relative;
+  padding: 0 0 15px 0;
 }
 
-.homeBottomBox {
-  text-align: center;
-  /* border: 2px solid var(--brand-blue); */
-  background-color: var(--back-sky-blue);
-  border-radius: 8px;
+.homeBottomBoxTextContainer {
+  /* text-align: center; */
+  /* border: 2px solid var(--brand-slate); */
   width: 90%;
-  padding: 10px;
-  max-width: 380px;
+  padding: 20px 10px;
   position: relative;
   box-sizing: border-box;
+}
+
+.homeBottomBoxTextContainer h3 {
+  text-align: center;
+  color: white;
+  margin: 10px 0;
+  font-size: 30px;
+}
+
+.homeBottomBoxTextContainer p {
+  text-align: center;
+  color: white;
+  font-size: 16px;
 }
 
 .homeBottomBox > h3 {
@@ -782,7 +799,7 @@ button {
 }
 
 .homeBottomBoxNumber {
-  background-color: var(--brand-blue);
+  background-color: var(--brand-slate);
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -805,7 +822,7 @@ button {
   align-items: center;
   margin-top: 20px;
   background-color: var(--back-cream);
-  border: 4px solid var(--brand-yellow);
+  border: 4px solid var(--brand-gold);
   border-radius: 10px;
   box-shadow: 3px 3px 3px lightgray;
   box-sizing: border-box;
@@ -844,7 +861,7 @@ button {
   width: 100%;
   min-height: 100vh;
 
-  background-color: var(--brand-blue);
+  background-color: var(--brand-slate);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -869,7 +886,7 @@ button {
 
 .pathContentContainer > h2 {
   font-size: 25px;
-  color: var(--action-coral);
+  color: var(--action-bronze);
   text-align: center;
   padding: 0 0 10px 0;
 }
@@ -877,7 +894,7 @@ button {
 .pathSelectorBox {
   display: flex;
   width: 85%;
-  background-color: lightgray;
+  /* background-color: var(--action-bronze); */
   padding: 15px;
   justify-content: flex-start;
   align-items: center;
@@ -886,21 +903,30 @@ button {
   margin-bottom: 25px;
   max-width: 400px;
   cursor: pointer;
+  border: 2px solid var(--action-bronze);
+  transition: transform 0.2s ease;
 }
 
 .pathSelectorBox:hover {
   /* box-shadow: 5px 5px 8px var(--dark-teal); */
-  background-color: var(--back-sky-blue);
+  background-color: var(--action-bronze);
+  transform: scale(1.02);
 }
 
 .pathSelectorBoxText {
   display: flex;
   flex-direction: column;
   line-height: 0;
+  justify-content: center;
 }
+/* 
+.pathSelectorBoxText * {
+  color: white;
+} */
 
 .pathSelectorBoxText > h3 {
   font-size: 18px;
+  margin: 12pz;
 }
 
 .pathSelectorBoxText > p {
@@ -955,7 +981,7 @@ button {
   background-color: var(--back-cream);
   border-radius: 10px;
   z-index: 2;
-  border: 5px solid var(--brand-yellow);
+  border: 5px solid var(--brand-gold);
   margin: 10px 10px;
   box-sizing: border-box;
   text-align: center;
@@ -977,11 +1003,11 @@ p {
 }
 
 .shareIconMePage {
-  /* background-color: var(--brand-blue); */
+  /* background-color: var(--brand-slate); */
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  /* border: 1px solid var(--brand-blue); */
+  /* border: 1px solid var(--brand-slate); */
   display: flex;
   justify-self: flex-end;
   cursor: pointer;
@@ -994,7 +1020,7 @@ p {
 }
 
 .shareIconMePage * {
-  color: var(--action-coral);
+  color: var(--action-bronze);
 }
 
 .myAccountPlanContainer img {
@@ -1010,7 +1036,7 @@ p {
   position: absolute;
   top: 5px;
   right: 5px;
-  background-color: var(--brand-blue);
+  background-color: var(--brand-slate);
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -1021,7 +1047,7 @@ p {
 }
 
 .shareTest * {
-  color: var(--action-coral);
+  color: var(--action-bronze);
 } */
 
 /* ***** SHARING PLAN COMPONENT ***** */
@@ -1133,7 +1159,7 @@ p {
   margin-top: 10px;
   padding: 10px;
   box-sizing: border-box;
-  border: 1px solid var(--brand-blue);
+  border: 1px solid var(--brand-slate);
   border-radius: 8px;
 }
 
@@ -1333,7 +1359,7 @@ p {
   background-color: white;
   width: 85%;
   min-height: fit-content;
-  border: 3px solid var(--brand-yellow);
+  border: 3px solid var(--brand-gold);
   border-radius: 12px;
   padding: 10px;
   box-sizing: border-box;
@@ -1382,8 +1408,8 @@ p {
   }
 
   .homeBottomBoxContainer {
-    flex-direction: row;
-    justify-content: space-evenly;
+    /* flex-direction: row;
+    justify-content: space-evenly; */
   }
 
   .homeBottomBox {
@@ -1407,7 +1433,7 @@ p {
   }
 
   .lineDivider {
-    border-right: 1px solid var(--brand-blue);
+    border-right: 1px solid var(--brand-slate);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1419,7 +1445,7 @@ p {
     content: "●";
     position: absolute;
     right: -9px;
-    color: var(--brand-blue);
+    color: var(--brand-slate);
     font-size: 25px;
     padding: 1px;
   }
@@ -1464,7 +1490,7 @@ p {
     background-color: var(--back-cream);
     border-radius: 10px;
     z-index: 2;
-    border: 5px solid var(--brand-yellow);
+    border: 5px solid var(--brand-gold);
     margin: 10px 10px;
     box-sizing: border-box;
     text-align: center;

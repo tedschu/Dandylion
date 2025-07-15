@@ -382,18 +382,20 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
               </div>
               <div className="planContentBlock">
                 <h2>Places to eat:</h2>
-                {plan?.plan_data.destination.restaurants.map((place, index) => {
-                  return (
-                    <>
-                      <li key={`${place.restaurant_name} - ${index}`}>
-                        <span style={{ fontWeight: "bold" }}>
-                          {place.restaurant_name}
-                        </span>{" "}
-                        ({place.restaurant_type}): {place.description}.
-                      </li>
-                    </>
-                  );
-                })}
+                {plan?.plan_data.second_destination.restaurants.map(
+                  (place, index) => {
+                    return (
+                      <>
+                        <li key={`${place.restaurant_name} - ${index}`}>
+                          <span style={{ fontWeight: "bold" }}>
+                            {place.restaurant_name}
+                          </span>{" "}
+                          ({place.restaurant_type}): {place.description}.
+                        </li>
+                      </>
+                    );
+                  }
+                )}
               </div>
 
               <div className="planContentBlock">

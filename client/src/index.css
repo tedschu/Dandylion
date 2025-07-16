@@ -65,6 +65,12 @@
   --forest-green: #5a7c47;
   --moss-green: #a8c686;
 
+  /* Accent colors */
+  --ocean-blue: #4a90e2;
+  --coral: #ff7a5a;
+  --emerald-green: #50e3c2;
+  --sunset-orange: #ff8c42;
+
   /* Backgrounds */
   --back-sky-blue: #e8eef2;
   --back-cream: #f7f4ef;
@@ -606,6 +612,10 @@ button {
   color: white;
 }
 
+.homeContainer h4 {
+  margin: 5px;
+}
+
 .heroText {
   font-size: 70px;
   font-family: "Pacifico";
@@ -780,12 +790,88 @@ button {
   color: white;
   margin: 10px 0;
   font-size: 30px;
+  font-weight: normal;
 }
 
 .homeBottomBoxTextContainer p {
   text-align: center;
   color: white;
   font-size: 16px;
+}
+
+.homeBottomHowToContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  padding: 10px;
+}
+
+.homeBottomHowToContainer h3 {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 30px;
+  font-weight: normal;
+}
+
+.homeBottomHowToContentContainer {
+  width: 90%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 30px 0;
+  background-color: var(--back-cream);
+  /* border: 2px solid var(--brand-gold); */
+  border-radius: 10px;
+  box-shadow: 3px 3px 7px lightgray;
+  box-sizing: border-box;
+  background-color: white;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.homeBottomHowToContentContainer * {
+  color: var(--brand-slate);
+  text-align: center;
+}
+
+.homeBottomHowToContentContainer h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.homeBottomHowToContentContainer h4 {
+  font-size: 16px;
+}
+
+.homeBottomHowToBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  box-sizing: border-box;
+  gap: 15px;
+}
+
+.homeBottomHowToContentBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  /* border: 2px solid var(--forest-green); */
+  border-radius: 9px;
+  background-color: var(--back-cream);
+  box-shadow: 3px 3px 3px lightgray;
+  max-width: 400px;
+}
+
+.homeBottomHowToContentBox p {
+  text-align: center;
+  color: var(--brand-slate-light);
 }
 
 .homeBottomBox > h3 {
@@ -853,6 +939,39 @@ button {
   border-radius: 12px;
   padding: 30px;
   box-sizing: border-box;
+}
+
+.homeBottomItineraryContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 800px;
+}
+
+.homeBottomItineraryContent img {
+  border-radius: 9px;
+  box-shadow: 3px 3px 6px lightgray;
+  width: 90%;
+  margin: 20px 0;
+}
+
+.homeBottomItineraryBoxContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.homeBottomItineraryBox {
+  width: 90%;
+  background-color: var(--back-light-sage);
+  padding: 5px;
+  font-size: 14px;
+  text-align: left;
+  border-radius: 7px;
 }
 
 /* **** PATH SCREEN **** */
@@ -1088,7 +1207,7 @@ p {
 
 .emailPill {
   padding: 7px 10px;
-  background-color: var(--success);
+  background-color: var(--forest-green);
   border-radius: 20px;
   position: relative;
   color: white;
@@ -1511,5 +1630,13 @@ p {
 
   .shareIconMePage {
     margin-left: auto;
+  }
+
+  .homeBottomItineraryContent {
+    flex-direction: row;
+  }
+
+  .homeBottomItineraryContent img {
+    width: 50%;
   }
 }

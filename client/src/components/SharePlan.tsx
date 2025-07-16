@@ -33,6 +33,8 @@ function SharePlan() {
       return;
     }
 
+    if (email === "") return;
+
     setSharedEmails((prevState) => [...prevState, email]);
 
     event.currentTarget.reset();
@@ -143,7 +145,16 @@ function SharePlan() {
                   padding: "3px",
                 }}
               />
-              <button>Add</button>
+              <button
+                style={{
+                  backgroundColor: "var(--forest-green)",
+                  color: "white",
+                  padding: "3px 8px",
+                  fontSize: "16px",
+                }}
+              >
+                +
+              </button>
             </div>
             {showAlert && (
               <h2 style={{ color: "red" }}>
@@ -157,8 +168,8 @@ function SharePlan() {
                   <div
                     onClick={() => removeEmail(email)}
                     style={{
-                      backgroundColor: "#298064",
-                      marginLeft: "5px",
+                      backgroundColor: "var(--forest-green)",
+                      marginLeft: "7px",
                       borderRadius: "50%",
                       width: "20px",
                       height: "20px",

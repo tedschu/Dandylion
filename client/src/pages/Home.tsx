@@ -13,6 +13,14 @@ import background from "../assets/images/background.png";
 import beach from "../assets/images/beach copy.png";
 import DestinationCards from "../components/FanOutImages";
 import FanOutImages from "../components/FanOutImages";
+import MapIcon from "@mui/icons-material/Map";
+import DirectionsIcon from "@mui/icons-material/Directions";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
+import itineraryExample from "../assets/images/itinerary-example.png";
+import itineraryExample2 from "../assets/images/itinerary-example-2.png";
+import itineraryExample3 from "../assets/images/itinerary-example-3.png";
+import { Stack } from "@mui/material";
 
 function Home() {
   const storedToken = localStorage.getItem("token");
@@ -151,77 +159,169 @@ function Home() {
               </div>
               <FanOutImages />
             </div>
-            <h3 style={{ color: "var(--action-coral)", fontSize: "26px" }}>
-              Maybe you'll go to...
-            </h3>
-            <div className="homeBottomExampleContainer">
-              <div className="homeBottomExampleContentContainer">
-                <h2
-                  style={{
-                    fontFamily: "Pacifico",
-                    fontSize: "30px",
-                    margin: "15px 0",
-                  }}
-                >
-                  Prague, Czech Republic
-                </h2>
-                <p style={{ textAlign: "left", fontSize: "18px" }}>
-                  Prague is absolutely perfect for you two! This enchanting city
-                  has all the charm of Amsterdam with its winding cobblestone
-                  streets, stunning bridges spanning the Vitava River, and
-                  incredible Gothic and Baroque architecture. October is ideal
-                  timing - you'll catch beautiful autumn colors while avoiding
-                  summer crowds. The city is incredibly walkable and perfect for
-                  getting wonderfully lost in its maze-like Old Town, plus Czech
-                  cuisine has fantastic vegan options and the cost of living
-                  makes your $1,000 budget go far!
-                </p>
-                <img
-                  src={prague}
-                  alt=""
-                  style={{ borderRadius: "10px", width: "90%" }}
-                />
+            <div className="homeBottomHowToContainer">
+              <h3>Here's how it works:</h3>
+              <div className="homeBottomHowToContentContainer">
                 <div
                   style={{
-                    width: "80%",
-                    height: "2px",
-                    backgroundColor: "var(--action-coral)",
-                    margin: "35px 0 10px 0",
-                  }}
-                />
-
-                <h3
-                  style={{
-                    margin: "20px 0 10px 0",
-                    fontSize: "22px",
-                    color: "var(--brand-blue)",
+                    position: "absolute",
+                    top: "-10px",
+                    left: "-10px",
+                    backgroundColor: "var(--forest-green)",
+                    padding: "10px",
+                    height: "20px",
+                    width: "20px",
+                    borderRadius: "50%",
+                    color: "white",
+                    fontWeight: "bold",
                   }}
                 >
-                  Your travel plan will include:
-                </h3>
-                <div
-                  style={{
-                    backgroundColor: "rgba(255, 139, 102, 0.2)",
-                    width: "75%",
-                    borderRadius: "10px",
-                    padding: "20px",
-                  }}
-                >
-                  <li>Recommendations on destinations and things to see</li>
-                  <li>
-                    The best places to stay and eat that fit your lifestyle
-                  </li>
-                  <li>Detailed itineraries for the length of your trip</li>
-                  <li>Advice on local customs and tips on traveling</li>
-                  <li>And (of course) much more!</li>
+                  1
                 </div>
-                <img
-                  src={beeLogo}
-                  style={{ width: "50px", margin: "20px 0 5px 0" }}
-                  alt=""
-                />
+                <h3>Where are you at in your planning?</h3>
+                <div className="homeBottomHowToBox">
+                  <div className="homeBottomHowToContentBox">
+                    <MapIcon
+                      style={{
+                        width: "35px",
+                        height: "35px",
+                        fill: "var(--forest-green)",
+                        backgroundColor: "white",
+                        padding: "5px",
+                        borderRadius: "50%",
+                        margin: "10px 0",
+                      }}
+                    />
+                    <h4>I know where I'm going</h4>
+                    <p>
+                      You’ve already picked the destination. Now let us build
+                      your itinerary.
+                    </p>
+                  </div>
+                  <div className="homeBottomHowToContentBox">
+                    <DirectionsIcon
+                      style={{
+                        width: "35px",
+                        height: "35px",
+                        fill: "var(--forest-green)",
+                        backgroundColor: "white",
+                        padding: "5px",
+                        borderRadius: "50%",
+                        margin: "10px 0",
+                      }}
+                    />
+                    <h4>I'm still deciding</h4>
+                    <p>
+                      Discover tailored destinations based on your travel style
+                      and interests.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="homeBottomHowToContentContainer">
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "-10px",
+                    left: "-10px",
+                    backgroundColor: "var(--forest-green)",
+                    padding: "10px",
+                    height: "20px",
+                    width: "20px",
+                    borderRadius: "50%",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  2
+                </div>
+                <h3>Tell us about yourself</h3>
+                <p
+                  style={{ color: "var(--brand-slate-light", fontSize: "16px" }}
+                >
+                  Answer a few questions so we can match you with destinations
+                  and experiences you'll love.
+                </p>
+
+                <div
+                  style={{
+                    margin: "15px 0",
+                    textAlign: "center",
+                    backgroundColor: "var(--back-cream)",
+                    padding: "10px",
+                    boxShadow: "3px 3px 3px lightgray",
+                    borderRadius: "9px",
+                    // border: "1px solid var(--ocean-blue)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                  }}
+                >
+                  <p style={{ fontWeight: "bold" }}>Our AI analyzes:</p>
+                  <p>
+                    Your preferences • Travel style • Budget • Interests •
+                    Timeline
+                  </p>
+                  <AutoFixHighIcon
+                    style={{
+                      // backgroundColor: "var(--ocean-blue)",
+                      fill: "var(--ocean-blue)",
+                      height: "40px",
+                      width: "40px",
+                      margin: "5px",
+                      borderRadius: "50%",
+                      // border: "1px solid var(--ocean-blue)",
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="homeBottomHowToContentContainer">
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "-10px",
+                    left: "-10px",
+                    backgroundColor: "var(--forest-green)",
+                    padding: "10px",
+                    height: "20px",
+                    width: "20px",
+                    borderRadius: "50%",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  3
+                </div>
+                <h3>Explore your custom journey</h3>
+                <div className="homeBottomItineraryContent">
+                  <img src={itineraryExample} alt="" />
+                  <div className="homeBottomItineraryBoxContainer">
+                    <div className="homeBottomItineraryBox">
+                      Personalized destination matching
+                    </div>
+                    <div className="homeBottomItineraryBox">
+                      Day-by-day detailed itineraries
+                    </div>
+                    <div className="homeBottomItineraryBox">
+                      Restaurant and dining recommendations
+                    </div>
+                    <div className="homeBottomItineraryBox">
+                      Accommodation suggestions
+                    </div>
+                    <div className="homeBottomItineraryBox">
+                      Local insights: tips, cultural recommendations
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+
+            {/* <div className="homeBottomExampleContainer">
+              <div className="homeBottomExampleContentContainer"></div>
+            </div> */}
 
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

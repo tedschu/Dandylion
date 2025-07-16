@@ -7,6 +7,7 @@ import { h2, span } from "motion/react-client";
 import testIMage from "../assets/images/destinations/italy.png";
 import SharePlan from "../components/SharePlan";
 import ShareIcon from "@mui/icons-material/Share";
+import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
 
 type Plan = {
   plan_data: {

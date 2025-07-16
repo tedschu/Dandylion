@@ -4,6 +4,9 @@ import arrow from "../assets/icons/arrow_forward.png";
 import bee from "../assets/bee.png";
 import { useQuestionsResponses } from "../contexts/QuestionsResponsesContext";
 import { useAuth } from "../contexts/AuthContext";
+import MapIcon from "@mui/icons-material/Map";
+import DirectionsIcon from "@mui/icons-material/Directions";
+import beach from "../assets/images/beach copy.png";
 
 function Path() {
   const { currentStep, setCurrentStep, setUserResponses } =
@@ -42,15 +45,28 @@ function Path() {
   return (
     <>
       <div className="pathContainer">
+        <img src={beach} alt="" className="heroImage" />
         {isLoggedIn && <Header variant="header-fixed" />}
         <div className="pathContentContainer">
           <h2>How can we help plan your trip?</h2>
           <div className="pathSelectorBox">
+            <MapIcon
+              style={{
+                width: "35px",
+                height: "35px",
+                fill: "var(--forest-green)",
+                backgroundColor: "white",
+                padding: "5px",
+                borderRadius: "50%",
+                margin: "10px 0",
+              }}
+            ></MapIcon>
+
             <div
               className="pathSelectorBoxText"
               onClick={() => handleKnownDestinationClick()}
             >
-              <h3>I know my destination.</h3>
+              <h3>I know my destination</h3>
               <p>I want a plan for while I'm there.</p>
             </div>
             <img src={arrow} alt="" />
@@ -59,8 +75,19 @@ function Path() {
             className="pathSelectorBox"
             onClick={() => handleUnknownDestinationClick()}
           >
+            <DirectionsIcon
+              style={{
+                width: "35px",
+                height: "35px",
+                fill: "var(--forest-green)",
+                backgroundColor: "white",
+                padding: "5px",
+                borderRadius: "50%",
+                margin: "10px 0",
+              }}
+            />
             <div className="pathSelectorBoxText">
-              <h3>I need destination ideas.</h3>
+              <h3>I need destination ideas</h3>
               <p>Help me find new places to explore.</p>
             </div>
             <img src={arrow} alt="" />

@@ -21,6 +21,7 @@ import itineraryExample from "../assets/images/itinerary-example.png";
 import itineraryExample2 from "../assets/images/itinerary-example-2.png";
 import itineraryExample3 from "../assets/images/itinerary-example-3.png";
 import { Stack } from "@mui/material";
+import ScrollRevealSteps from "../components/ScrollRevealSteps";
 
 function Home() {
   const storedToken = localStorage.getItem("token");
@@ -160,8 +161,8 @@ function Home() {
               <FanOutImages />
             </div>
             <div className="homeBottomHowToContainer">
-              <h3>Here's how it works:</h3>
-              <div className="homeBottomHowToContentContainer">
+              <ScrollRevealSteps />
+              {/* <div className="homeBottomHowToContentContainer">
                 <div
                   style={{
                     position: "absolute",
@@ -217,9 +218,9 @@ function Home() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="homeBottomHowToContentContainer">
+              {/* <div className="homeBottomHowToContentContainer">
                 <div
                   style={{
                     position: "absolute",
@@ -316,7 +317,7 @@ function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* <div className="homeBottomExampleContainer">

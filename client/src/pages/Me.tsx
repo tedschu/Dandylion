@@ -8,6 +8,7 @@ import testIMage from "../assets/images/destinations/italy.png";
 import SharePlan from "../components/SharePlan";
 import ShareIcon from "@mui/icons-material/Share";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
+import star_background from "../assets/images/starry-background.png";
 
 type Plan = {
   plan_data: {
@@ -140,6 +141,8 @@ function Me() {
   return (
     <>
       <div className="myAccountContainer">
+        <img src={star_background} alt="" className="heroImage" />
+
         <Header variant="header-relative" />
 
         <div className="myAccountContentContainer">

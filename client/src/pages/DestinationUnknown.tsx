@@ -9,6 +9,8 @@ import Step7 from "../components/destinationUnknownPath/Step7_Unknown";
 import Step8 from "../components/destinationUnknownPath/Step8_Unknown";
 import Step9 from "../components/destinationUnknownPath/Step9_Unknown";
 import Step10 from "../components/destinationUnknownPath/Step10_Unknown";
+import JourneyProgress from "../components/JourneyProgress";
+import star_background from "../assets/images/starry-background.png";
 
 import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
@@ -85,6 +87,10 @@ function DestinationUnknown() {
           alt=""
           style={{ top: "60px", right: `${moonShift}` }}
         /> */}
+
+        <img src={star_background} alt="" className="heroImage" />
+
+        <JourneyProgress currentStep={currentStep} />
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS />

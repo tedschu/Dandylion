@@ -7,6 +7,8 @@ import Step5 from "../components/destinationKnownPath/Step5_Known";
 import Step6 from "../components/destinationKnownPath/Step6_Known";
 import Step7 from "../components/destinationKnownPath/Step7_Known";
 import Step8 from "../components/destinationKnownPath/Step8_Known";
+import star_background from "../assets/images/starry-background.png";
+import JourneyProgress from "../components/JourneyProgress";
 
 import { AnimatePresence, motion } from "motion/react";
 import DandelionSeedsCSS from "../components/DandelionSeedsCSS";
@@ -70,6 +72,10 @@ function DestinationKnown() {
           alt=""
           style={{ top: "60px", right: `${moonShift}` }}
         /> */}
+
+        <img src={star_background} alt="" className="heroImage" />
+
+        <JourneyProgress currentStep={currentStep} />
 
         <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS />

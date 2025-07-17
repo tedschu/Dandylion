@@ -141,7 +141,7 @@ function Me() {
   return (
     <>
       <div className="myAccountContainer">
-        <img src={star_background} alt="" className="heroImage" />
+        <div className="backgroundImage"></div>
 
         <Header variant="header-relative" />
 

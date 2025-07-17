@@ -2,20 +2,20 @@ import { motion } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 import airplane from "../assets/images/airplane.png";
 
-function JourneyProgress({ currentStep, totalSteps = 10 }) {
-  const progressPercent = (currentStep / totalSteps) * 100;
+function JourneyProgress({ currentStep, totalSteps }) {
   const pathRef = useRef(null);
   const [pathLength, setPathLength] = useState(0);
   const [planePosition, setPlanePosition] = useState({ x: 0, y: 0, angle: 0 });
+  const [milestonePositions, setMilestonePositions] = useState([]);
 
   const journeyProgressStyle = {
     position: "absolute",
-    top: "120px",
-    left: "2%", // Reduced from 5%
-    right: "2%", // Reduced from 5%
+    top: "40px",
+    left: "2%",
+    right: "2%",
     height: "300px",
     pointerEvents: "none",
-    zIndex: 10,
+    zIndex: 2,
   };
 
   // Responsive adjustments
@@ -29,24 +29,7 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
   // Expanded viewBox to accommodate wider path
   const responsiveViewBox = isMobile ? "0 0 580 220" : "0 0 1440 300";
 
-  // Calculate milestone positions along the actual path
-  const getMilestonePositions = () => {
-    if (!pathRef.current) return [];
-
-    const path = pathRef.current;
-    const totalLength = path.getTotalLength();
-    const positions = [];
-
-    for (let i = 0; i < totalSteps; i++) {
-      const distance = (i / (totalSteps - 1)) * totalLength;
-      const point = path.getPointAtLength(distance);
-      positions.push({ x: point.x, y: point.y });
-    }
-
-    return positions;
-  };
-
-  // Calculate plane position and rotation
+  // Calculate milestone positions and current progress distance
   useEffect(() => {
     if (!pathRef.current) return;
 
@@ -54,8 +37,25 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
     const totalLength = path.getTotalLength();
     setPathLength(totalLength);
 
+    // Calculate milestone positions
+    const positions = [];
+    const distances = [];
+
+    for (let i = 0; i < totalSteps; i++) {
+      const distance = (i / (totalSteps - 1)) * totalLength;
+      const point = path.getPointAtLength(distance);
+      positions.push({ x: point.x, y: point.y });
+      distances.push(distance);
+    }
+
+    setMilestonePositions(positions);
+
+    // Calculate current progress distance (to current step's milestone)
+    const currentStepIndex = Math.min(currentStep - 1, totalSteps - 1);
+    const currentDistance =
+      currentStepIndex >= 0 ? distances[currentStepIndex] : 0;
+
     // Get current position along path
-    const currentDistance = (progressPercent / 100) * totalLength;
     const currentPoint = path.getPointAtLength(currentDistance);
 
     // Get a point slightly ahead to calculate rotation
@@ -71,21 +71,24 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
       x: currentPoint.x,
       y: currentPoint.y,
       angle: angle,
+      distance: currentDistance, // Store the distance for progress line
     });
-  }, [progressPercent]);
+  }, [currentStep, totalSteps]);
 
   // Responsive vehicle sizing
   const vehicleStyle = {
-    width: isMobile ? "56px" : "100px", // Slightly larger for desktop
+    width: isMobile ? "56px" : "100px",
     height: isMobile ? "28px" : "50px",
     filter: "drop-shadow(0 3px 6px rgba(0,0,0,0.4))",
   };
 
+  // Calculate airplane centering offsets
+  const airplaneWidth = isMobile ? 56 : 100;
+  const airplaneHeight = isMobile ? 28 : 50;
+
   if (isMobile) {
     journeyProgressStyle.height = "220px";
   }
-
-  const milestonePositions = getMilestonePositions();
 
   return (
     <div style={journeyProgressStyle}>
@@ -122,12 +125,10 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
           stroke="url(#progressGradient)"
           strokeWidth={isMobile ? "4" : "6"}
           strokeLinecap="round"
-          strokeDasharray={pathLength || 1200}
-          initial={{ strokeDashoffset: pathLength || 1200 }}
+          strokeDasharray={pathLength}
+          initial={{ strokeDashoffset: pathLength }}
           animate={{
-            strokeDashoffset:
-              (pathLength || 1200) -
-              ((pathLength || 1200) * progressPercent) / 100,
+            strokeDashoffset: pathLength - (planePosition.distance || 0),
           }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         />
@@ -180,7 +181,12 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
           transition={{ duration: 0.8, ease: "easeOut" }}
           style={{ transformOrigin: "center" }}
         >
-          <foreignObject x="-115" y="-52" width="100" height="50">
+          <foreignObject
+            x={-airplaneWidth / 2}
+            y={-airplaneHeight / 2}
+            width={airplaneWidth}
+            height={airplaneHeight}
+          >
             <img src={airplane} alt="Travel progress" style={vehicleStyle} />
           </foreignObject>
         </motion.g>

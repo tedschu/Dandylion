@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserInfo } from "../types/types";
 import { useAuth } from "../contexts/AuthContext";
 import { h3 } from "motion/react-client";
+import itineraryExample from "../assets/images/itinerary-example.png";
 
 type RegisterWithPlanProps = {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -134,12 +135,30 @@ function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
               margin: "0",
               color: "gray",
               cursor: "pointer",
+              fontSize: "16px",
             }}
             onClick={() => setIsModalOpen(false)}
           >
             X
           </p>
-          <h1>Get your personalized results</h1>
+          <div className="registerModalText">
+            <h1 style={{ margin: "10px 0 5px 0" }}>
+              Almost there! Your custom travel plan is ready
+            </h1>
+            <p
+              style={{
+                fontSize: "16px",
+                margin: "10px 0 7px 0",
+                color: "var(--brand-slate-light)",
+              }}
+            >
+              Your personalized plan includes:
+            </p>
+            <li>Custom destination matching for your travel style</li>
+            <li>Day-by-day itineraries with specific recommendations </li>
+            <li>Restaurants and local experiences you'll enjoy</li>
+            <li>Accommodation suggestions within your budget</li>
+          </div>
           <p>[Continue with Google]</p>
           <p>OR</p>
           {/* Conditionally render register form as default. */}
@@ -180,7 +199,9 @@ function RegisterWithPlan({ setIsModalOpen }: RegisterWithPlanProps) {
                 />
 
                 <div className="registerButtonContainer">
-                  <button className="register">Create account</button>
+                  <button className="register" style={{ color: "white" }}>
+                    Get my results
+                  </button>
                 </div>
               </form>
               <h4>

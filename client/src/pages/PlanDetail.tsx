@@ -72,7 +72,8 @@ function PlanDetail() {
     <>
       {!planError && plan && (
         <div className="resultPageContainer">
-          <Header />
+          <div className="backgroundImageNoVillage"></div>
+          <Header variant="relative" />
           {plan && plan.plan_type === "DESTINATION_UNKNOWN" && (
             <Results_Full_Unknown plan={plan} planID={planId} />
           )}

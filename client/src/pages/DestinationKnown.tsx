@@ -60,9 +60,9 @@ function DestinationKnown() {
           style={{ top: "60px", right: `${moonShift}` }}
         /> */}
 
-        <img src={star_background} alt="" className="heroImage" />
+        <div className="backgroundImage"></div>
 
-        <JourneyProgress currentStep={currentStep} />
+        <JourneyProgress currentStep={currentStep} totalSteps={8} />
 
         {/* <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS /> */}

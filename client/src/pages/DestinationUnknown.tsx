@@ -88,9 +88,8 @@ function DestinationUnknown() {
           style={{ top: "60px", right: `${moonShift}` }}
         /> */}
 
-        <img src={star_background} alt="" className="heroImage" />
-
-        <JourneyProgress currentStep={currentStep} />
+        <div className="backgroundImage"></div>
+        <JourneyProgress currentStep={currentStep} totalSteps={10} />
 
         {/* <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
         <DandelionSeedsCSS /> */}

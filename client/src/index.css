@@ -151,6 +151,7 @@ button {
   height: 32px;
   background-color: var(--ocean-blue);
   color: white;
+  padding: 5px 10px;
 }
 
 .register:hover {
@@ -332,14 +333,14 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
+  /* background: linear-gradient(
     to bottom,
     #1a252b 0%,
     #2d4049 30%,
     #364954 70%,
     #4a5f6b 90%,
     #618295 100%
-  );
+  ); */
 }
 
 .resultContentContainer {
@@ -672,6 +673,38 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: top;
+  z-index: -1;
+  transform: scale(1);
+  transition: transform 0.5s ease-out;
+}
+
+.backgroundImage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("../src/assets/images/starry-background.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* This allows it to scroll with content */
+  z-index: -1;
+  transform: scale(1);
+  transition: transform 0.5s ease-out;
+}
+
+.backgroundImageNoVillage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("../src/assets/images/starry-background-no-village.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* This allows it to scroll with content */
   z-index: -1;
   transform: scale(1);
   transition: transform 0.5s ease-out;
@@ -1347,9 +1380,7 @@ p {
 .loginContainer {
   width: 100%;
   height: 100vh;
-  background-image: url("./assets/images/background.jpg");
-  background-size: cover;
-  background-position: top;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1359,7 +1390,6 @@ p {
 .loginContentContainer {
   width: 90%;
   max-width: 350px;
-  background-color: rgb(255, 255, 255, 0.9);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -1369,6 +1399,10 @@ p {
   box-sizing: border-box;
   position: relative;
   min-height: 60vh;
+}
+
+.loginContentContainer * {
+  color: white;
 }
 
 .loginForm {
@@ -1526,6 +1560,26 @@ p {
   box-sizing: border-box;
   max-width: 700px;
   position: relative;
+  z-index: 1000;
+}
+
+.registerModalContentContainer * {
+  color: var(--brand-slate);
+  text-align: center;
+}
+
+.registerModalContentContainer li {
+  font-size: 16px;
+  color: var(--ocean-blue);
+}
+
+.registerModalText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 20px 0;
+  width: 90%;
 }
 
 .registerForm {
@@ -1533,6 +1587,7 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 250px;
 }
 
 .registerForm > input {

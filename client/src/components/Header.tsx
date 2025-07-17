@@ -41,57 +41,61 @@ function Header({ variant }: HeaderProps) {
           dandylion.ai
         </h1>
         <div className="navMenu">
-          <IconButton
-            id="hamburger-button"
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-            sx={{
-              color: "white",
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            slotProps={{
-              list: {
-                "aria-labelledby": "basic-button",
-              },
-            }}
-          >
-            <MenuItem
-              style={{
-                fontWeight: "bold",
-                fontFamily: "Parkinsans, sans-serif",
-              }}
-            >
-              Hey, {userInfo.email}
-            </MenuItem>
-            <MenuItem
-              style={{ fontFamily: "Parkinsans, sans-serif" }}
-              onClick={() => navigate("/me")}
-            >
-              My plans
-            </MenuItem>
-            <MenuItem
-              style={{ fontFamily: "Parkinsans, sans-serif" }}
-              onClick={() => navigate("/path")}
-            >
-              Start a plan
-            </MenuItem>
+          {isLoggedIn && (
+            <>
+              <IconButton
+                id="hamburger-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+                sx={{
+                  color: "white",
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                slotProps={{
+                  list: {
+                    "aria-labelledby": "basic-button",
+                  },
+                }}
+              >
+                <MenuItem
+                  style={{
+                    fontWeight: "bold",
+                    fontFamily: "Parkinsans, sans-serif",
+                  }}
+                >
+                  Hey, {userInfo.email}
+                </MenuItem>
+                <MenuItem
+                  style={{ fontFamily: "Parkinsans, sans-serif" }}
+                  onClick={() => navigate("/me")}
+                >
+                  My plans
+                </MenuItem>
+                <MenuItem
+                  style={{ fontFamily: "Parkinsans, sans-serif" }}
+                  onClick={() => navigate("/path")}
+                >
+                  Start a plan
+                </MenuItem>
 
-            <MenuItem
-              style={{ fontFamily: "Parkinsans, sans-serif" }}
-              onClick={handleLogout}
-            >
-              Logout
-            </MenuItem>
-          </Menu>
+                <MenuItem
+                  style={{ fontFamily: "Parkinsans, sans-serif" }}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </MenuItem>
+              </Menu>
+            </>
+          )}
         </div>
       </div>
     </>

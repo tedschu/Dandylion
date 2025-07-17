@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { UserInfo } from "../types/types";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import Header from "../components/Header";
 
 function Login() {
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn, token, setToken } =
@@ -74,6 +75,8 @@ function Login() {
   return (
     <>
       <div className="loginContainer">
+        <div className="backgroundImage"></div>
+        <Header variant="header-fixed" />
         <div className="loginContentContainer">
           <p>[Continue with Google]</p>
           <p>OR</p>

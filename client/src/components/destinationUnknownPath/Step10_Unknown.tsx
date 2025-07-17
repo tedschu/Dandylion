@@ -25,8 +25,6 @@ function Step10() {
     useAppContext();
   const [showFormAlert, setShowFormAlert] = useState(false);
 
-  // TODO: UPDATE ALL STEP PAGES TO HAVE CONTEXT RATHER THAN PROP VALUES ****************************
-
   const setFormValues = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const tempObj = { ...userResponses };
     tempObj[event.target.name as keyof typeof userResponses] =

@@ -63,7 +63,7 @@ function Step8() {
     <>
       <div className="stepContainer">
         <div className="questionImageGridContainer">
-          <img src={pyramid} alt="" />
+          <div></div>
           <h3>{questionPromptsKnown?.question8}</h3>
           <div></div>
         </div>{" "}

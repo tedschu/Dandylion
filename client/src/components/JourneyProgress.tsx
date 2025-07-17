@@ -10,10 +10,10 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
 
   const journeyProgressStyle = {
     position: "absolute",
-    top: "30px",
-    left: "5%",
-    right: "5%",
-    height: "280px",
+    top: "120px",
+    left: "2%", // Reduced from 5%
+    right: "2%", // Reduced from 5%
+    height: "300px",
     pointerEvents: "none",
     zIndex: 10,
   };
@@ -21,11 +21,13 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
   // Responsive adjustments
   const isMobile = window.innerWidth <= 768;
 
+  // Expanded path data to use more screen width
   const pathData = isMobile
-    ? "M 30 200 Q 80 170 130 140 T 230 110 T 350 80 T 400 70"
-    : "M 50 250 Q 130 210 210 190 T 370 160 T 530 120 T 770 60";
+    ? "M 20 200 Q 100 170 180 140 T 340 110 T 480 80 T 560 70"
+    : "M 40 250 Q 200 210 360 190 T 680 160 T 1000 120 T 1400 60";
 
-  const responsiveViewBox = isMobile ? "0 0 420 220" : "0 0 820 300";
+  // Expanded viewBox to accommodate wider path
+  const responsiveViewBox = isMobile ? "0 0 580 220" : "0 0 1440 300";
 
   // Calculate milestone positions along the actual path
   const getMilestonePositions = () => {
@@ -57,7 +59,7 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
     const currentPoint = path.getPointAtLength(currentDistance);
 
     // Get a point slightly ahead to calculate rotation
-    const lookAheadDistance = Math.min(currentDistance + 5, totalLength);
+    const lookAheadDistance = Math.min(currentDistance + 10, totalLength);
     const lookAheadPoint = path.getPointAtLength(lookAheadDistance);
 
     // Calculate angle
@@ -72,10 +74,11 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
     });
   }, [progressPercent]);
 
+  // Responsive vehicle sizing
   const vehicleStyle = {
-    width: isMobile ? "60px" : "80px",
-    height: isMobile ? "30px" : "40px",
-    filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
+    width: isMobile ? "56px" : "100px", // Slightly larger for desktop
+    height: isMobile ? "28px" : "50px",
+    filter: "drop-shadow(0 3px 6px rgba(0,0,0,0.4))",
   };
 
   if (isMobile) {
@@ -91,6 +94,7 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
         height="100%"
         viewBox={responsiveViewBox}
         style={{ overflow: "visible" }}
+        preserveAspectRatio="xMidYMid meet"
       >
         {/* Hidden reference path for calculations */}
         <path
@@ -106,7 +110,7 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
           d={pathData}
           fill="none"
           stroke="rgba(123, 160, 91, 0.3)"
-          strokeWidth="3"
+          strokeWidth={isMobile ? "3" : "4"}
           strokeDasharray="8,8"
           strokeLinecap="round"
         />
@@ -116,14 +120,14 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
           d={pathData}
           fill="none"
           stroke="url(#progressGradient)"
-          strokeWidth="4"
+          strokeWidth={isMobile ? "4" : "6"}
           strokeLinecap="round"
-          strokeDasharray={pathLength || 800}
-          initial={{ strokeDashoffset: pathLength || 800 }}
+          strokeDasharray={pathLength || 1200}
+          initial={{ strokeDashoffset: pathLength || 1200 }}
           animate={{
             strokeDashoffset:
-              (pathLength || 800) -
-              ((pathLength || 800) * progressPercent) / 100,
+              (pathLength || 1200) -
+              ((pathLength || 1200) * progressPercent) / 100,
           }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         />
@@ -148,7 +152,7 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
             key={index}
             cx={position.x}
             cy={position.y}
-            r="6"
+            r={isMobile ? "6" : "8"}
             fill={
               index + 1 <= currentStep ? "#d4b24f" : "rgba(123, 160, 91, 0.3)"
             }
@@ -176,7 +180,7 @@ function JourneyProgress({ currentStep, totalSteps = 10 }) {
           transition={{ duration: 0.8, ease: "easeOut" }}
           style={{ transformOrigin: "center" }}
         >
-          <foreignObject x="-90" y="-30" width="80" height="40">
+          <foreignObject x="-115" y="-52" width="100" height="50">
             <img src={airplane} alt="Travel progress" style={vehicleStyle} />
           </foreignObject>
         </motion.g>

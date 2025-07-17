@@ -62,18 +62,18 @@ function DestinationUnknown() {
     },
   };
 
-  const moonPosition = {
-    1: "80px",
-    2: "65px",
-    3: "50px",
-    4: "35px",
-    5: "20px",
-    6: "5px",
-    7: "-10px",
-    8: "-25px",
-    9: "-40px",
-    10: "-55px",
-  };
+  // const moonPosition = {
+  //   1: "80px",
+  //   2: "65px",
+  //   3: "50px",
+  //   4: "35px",
+  //   5: "20px",
+  //   6: "5px",
+  //   7: "-10px",
+  //   8: "-25px",
+  //   9: "-40px",
+  //   10: "-55px",
+  // };
 
   // const moonShift = moonPosition[currentStep as keyof typeof moonPosition];
 
@@ -92,8 +92,8 @@ function DestinationUnknown() {
 
         <JourneyProgress currentStep={currentStep} />
 
-        <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
-        <DandelionSeedsCSS />
+        {/* <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
+        <DandelionSeedsCSS /> */}
 
         {/* Maps through steps array and outputs the component that matches the currentStep state */}
         {steps.map((ComponentStep, index) => {

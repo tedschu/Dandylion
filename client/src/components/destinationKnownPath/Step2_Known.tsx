@@ -46,8 +46,7 @@ function Step2() {
     <>
       <div className="stepContainer">
         <div className="questionImageGridContainer">
-          <img src={venetian} alt="" />
-          <h3>{questionPromptsKnown?.question2}</h3>
+          <div></div> <h3>{questionPromptsKnown?.question2}</h3>
           <div></div>
         </div>
         <form className="userForm" action="">

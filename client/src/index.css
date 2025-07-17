@@ -264,6 +264,8 @@ button {
   align-items: center;
   width: 95%;
   position: relative;
+  /* Brings the form down a bit to accommodate the airplane progress animation */
+  margin-top: 40px;
 }
 
 .moon {
@@ -1428,24 +1430,18 @@ p {
 }
 
 .questionImageGridContainer {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  width: 90%;
-}
+  display: flex;
 
-.questionImageGridContainer > img {
-  width: 80px;
-  border-radius: 8px;
-  align-self: flex-end;
+  width: 80%;
 }
 
 .questionImageGridContainer h3 {
-  align-self: flex-end;
   font-size: 20px;
   z-index: 1;
   text-align: right;
   margin-bottom: 8px;
   color: white;
+  text-align: center;
 }
 
 /* FORM AND INPUT STYLING */
@@ -1553,19 +1549,6 @@ p {
 @media screen and (min-width: 800px) {
   .formContainer {
     flex-direction: row;
-  }
-
-  .questionImageGridContainer {
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
-  }
-
-  .questionImageGridContainer > img {
-    width: 120px;
-  }
-
-  .questionImageGridContainer h3 {
-    text-align: center;
   }
 
   .locationImage {

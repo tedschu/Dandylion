@@ -46,7 +46,7 @@ function Step3() {
     <>
       <div className="stepContainer">
         <div className="questionImageGridContainer">
-          <img src={temple} alt="" />
+          <div></div>
           <h3>{questionPromptsUnknown?.question3}</h3>
           <div></div>
         </div>

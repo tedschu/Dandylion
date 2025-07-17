@@ -69,7 +69,7 @@ function Step10() {
     <>
       <div className="stepContainer">
         <div className="questionImageGridContainer">
-          <img src={pyramid} alt="" />
+          <div></div>
           <h3>{questionPromptsUnknown?.question10}</h3>
           <div></div>
         </div>{" "}

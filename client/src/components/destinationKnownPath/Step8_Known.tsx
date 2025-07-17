@@ -9,6 +9,7 @@ import RegisterWithPlan from "../RegisterWithPlan";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAppContext } from "../../contexts/AppContext";
 import { useQuestionsResponses } from "../../contexts/QuestionsResponsesContext";
+import FormAlert from "../FormAlert";
 
 function Step8() {
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -22,6 +23,7 @@ function Step8() {
   } = useQuestionsResponses();
   const { plan, setPlan, showBadWordsAlert, setShowBadWordsAlert } =
     useAppContext();
+  const [showFormAlert, setShowFormAlert] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -44,12 +46,32 @@ function Step8() {
       setTimeout(() => {
         setShowBadWordsAlert(false);
       }, 3000);
-    } else if (!isLoggedIn) {
+      return;
+    }
+
+    if (!hasValidResponses()) {
+      setShowFormAlert(true);
+      setTimeout(() => {
+        setShowFormAlert(false);
+      }, 3000);
+      return;
+    }
+
+    if (!isLoggedIn) {
       openModal();
     } else if (isLoggedIn) {
       navigate("/your-plan");
     }
   }
+
+  const hasValidResponses = () => {
+    // Check first name, and then loop through userResponses object to ensure all keys have values (e.g. not "")
+    for (let i = 1; i <= 8; i++) {
+      if (userResponses[`response${i}` as keyof typeof userResponses] === "")
+        return false;
+    }
+    return true;
+  };
 
   // Handle Enter key to trigger Next step
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -85,18 +107,18 @@ function Step8() {
             >
               Go back
             </button>
-            {!showBadWordsAlert && (
-              <button
-                type="button"
-                className="next"
-                onClick={() => handleClick()}
-              >
-                Show me the results!
-              </button>
-            )}
-            {showBadWordsAlert && <BadWordsAlert />}
+
+            <button
+              type="button"
+              className="next"
+              onClick={() => handleClick()}
+            >
+              Show me the results!
+            </button>
           </div>
         </form>
+        {showBadWordsAlert && <BadWordsAlert />}
+        {showFormAlert && <FormAlert />}
         {isModalOpen && <RegisterWithPlan setIsModalOpen={setIsModalOpen} />}
       </div>
     </>

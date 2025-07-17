@@ -9,6 +9,7 @@ import RegisterWithPlan from "../RegisterWithPlan";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAppContext } from "../../contexts/AppContext";
 import { useQuestionsResponses } from "../../contexts/QuestionsResponsesContext";
+import FormAlert from "../FormAlert";
 
 function Step10() {
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -22,6 +23,7 @@ function Step10() {
   } = useQuestionsResponses();
   const { plan, setPlan, showBadWordsAlert, setShowBadWordsAlert } =
     useAppContext();
+  const [showFormAlert, setShowFormAlert] = useState(false);
 
   // TODO: UPDATE ALL STEP PAGES TO HAVE CONTEXT RATHER THAN PROP VALUES ****************************
 
@@ -44,18 +46,37 @@ function Step10() {
   // Then, if user is logged in, goes to destination plan
   // If not logged in, opens register / login modal
   function handleClick() {
-    if (containsBadWords(userResponses.response10 ?? "")) {
+    if (containsBadWords(userResponses.response10)) {
       setShowBadWordsAlert(true);
       setTimeout(() => {
         setShowBadWordsAlert(false);
       }, 3000);
-    } else if (!isLoggedIn) {
-      // IF NOT LOGGED IN, OPEN LOGIN / REGISTER MODAL
+      return;
+    }
+
+    if (!hasValidResponses()) {
+      setShowFormAlert(true);
+      setTimeout(() => {
+        setShowFormAlert(false);
+      }, 3000);
+      return;
+    }
+
+    if (!isLoggedIn) {
       openModal();
     } else if (isLoggedIn) {
-      navigate("/your-destination-plan");
+      navigate("/your-plan");
     }
   }
+
+  const hasValidResponses = () => {
+    // Check first name, and then loop through userResponses object to ensure all keys have values (e.g. not "")
+    for (let i = 1; i <= 10; i++) {
+      if (userResponses[`response${i}` as keyof typeof userResponses] === "")
+        return false;
+    }
+    return true;
+  };
 
   // Handle Enter key to trigger Next step
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -91,18 +112,18 @@ function Step10() {
             >
               Go back
             </button>
-            {!showBadWordsAlert && (
-              <button
-                type="button"
-                className="next"
-                onClick={() => handleClick()}
-              >
-                See my travel plan
-              </button>
-            )}
-            {showBadWordsAlert && <BadWordsAlert />}
+
+            <button
+              type="button"
+              className="next"
+              onClick={() => handleClick()}
+            >
+              See my travel plan
+            </button>
           </div>
         </form>
+        {showBadWordsAlert && <BadWordsAlert />}
+        {showFormAlert && <FormAlert />}
         {isModalOpen && <RegisterWithPlan setIsModalOpen={setIsModalOpen} />}
       </div>
     </>

@@ -1,4 +1,4 @@
-function BadWordsAlert() {
+function FormAlert() {
   return (
     <>
       <div
@@ -10,11 +10,11 @@ function BadWordsAlert() {
         }}
       >
         <p style={{ color: "white", fontSize: "16px" }}>
-          Please, no naughty words :)
+          Make sure you've answered all the questions
         </p>
       </div>
     </>
   );
 }
 
-export default BadWordsAlert;
+export default FormAlert;

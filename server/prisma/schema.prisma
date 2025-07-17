@@ -56,7 +56,8 @@ model Plan {
   is_paid Boolean @default(false)
   order_id String?
   created_at DateTime @default(now())
-  was_modified Boolean @default(false)
+  was_modified_first_destination Boolean @default(false)
+  was_modified_second_destination Boolean @default(false)
   userResponse UserResponse[]
   planShares PlanShares[]
   // Note: Image S3 URL is stored in result_data Json object

@@ -68,6 +68,8 @@ function PlanDetail() {
     }
   };
 
+  console.log(plan);
+
   return (
     <>
       {!planError && plan && (

@@ -37,6 +37,8 @@ router.get("/:plan_id", verifyToken, async (req, res) => {
         photos_first_destination: true,
         photos_second_destination: true,
         user_id: true,
+        was_modified_first_destination: true,
+        was_modified_second_destination: true,
       },
     });
 

@@ -72,6 +72,7 @@ router.patch(
         },
         data: {
           plan_data: updatedResultData,
+          was_modified_second_destination: true,
         },
       });
 
@@ -109,6 +110,7 @@ router.patch("/plan-update-destination", verifyToken, async (req, res) => {
       },
       data: {
         plan_data: updatedResultData,
+        was_modified_first_destination: true,
       },
     });
 

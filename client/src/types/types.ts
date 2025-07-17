@@ -83,6 +83,8 @@ export type Plan = {
   photos_first_destination: string[];
   photos_second_destination: string[];
   user_id?: number;
+  was_modified_first_destination?: boolean;
+  was_modified_second_destination?: boolean;
 };
 
 export type Itinerary = {
@@ -113,6 +115,8 @@ export type PlanKnown = {
   photos_first_destination: string[];
   photos_second_destination: string[];
   user_id?: number;
+  was_modified_first_destination?: boolean;
+  was_modified_second_destination?: boolean;
 };
 
 export type DestinationKnown = {

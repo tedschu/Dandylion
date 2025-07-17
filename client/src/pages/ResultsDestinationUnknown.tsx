@@ -325,11 +325,12 @@ function ResultsDestinationUnknown() {
   return (
     <>
       <div className="resultPageContainer">
-        <Header variant="header-relative" />
+        <div className="backgroundImage"></div>
+        <Header variant="header-fixed" />
         {/* <img className="moon scrollout" src={moon} alt="" /> */}
 
-        <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
-        <DandelionSeedsCSS />
+        {/* <img src={dandelion_corner_2} className="dandelion_corner" alt="" />
+        <DandelionSeedsCSS /> */}
         {/* Loading state component, including progress bar and image carousel */}
         {hasResponse === false && (
           <ResultsLoadingState

@@ -81,6 +81,8 @@ function ResultsLoadingState({
   return (
     <>
       <div className="resultLoadingContainer">
+        {/* <div className="backgroundImage"></div> */}
+
         {!showAPIErrorMessage && (
           <>
             {/* @ts-ignore */}

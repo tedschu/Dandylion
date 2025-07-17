@@ -203,6 +203,10 @@ function EditPlan() {
                 A few things to keep in mind:
               </p>
               <li>
+                You can edit your plan once. If you'd like additional edits, you
+                can create a new plan.{" "}
+              </li>
+              <li>
                 You can't change your destination (ex. "I don't want to go to
                 New Orleans anymore"). To do that,{" "}
                 <span

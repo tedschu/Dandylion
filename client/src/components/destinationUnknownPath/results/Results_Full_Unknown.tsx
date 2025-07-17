@@ -160,15 +160,17 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
               >
                 <ShareIcon sx={{ fontSize: "large" }} />
               </button>
-              <button
-                type="button"
-                className="icons"
-                onClick={() =>
-                  openEditModal(planID, plan.plan_data.destination)
-                }
-              >
-                <ModeEditIcon sx={{ fontSize: "large" }} />
-              </button>
+              {plan.was_modified_first_destination === false && (
+                <button
+                  type="button"
+                  className="icons"
+                  onClick={() =>
+                    openEditModal(planID, plan.plan_data.destination)
+                  }
+                >
+                  <ModeEditIcon sx={{ fontSize: "large" }} />
+                </button>
+              )}
             </div>
           </>
         )}
@@ -342,9 +344,12 @@ function Results_Full_Unknown({ plan, planID }: ResultsProps) {
                   >
                     <ShareIcon sx={{ fontSize: "large" }} />
                   </button>
-                  <button type="button" className="icons">
-                    <ModeEditIcon sx={{ fontSize: "large" }} />
-                  </button>
+
+                  {plan.was_modified_second_destination === false && (
+                    <button type="button" className="icons">
+                      <ModeEditIcon sx={{ fontSize: "large" }} />
+                    </button>
+                  )}
                 </div>
               </>
             )}

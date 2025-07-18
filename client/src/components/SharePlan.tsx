@@ -239,13 +239,17 @@ function SharePlan() {
               ))}
             </div>
           </form>
-          <button
-            className="register"
-            type="button"
-            onClick={() => shareEmails()}
-          >
-            Send invites
-          </button>
+
+          {/* ADD CONDITIONAL THAT ARRAY > 0 */}
+          {sharedEmails.length > 0 && (
+            <button
+              className="register"
+              type="button"
+              onClick={() => shareEmails()}
+            >
+              Send invites
+            </button>
+          )}
 
           {previouslySharedEmails.length > 0 && (
             <div className="shareExistingContainer">

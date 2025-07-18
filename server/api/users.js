@@ -169,11 +169,11 @@ router.get("/my-plans", verifyToken, async (req, res) => {
 });
 
 // GET to pull all users shared on a given trip, by the trip owner (rendered on the "Me" page)
-router.get("/plan-shared-users", verifyToken, async (req, res) => {
+router.get("/plan-shared-users/:plan_id", verifyToken, async (req, res) => {
   try {
     // Finds all users that a given plan has been shared with
 
-    const plan_id = req.body.plan_id;
+    const plan_id = parseInt(req.params.plan_id);
 
     const getSharedUsers = await prisma.planShares.findMany({
       where: {
@@ -184,11 +184,7 @@ router.get("/plan-shared-users", verifyToken, async (req, res) => {
       },
     });
 
-    const allSharedUsers = getSharedUsers.map((user) => user.email);
-
-    res.status(200).send({
-      allSharedUsers,
-    });
+    res.status(200).send(getSharedUsers.map((user) => user.email));
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -292,6 +288,29 @@ router.post("/share-plan-users", verifyToken, async (req, res) => {
       message: "Plan shared successfully",
       shared_with: emails.length,
       plan_id: plan_id,
+    });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+router.delete("/remove-shared-user", verifyToken, async (req, res) => {
+  try {
+    const { email, plan_id } = req.body;
+
+    console.log(email, plan_id);
+
+    await prisma.planShares.deleteMany({
+      where: {
+        plan_id: plan_id,
+        email: email,
+      },
+    });
+
+    res.status(200).send({
+      email,
+      plan_id,
     });
   } catch (error) {
     console.log(error);

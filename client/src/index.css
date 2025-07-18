@@ -395,7 +395,7 @@ button {
   text-align: center;
   font-size: 36px;
   padding: 0 5px;
-  color: var(--ocean-blue);
+  color: var(--brand-slate);
 }
 
 .resultsFullDescription {
@@ -1296,6 +1296,16 @@ p {
   font-size: 14px;
 }
 
+.emailPillExisting {
+  padding: 7px 10px;
+  border: 1px solid var(--brand-slate-light);
+  border-radius: 20px;
+  position: relative;
+  color: var(--brand-slate-light);
+  display: flex;
+  font-size: 14px;
+}
+
 .shareModalOverlay {
   position: fixed;
   height: 100%;
@@ -1308,6 +1318,25 @@ p {
   justify-content: center;
   align-items: center;
   z-index: 2;
+}
+
+.shareExistingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 0 0;
+  width: 100%;
+}
+
+.shareExistingPillContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 /* ***** EDIT MODAL COMPONENT ***** */

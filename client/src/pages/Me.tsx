@@ -136,8 +136,6 @@ function Me() {
     setIsShareModalOpen(true);
   };
 
-  console.log(userSharedPlans, userPlans);
-
   return (
     <>
       <div className="myAccountContainer">
@@ -243,7 +241,11 @@ function Me() {
 
               {userSharedPlans.map((plan, index) => {
                 return (
-                  <div className="myAccountPlanContainer" key={index}>
+                  <div
+                    className="myAccountPlanContainer"
+                    key={index}
+                    onClick={() => navigate(`/plans/${plan.id}`)}
+                  >
                     <img
                       src={plan.photos_first_destination[0]}
                       alt=""

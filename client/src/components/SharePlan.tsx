@@ -1,11 +1,14 @@
 import { useAuth } from "../contexts/AuthContext";
 import { useAppContext } from "../contexts/AppContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SharePlan() {
   const storedToken = localStorage.getItem("token");
 
   const [sharedEmails, setSharedEmails] = useState<string[]>([]);
+  const [previouslySharedEmails, setPreviouslySharedEmails] = useState<
+    string[]
+  >([]);
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn, token, setToken } =
     useAuth();
   const {
@@ -16,6 +19,31 @@ function SharePlan() {
     setShouldRefreshPlans,
   } = useAppContext();
   const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    getPreviouslySharedEmails();
+  }, [planShareData]);
+
+  const getPreviouslySharedEmails = async () => {
+    try {
+      const response = await fetch(
+        `/api/users/plan-shared-users/${planShareData.planID}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (data) {
+        setPreviouslySharedEmails(data);
+      }
+    } catch (error) {}
+  };
 
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -96,6 +124,30 @@ function SharePlan() {
     } catch (error) {
       console.error("Error sharing emails", error);
     }
+  };
+
+  const deleteEmailFromPlan = async (email: string, plan_id: number) => {
+    try {
+      const response = await fetch("/api/users/remove-shared-user", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          plan_id: plan_id,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        await getPreviouslySharedEmails();
+      }
+
+      console.log(data);
+    } catch (error) {}
   };
 
   return (
@@ -194,6 +246,43 @@ function SharePlan() {
           >
             Send invites
           </button>
+
+          {previouslySharedEmails.length > 0 && (
+            <div className="shareExistingContainer">
+              <p style={{ margin: "10px 0" }}>
+                You've already shared this plan with:{" "}
+              </p>
+              <div className="shareExistingPillContainer">
+                {previouslySharedEmails.map((email, index) => {
+                  return (
+                    <div className="emailPillExisting">
+                      {email}{" "}
+                      <div
+                        onClick={() =>
+                          deleteEmailFromPlan(email, planShareData.planID)
+                        }
+                        style={{
+                          backgroundColor: "var(--brand-slate-light)",
+                          marginLeft: "7px",
+                          borderRadius: "50%",
+                          width: "20px",
+                          height: "20px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          fontSize: "13px",
+                          color: "white",
+                          cursor: "pointer",
+                        }}
+                      >
+                        x
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>
